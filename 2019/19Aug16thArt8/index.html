@@ -36,8 +36,8 @@
 <meta property="article:tag" content="数据结构-线段树">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="图论-二分图">
-<meta property="article:tag" content="动态规划-状压DP">
 <meta property="article:tag" content="贪心">
+<meta property="article:tag" content="动态规划-状压DP">
 <meta property="article:tag" content="算法效率-扫描线">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://luckyglass.github.io/2019/19Aug16thArt8/png1.png">
@@ -342,11 +342,11 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
 <p>那么现在问题就是要求 $cov()$ 。</p>
 <h5 id="转化距离"><a href="#转化距离" class="headerlink" title="= 转化距离"></a>= 转化距离</h5><p>由于曼哈顿距离并不好处理，我们引入新的距离 —— 切比雪夫距离：</p>
 <blockquote>
-<p>$(x_1,y_1),(x_2,y_2)$ 的切比雪夫距离为 $\max{|x_1-x_2|,|y_1-y_2|}$</p>
+<p>$(x_1,y_1),(x_2,y_2)$ 的切比雪夫距离为 $\max\{|x_1-x_2|,|y_1-y_2|\}$</p>
 </blockquote>
 <p>我们可以这样转换：新建一个坐标系，将原坐标系里的 点$(x,y)$ 变为点 $(x+y,x-y)$ 放进新坐标系里（换成 $(x-y,x+y)$ 也可以）。</p>
-<p>我们发现原坐标系里的两点 $(x_1,y_1),(x_2,y_2)$ 的曼哈顿距离为 $|x_1-x_2|+|y_1-y_2|$ ，而这两个点在新坐标系里的切比雪夫距离为 $\max{|(x_1+y_1)-(x_2+y_2)|,|(x_1-y_1)-(x_2-y_2)|}$ 。</p>
-<p>讲课的神犇说：“如果你知道<strong>绝对值不等式</strong>，你就会知道 $|x_1-x_2|+|y_1-y_2|=\max{|(x_1+y_1)-(x_2+y_2)|,|(x_1-y_1)-(x_2-y_2)|}$”。由于我不知道绝对值不等式，这里就不多加赘述了……（<del>免得出锅</del>）</p>
+<p>我们发现原坐标系里的两点 $(x_1,y_1),(x_2,y_2)$ 的曼哈顿距离为 $|x_1-x_2|+|y_1-y_2|$ ，而这两个点在新坐标系里的切比雪夫距离为 $\max\{|(x_1+y_1)-(x_2+y_2)|,|(x_1-y_1)-(x_2-y_2)|\}$ 。</p>
+<p>讲课的神犇说：“如果你知道<strong>绝对值不等式</strong>，你就会知道 $|x_1-x_2|+|y_1-y_2|=\max\{|(x_1+y_1)-(x_2+y_2)|,|(x_1-y_1)-(x_2-y_2)|\}$”。由于我不知道绝对值不等式，这里就不多加赘述了……（<del>免得出锅</del>）</p>
 <p><strong>也就是说原坐标系的曼哈顿距离等于新坐标系里的切比雪夫距离</strong>。</p>
 <p>切比雪夫距离要好处理许多，根据定义，不难发现对于一个点 $u$，切比雪夫距离小于等于 $D$ 的点在以 $u$ 为中心的边长为 $2D$ 的正方形中。也就是下面这样：</p>
 <p><img src="/2019/19Aug16thArt8/png1.png" alt="png1"></p>
@@ -406,8 +406,8 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
               <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i> 数据结构-线段树</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
               <a href="/tags/%E5%9B%BE%E8%AE%BA-%E4%BA%8C%E5%88%86%E5%9B%BE/" rel="tag"><i class="fa fa-tag"></i> 图论-二分图</a>
-              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E7%8A%B6%E5%8E%8BDP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-状压DP</a>
               <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"><i class="fa fa-tag"></i> 贪心</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E7%8A%B6%E5%8E%8BDP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-状压DP</a>
               <a href="/tags/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87-%E6%89%AB%E6%8F%8F%E7%BA%BF/" rel="tag"><i class="fa fa-tag"></i> 算法效率-扫描线</a>
           </div>
 

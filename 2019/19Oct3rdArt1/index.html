@@ -298,8 +298,8 @@
 </ul>
 <p>复杂度都是 $O(n\log n)$。</p>
 </blockquote>
-<h3 id="Part1-2-点值表示的乘法"><a href="#Part1-2-点值表示的乘法" class="headerlink" title="Part1/2. 点值表示的乘法"></a>Part1/2. 点值表示的乘法</h3><p>假设我们用 ${x_0,x_1,x_2,…,x_n}$ 来表示 $f(x)$ 为 ${(x_0,f(x_0)),(x_1,f(x_1)),…,(x_n,f(x_n))}$、表示 $g(x)$ 为 ${(x_0,g(x_0)),(x_1,g(x_1)),…,(x_n,g(x_n))}$。</p>
-<p>那么 $f(x)\cdot g(x)$ 的点值表达式就是 ${(x_0,f(x_0)\cdot g(x_0)),(x_1,f(x_1)\cdot g(x_1)),…,(x_n,f(x_n)\cdot g(x_n))}$ ，其实就是对应项相乘，可见它的时间复杂度是 $O(n)$ 的。</p>
+<h3 id="Part1-2-点值表示的乘法"><a href="#Part1-2-点值表示的乘法" class="headerlink" title="Part1/2. 点值表示的乘法"></a>Part1/2. 点值表示的乘法</h3><p>假设我们用 $\{x_0,x_1,x_2,…,x_n\}$ 来表示 $f(x)$ 为 $\{(x_0,f(x_0)),(x_1,f(x_1)),…,(x_n,f(x_n))\}$、表示 $g(x)$ 为 $\{(x_0,g(x_0)),(x_1,g(x_1)),…,(x_n,g(x_n))\}$。</p>
+<p>那么 $f(x)\cdot g(x)$ 的点值表达式就是 $\{(x_0,f(x_0)\cdot g(x_0)),(x_1,f(x_1)\cdot g(x_1)),…,(x_n,f(x_n)\cdot g(x_n))\}$ ，其实就是对应项相乘，可见它的时间复杂度是 $O(n)$ 的。</p>
 <hr>
 <h2 id="Part2-算法思想"><a href="#Part2-算法思想" class="headerlink" title="Part2. 算法思想"></a>Part2. 算法思想</h2><h3 id="Part2-1-小科普：复数"><a href="#Part2-1-小科普：复数" class="headerlink" title="Part2/1. 小科普：复数"></a>Part2/1. 小科普：复数</h3><blockquote>
 <p>是复数(complex)不是负数(negative)</p>
@@ -329,15 +329,15 @@
 <ul>
 <li>$\omega_n^i\cdot\omega_n^j=\omega_n^{i+j}$；</li>
 <li>$\omega_n^{i+n}=\omega_n^i$；</li>
-<li>$\omega<em>n^i=\omega</em>{kn}^{ki}$；</li>
+<li>$\omega_n^i=\omega_{kn}^{ki}$；</li>
 <li>$\omega_n^i=-\omega_n^{i+n/2}$ （这里的“负”表示大小相等、方向相反）</li>
 </ul>
 <p>以上这些结论都可以通过在单位圆上画出单位根来证明。</p>
-<p>单位复根有什么用呢？因为 $n$ 次单位复根恰好有 $n$ 个，就可以把这 $n$ 个单位复根分别代入 $n-1$ 次多项式 $f(x)$ —— 得到点值表达 ${(\omega_n^0,f(\omega_n^0)),(\omega_n^1,f(\omega_n^1)),…,(\omega_n^{n-1},f(\omega_n^{n-1}))}$ </p>
+<p>单位复根有什么用呢？因为 $n$ 次单位复根恰好有 $n$ 个，就可以把这 $n$ 个单位复根分别代入 $n-1$ 次多项式 $f(x)$ —— 得到点值表达 $\{(\omega_n^0,f(\omega_n^0)),(\omega_n^1,f(\omega_n^1)),…,(\omega_n^{n-1},f(\omega_n^{n-1}))\}$ </p>
 <h3 id="Part2-3-傅里叶正变换（一般形式-to-点值表达）"><a href="#Part2-3-傅里叶正变换（一般形式-to-点值表达）" class="headerlink" title="Part2/3. 傅里叶正变换（一般形式 to 点值表达）"></a>Part2/3. 傅里叶正变换（一般形式 to 点值表达）</h3><blockquote>
 <p>Tab. 以下<u>思路</u>来自 Tiw_Air_OAO 的 cnblogs 博客，但不尽相同：<a href="https://www.cnblogs.com/Tiw-Air-OAO/p/10162034.html" target="_blank" rel="noopener">https://www.cnblogs.com/Tiw-Air-OAO/p/10162034.html</a></p>
 </blockquote>
-<p>FFT 的实现方法是 <strong>分治</strong>：记多项式 $f(x)=a<em>0+a_1x+a_2x^2+…+a</em>{n-1}x^{n-1}$。</p>
+<p>FFT 的实现方法是 <strong>分治</strong>：记多项式 $f(x)=a_0+a_1x+a_2x^2+…+a_{n-1}x^{n-1}$。</p>
 <p>接下来把 $f(x)$ 的偶数次项、奇数次项分开：</p>
 <script type="math/tex; mode=display">
 f_o(x)=a_1+a_3x+a_5x^2...\\
@@ -352,7 +352,7 @@ f(\omega_n^{i+p})&=\omega_n^{i+p}\times f_o(\omega_{n}^{2i+2p})+f_e(\omega_{n}^{
 &=-\omega_n^i\times f_o(\omega_{n/2}^{i+p})+f_e(\omega_{n/2}^{i+p})\\
 &=-\omega_n^i\times f_o(\omega_p^{i+p})+f_e(\omega_p^{i+p})\\
 &=-\omega_n^i\times f_o(\omega_p^i)+f_e(\omega_p^i)
-\end{align}</script><p>所以，如果已经知道 $f<em>o(\omega_p^i),f_e(\omega_p^i)$，就可以 $O(1)$ 求出 $f(\omega_n^i)$ 和 $f(\omega_n^{i+p})$。实现方法就是递归：每次从求解 $f(\omega_n^i)$ 的单位复根到求解 $f_o(\omega</em>{n/2}^i)$ 和 $f<em>e(\omega</em>{n/2}^i)$ ；最后当多项式只剩两项（一次项和常数项）时直接代入计算。</p>
+\end{align}</script><p>所以，如果已经知道 $f_o(\omega_p^i),f_e(\omega_p^i)$，就可以 $O(1)$ 求出 $f(\omega_n^i)$ 和 $f(\omega_n^{i+p})$。实现方法就是递归：每次从求解 $f(\omega_n^i)$ 的单位复根到求解 $f_o(\omega_{n/2}^i)$ 和 $f_e(\omega_{n/2}^i)$ ；最后当多项式只剩两项（一次项和常数项）时直接代入计算。</p>
 <p>由于 $n$ 每次会除以二，而要计算 $n$ 次，所以时间复杂度为 $O(n\log n)$。</p>
 <h3 id="Part2-4-傅里叶逆变换（点值表达-to-一般形式）"><a href="#Part2-4-傅里叶逆变换（点值表达-to-一般形式）" class="headerlink" title="Part2/4. 傅里叶逆变换（点值表达 to 一般形式）"></a>Part2/4. 傅里叶逆变换（点值表达 to 一般形式）</h3><p>其实傅里叶正变换是作的这样一个矩阵乘法：</p>
 <script type="math/tex; mode=display">
@@ -387,7 +387,7 @@ D=\begin{bmatrix}
 <script type="math/tex; mode=display">
 (D\times V)_{i,j}=\left(\omega_n^{j-i}\right)^0+\left(\omega_n^{j-i}\right)^1+\cdots+\left(\omega_n^{j-i}\right)^{n-1}</script><p> Hint. 用等比数列……</p>
 <script type="math/tex; mode=display">
-(D\times V)_{i,j}=\frac {\left(\omega_n^{j-i}\right)^0-\left(\omega_n^{j-i}\right)^n}{1-\left(\omega_n^{j-i}\right)^1}=\frac{1-\left(\omega_n^{j-i}\right)^n}{1-\omega_n^{j-i}}=\frac{1-\omega_n^{(j-i)n}}{1-\omega_n^{j-i}}</script><p>因为 $\omega<em>n^{(j-i)n}=\omega_n^0=1$，所以 $(D\times V)</em>{i,j}=0$，于是发现：</p>
+(D\times V)_{i,j}=\frac {\left(\omega_n^{j-i}\right)^0-\left(\omega_n^{j-i}\right)^n}{1-\left(\omega_n^{j-i}\right)^1}=\frac{1-\left(\omega_n^{j-i}\right)^n}{1-\omega_n^{j-i}}=\frac{1-\omega_n^{(j-i)n}}{1-\omega_n^{j-i}}</script><p>因为 $\omega_n^{(j-i)n}=\omega_n^0=1$，所以 $(D\times V)_{i,j}=0$，于是发现：</p>
 <script type="math/tex; mode=display">
 D\times V\times \begin{bmatrix}a_0\\a_1\\a_2\\\vdots\\a_{n-1}\end{bmatrix}
 =(D\times V)\times \begin{bmatrix}a_0\\a_1\\a_2\\\vdots\\a_{n-1}\end{bmatrix}=

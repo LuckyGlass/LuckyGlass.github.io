@@ -281,7 +281,7 @@
 <hr>
 <h2 id="Part1-题目"><a href="#Part1-题目" class="headerlink" title="Part1. 题目"></a>Part1. 题目</h2><p>> <a href="https://codeforces.com/contest/633/problem/H" target="_blank" rel="noopener"><strong>codeforces 633H 传送门</strong></a></p>
 <p>给出一个长度为 $n$ 的序列 $a_i$ 和一个整数 $mod$。</p>
-<p>有 $m$ 次操作，每次操作给出区间 $[l,r]$：将 $a<em>l,a</em>{l+1}…a<em>r$ 从小到大排序、去重后得到序列 $b_1,b_2,…,b_k$，计算 $\sum</em>{i=1}^kb_i\times f_i$（其中 $f_i$ 是斐波那契数第 $i$ 项，$f_0=0,f_1=f_2=1$）。</p>
+<p>有 $m$ 次操作，每次操作给出区间 $[l,r]$：将 $a_l,a_{l+1}…a_r$ 从小到大排序、去重后得到序列 $b_1,b_2,…,b_k$，计算 $\sum_{i=1}^kb_i\times f_i$（其中 $f_i$ 是斐波那契数第 $i$ 项，$f_0=0,f_1=f_2=1$）。</p>
 <p>（每次操作独立，即每次操作互不影响）</p>
 <blockquote>
 <p>数据规模：$1\leq n,m,mod\leq30000$，$0\leq a_i\leq10^9$，$1\leq l\leq r\leq n$。</p>
@@ -301,19 +301,19 @@
 <script type="math/tex; mode=display">
 \begin{bmatrix}1&1\\1&0\end{bmatrix}\times\begin{bmatrix}kf_i\\kf_{i-1}\end{bmatrix}=\begin{bmatrix}kf_{i+1}\\kf_{i}\end{bmatrix}</script><p>又因为矩阵乘法的分配律 $A(B+C)=AB+AC$。可以得到下式：</p>
 <script type="math/tex; mode=display">
-\begin{bmatrix}1&1\\1&0\end{bmatrix}\times\begin{bmatrix}af_i+bf_j+cf_k\dots\\af_{i-1}+bf_{j-1}+cf_{k-1}\dots\end{bmatrix}=\begin{bmatrix}af_{i+1}+bf_{j+1}+cf_{k+1}\dots\\af_i+bf_j+cf_k\dots\end{bmatrix}</script><h3 id="Part2-3-权值线段树"><a href="#Part2-3-权值线段树" class="headerlink" title="Part2/3. 权值线段树"></a>Part2/3. 权值线段树</h3><h4 id="Part2-3-1-维护节点信息"><a href="#Part2-3-1-维护节点信息" class="headerlink" title="Part2/3/1. 维护节点信息"></a>Part2/3/1. 维护节点信息</h4><p>对于权值线段树维护的一个区间 $[l,r]$：设序列 $B_{l,r}={b_i\ |\ l\leq b_i\leq r}$，则区间 $[l,r]$ 里存储的是：</p>
+\begin{bmatrix}1&1\\1&0\end{bmatrix}\times\begin{bmatrix}af_i+bf_j+cf_k\dots\\af_{i-1}+bf_{j-1}+cf_{k-1}\dots\end{bmatrix}=\begin{bmatrix}af_{i+1}+bf_{j+1}+cf_{k+1}\dots\\af_i+bf_j+cf_k\dots\end{bmatrix}</script><h3 id="Part2-3-权值线段树"><a href="#Part2-3-权值线段树" class="headerlink" title="Part2/3. 权值线段树"></a>Part2/3. 权值线段树</h3><h4 id="Part2-3-1-维护节点信息"><a href="#Part2-3-1-维护节点信息" class="headerlink" title="Part2/3/1. 维护节点信息"></a>Part2/3/1. 维护节点信息</h4><p>对于权值线段树维护的一个区间 $[l,r]$：设序列 $B_{l,r}=\{b_i | l\leq b_i\leq r\}$，则区间 $[l,r]$ 里存储的是：</p>
 <ol>
-<li>$S<em>{l,r}$，$B</em>{l,r}$ 的大小；</li>
-<li>一个矩阵 $M<em>{l,r}=\begin{bmatrix}\sum</em>{i=1}{B<em>{l,r}}[i]\times f_i\\sum</em>{i=1}B<em>{l,r}[i]\times f</em>{i-1}\end{bmatrix}$，其中 $B<em>{l,r}[i]$ 指 $B</em>{l,r}[i]$ 中的第 $i$ 个元素。</li>
+<li>$S_{l,r}$，$B_{l,r}$ 的大小；</li>
+<li>一个矩阵 $M_{l,r}=\begin{bmatrix}\sum_{i=1}{B_{l,r}}[i]\times f_i\\\sum_{i=1}B_{l,r}[i]\times f_{i-1}\end{bmatrix}$，其中 $B_{l,r}[i]$ 指 $B_{l,r}[i]$ 中的第 $i$ 个元素。</li>
 </ol>
 <p>那么对于一个线段树的节点 $[l,r]$ ，它的左儿子 $[l,m]$ 和右儿子 $[m+1,r]$ 可以这样合并起来：</p>
 <script type="math/tex; mode=display">
 M_{l,r}=M_{l,m}+\begin{bmatrix}1&1\\1&0\end{bmatrix}^{S_{l,m}}\times M_{m+1,r}</script><p>（应该比较直观吧）</p>
-<p>这样的话，我们可以预处理出 $\begin{bmatrix}1&amp;1\1&amp;0\end{bmatrix}^{k}$ ，然后就可以在常数时间（矩阵乘法的常数时间）内合并两个区间了~</p>
+<p>这样的话，我们可以预处理出 $\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}^{k}$ ，然后就可以在常数时间（矩阵乘法的常数时间）内合并两个区间了~</p>
 <h4 id="Part2-3-2-插入-删除元素"><a href="#Part2-3-2-插入-删除元素" class="headerlink" title="Part2/3/2. 插入/删除元素"></a>Part2/3/2. 插入/删除元素</h4><p>设插入元素 $i$：</p>
-<p>我们就在线段树的区间 $[i,i]$ 处，将 $S<em>{i,i}$ 修改为 $1$，并且把 $M</em>{i,i}$ 修改为 $\begin{bmatrix}i\0\end{bmatrix}$，然后向上更新节点信息直到根节点。</p>
+<p>我们就在线段树的区间 $[i,i]$ 处，将 $S_{i,i}$ 修改为 $1$，并且把 $M_{i,i}$ 修改为 $\begin{bmatrix}i\\0\end{bmatrix}$，然后向上更新节点信息直到根节点。</p>
 <p>如果删除元素 $i$：</p>
-<p>就把 $S<em>{i,i}$ 改为 $0$，$M</em>{i,i}$ 改为 $\begin{bmatrix}0\0\end{bmatrix}$，向上更新节点信息即可。</p>
+<p>就把 $S_{i,i}$ 改为 $0$，$M_{i,i}$ 改为 $\begin{bmatrix}0\\0\end{bmatrix}$，向上更新节点信息即可。</p>
 <h4 id="Part2-3-3-答案"><a href="#Part2-3-3-答案" class="headerlink" title="Part2/3/3. 答案"></a>Part2/3/3. 答案</h4><p>最后根节点的信息就是当前整个序列的信息，即：</p>
 <script type="math/tex; mode=display">
 M_{1,n}=\begin{bmatrix}\sum_{i=1}b_i\times f_i\\\sum_{i=1}b_i\times f_{i-1}\end{bmatrix}</script><p>那么 $\sum_{i=1}b_i\times f_i$ 即是答案。</p>

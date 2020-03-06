@@ -36,8 +36,8 @@
 <meta property="article:modified_time" content="2019-11-07T13:45:10.947Z">
 <meta property="article:author" content="Lucky_Glass">
 <meta property="article:tag" content="算法效率-哈希">
-<meta property="article:tag" content="动态规划-换根DP">
 <meta property="article:tag" content="-HDU-">
+<meta property="article:tag" content="动态规划-换根DP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://luckyglass.github.io/2019/19Nov6thArt1/jpg1.jpg">
 
@@ -303,7 +303,7 @@
 <li><p>DFS 子树的顺序也会造成影响，所以要乘上子树的全排列，即乘上 <code>fac[cntch[u]]</code>；</p>
 </li>
 <li><p>不难发现，<u><em>同构的两棵树的括号序列的方案集合一定是一样的</em></u>，因此有一些会算重复；</p>
-<p>把同构的子树划分到一块，计算出每一块的大小，为 ${sam<em>1,sam_2,…,sam_t}$，那么最后应该除以 $\prod</em>{i=1}^t(sam_i)!$。（其实就是可重集的全排列）</p>
+<p>把同构的子树划分到一块，计算出每一块的大小，为 $\{sam_1,sam_2,…,sam_t\}$，那么最后应该除以 $\prod_{i=1}^t(sam_i)!$。（其实就是可重集的全排列）</p>
 </li>
 </ol>
 <p>最后得到的转移式（要在模意义下计算）：</p>
@@ -313,14 +313,14 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
 <blockquote>
 <p><strong>> Tab</strong><br>以下默认以 1 为整棵树的根</p>
 </blockquote>
-<p>$idx<em>u$ 表示以 u 为根的子树的 hash 值。对于叶子节点 $idx_u=1$；其他节点的计算方式为 $idx_u=1+\sum</em>{v}idx<em>v\times rand</em>{siz_v}$，其中 $rand$ 是<u><em>一开始随机化得到的一个数列</em></u>，$siz_v$ 是以 v 为根的子树的大小。这样可以一次 DFS 求出每个点的 $idx$。</p>
+<p>$idx_u$ 表示以 u 为根的子树的 hash 值。对于叶子节点 $idx_u=1$；其他节点的计算方式为 $idx_u=1+\sum_{v}idx_v\times rand_{siz_v}$，其中 $rand$ 是<u><em>一开始随机化得到的一个数列</em></u>，$siz_v$ 是以 v 为根的子树的大小。这样可以一次 DFS 求出每个点的 $idx$。</p>
 <p>为什么这样设计 hash？当然目的是要让它的冲突尽可能少。理论上当 $rand$ 数列取质数数列的时候可以尽可能地避免冲突，但是我们需要的 $rand$ 比较多，找质数序列反而麻烦了，于是交给随机化。:)</p>
 <p>这样我们就求得了这棵树以 1 为根的 hash 值，但是我们发现当这棵树以不同的点作为根时，hash 值可能不同。为了相对准确地判断树的同构，我们可以在求出以 1 为根的 $idx$ 的基础上，通过 <strong><em><u>换根DP</u></em></strong> 计算出以每一个点 $u$ 为根的 $idx’_u$ 。</p>
 <p>考虑从当前的根 $u$ 将根换到子节点 $v$。换根DP的核心就是“<u><em>一次换根只会影响 u 和 v 的DP值</em></u>”，显然 $idx_u’$ 是满足这个特点的。</p>
 <p>考虑从 u 到 v 的转移：<br><img src="/2019/19Nov6thArt1/jpg1.jpg" alt="jpg1"></p>
-<p>我们已经计算出了 $idx’<em>u$，要计算 $idx_v’$。发现 v 的子树内的 $idx_v$ 并没有改变，换根后，u 变为 v 的子节点。首先 u 要减去原来 v 对 $idx_u’$ 的贡献：$rand</em>{siz<em>v}\times idx_v$，然后 v 要加上 u 的贡献 $(idx_u’-rand</em>{siz<em>v}\times idx_v)\times rand</em>{n-siz_v}$（$n-siz_v$ 就是现在 u 的子树的大小嘛）。</p>
-<p>所以可以得到 $idx’<em>v=idx_v+(idx_u’-rand</em>{siz<em>v}\times idx</em>{siz<em>v})\times rand</em>{n-siz_v}$，最初 $idx’_1=idx_1$，然后就可以 DP 了。</p>
-<p>实际上，实现代码时，$idx’<em>v$ 并没有加上 $idx_v$，而是 $idx’_v=idx_u-rand</em>{siz<em>v}\times idx</em>{siz<em>v}+rand</em>{n-siz<em>u}\times idx_u’$。当要计算以 v 为根的 hash 值时，就计算 $idx’_v\times rand</em>{n-siz_v}+idx_v$ 即可。</p>
+<p>我们已经计算出了 $idx’_u$，要计算 $idx_v’$。发现 v 的子树内的 $idx_v$ 并没有改变，换根后，u 变为 v 的子节点。首先 u 要减去原来 v 对 $idx_u’$ 的贡献：$rand_{siz_v}\times idx_v$，然后 v 要加上 u 的贡献 $(idx_u’-rand_{siz_v}\times idx_v)\times rand_{n-siz_v}$（$n-siz_v$ 就是现在 u 的子树的大小嘛）。</p>
+<p>所以可以得到 $idx’_v=idx_v+(idx_u’-rand_{siz_v}\times idx_{siz_v})\times rand_{n-siz_v}$，最初 $idx’_1=idx_1$，然后就可以 DP 了。</p>
+<p>实际上，实现代码时，$idx’_v$ 并没有加上 $idx_v$，而是 $idx’_v=idx_u-rand_{siz_v}\times idx_{siz_v}+rand_{n-siz_u}\times idx_u’$。当要计算以 v 为根的 hash 值时，就计算 $idx’_v\times rand_{n-siz_v}+idx_v$ 即可。</p>
 <h3 id="Part2-3-换根DP求每个点为根的答案"><a href="#Part2-3-换根DP求每个点为根的答案" class="headerlink" title="Part2/3. 换根DP求每个点为根的答案"></a>Part2/3. 换根DP求每个点为根的答案</h3><p>在 Part2/1 ，我们DP计算了以 1 为根的答案，但是显然以不同的点为根，括号序列很有可能是不一样的。</p>
 <p>其实和换根DP求 $idx_u’$ 是差不多的，还是定义 $f’_u$ 表示整棵树以 u 为根，能够得到的本质不同的括号序列的数量。主要难点就是“删去 v 对 $f_u’$ 的贡献，并计算新的作为 v 的子节点的 u 的贡献”。</p>
 <p>记删去 v 对 $f’_u$ 的贡献后，u 作为 v 的子节点代表的子树中括号序列的数量为 $h$。最初将 $h$ 的值设为 $f’_u$</p>
@@ -342,7 +342,7 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
 <p>可得 $f_v’=f_v\times h\times (cnt_v+1)\times sam_v!\times [(sam_v+1)!]^{-1}$；</p>
 <h3 id="Part2-4-统计答案"><a href="#Part2-4-统计答案" class="headerlink" title="Part2/4. 统计答案"></a>Part2/4. 统计答案</h3><p>已经计算出分别以每个点为根的答案了，似乎直接把 $f_u’$ 加起来就可以了。</p>
 <p>但是一样的道理，如果以 u 为根的整棵树与以 v 为根的整棵树形态相同，那么它们的括号序列方案集合一定完全相同，所以只能计算一次。这个就用到整棵树的哈希值。</p>
-<p>还好之前已经计算了，以 u 为根的整棵树的哈希值就为 $idx<em>u+idx’_u\times rand</em>{n-siz_u}$。所以只要 map 或者 set 判一下重就好了。</p>
+<p>还好之前已经计算了，以 u 为根的整棵树的哈希值就为 $idx_u+idx’_u\times rand_{n-siz_u}$。所以只要 map 或者 set 判一下重就好了。</p>
 <blockquote>
 <p><strong>> Tip</strong><br>这道题卡哈希！（好端端的一道哈希题被搞成了一道rp题……）<br>反正我写了一个三哈希……用结构体打了包，可以参考一下。</p>
 </blockquote>
@@ -378,8 +378,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
           
           <div class="post-tags">
               <a href="/tags/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87-%E5%93%88%E5%B8%8C/" rel="tag"><i class="fa fa-tag"></i> 算法效率-哈希</a>
-              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%8D%A2%E6%A0%B9DP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-换根DP</a>
               <a href="/tags/HDU/" rel="tag"><i class="fa fa-tag"></i> -HDU-</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%8D%A2%E6%A0%B9DP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-换根DP</a>
           </div>
 
         

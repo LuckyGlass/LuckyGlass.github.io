@@ -270,8 +270,8 @@
 </blockquote>
 <a id="more"></a>
 <hr>
-<h2 id="Part1-题面"><a href="#Part1-题面" class="headerlink" title="Part1. 题面"></a>Part1. 题面</h2><p>给定全集 $C={1,2,\cdots,n}$。</p>
-<p>在全集 C 的意义下，当一个子集 E 和一个 <u><em>有序</em></u> 对 (X,Y)（X,Y 都是 C 的子集）满足 $\begin{cases}X\subseteq E\Y\cap E=\varnothing\end{cases}$ 或 $\begin{cases}Y\subseteq E\X\cap E=\varnothing\end{cases}$ 时，称 “E 分割 (X,Y)”，即 “(X,Y) 被 E 分割”。</p>
+<h2 id="Part1-题面"><a href="#Part1-题面" class="headerlink" title="Part1. 题面"></a>Part1. 题面</h2><p>给定全集 $C=\{1,2,\cdots,n\}$。</p>
+<p>在全集 C 的意义下，当一个子集 E 和一个 <u><em>有序</em></u> 对 (X,Y)（X,Y 都是 C 的子集）满足 $\begin{cases}X\subseteq E\\Y\cap E=\varnothing\end{cases}$ 或 $\begin{cases}Y\subseteq E\\X\cap E=\varnothing\end{cases}$ 时，称 “E 分割 (X,Y)”，即 “(X,Y) 被 E 分割”。</p>
 <p>再给出 m 个 C 的子集 $A_i$ 和整数 k。</p>
 <p>求有多少个有序对 (X,Y) 满足 (X,Y) 至少被一个给定的子集 $A_i$ 分割，且 X,Y 的大小都为 k。</p>
 <p><strong>数据规模</strong>：$1\le m\le18,1\le n\le100,1\le k\le\left\lfloor\frac n2\right\rfloor$</p>
@@ -286,12 +286,12 @@
 <blockquote>
 <p><strong>>> Tip</strong><br>$\overline E$ 表示 E 在全集 C 意义下的补集</p>
 </blockquote>
-<p>但是 (X,Y) 被 E 分割有两种情况：<br>① $\begin{cases}X\subseteq E\Y\cap E=\varnothing\end{cases}$ 即 $\begin{cases}X\subseteq E\Y\subseteq \overline E\end{cases}$；<br>② $\begin{cases}Y\subseteq E\X\cap E=\varnothing\end{cases}$ 即 $\begin{cases}X\subseteq \overline E\Y\subseteq E\end{cases}$。</p>
+<p>但是 (X,Y) 被 E 分割有两种情况：<br>① $\begin{cases}X\subseteq E\\Y\cap E=\varnothing\end{cases}$ 即 $\begin{cases}X\subseteq E\\Y\subseteq \overline E\end{cases}$；<br>② $\begin{cases}Y\subseteq E\\X\cap E=\varnothing\end{cases}$ 即 $\begin{cases}X\subseteq \overline E\\Y\subseteq E\end{cases}$。</p>
 <p>那么我们除了要决策 $A_i$ 是否一定分割 (X,Y)，还要决策 $A_i$ 分割 (X,Y) 的方式是①还是②。</p>
 <p>因此对于每个 $A_i$ 有三种状态：<br>a. $A_i$ 不一定分割 (X,Y)，也就是对 (X,Y) 不造成影响；<br>b. $X\subseteq A_i$ 且 $Y\subseteq \overline {A_i}$；<br>c. $X\subseteq\overline {A_i}$ 且 $Y\subseteq A_i$；</p>
 <p>枚举每个 $A_i$ 的状态，再组合数计算 (X,Y) 的数量，容斥得到答案即可。</p>
 <blockquote>
-<p><strong>>> Tip</strong><br>枚举出每个 $A<em>i$ 的状态过后，我们可以得到对于集合 X,Y 的类似于 $X\subseteq E_x,Y\subseteq E_y$ 的限制。这样的话，(X,Y) 的数量就为 $C</em>{|E<em>x|}^kC</em>{|E_y|}^k$。</p>
+<p><strong>>> Tip</strong><br>枚举出每个 $A_i$ 的状态过后，我们可以得到对于集合 X,Y 的类似于 $X\subseteq E_x,Y\subseteq E_y$ 的限制。这样的话，(X,Y) 的数量就为 $C_{|E_x|}^kC_{|E_y|}^k$。</p>
 <p><strong>>> Tab</strong><br>$O(w)$ 是 bitset 的常数</p>
 </blockquote>
 <p>时间复杂度是枚举 m 个 $A_i$ 的 3 种状态 $O(3^m)$ 乘上 bitset 的复杂度 $O(nw)$，也就是 $O(3^mnw)$。</p>

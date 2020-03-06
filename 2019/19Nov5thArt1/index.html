@@ -269,9 +269,9 @@
 </blockquote>
 <a id="more"></a>
 <hr>
-<h2 id="Part1-题面"><a href="#Part1-题面" class="headerlink" title="Part1. 题面"></a>Part1. 题面</h2><p>有 n 个人和 k 辆车。人们排队上车，所以每辆车内是连续的一段人。已知第 i 个人和第 j 个人的厌恶值为 $y<em>{i,j}$，厌恶是相互的，即 $y</em>{i,j}=y_{j,i}$。</p>
-<p>如果 i 和 j 在同一辆车里，就会产生 $y<em>{i,j}$ 的不愉快值（$y</em>{i,j}$ 和 $y_{j,i}$ 只计算一次）。</p>
-<p><strong>数据结构</strong>：$1\le n\le4000,0\le y<em>{i,j}\le 9$，满足 $y</em>{i,j}=y<em>{j,i},y</em>{i,i}=0$。</p>
+<h2 id="Part1-题面"><a href="#Part1-题面" class="headerlink" title="Part1. 题面"></a>Part1. 题面</h2><p>有 n 个人和 k 辆车。人们排队上车，所以每辆车内是连续的一段人。已知第 i 个人和第 j 个人的厌恶值为 $y_{i,j}$，厌恶是相互的，即 $y_{i,j}=y_{j,i}$。</p>
+<p>如果 i 和 j 在同一辆车里，就会产生 $y_{i,j}$ 的不愉快值（$y_{i,j}$ 和 $y_{j,i}$ 只计算一次）。</p>
+<p><strong>数据结构</strong>：$1\le n\le4000,0\le y_{i,j}\le 9$，满足 $y_{i,j}=y_{j,i},y_{i,i}=0$。</p>
 <hr>
 <h2 id="Part2-解析"><a href="#Part2-解析" class="headerlink" title="Part2. 解析"></a>Part2. 解析</h2><h3 id="Part2-1-凸优化"><a href="#Part2-1-凸优化" class="headerlink" title="Part2/1. 凸优化"></a>Part2/1. 凸优化</h3><p>发现是恰好 $k$ 辆车，（需要足够的脑洞）根据这一点可以向凸优化这方面思考。<br>显然车越多、总不愉快值越小，大概可以发现 $f(x)$ 表示 $n$ 个人有 $x$ 辆车时的最优解，$\left(x,f(x)\right)$ 成凸包。于是凸优化是正确的。</p>
 <p>那么就是要二分斜率 $c$，求 $f’(x)=f(x)+cx$ 的最小值。即考虑每分一辆车，代价就额外增加 $c$。</p>
@@ -279,10 +279,10 @@
 <p>然后就可以得到一个非常显然的转移式子,也就是把第 j+1 到 i 个人分到一个车子里面，还要加上每辆车的附加值 c：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i] &#x3D; min&#123; dp[j] + (sum[i][i] - sum[i][j] - sum[j][i] + sum[j][j])&#x2F;2 + c &#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p><strong>> Tip</strong><br><code>sum[a][b]</code> 是 $\sum<em>{i=1}^a\sum</em>{j=1}^by_{i,j}$。</p>
+<p><strong>> Tip</strong><br><code>sum[a][b]</code> 是 $\sum_{i=1}^a\sum_{j=1}^by_{i,j}$。</p>
 </blockquote>
 <p>转移的时候还要统计一下 <code>cnt[i]</code>。最后根据 <code>cnt[n]</code> 和 $k$ 的大小，更改 $c$ 的取值范围。</p>
-<h3 id="Part2-2-决策单调性"><a href="#Part2-2-决策单调性" class="headerlink" title="Part2/2. 决策单调性"></a>Part2/2. 决策单调性</h3><p>然而我们发现，上面那种转移，对于每个 i，要枚举 j，也就是 $O(n^2)$ 的…… 然后再套上带权二分的 $O(\log<em>2w)$，变成了 $O(n^2\log_2w)$，好像卡不过 BZOJ 的机子（=</em>=）。</p>
+<h3 id="Part2-2-决策单调性"><a href="#Part2-2-决策单调性" class="headerlink" title="Part2/2. 决策单调性"></a>Part2/2. 决策单调性</h3><p>然而我们发现，上面那种转移，对于每个 i，要枚举 j，也就是 $O(n^2)$ 的…… 然后再套上带权二分的 $O(\log_2w)$，变成了 $O(n^2\log_2w)$，好像卡不过 BZOJ 的机子（=_=）。</p>
 <p>再观察 DP 结果（其实我是听 tiw dalao 讲的），可以发现 DP 决策是有单调性的！也就是说 <code>dp[i]</code> 的<u><em>最优转移点</em></u> $d(i)$ 是与 $i$ 呈现<u><em>非递减</em></u> 关系的。所以再用决策单调性优化一下，就将枚举 j 的 $O(n)$ 降至<u><em>二分</em></u> 维护决策队列的 $O(\log_2n)$。</p>
 <p>此时复杂度为 $O(n\log_2n\log_2w)$ 可以接受。</p>
 <blockquote>

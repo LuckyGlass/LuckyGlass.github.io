@@ -34,8 +34,8 @@
 <meta property="article:published_time" content="2019-08-16T01:15:03.000Z">
 <meta property="article:modified_time" content="2020-03-05T15:35:06.195Z">
 <meta property="article:author" content="Lucky_Glass">
-<meta property="article:tag" content="数学">
 <meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="数学">
 <meta property="article:tag" content="数学-组合数">
 <meta property="article:tag" content="数学-容斥">
 <meta name="twitter:card" content="summary">
@@ -313,7 +313,7 @@
 </blockquote>
 <h3 id="T1-Count-count"><a href="#T1-Count-count" class="headerlink" title="T1. Count(count)"></a>T1. Count(count)</h3><h4 id="Experience"><a href="#Experience" class="headerlink" title="[Experience]"></a>[Experience]</h4><p>看到这题的时候就开始懵推式子，最后推出来一个其实跟正解已经很接近了的式子，但是莫名其妙我想到了中国剩余定理（可能因为之前考过，印象比较深刻）……</p>
 <p>然后就偏离正解了。</p>
-<h4 id="Solution"><a href="#Solution" class="headerlink" title="[Solution]"></a>[Solution]</h4><h5 id="第一步"><a href="#第一步" class="headerlink" title="= 第一步"></a>= 第一步</h5><p>我们令 $b<em>i=a_i\bmod m$，$A=\sum</em>{i=1}^kb_i$ ，然后令 $a_i=t_im+b_i$ （$t_i\ge0$ 且 $1\leq b_i\leq m-1$） </p>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="[Solution]"></a>[Solution]</h4><h5 id="第一步"><a href="#第一步" class="headerlink" title="= 第一步"></a>= 第一步</h5><p>我们令 $b_i=a_i\bmod m$，$A=\sum_{i=1}^kb_i$ ，然后令 $a_i=t_im+b_i$ （$t_i\ge0$ 且 $1\leq b_i\leq m-1$） </p>
 <blockquote>
 <p>Q：$t_i$ 和 $b_i$ 的范围怎么确定的？</p>
 <p>A：由于 $b_i$ 是 $a_i$ 对 $m$ 取模的结果，所以 $b_i\leq m-1$，而又因为 $a_i$ 不是 $m$ 的倍数，则 $b_i\ge 1$，所以 $1\leq b_i\leq m-1$；</p>
@@ -326,9 +326,9 @@
 <script type="math/tex; mode=display">
 m\sum_{i=1}^kt_i+A=n</script><p>根据 $A$ 的定义式可知 $m|n-A$ ，即：</p>
 <script type="math/tex; mode=display">
-\sum_{i=1}^kt_i=\frac {n-A}{m}</script><p>其中 $t<em>i\ge0$，所以 $t_i$ 的不同的方案数相当于“把 $\frac{n-A}m$ 个无区别球，放进 $k$ 个有区别的箱子里，允许空箱”，组合数一下就是 $C</em>{\frac{n-A}m+k-1}^{k-1}$ 。</p>
+\sum_{i=1}^kt_i=\frac {n-A}{m}</script><p>其中 $t_i\ge0$，所以 $t_i$ 的不同的方案数相当于“把 $\frac{n-A}m$ 个无区别球，放进 $k$ 个有区别的箱子里，允许空箱”，组合数一下就是 $C_{\frac{n-A}m+k-1}^{k-1}$ 。</p>
 <h5 id="分配-b-i"><a href="#分配-b-i" class="headerlink" title="= 分配 $b_i$"></a>= 分配 $b_i$</h5><p>因为 $A=\sum_{i=1}^kb_i$ 且 $1\leq b_i\leq m-1$，所以 $k\leq A\leq k(m-1)$ ；</p>
-<p>又因为 $\sum<em>{i=1}^ka_i=m\sum</em>{i=1}^kt<em>i+A$ 且 $\sum</em>{i=1}^ka_i=n$；则有：</p>
+<p>又因为 $\sum_{i=1}^ka_i=m\sum_{i=1}^kt_i+A$ 且 $\sum_{i=1}^ka_i=n$；则有：</p>
 <script type="math/tex; mode=display">
 m\sum_{i=1}^kt_i+A=n</script><p>换个式子：</p>
 <script type="math/tex; mode=display">
@@ -340,7 +340,7 @@ A\equiv n\pmod m</script><p>由于可以知道在 $[k,k(m-1)]$ 中与 $n$ 模 $m
 </blockquote>
 <p>也就是：</p>
 <blockquote>
-<p>$F(A)\times C<em>k^0-F(A-(m-1))\times C</em>{k}^1+F(A-2(m-1))\times C_k^2…+(-1)^kF(A-k(m-1)\times C_k^k)$；</p>
+<p>$F(A)\times C_k^0-F(A-(m-1))\times C_{k}^1+F(A-2(m-1))\times C_k^2…+(-1)^kF(A-k(m-1)\times C_k^k)$；</p>
 <p>换个简单的式子：</p>
 <script type="math/tex; mode=display">
 \sum_{i=0}^k(-1)^iF\big(A-i(m-1)\big)C_{k}^i</script><p>其中 $(-1)^i$ 是<strong>容斥系数</strong>，$C_k^i$ 是从 $k$ 个盒子中选出 $i$ 个盒子，令它们中的球超过 m-1 个，那么对应的，有 $i(m-1)$ 个球已经固定分给 $i$ 个盒子了（为了使它们的球的个数超过 m-1），剩余 $A-i(m-1)$ 个球就可以随机分给 $k$ 个盒子了。</p>
@@ -407,8 +407,8 @@ A\equiv n\pmod m</script><p>由于可以知道在 $[k,k(m-1)]$ 中与 $n$ 模 $m
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
               <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6-%E7%BB%84%E5%90%88%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 数学-组合数</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6-%E5%AE%B9%E6%96%A5/" rel="tag"><i class="fa fa-tag"></i> 数学-容斥</a>
           </div>

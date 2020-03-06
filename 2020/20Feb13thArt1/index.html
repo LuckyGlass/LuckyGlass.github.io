@@ -281,9 +281,9 @@
 <hr>
 <h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>看到 $n$ 的规模，大概知道这是道结论题……下面来推一下结论：</p>
 <p>从生成函数考虑，因为是<u><em>无标号</em></u>，应该是用普通生成函数。</p>
-<p>设 $p<em>i$ 为 $i$ 个节点的二叉树的期望叶子数，那么就要求 $p_n$。再设 $c_i$ 表示 $i$ 个节点的二叉树的数量，显然有 $c_i=\sum</em>{j=0}^{i-1}c<em>jc</em>{i-1-j}$（枚举左右两棵子树的大小）。根据期望的线性性，可以像 DP 一样写出式子：</p>
+<p>设 $p_i$ 为 $i$ 个节点的二叉树的期望叶子数，那么就要求 $p_n$。再设 $c_i$ 表示 $i$ 个节点的二叉树的数量，显然有 $c_i=\sum_{j=0}^{i-1}c_jc_{i-1-j}$（枚举左右两棵子树的大小）。根据期望的线性性，可以像 DP 一样写出式子：</p>
 <script type="math/tex; mode=display">
-p_i=\frac{\sum_{j=0}^{i-1}c_jc_{i-j-1}(p_j+p_{i-j-1})}{c_i}</script><p>这个式子的意思就是讨论根的左右子树的大小，分别为 $j$ 和 $(i-j-1)$，那么概率为 $\frac{c<em>jc</em>{i-j-1}}{c<em>i}$，对期望的贡献为 $p_i+p</em>{i-j-1}$，于是 获得该贡献的概率×贡献 就是期望了。两边同时乘上 $c_i$：</p>
+p_i=\frac{\sum_{j=0}^{i-1}c_jc_{i-j-1}(p_j+p_{i-j-1})}{c_i}</script><p>这个式子的意思就是讨论根的左右子树的大小，分别为 $j$ 和 $(i-j-1)$，那么概率为 $\frac{c_jc_{i-j-1}}{c_i}$，对期望的贡献为 $p_i+p_{i-j-1}$，于是 获得该贡献的概率×贡献 就是期望了。两边同时乘上 $c_i$：</p>
 <script type="math/tex; mode=display">
 c_ip_i=\sum_{j=0}^{i-1}c_jc_{i-j-1}(p_j+p_{i-j-1})</script><p>观察到如果把括号展开，则有非常相似的 $c_xp_x$ 形式，于是令 $t_x=c_xp_x$。</p>
 <script type="math/tex; mode=display">
@@ -296,7 +296,7 @@ T(x)=2xT(x)C(x)+x</script><blockquote>
 <p>$2xT(x)C(x)$ 中 $T(x)C(x)$ 的第 $i$ 项表示根节点的两棵子树的大小为 $i$ 的方案数，整棵树则需加上根节点，即乘 $x$；</p>
 <p>$+x$ 是考虑到只有根节点一个点的情况。</p>
 </blockquote>
-<p>这个式子还可以进一步化简，因为 $C(x)$ 是可以写出式子的。观察递推式 $c<em>i=\sum</em>{j=0}^{i-1}c<em>jc</em>{i-1-j}$，敏锐的reader可以看出这是一个卡特兰数，可以直接背卡特兰数生成函数的结论，也可以现推（我背不着，所以推导一遍）：</p>
+<p>这个式子还可以进一步化简，因为 $C(x)$ 是可以写出式子的。观察递推式 $c_i=\sum_{j=0}^{i-1}c_jc_{i-1-j}$，敏锐的reader可以看出这是一个卡特兰数，可以直接背卡特兰数生成函数的结论，也可以现推（我背不着，所以推导一遍）：</p>
 <blockquote>
 <script type="math/tex; mode=display">
 C(x)=xC^2(x)+c_0=xC^2(x)+1\\
@@ -304,7 +304,7 @@ xC^2(x)+C(x)+1=0</script><p>把 $C(x)$ 当未知数,其他（包括 $x$）当成
 <script type="math/tex; mode=display">
 C(x)=\frac{1\pm\sqrt{1-4x}}{2x}</script><p>然而我们知道卡特兰数不会有两个解，$\pm$ 一定会舍弃一个。考虑 $\lim_{x\to0}$，如果为 $+$：</p>
 <script type="math/tex; mode=display">
-\lim_{x\to0}C(x)\to+\infty</script><p>（因为是一个大于 $1$ 的数除以无限接近 $0$ 的数）但是我们知道 $c<em>0=1$，所以 $\lim</em>{x\to0}C(x)=1$，矛盾。<br>所以应该取：</p>
+\lim_{x\to0}C(x)\to+\infty</script><p>（因为是一个大于 $1$ 的数除以无限接近 $0$ 的数）但是我们知道 $c_0=1$，所以 $\lim_{x\to0}C(x)=1$，矛盾。<br>所以应该取：</p>
 <script type="math/tex; mode=display">
 C(x)=\frac{1-\sqrt{1-4x}}{2x}</script><p>顺便写出通项公式：</p>
 <script type="math/tex; mode=display">

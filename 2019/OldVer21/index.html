@@ -275,14 +275,14 @@
 <a id="more"></a>
 <hr>
 <h2 id="·-题意-传送门"><a href="#·-题意-传送门" class="headerlink" title="· 题意 #传送门#"></a>· 题意 <a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2005" target="_blank" rel="noopener">#传送门#</a></h2><p><em>（Tab. 原题目经分析得到……）</em></p>
-<p>给出 $n,m$ ，求 $\sum<em>{i=1}^n\sum</em>{j=1}^m2\gcd(i,j)-1$ 。</p>
+<p>给出 $n,m$ ，求 $\sum_{i=1}^n\sum_{j=1}^m2\gcd(i,j)-1$ 。</p>
 <hr>
 <h2 id="·-解析"><a href="#·-解析" class="headerlink" title="· 解析"></a>· 解析</h2><p>因为 $m,n$ 比较大，不难想到用数论解决。又因为 gcd 与莫比乌斯反演有密不可分的联系，所以从这个角度想可能会 easy 一些~</p>
 <p>推导的过程如下：</p>
 <p><strong>〇</strong> 不妨假设 $n&lt;m$ ；</p>
 <p><strong>①</strong> 先把求和里的式子化简一下： </p>
 <script type="math/tex; mode=display">
-\sum_{i=1}^n\sum_{j=1}^m2\gcd(i,j)-1\ =\ 2\sum_{i=1}^n\sum_{j=1}^m\gcd(i,j)-nm</script><p>$\ \ \ \ \ $令 $g=\gcd(i,j)$，那么我们就要求 “$\sum<em>{i=1}^n\sum</em>{j=1}^mg$”；</p>
+\sum_{i=1}^n\sum_{j=1}^m2\gcd(i,j)-1\ =\ 2\sum_{i=1}^n\sum_{j=1}^m\gcd(i,j)-nm</script><p>$     $令 $g=\gcd(i,j)$，那么我们就要求 “$\sum_{i=1}^n\sum_{j=1}^mg$”；</p>
 <p><strong>②</strong> 根据反演的结论 “$n=\sum_{d|n}\phi(n)$” ，我们把它代入式子，可得：</p>
 <script type="math/tex; mode=display">
 \begin{align}

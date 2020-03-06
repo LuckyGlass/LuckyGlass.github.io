@@ -302,7 +302,7 @@
 <li>给定 正整数$A,B$，我们把 $A$位置 和 $B$位置 连接起来。</li>
 <li>如果 $A,B$ 位置是连接的，那么我们可以交换 $P$数组 $A$位置 和 $B$位置 上的数；问能否通过若干次交换，使 $P$数组 与 $Q$数组 相同（只需要各个位置的数值相等）。如果能，输出 “DA”，否则输出 “NE”。</li>
 <li><p>定义“云”为一个集合，当且仅当 $A$位置 和 $B$位置 <strong>直接或间接相连</strong>，$A$ 和 $B$ 属于一个云。换个说法，如果我们把 “连接$A位置,B位置$” 看成 “在 $A位置,B位置$ 之间连一条边”，那么一个云就是一个<strong>连通块</strong>。</p>
-<p>定义一个云$A$是“好”的，当且仅当${P_i|i\in A}={Q_i|i\in A}$。</p>
+<p>定义一个云$A$是“好”的，当且仅当$\{P_i|i\in A\}=\{Q_i|i\in A\}$。</p>
 <p>求解有多少个数对 $(X,Y)$ 满足以下条件：（在这里 $(X,Y)$ 和 $(Y,X)$ 没有区别）</p>
 <ul>
 <li>$X,Y$ 不在同一个云内；</li>
@@ -339,7 +339,7 @@
 </blockquote>
 <p>可以发现如果数对 $(i,j)$ 满足操作4的要求（忘了要求的上去看题目），那么 $i$ 所在云$X$ 中的每个元素与 $j$ 所在云$Y$中的每个元素都可以构成一个符合要求的数对。</p>
 <p>那么我们就不单个考虑元素，而是考虑一对云。根据定义，我们可以知道：当且仅当 $X,Y$都不是好的云 且 $cldP_X+cldP_Y=cldQ_X+cldQ_Y$ 时，$X$的每个元素 与 $Y$的每个元素 都能构成一个符合要求的数对（下文简称“$X$的每个元素 与 $Y$的每个元素 都能构成一个符合要求的数对”为“$X,Y$配对”）。<br>我们把 $cldP_X+cldP_Y=cldQ_X+cldQ_Y$ 变一下形—— $cldP_X-cldQ_X=cldQ_Y-cldP_Y$ 。也就是说当 $X,Y$ 满足 $cldP_X-cldQ_X=cldQ_Y-cldP_Y$ 且 $X,Y$都不是好的云 时，$X,Y$ 配对，则可以构造出 $siz_X\times siz_Y$ 个数对。</p>
-<p>定义 $cnt<em>i$ 表示所有 $cldP_X-cldQ_X=i$ 的云$X$的<strong>元素个数之和</strong>。对于 云$X$ ，它包含的每个元素可以和 $cnt</em>{cldQ<em>X-cldP_X}$ 个元素构成一个数对，那么云$X$对操作4的答案的“贡献”为 $siz_X\times cnt</em>{cldQ_X-cldP_X}$ 。</p>
+<p>定义 $cnt_i$ 表示所有 $cldP_X-cldQ_X=i$ 的云$X$的<strong>元素个数之和</strong>。对于 云$X$ ，它包含的每个元素可以和 $cnt_{cldQ_X-cldP_X}$ 个元素构成一个数对，那么云$X$对操作4的答案的“贡献”为 $siz_X\times cnt_{cldQ_X-cldP_X}$ 。</p>
 <p><img src="/2019/19June24thArt1/img1.png" alt="img1"></p>
 <p>记操作4的答案为 $numpair$ （注意这道题的 <code>numpair</code> 要开 <code>long long</code>）。</p>
 <p>显然仍然只会在操作1,2时 $numpair$ 会改变。</p>
@@ -347,7 +347,7 @@
 <li><p>操作1</p>
 <blockquote>
 <p>假设要交换数字的两个位置分别属于云$X,Y(X\not=Y)$ 。</p>
-<p>那么在交换之前，我们在分别减去 $X,Y$ 对 $numpair$ 的贡献：<br>（如果$X$不是好云）$numpair-=siz<em>X\times cnt</em>{cldQ<em>X-cldP_X}$<br>（如果$Y$不是好云）$numpair-=siz_Y\times cnt</em>{cldQ_Y-cldP_Y}$<br>但是就出现了一个问题：如果 $X,Y$ 是配对的呢？<br>因为题目所求的数对是无序的，所以当 $X,Y$ 配对时，我们就多减了一个 $X,Y$ 之间的贡献，就像容斥原理一样，我们需要把多减去的贡献加回去：$numpair+=siz_X\times siz_Y$</p>
+<p>那么在交换之前，我们在分别减去 $X,Y$ 对 $numpair$ 的贡献：<br>（如果$X$不是好云）$numpair-=siz_X\times cnt_{cldQ_X-cldP_X}$<br>（如果$Y$不是好云）$numpair-=siz_Y\times cnt_{cldQ_Y-cldP_Y}$<br>但是就出现了一个问题：如果 $X,Y$ 是配对的呢？<br>因为题目所求的数对是无序的，所以当 $X,Y$ 配对时，我们就多减了一个 $X,Y$ 之间的贡献，就像容斥原理一样，我们需要把多减去的贡献加回去：$numpair+=siz_X\times siz_Y$</p>
 <p><img src="/2019/19June24thArt1/img2.png" alt="img2"></p>
 <p><strong>在交换之后</strong>，<strong>先更新</strong> $cnt,cldP$ 。</p>
 <p>再用同样的操作将修改后$X,Y$ 分别的贡献加到 $numpair$ 上去。</p>
@@ -356,7 +356,7 @@
 <li><p>操作2</p>
 <blockquote>
 <p>先分别减去 $X,Y$ 对 $numpair$ 的贡献，与操作1相同。</p>
-<p><strong>合并后先更新</strong> $cnt,cldP$ ，再加入合并后得到的$X$云对 $numpair$ 的贡献，即 $numpair+=siz<em>X\times cnt</em>{cldQ_X-cldP_X}$ 。</p>
+<p><strong>合并后先更新</strong> $cnt,cldP$ ，再加入合并后得到的$X$云对 $numpair$ 的贡献，即 $numpair+=siz_X\times cnt_{cldQ_X-cldP_X}$ 。</p>
 </blockquote>
 </li>
 </ol>

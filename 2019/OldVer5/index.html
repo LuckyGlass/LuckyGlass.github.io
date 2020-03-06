@@ -297,7 +297,7 @@ x\equiv r_2\pmod{m_2}
 x=k_1m_1+r_1\\
 x=k_2m_2+r_2
 \end{cases}</script><p>所以有 $k_1m_1+r_1=k_2m_2+r_2$ ；<br>移项得：$k_1m_1-k_2m_2=r_2-r_1​$ ；</p>
-<p>令 $g=\gcd(m_1,m_2)$ ，将上式两边同时除以 $g$ ，得： $\frac{m_1}{g}k_1-\frac{m_2}{g}k_2=\frac{r_2-r_1}{g}$ ；<br><strong>（★）</strong>因为上式的左边一定是整数，如果右边是分数，即 $g\not|\ r_2-r_1$ ，方程就无解；反之方程有解；</p>
+<p>令 $g=\gcd(m_1,m_2)$ ，将上式两边同时除以 $g$ ，得： $\frac{m_1}{g}k_1-\frac{m_2}{g}k_2=\frac{r_2-r_1}{g}$ ；<br><strong>（★）</strong>因为上式的左边一定是整数，如果右边是分数，即 $g\not| r_2-r_1$ ，方程就无解；反之方程有解；</p>
 <p>判断如果有解，则有 $\frac{m_1}{g}k_1-\frac{m_2}{g}k_2=\frac{r_2-r_1}{g}$ 。<br>因为 $\gcd(\frac{m_1}{g},\frac{m_2}{g})=1$，通过<strong>扩展欧几里得定理</strong>我们可以得到一组 $(k_1’,k_2’)$ 满足 $\frac{m_1}{g}k_1’+\frac{m_2}{g}k_2’=1$ ；<br>再将上式两边同时乘以 $t=\frac{r_2-r_1}{g}$ ，得：$\frac{m_1}{g}(k_1’t)-\frac{m_2}{g}(k_2’t)=t$ ；<br>则有：</p>
 <script type="math/tex; mode=display">
 \begin{cases}
@@ -308,7 +308,7 @@ k_1'tm_1+k_2'tm_2=tg
 \begin{cases}
 k_1\equiv k_1't\pmod{\frac{m_2}{g}}\\
 k_2\equiv k_2't\pmod{\frac{m_1}{g}}
-\end{cases}</script><p>那么就可以得到 $x​$ 的一个最小解 $x=k_1m_1+r_1​$ ；<br>令 $l​$ 为 $m_1,m_2​$ 的最小公倍数，根据这个解我们可以得到一个解集：$X={kl+x|k\in R}​$ ；<br>则对于 $X_i\in X​$ 有 $X_i\equiv x\pmod{l}​$ ；</p>
+\end{cases}</script><p>那么就可以得到 $x​$ 的一个最小解 $x=k_1m_1+r_1​$ ；<br>令 $l​$ 为 $m_1,m_2​$ 的最小公倍数，根据这个解我们可以得到一个解集：$X=\{kl+x|k\in R\}​$ ；<br>则对于 $X_i\in X​$ 有 $X_i\equiv x\pmod{l}​$ ；</p>
 <h3 id="C-实现"><a href="#C-实现" class="headerlink" title="- C++实现"></a>- C++实现</h3><p>显然可以<strong>递推</strong>，设上一步得到了 $x\equiv R\pmod{M}$；则有：</p>
 <script type="math/tex; mode=display">
 \begin{cases}

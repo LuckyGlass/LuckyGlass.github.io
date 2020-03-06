@@ -290,10 +290,10 @@
 <p>我们现在要统计数字 h(h≠0) 出现的次数<strong>恰好</strong>为 i 的位数为 lenX 的数 X 的个数：</p>
 <blockquote>
 <ol>
-<li><p>如果 X 的最高位为 h，那么除去最高位的 (lenX-1) 位中，h 还要出现 (i-1) 次，则 (i-1) 个 h 出现的位置总共有 $C<em>{lenX-1}^{i-1}$ 种；<br>确定 h 出现的数位后，还有 (lenX-i) 个数位没有确定，这些数位可以填除了 h 的任何数字（因为不是最高位，可以取 0 ，而且 h 只能出现 i 次，不能在这些数位中再出现），所以每个数位有 9 个数字可以填，统计一下就是 $9^{lenX-i}$ 种填法。<br>综上，这种情况总共有 $(9^{lenX-i}\times C</em>{lenX-1}^{i-1})$ 个满足条件的数 X，而其中 h 出现的次数为 i ，则这种情况 h 共出现了 $(i\times 9^{lenX-i}\times C_{lenX-1}^{i-1})$ 个。</p>
+<li><p>如果 X 的最高位为 h，那么除去最高位的 (lenX-1) 位中，h 还要出现 (i-1) 次，则 (i-1) 个 h 出现的位置总共有 $C_{lenX-1}^{i-1}$ 种；<br>确定 h 出现的数位后，还有 (lenX-i) 个数位没有确定，这些数位可以填除了 h 的任何数字（因为不是最高位，可以取 0 ，而且 h 只能出现 i 次，不能在这些数位中再出现），所以每个数位有 9 个数字可以填，统计一下就是 $9^{lenX-i}$ 种填法。<br>综上，这种情况总共有 $(9^{lenX-i}\times C_{lenX-1}^{i-1})$ 个满足条件的数 X，而其中 h 出现的次数为 i ，则这种情况 h 共出现了 $(i\times 9^{lenX-i}\times C_{lenX-1}^{i-1})$ 个。</p>
 </li>
 <li><p>如果 X 的最高位不是 h，那么在剩下的 (lenX-1) 位中，h 要出现 i 次，则 h 出现的位置总共有 $C_{lenX-1}^i$ 种；<br>再考虑其他不是 h 的数位：最高位不能填 h 和 0，有 8 种选择；除了最高位以及填 h 的数位，还有 (lenX-i-1) 个数位，这些数位可以填除了 h 的任何数，则有 9 种选择；总计 $8\times 9^{lenX-i-1}$ 种；</p>
-<p>综上，这种情况共有 $8\times 9^{lenX-i-1}\times C^i<em>{lenX-1}$ 个满足条件的 X，而其中 h 出现的次数为 i，则这种情况 h 共出现了 $(i\times 8\times 9^{lenX-i-1}\times C^i</em>{lenX-1})$ 个。</p>
+<p>综上，这种情况共有 $8\times 9^{lenX-i-1}\times C^i_{lenX-1}$ 个满足条件的 X，而其中 h 出现的次数为 i，则这种情况 h 共出现了 $(i\times 8\times 9^{lenX-i-1}\times C^i_{lenX-1})$ 个。</p>
 </li>
 </ol>
 </blockquote>
@@ -302,14 +302,14 @@
 <blockquote>
 <p>由于 0 不能填在最高位，所以 i 个 0 必须填在除最高位的 (lenX-1) 个数位中，填 0 的位置的方案数为 $C_{lenX-1}^i$ ；</p>
 <p>剩余还有 (lenX-i) 个数位，这些数位可以填除了 0 的任何数，共 9 种选择，所以共有 $9^{lenX-i}$ 种方案；</p>
-<p>综上，总共有 $C^i<em>{lenX-1}\times 9^{lenX-i}$ 个满足条件的 X；而其中 0 出现的次数为 i，则这种情况 0 共出现了 $i\times C^i</em>{lenX-1}\times 9^{lenX-i}$ 个。</p>
+<p>综上，总共有 $C^i_{lenX-1}\times 9^{lenX-i}$ 个满足条件的 X；而其中 0 出现的次数为 i，则这种情况 0 共出现了 $i\times C^i_{lenX-1}\times 9^{lenX-i}$ 个。</p>
 </blockquote>
 <h3 id="求解-位数等于lenT且小于等于T-的数中0-9出现的次数"><a href="#求解-位数等于lenT且小于等于T-的数中0-9出现的次数" class="headerlink" title="- 求解 位数等于lenT且小于等于T 的数中0~9出现的次数"></a>- 求解 位数等于lenT且小于等于T 的数中0~9出现的次数</h3><p>假设整数 X 的（从左到右）前 (i-1) 个数位上的数字和 T 相同，设 T 的第 i 个数位上的数字为 p。</p>
 <blockquote>
 <p>Tab. 第1个数位即最高位</p>
 </blockquote>
 <h4 id="X的第-i-个数位填入小于-p-的数字"><a href="#X的第-i-个数位填入小于-p-的数字" class="headerlink" title="= X的第 i 个数位填入小于 p 的数字"></a>= X的第 i 个数位填入小于 p 的数字</h4><p>令 X 的第 i 个数位填入 q，则 q&lt;p 。这样就保证了 X&lt;T ，所以剩下的 (lenT-i) 个数位上就可以随便填数。</p>
-<p>设剩下的 (lenT-i) 个数位中恰好有 j 个数位填数字 h，方案为 $C<em>{lenT-i}^j$；剩下的 (lenT-i-j) 个数位中除了 h 都可以填，方案为 $9^{lenT-i-j}$；总共有 $C^j</em>{lenT-i}\times9^{lenT-i-j}$。这里 h 可以取任何数字。</p>
+<p>设剩下的 (lenT-i) 个数位中恰好有 j 个数位填数字 h，方案为 $C_{lenT-i}^j$；剩下的 (lenT-i-j) 个数位中除了 h 都可以填，方案为 $9^{lenT-i-j}$；总共有 $C^j_{lenT-i}\times9^{lenT-i-j}$。这里 h 可以取任何数字。</p>
 <p>设第 i 个数位填入 q，剩下的 (lenT-i) 个数位随便填，就有 $10^{lenT-i}$ 种方案。</p>
 <h4 id="X的第-i-个数位填入-p"><a href="#X的第-i-个数位填入-p" class="headerlink" title="= X的第 i 个数位填入 p"></a>= X的第 i 个数位填入 p</h4><p>也就是说我们已经确定了 X 和 T 的前 i 个数位相同。若要使 X≤T ，则必须使 X 的剩下的数位小于等于 T 剩下的数位，换个说法，也就是 $X \mod 10^{lenT-i}\leq T\mod 10^{lenT-i}$。</p>
 <p>则 X 剩下的数位的取值有 $(T\mod 10^{lenT-i})+1$ 种（因为剩下的数位可以全部取0，所以要加1），所以 X 的第 i 位的数字 p 会出现 $(T\mod 10^{lenT-i})+1$ 次。</p>

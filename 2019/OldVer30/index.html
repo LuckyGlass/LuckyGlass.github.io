@@ -283,7 +283,7 @@
 <blockquote>
 <p>(1) edg[i] 按照输入顺序给出的第i条边（从1开始）；<br>(2) fedg[i] 对应edg[i]，表示修改后的第i条边；<br>(3) pnt[i] 表示以i为根的子树的最小总重量（满足条件的）；<br>(4) (u,v) 表示 u,v 之间的边在输入时的顺序<br>Tab. edg,fedg 都是结构体，包含元素 wgt,ref 分别表示重量、强度</p>
 </blockquote>
-<p>假设现在是 u点，已经计算出它的儿子 v，边的编号 id=(u,v)。<br>首先判断重量是否合法——如果子树v的最小重量 pnt[v] 都大于 edg[id].ref 了，那么就不合法，输出-1。<br>否则，显然如果不考虑 $edg[id].wgt&gt;0$ ，那么我们可以把 edg[id].ref 降至 pnt[v] —— 那么我们就是要在 $edg[id].wgt&gt;0$ 的情况下尽可能的使 edg[id].ref 小。计算 $delta$ 表示将 edg[id] 的 wgt 和 ref 同时减去 delta。那么 $delta=min{edg[id].ref-hvy\ ,\ edg[id].wgt-1}$，将削减后的值存入 fedg[id] ，最后统计 pnt[u] 。</p>
+<p>假设现在是 u点，已经计算出它的儿子 v，边的编号 id=(u,v)。<br>首先判断重量是否合法——如果子树v的最小重量 pnt[v] 都大于 edg[id].ref 了，那么就不合法，输出-1。<br>否则，显然如果不考虑 $edg[id].wgt&gt;0$ ，那么我们可以把 edg[id].ref 降至 pnt[v] —— 那么我们就是要在 $edg[id].wgt&gt;0$ 的情况下尽可能的使 edg[id].ref 小。计算 $delta$ 表示将 edg[id] 的 wgt 和 ref 同时减去 delta。那么 $delta=min\{edg[id].ref-hvy , edg[id].wgt-1\}$，将削减后的值存入 fedg[id] ，最后统计 pnt[u] 。</p>
 <p>这样我们就求出了最小重量的方案（同时判断了不存在解的情况）。</p>
 <h3 id="「增重量-Solve」"><a href="#「增重量-Solve」" class="headerlink" title="「增重量-Solve」"></a>「增重量-Solve」</h3><p>根据最开始的分析，我们可以将与根节点相连的所有边的 wgt 和 ref 都调至最大（也就是初始值）。<br>在 Solve() 函数中除了 当前节点u 还附带一个变量 $del$表示<strong>u的子树在最小基础下的能够增加的最大重量</strong>。其实Solve()的本质还是一个 DFS……但是它的返回值是 <strong>以u为根的子树中在最小重量的基础上新增加的重量之和</strong>，所以我们用deltot来记录这个返回值。</p>
 <p>那么从根节点出发，我们可以把 del 看做是正无穷，因为没有任何限制。<br>假设现在正在处理 边(u,v) ，u是父亲。<br>如果当前边再加上 del 不超过原来的重量，那么就可以将它加上，返回 deltot+=del（这里del就相当于加重量的机会，而这种情况就相当于把所有机会用完了）。<br>否则在给当前边增加重量后，del还有剩余——那么就贪心地把 del 分配到 v 里去。也就是先给 边(u,v) 加大到可能的最大值，同时将 del 减去增加的值。但是我们不能直接将 del 下传到 v 去，因为可能 v 的子树在增加 del 的重量后，边(u,v) 的强度不够，所以下传时，我们进行一个处理—— $min(del,fedg[id].ref-pnt[v])$（这里的pnt[v]其实就是在未对v进行 Solve() 修改时的v的子树总重）。最后在 Solve() 返回时将 del 减去其返回值，表示用去了这么多“机会”。</p>

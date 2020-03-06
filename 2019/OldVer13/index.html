@@ -275,8 +275,8 @@
 <a id="more"></a>
 <hr>
 <h2 id="2-sat问题"><a href="#2-sat问题" class="headerlink" title="2-sat问题"></a>2-sat问题</h2><p>先说sat问题——指一种每个变量只有两个值（true or false），并且给出一些限制，每个限制的基本形式为：</p>
-<p>$a\ XOR/OR/AND\ b\ XOR/OR/AND\ c\ (etc.) = true$</p>
-<p>另外当每个限制涉及的变量只有两个时，这类问题称为2-sat问题，即 $a\ XOR/OR/AND\ b=true$，当然也可以限制值为 false，在这里a,b也可以不保证不同。求这样的问题的解，即每一个变量选或不选。</p>
+<p>$a XOR/OR/AND b XOR/OR/AND c (etc.) = true$</p>
+<p>另外当每个限制涉及的变量只有两个时，这类问题称为2-sat问题，即 $a XOR/OR/AND b=true$，当然也可以限制值为 false，在这里a,b也可以不保证不同。求这样的问题的解，即每一个变量选或不选。</p>
 <hr>
 <h2 id="2-sat问题的建模"><a href="#2-sat问题的建模" class="headerlink" title="2-sat问题的建模"></a>2-sat问题的建模</h2><p>假设现在有N个变量形成2-sat问题。</p>
 <p>由于一个变量要么为true，要么为false；我们可以把变量拆分成两个点——一个点表示true，另一个表示false，这样一来我们有 2N 个点，也就是 N 个点对；下面我们称 A、A’ 分别表示变量A选、不选。然后我们称“一个变量的状态”为“这个状态所对应的点选或不选”。</p>

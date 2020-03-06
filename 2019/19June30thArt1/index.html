@@ -281,9 +281,9 @@
 g(A,x)=\sum_{i=0}\frac{a_i}{i!}x^i</script><p>对于实数 $c$，我们根据它定义数列：</p>
 <script type="math/tex; mode=display">
 E_c=(0,c^1,0,c^3,0,c^5,...)\\
-U_c=(c^0,c^1,c^2,c^3,c^4,c^5,...)</script><p>给定正整数 $A,B,n$ ；根据 $A$ 构造数列 $U<em>A$（记 $U_A$ 中的元素为 $u_i$），根据 $B$ 构造数列 $E</em>\sqrt{B}$（记 $E_\sqrt B$ 中的元素为 $e_i$）；求：</p>
+U_c=(c^0,c^1,c^2,c^3,c^4,c^5,...)</script><p>给定正整数 $A,B,n$ ；根据 $A$ 构造数列 $U_A$（记 $U_A$ 中的元素为 $u_i$），根据 $B$ 构造数列 $E_\sqrt{B}$（记 $E_\sqrt B$ 中的元素为 $e_i$）；求：</p>
 <script type="math/tex; mode=display">
-\sum_{i=0}^nC_n^iu_ie_{n-i}</script><p>输出时，第一行输出 $q$，接下来 $q$ 行，每行输出整数 $a<em>i,b_i$；表示答案为 $\sum</em>{i=1}^qa^i\sqrt {b_i}$。</p>
+\sum_{i=0}^nC_n^iu_ie_{n-i}</script><p>输出时，第一行输出 $q$，接下来 $q$ 行，每行输出整数 $a_i,b_i$；表示答案为 $\sum_{i=1}^qa^i\sqrt {b_i}$。</p>
 <hr>
 <h2 id="·-解析"><a href="#·-解析" class="headerlink" title="· 解析"></a>· 解析</h2><p>根据题目我们可以知道：</p>
 <script type="math/tex; mode=display">
@@ -312,7 +312,7 @@ x^i-(-x)^i=\begin{cases}
 <p>可以发现形如 $(a+b\sqrt t)$ 的两个式子相乘，我们仍可以得到一个形如 $(a+b\sqrt t)$ 的式子，于是…… $(A+\sqrt B)^n$ 和 $(A-\sqrt B)^n$ 展开后也会得到形如 $(a+b\sqrt t)$ 的式子。</p>
 <p>多项式的幂？式子的形式相同？——<strong>快速幂</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">SQPow</span><span class="params">(ll fir,ll sec,ll thi,ll B,ll mod)</span></span>&#123; <span class="comment">//求 (fir+sec*\sqrt(B))^thi % mod</span></span><br><span class="line">	ll resfir=<span class="number">1</span>,ressec=<span class="number">0</span>; <span class="comment">//返回值是 resfir+ressec*\sqrt(B)</span></span><br><span class="line">	<span class="keyword">while</span>(thi)&#123;</span><br><span class="line">		<span class="keyword">if</span>(thi&amp;<span class="number">1</span>)&#123;</span><br><span class="line">			ll _resfir,_ressec;</span><br><span class="line">			_resfir=(resfir*fir%mod+ressec*sec%mod*B%mod)%mod;</span><br><span class="line">			_ressec=(ressec*fir%mod+resfir*sec%mod)%mod;</span><br><span class="line">			resfir=_resfir;ressec=_ressec;</span><br><span class="line">            <span class="comment">//根据上面推导的式子更新返回值</span></span><br><span class="line">		&#125;</span><br><span class="line">		ll _fir,_sec;</span><br><span class="line">		_fir=(sec*sec%mod*B%mod+fir*fir%mod)%mod;</span><br><span class="line">		_sec=fir*sec%mod*<span class="number">2</span>%mod;</span><br><span class="line">		fir=_fir;sec=_sec;</span><br><span class="line">		thi&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ressec; <span class="comment">//这里只返回 a+b\sqrt(B) 中的 b，原因下面解释</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>令 $(A+\sqrt B)^n=P_1+Q_1\sqrt B,\ (A-\sqrt B)=P_2+Q_2\sqrt Ｂ$ （$P_1,P_2,Q_1,Q_2$是常数）；</p>
+<p>令 $(A+\sqrt B)^n=P_1+Q_1\sqrt B, (A-\sqrt B)=P_2+Q_2\sqrt Ｂ$ （$P_1,P_2,Q_1,Q_2$是常数）；</p>
 <p>可以发现 $P_1=P_2=A^n+A^{n-2}B+A^{n-4}B^2…$ ，所以 $(A+\sqrt B)^n-(A-\sqrt B)^n=(Q_1-Q_2)\sqrt B$ ；那么答案就是：</p>
 <script type="math/tex; mode=display">
 \frac 12\left[(A+\sqrt B)^n-(A-\sqrt B)^n\right]=\frac 12(Q_1-Q_2)\sqrt B</script><p>可见要将上式表示为 $\sum_{i=1}^qa_i\sqrt {b_i}$ 的形式 —— 令 $B=x^2y(x是尽可能大的正整数)$，则 $q=1,a_1=(Q_1-Q_2)x,b_1=y$ 。（<strong>别忘了分解质因数</strong>）</p>

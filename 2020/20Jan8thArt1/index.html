@@ -279,7 +279,7 @@
 <a id="more"></a>
 <hr>
 <h2 id="引入"><a href="#引入" class="headerlink" title="# 引入"></a># 引入</h2><p>感觉跟 KMP 关系不大，倒跟 Manachar 的思想比较接近。</p>
-<p>在 Z算法 中，对于一个字符串 $S={S<em>0,S_1,\cdots,S</em>{n-1}}$ 定义了一个函数 $Z(i)$，表示以位置 $i$ 开始的 $S$ 的后缀 $T<em>i={S_i,S</em>{i+1},\cdots,S_{n-1}}$ 与 $S$ 的最长公共前缀的长度。<br>其中特殊定义 $Z(0)=0$。</p>
+<p>在 Z算法 中，对于一个字符串 $S=\{S_0,S_1,\cdots,S_{n-1}\}$ 定义了一个函数 $Z(i)$，表示以位置 $i$ 开始的 $S$ 的后缀 $T_i=\{S_i,S_{i+1},\cdots,S_{n-1}\}$ 与 $S$ 的最长公共前缀的长度。<br>其中特殊定义 $Z(0)=0$。</p>
 <p>暂且不管这个函数有什么用，先看看这个函数怎么算的。</p>
 <hr>
 <h2 id="Z-Algorithm"><a href="#Z-Algorithm" class="headerlink" title="# Z-Algorithm"></a># Z-Algorithm</h2><blockquote>
@@ -298,7 +298,7 @@
 <blockquote>
 <p>也就是说：因为橙色位置可能不一样，所以 $Z(i)$ 不一定为 $Z(i-L)$。</p>
 </blockquote>
-<p>这时候就要缩小，缩成这样就没问题了：<br><img src="/2020/20Jan8thArt1/jpg2.jpg" alt="jpg2" style="height:120pt;"><br>也就是说，我们可以确定 $Z(i)$ 至少为 $\min{Z(i-L),R-i+1}$（跟Manachar那种计算方式特别像）<br>然后 $Z(i)$ 可能还可以增大，于是继续暴力扩增 $Z(i)$。</p>
+<p>这时候就要缩小，缩成这样就没问题了：<br><img src="/2020/20Jan8thArt1/jpg2.jpg" alt="jpg2" style="height:120pt;"><br>也就是说，我们可以确定 $Z(i)$ 至少为 $\min\{Z(i-L),R-i+1\}$（跟Manachar那种计算方式特别像）<br>然后 $Z(i)$ 可能还可以增大，于是继续暴力扩增 $Z(i)$。</p>
 </li>
 </ol>
 <hr>

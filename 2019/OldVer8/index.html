@@ -309,14 +309,14 @@ k\ l\ m\ n\\
 <h3 id="「例题Ⅰ-HihoCoder-1143」"><a href="#「例题Ⅰ-HihoCoder-1143」" class="headerlink" title="「例题Ⅰ- HihoCoder 1143」"></a>「例题Ⅰ- HihoCoder 1143」</h3><p>本质上就是求斐波那契数列的第n项，稍微打下表就可以发现。这道题的 $n\leq 10^8$ 按道理来说 $1s$ 可以直接递推……但是既然我们在学矩阵加速，我们还是用矩阵加速的方法。</p>
 <p>矩阵加速最重要的就是找到“矩阵乘法的转移式”；（$f(n)$ 即第 $n$ 项）首先我们知道 $f(n)=f(n-1)+f(n-2)$，那么求斐波那契第 $n$ 项的转移式就是：</p>
 <script type="math/tex; mode=display">
-\begin{bmatrix}f(n)\\f(n-1)\end{bmatrix}=\begin{bmatrix}1\ 1\\1\ 0\end{bmatrix}\times\begin{bmatrix}f(n-1)\\f(n-2)\end{bmatrix}</script><p>令函数 $g(n)=\begin{smallmatrix}\begin{bmatrix}f(n)\f(n-1)\end{bmatrix}\end{smallmatrix}$，常量 $M=\begin{smallmatrix}\begin{bmatrix}1\ 1\1\ 0\end{bmatrix}\end{smallmatrix}$ ，那么递推式就可以写成 $g(n)=M\times g(n-1)$ 。</p>
+\begin{bmatrix}f(n)\\f(n-1)\end{bmatrix}=\begin{bmatrix}1\ 1\\1\ 0\end{bmatrix}\times\begin{bmatrix}f(n-1)\\f(n-2)\end{bmatrix}</script><p>令函数 $g(n)=\begin{smallmatrix}\begin{bmatrix}f(n)\\f(n-1)\end{bmatrix}\end{smallmatrix}$，常量 $M=\begin{smallmatrix}\begin{bmatrix}1 1\\1 0\end{bmatrix}\end{smallmatrix}$ ，那么递推式就可以写成 $g(n)=M\times g(n-1)$ 。</p>
 <p>现在再来看 $M$ 和 $g(n)$ 是如何求出来的：<br>a) 首先我们必须要能够从 $g(n-1)$ 推导到 $g(n)$ 。根据 ①式，我们采取的方法是“提取出等号左边与 $n$ 相关的值并将它排成一列作为 $g(x-1)$”，即将 $f(n-1),f(n-2)$ 排成一列，作为 $g(n-1)$，那么我们就可以得到 $g(n)$。<br>b) 假设 $g(n)$ 的行数为 $R$，$M$ 一般来说是 $R\times R$ 的一个矩阵。$M$ <strong>的第</strong> $i$ <strong>行代表的是</strong> $g(n)$ <strong>的第</strong> $i$ <strong>行如何由</strong> $g(n-1)$ <strong>转移过来。</strong></p>
 <blockquote>
 <p>这下面就是我推导 $M$ 的方法：</p>
 <p>写出 $R$ 个等式，第 $i$ 个等式的左边是 $g(n)$ 的第 $i$ 行；把 $g(n-1)$ 横向写在每个等式的右边，得到</p>
 <script type="math/tex; mode=display">
 \ \ \ \ \ \ \ f(n)=M_{(1,1)}f(n-1)+M_{(1,2)}f(n-2)\\
-f(n-1)=M_{(2,1)}f(n-1)+M_{(2,2)}f(n-2)</script><p>这样就能够看出 $M<em>{(1,1)}=1;M</em>{(1,2)}=1;M<em>{(2,1)}=1;M</em>{(2,2)}=0$ ，对应的就是矩阵 $M$。</p>
+f(n-1)=M_{(2,1)}f(n-1)+M_{(2,2)}f(n-2)</script><p>这样就能够看出 $M_{(1,1)}=1;M_{(1,2)}=1;M_{(2,1)}=1;M_{(2,2)}=0$ ，对应的就是矩阵 $M$。</p>
 </blockquote>
 <h3 id="「例题Ⅱ-HihoCoder-1151」"><a href="#「例题Ⅱ-HihoCoder-1151」" class="headerlink" title="「例题Ⅱ- HihoCoder 1151」"></a>「例题Ⅱ- HihoCoder 1151」</h3><p>先思考出状压DP的方程式（这里就不推导了）。</p>
 <blockquote>

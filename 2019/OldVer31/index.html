@@ -279,7 +279,7 @@
 <script type="math/tex; mode=display">
 height[1] < height[2] > height[3] < height[4]\ etc.</script><p>或</p>
 <script type="math/tex; mode=display">
-\ height[1] > height[2] < height[3]  > height[4]\ etc.</script><p>（也就是一高一低）。<br>将所有方案按木板排列高度的字典序排列，求出第C个方案（保证存在）。<br>$0 &lt; N\leq 20,\ C &gt; 0$<br>T组数据($T\leq 100$)。</p>
+\ height[1] > height[2] < height[3]  > height[4]\ etc.</script><p>（也就是一高一低）。<br>将所有方案按木板排列高度的字典序排列，求出第C个方案（保证存在）。<br>$0 &lt; N\leq 20, C &gt; 0$<br>T组数据($T\leq 100$)。</p>
 <hr>
 <h2 id="『解析』"><a href="#『解析』" class="headerlink" title="『解析』"></a>『解析』</h2><p>这道题有一个重要的性质——栅栏的高度具体是多少对能否构成方案并不重要，起主要影响的是它们的<strong>相对高度</strong>。又因为高度是一个排列（没有重复），所以我们只要知道有多少个木板，我们就可以获得它们的相对高度！</p>
 <p>而两种漂亮的栅栏我们可以把它抽象成：①”M”型，第一个栅栏比第二个栅栏矮；②”W”型，第一个栅栏比第二个栅栏高；</p>

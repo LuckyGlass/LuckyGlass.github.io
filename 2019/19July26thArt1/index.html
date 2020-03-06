@@ -302,9 +302,9 @@
 &r=\prod_{i=1}^{k}r_i^{p_i}\\
 &a=\left(\prod_{i=1}^{k}r_i^{q_i}\right)\cdot a'&&(\gcd\{a',r\}=1)\\
 &a^b=\left[\left(\prod_{i=1}^{k}r_i^{q_i}\right)\cdot a'\right]^b=\prod_{i=1}^{k}r_i^{q_ib}\cdot a'^b
-\end{align}</script><p>则有： $\forall_i\ q_ib\ge p_i$ ，即 $\forall_i\ q_i\ge \left\lceil\frac{p_i}b\right\rceil$；换句话说，令：</p>
+\end{align}</script><p>则有： $\forall_i q_ib\ge p_i$ ，即 $\forall_i q_i\ge \left\lceil\frac{p_i}b\right\rceil$；换句话说，令：</p>
 <script type="math/tex; mode=display">
-G=\prod_{i=1}^kr_i^{\left\lceil\frac{p_i}b\right\rceil}</script><p>则 $G|a$ ，那么对于给定的 $b$，$a$ 的个数就是 $\left\lfloor\frac nG\right\rfloor$ （这个 $n$ 是题目里的 “$a\in[1,n]$”）；所以我们枚举 $b$ —— ？？？$b$ 的范围好像很大没法枚举？？？<br>emm……其实我们会发现，当 $b\ge \max{p<em>i}$ 的时候，$\left\lceil\frac{p_i}b\right\rceil$ 就都为 $1$ 了——而且我们高兴地发现：$p_i$ 最大就是 $(\log_2n)$ ~<br>所以我们只需要枚举 $b$ 从 $1$ 到 $\max{p_i}$ 就可以了，当 $b$ 超过 $\max{p_i}$  时，$G$ 恒等于 $\prod</em>{i=1}^kr_i$ ，可以直接计算答案。</p>
+G=\prod_{i=1}^kr_i^{\left\lceil\frac{p_i}b\right\rceil}</script><p>则 $G|a$ ，那么对于给定的 $b$，$a$ 的个数就是 $\left\lfloor\frac nG\right\rfloor$ （这个 $n$ 是题目里的 “$a\in[1,n]$”）；所以我们枚举 $b$ —— ？？？$b$ 的范围好像很大没法枚举？？？<br>emm……其实我们会发现，当 $b\ge \max\{p_i\}$ 的时候，$\left\lceil\frac{p_i}b\right\rceil$ 就都为 $1$ 了——而且我们高兴地发现：$p_i$ 最大就是 $(\log_2n)$ ~<br>所以我们只需要枚举 $b$ 从 $1$ 到 $\max\{p_i\}$ 就可以了，当 $b$ 超过 $\max\{p_i\}$  时，$G$ 恒等于 $\prod_{i=1}^kr_i$ ，可以直接计算答案。</p>
 <h3 id="Part-4-求解数论阶"><a href="#Part-4-求解数论阶" class="headerlink" title="- Part 4. 求解数论阶"></a>- Part 4. 求解数论阶</h3><p>我用的是 BSGS 直接求解 $10^r\equiv1\pmod p$ 的最小 $r$ ……（感谢 Tiw 神犇）</p>
 <p>还有一种方法是利用了数论阶的性质：</p>
 <blockquote>
