@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="出题人你卡 hash 卡得开心吗？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI - Bracket Sequences on Tree (HDU)">
+<meta property="og:url" content="http://luckyglass.github.io/2019/19Nov6thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="出题人你卡 hash 卡得开心吗？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://luckyglass.github.io/2019/19Nov6thArt1/jpg1.jpg">
+<meta property="og:image" content="http://luckyglass.github.io/2019/19Nov6thArt1/jpg2.jpg">
+<meta property="og:image" content="http://luckyglass.github.io/2019/19Nov6thArt1/jpg1.jpg">
+<meta property="article:published_time" content="2019-11-06T14:06:10.000Z">
+<meta property="article:modified_time" content="2019-11-07T13:45:10.947Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="算法效率-哈希">
+<meta property="article:tag" content="-HDU-">
+<meta property="article:tag" content="动态规划-换根DP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://luckyglass.github.io/2019/19Nov6thArt1/jpg1.jpg">
+
+<link rel="canonical" href="http://luckyglass.github.io/2019/19Nov6thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>OI - Bracket Sequences on Tree (HDU) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/luckyglass" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2019/19Nov6thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI - Bracket Sequences on Tree (HDU)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-06 22:06:10" itemprop="dateCreated datePublished" datetime="2019-11-06T22:06:10+08:00">2019-11-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-07 21:45:10" itemprop="dateModified" datetime="2019-11-07T21:45:10+08:00">2019-11-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/19Nov6thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/19Nov6thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>出题人你卡 hash 卡得开心吗？</p>
+</blockquote>
+<a id="more"></a>
+
+<hr>
+<h2 id="Part1-题面"><a href="#Part1-题面" class="headerlink" title="Part1. 题面"></a>Part1. 题面</h2><p>本题有多组数据，总共 $t$ 组。</p>
+<p>每组数据给出一棵 $n$ 个点的无根树，求从任意点出发可能得到的本质不同的括号序列数量，对 $998244353$ 取模。</p>
+<blockquote>
+<p><strong>&gt; Tip</strong><br>一棵树的括号序列为：从根节点出发 DFS，当一个点进入 DFS 栈中时，在序列的末尾加上 <code>(</code>，当一个点从 DFS 栈中弹出时，在序列末尾加上 <code>)</code>。<br>这样可以得到一个长度为 2n 的括号序列。<br>本质不同的括号序列即指长得不一样的括号序列。</p>
+</blockquote>
+<p><strong>数据结构</strong>：$1\le t\le10^5,1\le n\le10^5$；保证所有数据点的 $n$ 之和不超过 $3.2\times10^6$。</p>
+<hr>
+<h2 id="Part2-解析"><a href="#Part2-解析" class="headerlink" title="Part2. 解析"></a>Part2. 解析</h2><p>首先你得知道什么叫树的同构：</p>
+<blockquote>
+<p><strong>&gt; Tip</strong><br>如果两棵树可以通过给节点重新编号，使得两棵树对应边的节点编号相同，则称这两棵树同构。</p>
+</blockquote>
+<h3 id="Part2-1-指定某点为根的答案"><a href="#Part2-1-指定某点为根的答案" class="headerlink" title="Part2/1. 指定某点为根的答案"></a>Part2/1. 指定某点为根的答案</h3><p>不妨指定 1 为根。（万年工具人 1 号节点……）</p>
+<p>可以直接 dp：u 的子树中的括号序列数量为 <code>f[u]</code>；</p>
+<blockquote>
+<p><strong>&gt; Tab</strong><br><code>cntch[u]</code> 为 u 的子节点数量；<br><code>fac[i]</code> 为模意义下的 $i!$。</p>
+</blockquote>
+<p>先计算出每个子节点的答案 <code>f[v]</code>：</p>
+<ol>
+<li><p><code>f[u]</code> 应该为所有 <code>f[v]</code> 的乘积（因为是方案数，所以通过乘法原理计算）；</p>
+</li>
+<li><p>DFS 子树的顺序也会造成影响，所以要乘上子树的全排列，即乘上 <code>fac[cntch[u]]</code>；</p>
+</li>
+<li><p>不难发现，<u><em>同构的两棵树的括号序列的方案集合一定是一样的</em></u>，因此有一些会算重复；</p>
+<p>把同构的子树划分到一块，计算出每一块的大小，为 ${sam_1,sam_2,…,sam_t}$，那么最后应该除以 $\prod_{i=1}^t(sam_i)!$。（其实就是可重集的全排列）</p>
+</li>
+</ol>
+<p>最后得到的转移式（要在模意义下计算）：<br>$$<br>f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!<br>$$</p>
+<h3 id="Part2-2-换根DP求树的同构"><a href="#Part2-2-换根DP求树的同构" class="headerlink" title="Part2/2. 换根DP求树的同构"></a>Part2/2. 换根DP求树的同构</h3><p>（这也是最近学习的内容 awa）</p>
+<p>仍然先考虑指定 1 号节点为根，求出树的一个 hash 值。可以考虑这样设计一个 hash 的递归式：</p>
+<blockquote>
+<p><strong>&gt; Tab</strong><br>以下默认以 1 为整棵树的根</p>
+</blockquote>
+<p>$idx_u$ 表示以 u 为根的子树的 hash 值。对于叶子节点 $idx_u=1$；其他节点的计算方式为 $idx_u=1+\sum_{v}idx_v\times rand_{siz_v}$，其中 $rand$ 是<u><em>一开始随机化得到的一个数列</em></u>，$siz_v$ 是以 v 为根的子树的大小。这样可以一次 DFS 求出每个点的 $idx$。</p>
+<p>为什么这样设计 hash？当然目的是要让它的冲突尽可能少。理论上当 $rand$ 数列取质数数列的时候可以尽可能地避免冲突，但是我们需要的 $rand$ 比较多，找质数序列反而麻烦了，于是交给随机化。:)</p>
+<p>这样我们就求得了这棵树以 1 为根的 hash 值，但是我们发现当这棵树以不同的点作为根时，hash 值可能不同。为了相对准确地判断树的同构，我们可以在求出以 1 为根的 $idx$ 的基础上，通过 <strong>*<u>换根DP</u>*</strong> 计算出以每一个点 $u$ 为根的 $idx’_u$ 。</p>
+<p>考虑从当前的根 $u$ 将根换到子节点 $v$。换根DP的核心就是“<u><em>一次换根只会影响 u 和 v 的DP值</em></u>”，显然 $idx_u’$ 是满足这个特点的。</p>
+<p>考虑从 u 到 v 的转移：<br><img src="/2019/19Nov6thArt1/jpg1.jpg" alt="jpg1"></p>
+<p>我们已经计算出了 $idx’<em>u$，要计算 $idx_v’$。发现 v 的子树内的 $idx_v$ 并没有改变，换根后，u 变为 v 的子节点。首先 u 要减去原来 v 对 $idx_u’$ 的贡献：$rand</em>{siz_v}\times idx_v$，然后 v 要加上 u 的贡献 $(idx_u’-rand_{siz_v}\times idx_v)\times rand_{n-siz_v}$（$n-siz_v$ 就是现在 u 的子树的大小嘛）。</p>
+<p>所以可以得到 $idx’<em>v=idx_v+(idx_u’-rand</em>{siz_v}\times idx_{siz_v})\times rand_{n-siz_v}$，最初 $idx’_1=idx_1$，然后就可以 DP 了。</p>
+<p>实际上，实现代码时，$idx’<em>v$ 并没有加上 $idx_v$，而是 $idx’_v=idx_u-rand</em>{siz_v}\times idx_{siz_v}+rand_{n-siz_u}\times idx_u’$。当要计算以 v 为根的 hash 值时，就计算 $idx’<em>v\times rand</em>{n-siz_v}+idx_v$ 即可。</p>
+<h3 id="Part2-3-换根DP求每个点为根的答案"><a href="#Part2-3-换根DP求每个点为根的答案" class="headerlink" title="Part2/3. 换根DP求每个点为根的答案"></a>Part2/3. 换根DP求每个点为根的答案</h3><p>在 Part2/1 ，我们DP计算了以 1 为根的答案，但是显然以不同的点为根，括号序列很有可能是不一样的。</p>
+<p>其实和换根DP求 $idx_u’$ 是差不多的，还是定义 $f’_u$ 表示整棵树以 u 为根，能够得到的本质不同的括号序列的数量。主要难点就是“删去 v 对 $f_u’$ 的贡献，并计算新的作为 v 的子节点的 u 的贡献”。</p>
+<p>记删去 v 对 $f’_u$ 的贡献后，u 作为 v 的子节点代表的子树中括号序列的数量为 $h$。最初将 $h$ 的值设为 $f’_u$</p>
+<p>要删除贡献，首先要知道 $f_u’$ 是怎么计算的：</p>
+<p><img src="/2019/19Nov6thArt1/jpg2.jpg" alt="jpg2"></p>
+<ol>
+<li>v 不是 u 的子树了，要除去 $f_v$ 对 $f_u’$ 的贡献，即$\div f_v$；</li>
+<li>u 的子树少了一棵：记原来 u 作为根时，有 cnt 棵子树，因为计算的时候 $f_v$ 中乘上了 $cnt!$，现在要改为乘上 $(cnt-1)!$ —— 可以先乘上 $(cnt!)^{-1}$ 再乘上 $(cnt-1)!$ ；</li>
+<li>u 的子树中，与 v 同构的子树少了一棵：设原来 u 为根时，与 v 同构的子树有 $sam$ 棵，因为要除去重复，除掉了 $sam!$，现在要改为除掉 $(sam-1)!$ —— 可以先乘上 $sam!$，再乘上 $\left[(sam-1)!\right]^{-1}$；</li>
+</ol>
+<p>所以 $h=f_u’\times (f_v)^{-1}\times (cnt!)^{-1}\times(cnt-1)!\times sam!\times (sam-1)!$；这样 u 作为 v 的子树时的括号序列数量就求到了。</p>
+<p>然后计算 $f_v’$，先设 $f_v’$ 的初值为 $f_v$：（仍然是这张图）</p>
+<p><img src="/2019/19Nov6thArt1/jpg1.jpg" alt="jpg1"></p>
+<ol>
+<li>u 作为 v 的子树，提供了 $h$ 的贡献，则乘上 $h$；</li>
+<li>v 的子树多了一个，记原来子树个数为 $cnt_v$，因为全排列时乘上了 $cnt_v!$，现在要乘上 $(cnt_v+1)!$，所以乘上 $(cnt_v+1)$ 即可；</li>
+<li>v 的与 u 同构的子树增加了一个（这里 u 的子树的哈希值就是 $idx_v’$ 了），记原来 u 的与 u 同构的子树个数为 $sam_v$，因为去重时除去了 $sam_v!$，现在要除去 $(sam_v+1)!$ —— 则先乘上 $sam_v!$，再乘上 $[(sam_v+1)!]^{-1}$ 。</li>
+</ol>
+<p>可得 $f_v’=f_v\times h\times (cnt_v+1)\times sam_v!\times [(sam_v+1)!]^{-1}$；</p>
+<h3 id="Part2-4-统计答案"><a href="#Part2-4-统计答案" class="headerlink" title="Part2/4. 统计答案"></a>Part2/4. 统计答案</h3><p>已经计算出分别以每个点为根的答案了，似乎直接把 $f_u’$ 加起来就可以了。</p>
+<p>但是一样的道理，如果以 u 为根的整棵树与以 v 为根的整棵树形态相同，那么它们的括号序列方案集合一定完全相同，所以只能计算一次。这个就用到整棵树的哈希值。</p>
+<p>还好之前已经计算了，以 u 为根的整棵树的哈希值就为 $idx_u+idx’<em>u\times rand</em>{n-siz_u}$。所以只要 map 或者 set 判一下重就好了。</p>
+<blockquote>
+<p><strong>&gt; Tip</strong><br>这道题卡哈希！（好端端的一道哈希题被搞成了一道rp题……）<br>反正我写了一个三哈希……用结构体打了包，可以参考一下。</p>
+</blockquote>
+<hr>
+<h2 id="Part3-源代码"><a href="#Part3-源代码" class="headerlink" title="Part3. 源代码"></a>Part3. 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> uint;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD=<span class="number">998244353</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fix(x) (int((x%MOD+MOD)%MOD))</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MNUM</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> num;</span><br><span class="line">	MNUM()&#123;&#125;</span><br><span class="line">	MNUM(<span class="keyword">int</span> _n)&#123;num=_n;&#125;</span><br><span class="line">	MNUM <span class="keyword">operator</span> +(<span class="keyword">const</span> MNUM &amp;B)<span class="keyword">const</span>&#123;<span class="keyword">return</span> fix(<span class="number">1l</span>l*num+B.num);&#125;</span><br><span class="line">	MNUM <span class="keyword">operator</span> -(<span class="keyword">const</span> MNUM &amp;B)<span class="keyword">const</span>&#123;<span class="keyword">return</span> fix(<span class="number">1l</span>l*num-B.num);&#125;</span><br><span class="line">	MNUM <span class="keyword">operator</span> *(<span class="keyword">const</span> MNUM &amp;B)<span class="keyword">const</span>&#123;<span class="keyword">return</span> fix(<span class="number">1l</span>l*num*B.num);&#125;</span><br><span class="line">	MNUM <span class="keyword">operator</span> +=(<span class="keyword">const</span> MNUM &amp;B)&#123;<span class="keyword">return</span> *<span class="keyword">this</span>=(*<span class="keyword">this</span>)+B;&#125;</span><br><span class="line">	MNUM <span class="keyword">operator</span> -=(<span class="keyword">const</span> MNUM &amp;B)&#123;<span class="keyword">return</span> *<span class="keyword">this</span>=(*<span class="keyword">this</span>)-B;&#125;</span><br><span class="line">	MNUM <span class="keyword">operator</span> *=(<span class="keyword">const</span> MNUM &amp;B)&#123;<span class="keyword">return</span> *<span class="keyword">this</span>=(*<span class="keyword">this</span>)*B;&#125;</span><br><span class="line">	MNUM <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> MNUM &amp;B)<span class="keyword">const</span>&#123;<span class="keyword">return</span> num&lt;B.num;&#125;</span><br><span class="line">&#125;fac[N+<span class="number">3</span>],ifac[N+<span class="number">3</span>],ansf[N+<span class="number">3</span>],ansg[N+<span class="number">3</span>],ans;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TNODE</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to;TNODE *nxt;</span><br><span class="line">	TNODE()&#123;&#125;</span><br><span class="line">	TNODE(<span class="keyword">int</span> <span class="keyword">_t</span>,TNODE *_n):to(<span class="keyword">_t</span>),nxt(_n)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TREE</span>&#123;</span></span><br><span class="line">	TNODE pol[N*<span class="number">2</span>+<span class="number">3</span>],*head[N+<span class="number">3</span>],*ncnt;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">		ncnt=pol;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> u=<span class="number">1</span>;u&lt;=n;u++)</span><br><span class="line">			head[u]=<span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">		TNODE *p=++ncnt,*q=++ncnt;</span><br><span class="line">		*p=TNODE(v,head[u]);head[u]=p;</span><br><span class="line">		*q=TNODE(u,head[v]);head[v]=q;</span><br><span class="line">	&#125;</span><br><span class="line">	TNODE* <span class="keyword">operator</span> [](<span class="keyword">int</span> id)&#123;<span class="keyword">return</span> head[id];&#125;</span><br><span class="line">&#125;T_;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ull HASHMOD1=<span class="number">1073790841</span>,HASHMOD2=<span class="number">1073919029</span>,HASHMOD3=<span class="number">2305843009213693951u</span>ll;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HASH</span>&#123;</span></span><br><span class="line">	ull idx1,idx2,idx3;</span><br><span class="line">	HASH()&#123;&#125;</span><br><span class="line">	HASH(ull A)&#123;idx1=idx2=idx3=A;&#125;</span><br><span class="line">	HASH(ull Ix1,ull Ix2,ull Ix3):idx1(Ix1%HASHMOD1),idx2(Ix2%HASHMOD2),idx3(Ix3%HASHMOD3)&#123;&#125;</span><br><span class="line">	ull&amp; <span class="keyword">operator</span> [](<span class="keyword">int</span> id)&#123;<span class="keyword">return</span> id==<span class="number">1</span>? idx1:idx2;&#125;</span><br><span class="line">	HASH <span class="keyword">operator</span> *(<span class="keyword">const</span> HASH &amp;B)<span class="keyword">const</span>&#123;<span class="keyword">return</span> HASH(idx1*B.idx1,idx2*B.idx2,idx3*B.idx3);&#125;</span><br><span class="line">	HASH <span class="keyword">operator</span> -(<span class="keyword">const</span> HASH &amp;B)<span class="keyword">const</span>&#123;<span class="keyword">return</span> HASH(idx1+HASHMOD1-B.idx1,idx2+HASHMOD2-B.idx2,idx3+HASHMOD3-B.idx3);&#125;</span><br><span class="line">	HASH <span class="keyword">operator</span> +(<span class="keyword">const</span> HASH &amp;B)<span class="keyword">const</span>&#123;<span class="keyword">return</span> HASH(idx1+B.idx1,idx2+B.idx2,idx3+B.idx3);&#125;</span><br><span class="line">	HASH <span class="keyword">operator</span> *=(<span class="keyword">const</span> HASH &amp;B)&#123;<span class="keyword">return</span> *<span class="keyword">this</span>=(*<span class="keyword">this</span>)*B;&#125;</span><br><span class="line">	HASH <span class="keyword">operator</span> -=(<span class="keyword">const</span> HASH &amp;B)&#123;<span class="keyword">return</span> *<span class="keyword">this</span>=(*<span class="keyword">this</span>)-B;&#125;</span><br><span class="line">	HASH <span class="keyword">operator</span> +=(<span class="keyword">const</span> HASH &amp;B)&#123;<span class="keyword">return</span> *<span class="keyword">this</span>=(*<span class="keyword">this</span>)+B;&#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> HASH &amp;B)<span class="keyword">const</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(idx1!=B.idx1) <span class="keyword">return</span> idx1&lt;B.idx1;</span><br><span class="line">		<span class="keyword">if</span>(idx2!=B.idx2) <span class="keyword">return</span> idx2&lt;B.idx2;</span><br><span class="line">		<span class="keyword">return</span> idx3&lt;B.idx3;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span> !=(<span class="keyword">const</span> HASH &amp;B)<span class="keyword">const</span>&#123;<span class="keyword">return</span> idx1!=B.idx1 || idx2!=B.idx2 || idx3!=B.idx3;&#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span> ==(<span class="keyword">const</span> HASH &amp;B)<span class="keyword">const</span>&#123;<span class="keyword">return</span> idx1==B.idx1 &amp;&amp; idx2==B.idx2 &amp;&amp; idx3==B.idx3;&#125;</span><br><span class="line">&#125;idxf[N+<span class="number">3</span>],idxg[N+<span class="number">3</span>],rnd[N+<span class="number">3</span>],nidxg[N+<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,cas;</span><br><span class="line"><span class="keyword">int</span> siz[N+<span class="number">3</span>],cntch[N+<span class="number">3</span>];</span><br><span class="line"><span class="built_in">set</span>&lt; HASH &gt; cont;</span><br><span class="line"><span class="built_in">map</span>&lt; HASH,<span class="keyword">int</span> &gt; per[N+<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="function">MNUM <span class="title">QPow</span><span class="params">(MNUM und,<span class="keyword">int</span> ovr)</span></span>&#123;</span><br><span class="line">	<span class="function">MNUM <span class="title">resu</span><span class="params">(<span class="number">1</span>)</span></span>;</span><br><span class="line">	<span class="keyword">while</span>(ovr)&#123;</span><br><span class="line">		<span class="keyword">if</span>(ovr&amp;<span class="number">1</span>) resu*=und;</span><br><span class="line">		und*=und;</span><br><span class="line">		ovr&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> resu;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFSf</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt; HASH &gt; sav;</span><br><span class="line">	idxf[u]=HASH(<span class="number">1</span>);</span><br><span class="line">	siz[u]=<span class="number">1</span>;ansf[u]=<span class="number">1</span>;</span><br><span class="line">	cntch[u]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(TNODE *it=T_[u];it;it=it-&gt;nxt)&#123;</span><br><span class="line">		<span class="keyword">int</span> v=it-&gt;to;</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		cntch[u]++;</span><br><span class="line">		DFSf(v,u);</span><br><span class="line">		siz[u]+=siz[v];</span><br><span class="line">		idxf[u]+=rnd[siz[v]]*idxf[v];</span><br><span class="line">		ansf[u]*=ansf[v];</span><br><span class="line">		sav.push_back(idxf[v]);</span><br><span class="line">		per[u][idxf[v]]++;</span><br><span class="line">	&#125;</span><br><span class="line">	ansf[u]*=fac[cntch[u]];</span><br><span class="line">	sort(sav.begin(),sav.end());</span><br><span class="line">	<span class="keyword">int</span> cnt=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;(<span class="keyword">int</span>)sav.size();i++)</span><br><span class="line">		<span class="keyword">if</span>(sav[i]!=sav[i<span class="number">-1</span>])&#123;</span><br><span class="line">			ansf[u]*=ifac[cnt];</span><br><span class="line">			cnt=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> cnt++;</span><br><span class="line">	ansf[u]*=ifac[cnt];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFSg</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span>&#123;</span><br><span class="line"><span class="comment">//	cout&lt;&lt;"? "&lt;&lt;u&lt;&lt;" "&lt;&lt;idxf[u].idx2&lt;&lt;endl;</span></span><br><span class="line">	<span class="keyword">for</span>(TNODE *it=T_[u];it;it=it-&gt;nxt)&#123;</span><br><span class="line">		<span class="keyword">int</span> v=it-&gt;to;</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		</span><br><span class="line">		idxg[v]=idxf[u]-rnd[siz[v]]*idxf[v]+rnd[n-siz[u]]*idxg[u];</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> cntsam=per[u][idxf[v]];</span><br><span class="line">		<span class="keyword">if</span>(u!=<span class="number">1</span> &amp;&amp; idxg[u]==idxf[v]) cntsam++;</span><br><span class="line">		<span class="keyword">int</span> nch=cntch[u];</span><br><span class="line">		<span class="keyword">if</span>(u!=<span class="number">1</span>) nch++;</span><br><span class="line">		</span><br><span class="line">		MNUM resu=ansg[u];</span><br><span class="line">		resu*=fac[cntsam];resu*=ifac[cntsam<span class="number">-1</span>];</span><br><span class="line">		resu*=ifac[nch];resu*=fac[nch<span class="number">-1</span>];</span><br><span class="line">		resu*=QPow(ansf[v],MOD<span class="number">-2</span>);</span><br><span class="line">		</span><br><span class="line">		cntsam=per[v][idxg[v]]+<span class="number">1</span>;</span><br><span class="line">		nch=cntch[v]+<span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">		ansg[v]=ansf[v];</span><br><span class="line">		ansg[v]*=resu;</span><br><span class="line">		ansg[v]*=ifac[nch<span class="number">-1</span>];ansg[v]*=fac[nch];</span><br><span class="line">		ansg[v]*=fac[cntsam<span class="number">-1</span>];ansg[v]*=ifac[cntsam];</span><br><span class="line">		</span><br><span class="line">		DFSg(v,u);</span><br><span class="line">	&#125;</span><br><span class="line">	HASH rel=idxf[u]+idxg[u]*rnd[n-siz[u]];</span><br><span class="line">	<span class="keyword">if</span>(!cont.count(rel))&#123;</span><br><span class="line">		cont.insert(rel);</span><br><span class="line">		ans+=ansg[u];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N+<span class="number">2</span>;i++) fac[i]=fac[i<span class="number">-1</span>]*i;</span><br><span class="line">	ifac[N+<span class="number">2</span>]=QPow(fac[N+<span class="number">2</span>],MOD<span class="number">-2</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=N+<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--) ifac[i]=ifac[i+<span class="number">1</span>]*(i+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Init();</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;cas);</span><br><span class="line">	srand(<span class="number">20192022</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=N+<span class="number">2</span>;i++)&#123;</span><br><span class="line">		rnd[i][<span class="number">0</span>]=(i? rnd[i][<span class="number">2</span>]:<span class="number">0</span>)+(ull)rand()*(ull)rand();</span><br><span class="line">		rnd[i][<span class="number">1</span>]=(i? rnd[i][<span class="number">0</span>]:<span class="number">0</span>)+(ull)rand()*(ull)rand();</span><br><span class="line">		rnd[i][<span class="number">2</span>]=(i? rnd[i][<span class="number">1</span>]:<span class="number">0</span>)+(ull)rand()*(ull)rand();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(cas--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">		cont.clear();</span><br><span class="line">		ans=<span class="number">0</span>;</span><br><span class="line">		T_.Init(n);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			per[i].clear();</span><br><span class="line">			idxf[i]=idxg[i]=nidxg[i]=HASH(<span class="number">0</span>);</span><br><span class="line">			ansf[i]=ansg[i]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">			<span class="keyword">int</span> u,v;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;u,&amp;v);</span><br><span class="line">			T_.AddEdge(u,v);</span><br><span class="line">		&#125;</span><br><span class="line">		DFSf(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">		ansg[<span class="number">1</span>]=ansf[<span class="number">1</span>];</span><br><span class="line">		DFSg(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans.num);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><p>明明一道好好的哈希判断树的同构题为什么非要卡哈希卡成这样…… =_=</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2019/19Nov6thArt1/" title="OI - Bracket Sequences on Tree (HDU)">http://luckyglass.github.io/2019/19Nov6thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87-%E5%93%88%E5%B8%8C/" rel="tag"><i class="fa fa-tag"></i> 算法效率-哈希</a>
+              <a href="/tags/HDU/" rel="tag"><i class="fa fa-tag"></i> -HDU-</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%8D%A2%E6%A0%B9DP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-换根DP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/19Nov5thArt2/" rel="prev" title="OI - Acesrc and Travel (HDU)">
+      <i class="fa fa-chevron-left"></i> OI - Acesrc and Travel (HDU)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/19Nov7thArt1/" rel="next" title="OI - Adopt or not (HDU)">
+      OI - Adopt or not (HDU) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part1-题面"><span class="nav-text">Part1. 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part2-解析"><span class="nav-text">Part2. 解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part2-1-指定某点为根的答案"><span class="nav-text">Part2&#x2F;1. 指定某点为根的答案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part2-2-换根DP求树的同构"><span class="nav-text">Part2&#x2F;2. 换根DP求树的同构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part2-3-换根DP求每个点为根的答案"><span class="nav-text">Part2&#x2F;3. 换根DP求每个点为根的答案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part2-4-统计答案"><span class="nav-text">Part2&#x2F;4. 统计答案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part3-源代码"><span class="nav-text">Part3. 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-End"><span class="nav-text">The End</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共234.7k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

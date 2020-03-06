@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="最近开始了网络流的魔鬼练习，出现了一堆脑洞题（我现在脑袋已经要变成一个杯子形了 QwQ） 新学了一些网络流的方法，写一下博客免得忘掉……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 - 费用流">
+<meta property="og:url" content="http://luckyglass.github.io/2019/19Aug27thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="最近开始了网络流的魔鬼练习，出现了一堆脑洞题（我现在脑袋已经要变成一个杯子形了 QwQ） 新学了一些网络流的方法，写一下博客免得忘掉……">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-27T13:17:09.000Z">
+<meta property="article:modified_time" content="2020-03-05T15:35:42.664Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="图论-网络流">
+<meta property="article:tag" content="-洛谷-">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://luckyglass.github.io/2019/19Aug27thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>学习笔记 - 费用流 | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/luckyglass" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2019/19Aug27thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习笔记 - 费用流
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-27 21:17:09" itemprop="dateCreated datePublished" datetime="2019-08-27T21:17:09+08:00">2019-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-05 23:35:42" itemprop="dateModified" datetime="2020-03-05T23:35:42+08:00">2020-03-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/19Aug27thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/19Aug27thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>最近开始了网络流的魔鬼练习，出现了一堆脑洞题（我现在脑袋已经要变成一个杯子形了 QwQ）</p>
+<p>新学了一些网络流的方法，写一下博客免得忘掉……</p>
+</blockquote>
+<a id="more"></a>
+
+<hr>
+<h2 id="Part1-费用流的概念"><a href="#Part1-费用流的概念" class="headerlink" title="Part1. 费用流的概念"></a>Part1. 费用流的概念</h2><p>目前碰到了两种费用流：<strong>最小费用最大流、最大费用最大流</strong>。</p>
+<p>费用流的流网络上，边 $(u,v)$ 除了容量，还有一个<strong>费用</strong><code>cost</code>，这意味着如果这条边上的流量为<code>flow</code>，这条边就会产生<code>flow*cost</code>的费用。而且<code>cost</code>满足<strong>斜对称性</strong>，即<code>cost[u,v]=-cost[v,u]</code>。</p>
+<p>最小费用最大流就是在满足<strong>流量最大</strong>的基础上，使得总费用最小（最大费用最大流则是使费用最大）。</p>
+<hr>
+<h2 id="Part2-最小费用最大流"><a href="#Part2-最小费用最大流" class="headerlink" title="Part2. 最小费用最大流"></a>Part2. 最小费用最大流</h2><p>这种费用流的实现方法由 Dinic 改变得到 —— 普通的 Dinic 分层用 <code>BFS()</code> ，其实<strong>相当于每条边的费用都是 <code>1</code></strong>，因此没有影响，但是对于费用流，每条边的费用可能不同，因此要将 <code>BFS()</code> 改为 <code>SPFA()</code>（虽然，关于 <code>SPFA()</code>，它死了……但是大部分题实测仍然跑得很快），这里用 <code>SPFA()</code> 主要是因为存在<strong>负费用</strong>（正向边的费用是正数，则反向边就是负数了）。</p>
+<blockquote>
+<p>Tab. 有一种尴尬的情况，如果建图的时候，正向边形成了负权环，就要用最小费用循环流（没学过，先写着<del>，留个坑之后再填</del>）。不过很开心的是除了这种情况，费用流是不会出现负权环的 awa</p>
+</blockquote>
+<p>具体的话，我们用 <code>SPFA()</code> 在 <strong>残留网络</strong> 上跑出从源点到每个点 $u$ 的最短路，记为 $dis(u)$。那么在增广时，只有当 $dis(u)+cost(u,v)=dis(v)$ 时，才考虑增广边 $(u,v)$（就像普通的 Dinic 分层一样）。</p>
+<p>不放模板题了，下面来看一道有意思的题——</p>
+<h3 id="ZJOI2010-网络扩容-lt-洛谷-gt"><a href="#ZJOI2010-网络扩容-lt-洛谷-gt" class="headerlink" title="- [ZJOI2010]网络扩容 &lt;洛谷&gt;"></a>- [ZJOI2010]网络扩容 <a href="https://www.luogu.org/problem/P2604" target="_blank" rel="noopener">&lt;<strong>洛谷</strong>&gt;</a></h3><h4 id="题意"><a href="#题意" class="headerlink" title="= 题意"></a>= 题意</h4><p>给出一个 $n$ 个点 $m$ 条边的有源汇流网络，源点为 $1$，汇点为 $n$，记最大流的流量为 $A$。对于流网络上的边 $(u,v)$ ，你可以花费 $cost(u,v)$ 的代价让这条边的容量 $+1$（可以增加多次）。</p>
+<p>给出每一个 $cost(u,v)$ 和整数 $k$，求要使流网络的最大流变为 $A+k$，增加边的容量的总代价最小是多少。</p>
+<p>（输出 $A$ 和最小代价）</p>
+<h4 id="规模"><a href="#规模" class="headerlink" title="= 规模"></a>= 规模</h4><p>$n\leq1000$，$m\leq5000$，$k\leq10$。</p>
+<h4 id="题解"><a href="#题解" class="headerlink" title="= 题解"></a>= 题解</h4><p>求解 $A$ 可以直接跑最大流。然后考虑求解最小代价。</p>
+<p>设原流网络上边 $(u,v)$ 的容量为 $c(u,v)$。</p>
+<p>我们可以这样理解题意，对于每一条边 $(u,v)$，分段计价：流量在 $0$ 到 $c(u,v)$ 时，费用为 $0$；当流量大于 $c(u,v)$ 时，超过 $c(u,v)$ 的流量费用为 $cost(u,v)$ 。即在 $(u,v)$ 之间连一条容量为 $c(u,v)$、费用为 $0$ 的边，和另一条容量为 $k$（你也可以让流量为 $\inf$，但是不难发现只需要增加 $k$ 的容量即可）、费用为 $cost(u,v)$ 的边。</p>
+<p>最后再连一条容量为 $A+k$、费用为 $0$ 的边 $(n,n+1)$，并把 $n+1$ 作为汇点，以限制最大流只增加 $k$。再求从 $1$ 到 $n+1$ 的最小费用最大流。</p>
+<p>然后这样建图就可以了，因为 $0&lt;cost(u,v)$ ，所以对于每一条边，一定会先流满费用为 $0$ 的边，然后再流费用为 $cost(u,v)$ 的边。</p>
+<h4 id="源代码"><a href="#源代码" class="headerlink" title="= 源代码"></a>= 源代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1000</span>,M=<span class="number">5000</span>,inf=(<span class="number">1</span>&lt;&lt;<span class="number">29</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EDGE</span>&#123;</span><span class="keyword">int</span> to,lim,cst;EDGE *rev,*nxt;&#125;*cpy[N+<span class="number">3</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FLOWGRAPH</span>&#123;</span></span><br><span class="line">	EDGE edg[<span class="number">5</span>*M+<span class="number">10</span>],*ncnt,*top[N+<span class="number">3</span>];</span><br><span class="line">	FLOWGRAPH()&#123;ncnt=edg;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> lim,<span class="keyword">int</span> cst)</span></span>&#123;</span><br><span class="line">		EDGE *p=++ncnt,*q=++ncnt;</span><br><span class="line">		*p=(EDGE)&#123;v,lim,cst,q,top[u]&#125;;top[u]=p;</span><br><span class="line">		*q=(EDGE)&#123;u,<span class="number">0</span>,-cst,p,top[v]&#125;;top[v]=q;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;Gflw,cpyGflw;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">PAIR</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> x,y;</span><br><span class="line">	PAIR()&#123;&#125;</span><br><span class="line">	PAIR(<span class="keyword">int</span> _x,<span class="keyword">int</span> _y):x(_x),y(_y)&#123;&#125;</span><br><span class="line">	PAIR <span class="keyword">operator</span> +(<span class="keyword">const</span> PAIR curb)<span class="keyword">const</span>&#123;<span class="keyword">return</span> (PAIR)&#123;x+curb.x,y+curb.y&#125;;&#125;</span><br><span class="line">	PAIR <span class="keyword">operator</span> +=(<span class="keyword">const</span> PAIR curb)&#123;x+=curb.x;y+=curb.y;<span class="keyword">return</span> *<span class="keyword">this</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,Vk,Ps,Pt;</span><br><span class="line"><span class="keyword">int</span> sav[M+<span class="number">3</span>][<span class="number">3</span>],dis[N+<span class="number">3</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[N+<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SPFA</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=Pt;i++) vis[i]=<span class="literal">false</span>,dis[i]=inf;</span><br><span class="line">	dis[Ps]=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;que.push(Ps);</span><br><span class="line">	<span class="keyword">while</span>(!que.empty())&#123;</span><br><span class="line">		<span class="keyword">int</span> u=que.front();que.pop();</span><br><span class="line">		vis[u]=<span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">for</span>(EDGE *it=Gflw.top[u];it;it=it-&gt;nxt)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!it-&gt;lim) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">int</span> v=it-&gt;to;</span><br><span class="line">			<span class="keyword">if</span>(dis[v]&gt;dis[u]+it-&gt;cst)&#123;</span><br><span class="line">				dis[v]=dis[u]+it-&gt;cst;</span><br><span class="line">				<span class="keyword">if</span>(!vis[v])&#123;</span><br><span class="line">					vis[v]=<span class="literal">true</span>;</span><br><span class="line">					que.push(v);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dis[Pt]!=inf;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">PAIR <span class="title">GetFlow</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> flwin)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(u==Pt) <span class="keyword">return</span> PAIR(flwin,<span class="number">0</span>);</span><br><span class="line">	PAIR flwres=PAIR(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">	vis[u]=<span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">for</span>(;cpy[u];cpy[u]=cpy[u]-&gt;nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!cpy[u]-&gt;lim) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">int</span> v=cpy[u]-&gt;to;</span><br><span class="line">		<span class="keyword">if</span>(!vis[v] &amp;&amp; dis[v]==dis[u]+cpy[u]-&gt;cst)&#123;</span><br><span class="line">			PAIR flw=GetFlow(v,min(flwin-flwres.x,cpy[u]-&gt;lim));</span><br><span class="line">			flw.y+=flw.x*cpy[u]-&gt;cst;</span><br><span class="line">			flwres+=flw;</span><br><span class="line">			cpy[u]-&gt;lim-=flw.x;cpy[u]-&gt;rev-&gt;lim+=flw.x;</span><br><span class="line">			<span class="keyword">if</span>(flwin==flwres.x) <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	vis[u]=<span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> flwres;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">PAIR <span class="title">Dinic</span><span class="params">()</span></span>&#123;</span><br><span class="line">	PAIR res=PAIR(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">while</span>(SPFA())&#123;</span><br><span class="line">		<span class="built_in">memcpy</span>(cpy,Gflw.top,<span class="keyword">sizeof</span> Gflw.top);</span><br><span class="line">		res+=GetFlow(Ps,inf);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;Vk);</span><br><span class="line">	Ps=<span class="number">1</span>;Pt=n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> u,v,lim,cst;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;u,&amp;v,&amp;lim,&amp;cst);</span><br><span class="line">		Gflw.AddEdge(u,v,lim,<span class="number">0</span>);</span><br><span class="line">		sav[i][<span class="number">0</span>]=cst;</span><br><span class="line">		sav[i][<span class="number">1</span>]=u;</span><br><span class="line">		sav[i][<span class="number">2</span>]=v;</span><br><span class="line">	&#125;</span><br><span class="line">	cpyGflw=Gflw;</span><br><span class="line">	PAIR res=Dinic();</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d "</span>,res.x);</span><br><span class="line">	Gflw=cpyGflw;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">		Gflw.AddEdge(sav[i][<span class="number">1</span>],sav[i][<span class="number">2</span>],Vk,sav[i][<span class="number">0</span>]);</span><br><span class="line">	Pt++;</span><br><span class="line">	Gflw.AddEdge(n,Pt,res.x+Vk,<span class="number">0</span>);</span><br><span class="line">	res=Dinic();</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,res.y);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="总结-建图套路"><a href="#总结-建图套路" class="headerlink" title="= 总结-建图套路"></a>= 总结-建图套路</h4><blockquote>
+<p>也不算什么套路……</p>
+</blockquote>
+<p>分段计价，对于边 $(u,v)$，设计费分为 $k$ 段，第 $i$ 段的费用为 $cost(u,v,i)$。</p>
+<p>如果满足 $cost(u,v,i-1)\leq cost(u,v,i)$，则可以按照上面的建图方式。但是这样建图的缺点是会造成总边数变大，降低算法效率。</p>
+<h2 id="Part3-最大费用最大流"><a href="#Part3-最大费用最大流" class="headerlink" title="Part3. 最大费用最大流"></a>Part3. 最大费用最大流</h2><p>个人觉得这里的费用应该被称为价值更合适，毕竟一般是要“总价值”最大。</p>
+<p>发现上面的最小费用最大流是把费用当作边的长度，用 <code>SPFA()</code> 跑最短路；然后就在想，是不是把费用当边长，然后跑一个 <strong>最长路</strong> 就可以了？</p>
+<p>的确是这样，但是并没有 <strong>最长路</strong> 这个东西，不过我们可以<strong>把边权全部取负</strong>，于是就可以跑最短路了！但是这里仍然有负权环的问题（然而这个菜博主并不会解决这个问题），先不考虑这个。<code>SPFA()</code> 可以跑负边，所以这个问题也就迎刃而解了~</p>
+<p>However，如果一个<del>非常 nice的</del>出题人他非要卡 SPFA…… 那么我们就不得不用复杂度非常稳定为 $O(n\log n) $ 的堆优化 <code>Dijkstra()</code>，但是并不是直接把 <code>SPFA()</code> 换成 <code>Dijkstra()</code> 就可以的，因为这里有负权边啊 QwQ。于是我们引入一个叫做<strong>势函数</strong>的东西……</p>
+<blockquote>
+<p>Tab. 下文有关势函数的叙述很有可能不规范，只是方便理解（不要被势函数这个陌生名词吓到了，学 Splay 的时候你还碰到过它……）</p>
+</blockquote>
+<p>对于流网络上的每一个点 $u$ ，定义 $h(u)$ 是 $u$ 的势函数。记边 $(u,v)$ 的费用，即长度为 $l(u,v)$ 。对于每条边 $(u,v)$ 我们再定义一个<strong>附加势函数的长度</strong> $l’(u,v)=l(u,v)+h(u)-h(v)$ ，那么我们现在就是要<strong>维护势函数的值</strong>，使得 $l’(u,v)\ge0$。</p>
+<p>下面给出一种维护方案：</p>
+<ol>
+<li><p>$h(u)$ 的初值全设为 $0$；</p>
+</li>
+<li><p>首先每条边以 $l(u,v)$（原图的边权，可能有负），用 SPFA <strong>先跑一遍</strong>，得到最初源点到每个点 $u$ 的最短距离，记作 $d(u)$，如果源点无法到达汇点，直接结束；</p>
+</li>
+<li><p>增广一次；</p>
+</li>
+<li><p>将每个 $h(u)$ 的值加上 $d(u)$，此时 $h(u)=d(u)$；</p>
+</li>
+<li><p>循环：</p>
+<ul>
+<li><p>每条边的边权设为 $l’(u,v)=l(u,v)+h(u)-h(v)$，然后用 Dijkstra 跑一遍得到新的 $d(u)$ ，如果从源点无法到达汇点，退出循环；</p>
+</li>
+<li><p>增广一次；</p>
+</li>
+<li><p>将每个 $h(u)$ 的值 <strong>加上</strong> $d(u)$。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>这样就可以保证 <strong>在跑 Dijkstra 的时候，新的边权</strong> $l’(u,v)$ <strong>都是非负权</strong>。</p>
+<p>证明如下：</p>
+<blockquote>
+<p>当一条边在残留网络上，称为“这条边存在”（满流的边则“不存在”）；我们只需要讨论<strong>在残留网络上的边</strong>，因为我们是在残留网络上跑最短路，所以不在残留网络上的边没有影响。</p>
+<p>分类讨论：</p>
+<ol>
+<li><p>边 $(u,v)$ 在增广之前在残留网络上，增广后仍有容量剩余（即仍然存在）：</p>
+<p>由于最短路的性质，满足 $d(u)+l’(u,v)\ge d(v)$，即考虑从源点到 $v$ 的最短路可能经过 $(u,v)$，则最短路为 $d(u)+l’(u,v)$，否则存在一条更短的路径到达 $v$，因此为 $\ge$ 。</p>
+<p>因为 $l’(u,v)=l(u,v)+h(u)-h(v)$，所以 $d(u)+l(u,v)+h(u)-h(v)\ge d(v)$；</p>
+<p>移项可得 $d(u)+h(u)-d(v)-h(v)+l(u,v)\ge 0$；</p>
+<p>则 $[d(u)+h(u)]-[d(v)+h(v)]+l(u,v)\ge0$；</p>
+<p>所以让每个 $h(u)+=d(u)$ 就可以让边权非负。</p>
+</li>
+<li><p>边 $(u,v)$ 在增广之前不存在，增广后存在：</p>
+<p>由于增广的性质，可以得到反向边 $(v,u)$ 被增广，说明源点到 $u$ 的最短路经过 $(v,u)$ 这条边（因为只有最短路上的边才会被增广）；</p>
+<p>可以得到 $d(u)=d(v)+l’(v,u)$ ；</p>
+<p>则 $d(u)=d(v)+l(v,u)+h(v)-h(u)$；</p>
+<p>移项可得 $l(v,u)+[h(v)+d(v)]-[h(u)+d(u)]=0$；</p>
+</li>
+</ol>
+<p>得证，“每次增广过后维护 $h(u)+=d(u)$ ”的方法，可以使得在残留网络上的边权非负。</p>
+</blockquote>
+<p>于是放一道<del>非常nice的</del>出题人的题……</p>
+<h3 id="HDU多校赛2019-K-Subsequence-lt-HDU-gt"><a href="#HDU多校赛2019-K-Subsequence-lt-HDU-gt" class="headerlink" title="- [HDU多校赛2019] K Subsequence &lt;HDU&gt;"></a>- [HDU多校赛2019] K Subsequence <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6611" target="_blank" rel="noopener">&lt;HDU&gt;</a></h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="= 题意"></a>= 题意</h4><p>给出一个长度为 $n$ 的序列 $A$，你可以进行至多 $k$ 次操作：每次操作取出一个<strong>不降子序列</strong>（取出的数字就不能再取了），这次操作获得的得分为子序列中所有元素之和。</p>
+<p>问至多 $k$ 次操作后，获得的得分之和最大为多少。</p>
+<h4 id="规模-1"><a href="#规模-1" class="headerlink" title="= 规模"></a>= 规模</h4><p>$1\leq T\leq5$，$1\leq n\leq 2000$，$1\leq k\leq 10$，$1\leq ai\leq 10^5$</p>
+<h4 id="题解-1"><a href="#题解-1" class="headerlink" title="= 题解"></a>= 题解</h4><p>建图非常容易理解：先给序列的每个数拆点（因为每个数只能被取出一次），第 $i$ 个数对应的点为 $i$ 和 $i+n$，除此之外再建立 $3$ 个特殊点 $S,T,M$。</p>
+<p>建边：</p>
+<ol>
+<li>$i$ 连向 $i+n$ ，容量为 $1$ ，费用为 $A_i$，有流量代表 $A_i$ 被取出；</li>
+<li>$S$ 连向 $i$，容量为 $1$，费用为 $0$；</li>
+<li>$i+n$ 连向 $M$，容量为 $1$，费用为 $0$；</li>
+<li>$M$ 连向 $T$，容量为 $k$，费用为 $0$，用来限制”最多只能进行 $k$ 次操作”；</li>
+<li>如果 $i&lt;j$ 且 $A_i\leq A_j$，则 $i+n$ 连向 $j$，表示在一次操作中，$A_i,A_j$ 可以同时取出。</li>
+</ol>
+<p>然后跑一个 $S$ 为源 $T$ 为汇的最大费用最大流即可。</p>
+<p>然而卡 SPFA，需要用 Dijkstra 优化……就用上文提及的势函数。</p>
+<h4 id="总结-一个简单的建图技巧"><a href="#总结-一个简单的建图技巧" class="headerlink" title="= 总结 - 一个简单的建图技巧"></a>= 总结 - 一个简单的建图技巧</h4><p>如果建图后要求“限制某一个<strong>点</strong>的流量”，就可以<strong>拆点</strong>，把一个点 $u$ 拆为入点 $u_0$ 和出点 $u_1$。然后在 $u_1，u_0$ 之间连容量为限制流量最大值的边。</p>
+<h4 id="模板"><a href="#模板" class="headerlink" title="= 模板"></a>= 模板</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC optimize(2)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">4003</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EDGE</span>&#123;</span><span class="keyword">int</span> to,lim,cst,rev;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">PAIR</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> fir,sec;</span><br><span class="line">	PAIR()&#123;fir=sec=<span class="number">0</span>;&#125;</span><br><span class="line">	PAIR(<span class="keyword">int</span> _f,<span class="keyword">int</span> _s):fir(_f),sec(_s)&#123;&#125;</span><br><span class="line">	PAIR <span class="keyword">operator</span> +=(<span class="keyword">const</span> PAIR Vb)&#123;fir+=Vb.fir;sec+=Vb.sec;<span class="keyword">return</span> *<span class="keyword">this</span>;&#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span> &gt;(<span class="keyword">const</span> PAIR Vb)<span class="keyword">const</span>&#123;<span class="keyword">return</span> (fir==Vb.fir)? (sec&gt;Vb.sec):(fir&gt;Vb.fir);&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf=(<span class="number">1</span>&lt;&lt;<span class="number">29</span>);</span><br><span class="line"><span class="keyword">int</span> cas,n,m,Ps,Pt,Pm;</span><br><span class="line"><span class="built_in">vector</span>&lt;EDGE&gt; lnk[N+<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> Ca[N+<span class="number">3</span>],cpy[N+<span class="number">3</span>],Ch[N+<span class="number">3</span>],dis[N+<span class="number">3</span>];</span><br><span class="line"><span class="keyword">bool</span> firstSPFA;</span><br><span class="line"><span class="keyword">bool</span> vis[N+<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPFA</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line">	que.push(Ps);vis[Ps]=<span class="literal">true</span>;dis[Ps]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(!que.empty())&#123;</span><br><span class="line">		<span class="keyword">int</span> u=que.front();que.pop();</span><br><span class="line">		vis[u]=<span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="keyword">int</span>)lnk[u].size();i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(lnk[u][i].lim&lt;=<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">int</span> v=lnk[u][i].to;</span><br><span class="line">			<span class="keyword">if</span>(dis[v]&gt;dis[u]+lnk[u][i].cst)&#123;</span><br><span class="line">				dis[v]=dis[u]+lnk[u][i].cst;</span><br><span class="line">				<span class="keyword">if</span>(!vis[v])&#123;</span><br><span class="line">					que.push(v);</span><br><span class="line">					vis[v]=<span class="literal">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">()</span></span>&#123;</span><br><span class="line">	priority_queue&lt; PAIR,<span class="built_in">vector</span>&lt;PAIR&gt;,greater&lt;PAIR&gt; &gt; que;</span><br><span class="line">	que.push(PAIR(dis[Ps]=<span class="number">0</span>,Ps));</span><br><span class="line">	<span class="keyword">while</span>(!que.empty())&#123;</span><br><span class="line">		<span class="keyword">int</span> u=que.top().sec;que.pop();</span><br><span class="line">		<span class="keyword">if</span>(vis[u]) <span class="keyword">continue</span>;</span><br><span class="line">		vis[u]=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="keyword">int</span>)lnk[u].size();i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(lnk[u][i].lim&lt;=<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">int</span> v=lnk[u][i].to;</span><br><span class="line">			<span class="keyword">if</span>(dis[v]&gt;dis[u]+Ch[u]-Ch[v]+lnk[u][i].cst)&#123;</span><br><span class="line">				dis[v]=dis[u]+Ch[u]-Ch[v]+lnk[u][i].cst;</span><br><span class="line">				que.push(PAIR(dis[v],v));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=Pm;i++) vis[i]=<span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Update</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=Pm;i++) dis[i]=inf,cpy[i]=vis[i]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(firstSPFA) firstSPFA=<span class="literal">false</span>,SPFA();</span><br><span class="line">	<span class="keyword">else</span> Dijkstra();</span><br><span class="line">	<span class="keyword">return</span> dis[Pt]!=inf;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetFlow</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> flwin)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(u==Pt) <span class="keyword">return</span> flwin;</span><br><span class="line">	<span class="keyword">int</span> flwout=<span class="number">0</span>;</span><br><span class="line">	vis[u]=<span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">for</span>(;cpy[u]&lt;(<span class="keyword">int</span>)lnk[u].size();cpy[u]++)&#123;</span><br><span class="line">		<span class="keyword">int</span> it=cpy[u];</span><br><span class="line">		<span class="keyword">if</span>(!lnk[u][it].lim) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">int</span> v=lnk[u][it].to;</span><br><span class="line">		<span class="keyword">if</span>(!vis[v] &amp;&amp; dis[u]+lnk[u][it].cst+Ch[u]-Ch[v]==dis[v])&#123;</span><br><span class="line">			<span class="keyword">int</span> flwv=GetFlow(v,min(flwin-flwout,lnk[u][it].lim));</span><br><span class="line">			flwout+=flwv;</span><br><span class="line">			lnk[u][it].lim-=flwv;</span><br><span class="line">			lnk[v][lnk[u][it].rev].lim+=flwv;</span><br><span class="line">			<span class="keyword">if</span>(flwin==flwout) <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	vis[u]=<span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> flwout;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Dinic</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret=<span class="number">0</span>;</span><br><span class="line">	firstSPFA=<span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">while</span>(Update())&#123;</span><br><span class="line">		ret+=(dis[Pt]+Ch[Pt])*GetFlow(Ps,inf);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=Pm;i++)</span><br><span class="line">			<span class="keyword">if</span>(dis[i]!=inf)</span><br><span class="line">				Ch[i]+=dis[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> lim,<span class="keyword">int</span> cst)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> p=lnk[u].size(),q=lnk[v].size();</span><br><span class="line">	lnk[u].push_back((EDGE)&#123;v,lim,cst,q&#125;);</span><br><span class="line">	lnk[v].push_back((EDGE)&#123;u, <span class="number">0</span>,-cst,p&#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="comment">//	freopen("multi.in","r",stdin);</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;cas);</span><br><span class="line">	<span class="keyword">while</span>(cas--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;Ca[i]);</span><br><span class="line">		Ps=<span class="number">2</span>*n+<span class="number">1</span>,Pt=Ps+<span class="number">1</span>;Pm=Pt+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=Pm;i++) lnk[i].clear(),Ch[i]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			AddEdge(Ps,i,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">			AddEdge(i,i+n,<span class="number">1</span>,-Ca[i]);</span><br><span class="line">			AddEdge(i+n,Pm,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		AddEdge(Pm,Pt,m,<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">				<span class="keyword">if</span>(Ca[i]&lt;=Ca[j])</span><br><span class="line">					AddEdge(i+n,j,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">int</span> ans=Dinic();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,-ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><p>Email: <a href="mailto:lucky_glass@foxmail.com">lucky_glass@foxmail.com</a>，欢迎提问~</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2019/19Aug27thArt1/" title="学习笔记 - 费用流">http://luckyglass.github.io/2019/19Aug27thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BE%E8%AE%BA-%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag"><i class="fa fa-tag"></i> 图论-网络流</a>
+              <a href="/tags/%E6%B4%9B%E8%B0%B7/" rel="tag"><i class="fa fa-tag"></i> -洛谷-</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/19Aug20thArt1/" rel="prev" title="杂记 - 广州纪中游学总结">
+      <i class="fa fa-chevron-left"></i> 杂记 - 广州纪中游学总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/19Aug29thArt1/" rel="next" title="学习笔记 - 带上下界的网络流">
+      学习笔记 - 带上下界的网络流 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part1-费用流的概念"><span class="nav-text">Part1. 费用流的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part2-最小费用最大流"><span class="nav-text">Part2. 最小费用最大流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ZJOI2010-网络扩容-lt-洛谷-gt"><span class="nav-text">- [ZJOI2010]网络扩容 &lt;洛谷&gt;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题意"><span class="nav-text">&#x3D; 题意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#规模"><span class="nav-text">&#x3D; 规模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题解"><span class="nav-text">&#x3D; 题解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源代码"><span class="nav-text">&#x3D; 源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结-建图套路"><span class="nav-text">&#x3D; 总结-建图套路</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part3-最大费用最大流"><span class="nav-text">Part3. 最大费用最大流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HDU多校赛2019-K-Subsequence-lt-HDU-gt"><span class="nav-text">- [HDU多校赛2019] K Subsequence &lt;HDU&gt;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题意-1"><span class="nav-text">&#x3D; 题意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#规模-1"><span class="nav-text">&#x3D; 规模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题解-1"><span class="nav-text">&#x3D; 题解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结-一个简单的建图技巧"><span class="nav-text">&#x3D; 总结 - 一个简单的建图技巧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模板"><span class="nav-text">&#x3D; 模板</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-End"><span class="nav-text">The End</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共234.7k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

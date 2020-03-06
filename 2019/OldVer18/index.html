@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="之前一位同学做了这场比赛，拉到了 vjudge 组里……就当练练手~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前行 - CF Round 531(Div3)">
+<meta property="og:url" content="http://luckyglass.github.io/2019/OldVer18/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="之前一位同学做了这场比赛，拉到了 vjudge 组里……就当练练手~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://luckyglass.github.io/2019/OldVer18/image1.png">
+<meta property="article:published_time" content="2019-01-18T13:18:13.000Z">
+<meta property="article:modified_time" content="2019-11-07T15:22:51.132Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="-Codeforces-">
+<meta property="article:tag" content="数学-博弈论">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://luckyglass.github.io/2019/OldVer18/image1.png">
+
+<link rel="canonical" href="http://luckyglass.github.io/2019/OldVer18/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>前行 - CF Round 531(Div3) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/luckyglass" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2019/OldVer18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前行 - CF Round 531(Div3)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-18 21:18:13" itemprop="dateCreated datePublished" datetime="2019-01-18T21:18:13+08:00">2019-01-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-07 23:22:51" itemprop="dateModified" datetime="2019-11-07T23:22:51+08:00">2019-11-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E8%A1%8C/" itemprop="url" rel="index"><span itemprop="name">前行</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/OldVer18/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/OldVer18/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>之前一位同学做了这场比赛，拉到了 vjudge 组里……<br>就当练练手~</p>
+</blockquote>
+<a id="more"></a>
+
+<hr>
+<h2 id="『A-Integer-Sequence-Dividing』-〔传送门〕"><a href="#『A-Integer-Sequence-Dividing』-〔传送门〕" class="headerlink" title="『A: Integer Sequence Dividing』 〔传送门〕"></a>『A: Integer Sequence Dividing』 <a href="http://codeforces.com/problemset/problem/1102/A" target="_blank" rel="noopener">〔传送门〕</a></h2><h3 id="「题意」"><a href="#「题意」" class="headerlink" title="「题意」"></a>「题意」</h3><p>将1~n的所有数分为两个集合A,B（每个数属于且尽属于一个集合），求 $|(\sum_iA_i)-(\sum_i B_i)|$ 的最小值。</p>
+<h3 id="「解析」"><a href="#「解析」" class="headerlink" title="「解析」"></a>「解析」</h3><p>显然数学题……（我可能想复杂了）</p>
+<p><strong>tab.以下区间均指整数区间</strong><br>先看这样一道问题：“将区间 $[i,i+4k-1],k\in \mathbb{Z}_+$ 的所有数（也就是连续 $4k$ 个正整数）分为两个集合 $A,B$，使得 $|\sum_iA_i-\sum_iB_i|$ 最小”。<br>可以找到一种方案：<br>$$<br>A=[i,i+k-1]\bigcup [i+3k,i+3k-1]\<br>B=[i+k,i+3k-1]<br>$$<br>使得 $\sum_iA_i=\sum_iB_i$，当然是最小的。</p>
+<p>推而广之，对于区间 $[1,n]$ 可以分为 $4$ 种情况：<br>① $n \mod 4=0$，也就是之前提到的问题，答案为 $0$；<br>② $n \mod 4=1$，那么区间 $[2,n]$ 是一个长度为 $4k$ 的整数区间，这一段可以分成和相等的两个集合，那么剩下的 $1$ 分给任何一个集合都会使差增加 $1$，所以答案为 $1$；<br>③ $n \mod 4=2$，类比情况②，会剩下 $1,2$ ，则把它们放在不同的集合中，可以达到最小值 $1$；<br>④ $n \mod 4=3$，此时就会剩下 $1,2,3$，把 $1,2$ 分给一个集合，$3$ 分给另一个集合，就达到最小值 $0$；</p>
+<p>其实不难发现——如果 $1$ 到 $n$ 的和为偶数，答案就为 $0$，否则为 $1$。</p>
+<h3 id="「源代码」"><a href="#「源代码」" class="headerlink" title="「源代码」"></a>「源代码」</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,(<span class="number">1l</span>l+n)*n/<span class="number">2l</span>l%<span class="number">2l</span>l);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="『B-Array-K-Coloring』-〔传送门〕"><a href="#『B-Array-K-Coloring』-〔传送门〕" class="headerlink" title="『B: Array K-Coloring』 〔传送门〕"></a>『B: Array K-Coloring』 <a href="http://codeforces.com/problemset/problem/1102/B" target="_blank" rel="noopener">〔传送门〕</a></h2><h3 id="「题意」-1"><a href="#「题意」-1" class="headerlink" title="「题意」"></a>「题意」</h3><p>有 $n$ 个方块，$m$ 种颜色（$m\leq n$），每个方块上有一个数字 $a_i$。你需要求出一种涂色方案，满足：<br>① 每个方块都有颜色；<br>② 每种颜色都被用过；<br>③ 被涂成相同颜色的方块上的数字不能相同；<br>如果有方案，输出”YES”并给出方案，否则输出”NO”。</p>
+<h3 id="「解析」-1"><a href="#「解析」-1" class="headerlink" title="「解析」"></a>「解析」</h3><p>一道不错的、难度不算高的贪心题。<br>首先我们把第 $1$ 到 $m$ 个方块涂上 $1$ 到 $m$ 种颜色，以保证每一个颜色都出现过；然后因为每一种颜色都是等价的，我们把接下来的方块依次尝试涂上颜色，暴力检查如果该方块涂上某一种颜色，该颜色是否会存在两个方块数字相同，如果可以涂，就涂上颜色，否则就无法得到方案。</p>
+<h3 id="「源代码」-1"><a href="#「源代码」-1" class="headerlink" title="「源代码」"></a>「源代码」</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">5000</span>;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; mem[N+<span class="number">7</span>];</span><br><span class="line"><span class="keyword">int</span> ans[N+<span class="number">7</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,num;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;num);</span><br><span class="line">		<span class="keyword">if</span>(i&lt;=m)&#123;</span><br><span class="line">			ans[i]=i;</span><br><span class="line">			mem[i].push_back(num);</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">bool</span> Ext=<span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">			<span class="keyword">bool</span> ext=<span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;mem[j].size();k++)</span><br><span class="line">				<span class="keyword">if</span>(mem[j][k]==num)&#123;</span><br><span class="line">					ext=<span class="literal">true</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			<span class="keyword">if</span>(!ext)&#123;</span><br><span class="line">				Ext=<span class="literal">true</span>;</span><br><span class="line">				ans[i]=j;</span><br><span class="line">				mem[j].push_back(num);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!Ext) <span class="built_in">printf</span>(<span class="string">"NO\n"</span>),<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">printf</span>(<span class="string">"%d%c"</span>,ans[i],i==n? <span class="string">'\n'</span>:<span class="string">' '</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="『C-Doors-Breaking-and-Repairing』-〔传送门〕"><a href="#『C-Doors-Breaking-and-Repairing』-〔传送门〕" class="headerlink" title="『C: Doors Breaking and Repairing』 〔传送门〕"></a>『C: Doors Breaking and Repairing』 <a href="http://codeforces.com/problemset/problem/1102/C" target="_blank" rel="noopener">〔传送门〕</a></h2><h3 id="「题意」-2"><a href="#「题意」-2" class="headerlink" title="「题意」"></a>「题意」</h3><p>你和另一个玩家进行一个游戏：<br>给出了 $n$ 个正整数和整数 $A,B$，你和对手轮流进行操作，你可以选择一个不为零的数字并将它减去 $A$（如果相减后小于$0$，则该数变为$0$），对手则选择一个不为零的数字将它加上 $B$。<br>当你不可能将任何数字变为 $0$ 或所有数字均为 $0$ 时，游戏结束。<br>假设你和对手都足够聪明，求最后你可以使多少个数字变成0。</p>
+<h3 id="「解析」-2"><a href="#「解析」-2" class="headerlink" title="「解析」"></a>「解析」</h3><p>一道思路非常“博弈论”的题……<br>显然只要你能够使一个数变成0，就对它进行操作。对于 $A&gt;B$ 的情况，显然可以全部变为 $0$。</p>
+<p>对于 $A\leq B$ 的情况就会复杂一些，这个时候只有你能够一次将某个数变为 $0$ 时，你才可以将它变为 $0$，不然你对那个数 $-A$ ，对手又给它 $+A$，你肯定比不过对手。<br>考虑双方的最优策略：<br>① 你的策略：找到一个小于 $A$ 的数进行操作；<br>② 对手的策略：找到一个小于 $A$ 的数进行操作；<br>？？？什么意思？？？<br>这种情况下，如果对手对一个小于 $A$ 的数操作，它就大于 $A$ 了，此时你肯定无法使它变成 $0$。所以当你将一个小于 $A$ 的数变成 $0$ 后，对手就会把另一个小于 $A$ 的数变成大于 $A$，设原来的正整数中有 $tot$ 个小于等于 $A$，因为你是先手，你最多能够将 $\frac{tot}{2}$（向上取整） 个数变成 $0$。</p>
+<h3 id="「源代码」-2"><a href="#「源代码」-2" class="headerlink" title="「源代码」"></a>「源代码」</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,a,b,ans,tot;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;a,&amp;b);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,num;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;num);</span><br><span class="line">		<span class="keyword">if</span>(b&lt;a) ans++;</span><br><span class="line">		<span class="keyword">if</span>(a&lt;=b &amp;&amp; num&lt;=a)</span><br><span class="line">			ans++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(a&lt;=b) ans=(ans+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="『D-Balanced-Ternary-String』-〔传送门〕"><a href="#『D-Balanced-Ternary-String』-〔传送门〕" class="headerlink" title="『D: Balanced Ternary String』 〔传送门〕"></a>『D: Balanced Ternary String』 <a href="http://codeforces.com/problemset/problem/1102/D" target="_blank" rel="noopener">〔传送门〕</a></h2><h3 id="「题意」-3"><a href="#「题意」-3" class="headerlink" title="「题意」"></a>「题意」</h3><p>有一个长度为 $3$ 的倍数且只包含字符 0,1,2 的字符串，你需要对它的一些字符进行改动，使得 0,1,2 出现的次数相等。<br>求出在修改次数最少的情况下修改后字典序最小的字符串。</p>
+<h3 id="「解析」-3"><a href="#「解析」-3" class="headerlink" title="「解析」"></a>「解析」</h3><p>又是一道贪心题……<br>我们先可以根据字符串长度求出每种字符各需要出现多少次，记为 $bal$。</p>
+<p><strong>tab.先考虑0或先考虑2是一样的</strong><br>因为 0 的字典序最小，我们先考虑 0 。如果它次数小于 $bal$ ，则将尽量靠前的不为 0 且次数超过 $bal$ 的字符改为 0；<br>因为 2 的字典序最大，我们再考虑 2。如果它次数小于 $bal$ ，则将尽量靠后的不为 2 且次数超过 $bal$ 的字符改为 2；</p>
+<p>如果此时 1 的个数不足 $bal$，<br>因为 1 字典序比 2 小，若 2 的次数大于 $bal$，我们将尽量靠前的 2 换成 1 ，直到 2 的次数为 $bal$ 为止；<br>因为 1 的字典序比 0 大，若 0 的次数大于 $bal$，我们将尽量靠后的 0 换成 1，直到 0 的次数为 $bal$ 为止；</p>
+<h3 id="「源代码」-3"><a href="#「源代码」-3" class="headerlink" title="「源代码」"></a>「源代码」</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=(<span class="keyword">int</span>)<span class="number">3e5</span>;</span><br><span class="line"><span class="keyword">int</span> n,bal;</span><br><span class="line"><span class="keyword">char</span> str[N+<span class="number">7</span>];</span><br><span class="line"><span class="keyword">int</span> cnt[<span class="number">3</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%s"</span>,&amp;n,str+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		cnt[str[i]-<span class="string">'0'</span>]++;</span><br><span class="line">	bal=n/<span class="number">3</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n &amp;&amp; cnt[<span class="number">0</span>]&lt;bal;i++)</span><br><span class="line">		<span class="keyword">if</span>(cnt[str[i]-<span class="string">'0'</span>]&gt;bal)</span><br><span class="line">			cnt[str[i]-<span class="string">'0'</span>]--,</span><br><span class="line">			str[i]=<span class="string">'0'</span>,</span><br><span class="line">			cnt[str[i]-<span class="string">'0'</span>]++;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;=<span class="number">1</span> &amp;&amp; cnt[<span class="number">2</span>]&lt;bal;i--)</span><br><span class="line">		<span class="keyword">if</span>(cnt[str[i]-<span class="string">'0'</span>]&gt;bal)</span><br><span class="line">			cnt[str[i]-<span class="string">'0'</span>]--,</span><br><span class="line">			str[i]=<span class="string">'2'</span>,</span><br><span class="line">			cnt[str[i]-<span class="string">'0'</span>]++;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n &amp;&amp; cnt[<span class="number">1</span>]&lt;bal &amp;&amp; cnt[<span class="number">2</span>]&gt;bal;i++)</span><br><span class="line">		<span class="keyword">if</span>(str[i]==<span class="string">'2'</span>)</span><br><span class="line">			cnt[str[i]-<span class="string">'0'</span>]--,</span><br><span class="line">			str[i]=<span class="string">'1'</span>,</span><br><span class="line">			cnt[str[i]-<span class="string">'0'</span>]++;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;=<span class="number">1</span> &amp;&amp; cnt[<span class="number">1</span>]&lt;bal &amp;&amp; cnt[<span class="number">0</span>]&gt;bal;i--)</span><br><span class="line">		<span class="keyword">if</span>(str[i]==<span class="string">'0'</span>)</span><br><span class="line">			cnt[str[i]-<span class="string">'0'</span>]--,</span><br><span class="line">			str[i]=<span class="string">'1'</span>,</span><br><span class="line">			cnt[str[i]-<span class="string">'0'</span>]++;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,str+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="『E-Monotonic-Renumeration』-〔传送门〕"><a href="#『E-Monotonic-Renumeration』-〔传送门〕" class="headerlink" title="『E: Monotonic Renumeration』 〔传送门〕"></a>『E: Monotonic Renumeration』 <a href="http://codeforces.com/problemset/problem/1102/E" target="_blank" rel="noopener">〔传送门〕</a></h2><h3 id="「题意」-4"><a href="#「题意」-4" class="headerlink" title="「题意」"></a>「题意」</h3><p>给出一个长度为 $n$ 的序列 $A$，根据 $A$ 构造长度为 $n$ 的序列 $B$，满足：<br>① 若 $A_i=A_j$，则 $B_i=B_j$；<br>② $B_i-B_{i-1}\leq 1$<br>求能够构造出的 $B$ 的个数。</p>
+<h3 id="「解析」-4"><a href="#「解析」-4" class="headerlink" title="「解析」"></a>「解析」</h3><p>非常巧妙~还好 C++ 有STL容器。</p>
+<p>如果 $A_i=A_j(i &lt; j)$，不难推出 $B_i$ 到 $B_j$ 的所有数应该相同。那么我们就可以得到：<br><img src="/2019/OldVer18/image1.png" alt="image1"><br>上图中 $A_a=A_c,A_b=A_d$，则 $B_k(k\in[a,d])$ 全部相同。就相当于我们把 $A_i=A_j$ 的 $i,j(i\leq j)$ 看成区间 $[i,j]$，如果两个区间相交，则取两个区间的并集，这个集合里的所有 $B_k$ 都相等。<br>这样的话 $B$ 就被分成了一些区间，相邻区间的元素的值要么相等，要么右边区间值比左边大 $1$，这样的话方案就是一个组合数，假设 $B$ 被分成的区间有 $tot$ 个，则方案数为 $2^{tot-1}$ ，快速幂就好了。<br>至于求区间，就交给 STL map了。</p>
+<h3 id="「源代码」-4"><a href="#「源代码」-4" class="headerlink" title="「源代码」"></a>「源代码」</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=(<span class="keyword">int</span>)<span class="number">2e5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">long</span> MOD=<span class="number">998244353l</span>l;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> num[N+<span class="number">7</span>];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; &gt; mem;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;num[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		mem[num[i]].first=min(mem[num[i]].first,i),</span><br><span class="line">		mem[num[i]].second=max(mem[num[i]].second,i);</span><br><span class="line">	<span class="keyword">int</span> to=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(i&lt;=to)</span><br><span class="line">			to=max(to,mem[num[i]].second);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			ans=ans*<span class="number">2</span>%MOD,</span><br><span class="line">			to=mem[num[i]].second;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="『F-Elongated-Matrix』-〔传送门〕"><a href="#『F-Elongated-Matrix』-〔传送门〕" class="headerlink" title="『F: Elongated Matrix』 〔传送门〕"></a>『F: Elongated Matrix』 <a href="http://codeforces.com/problemset/problem/1102/F" target="_blank" rel="noopener">〔传送门〕</a></h2><h3 id="「题意」-5"><a href="#「题意」-5" class="headerlink" title="「题意」"></a>「题意」</h3><p>给出一个 $r\times c$ 的矩阵，将它的第$i$<strong>列</strong>的尾部接上第$i+1$<strong>列</strong>的开头，构成一个序列，令这个序列的相邻元素的差的绝对值的最小值为 $S$。<br>你可以交换矩阵的<strong>行</strong>，使得 $S$ 最大，求最大的 $S$。</p>
+<h3 id="「解析」-5"><a href="#「解析」-5" class="headerlink" title="「解析」"></a>「解析」</h3><p>看数据规模容易想到状压。</p>
+<p>定义 dp[T][i] 表示已经确定的行为 $T$（状压的状态），且当前最后一行为第$i$行的最大 $S$。<br>预处理一个 val[i][j] 表示将第$i$行接在第$j$行后面时，它们之间的数值之差的最小值。</p>
+<p>那么我们可以得到状态转移方程式：<br>$$<br>dp[T\cup {i}][i]=\min(dp[T][j],val[i][j])\ |\ i\not\in T,j\in T<br>$$<br>不难理解就是把第$i$行放在第$j$行后面。</p>
+<p>好像缺了什么？首尾相接？第一行放哪一行也会产生影响。<br>由于规模不大，可以直接枚举第一行，再进行dp转移，假设确定第一行为 $fir$。我们再初始化一个 $val1[i][j]$ 表示 第一行放第$i$行、最后一行放第$j$行首尾相接后的相邻元素的差的最小值。<br>那么最后的答案就是 $\min(dp[{x|1\leq x\leq n}][i],val1[fir][i])$。<br>由于加了这么一个条件，我们需要在转移时判断第一行是否重复（即枚举时除非当前时第2行，上一行就不能是已经确定的第一行）。</p>
+<h3 id="「源代码」-5"><a href="#「源代码」-5" class="headerlink" title="「源代码」"></a>「源代码」</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> R=<span class="number">16</span>,C=(<span class="keyword">int</span>)<span class="number">1e4</span>;</span><br><span class="line"><span class="keyword">int</span> r,c,INF,ans;</span><br><span class="line"><span class="keyword">int</span> mat[R+<span class="number">7</span>][C+<span class="number">7</span>],val[R+<span class="number">7</span>][R+<span class="number">7</span>][<span class="number">2</span>],dp[(<span class="number">1</span>&lt;&lt;R)+<span class="number">7</span>][R+<span class="number">7</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[(<span class="number">1</span>&lt;&lt;R)+<span class="number">7</span>];</span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line"><span class="comment">//val[i][j][0]: i is in front of j</span></span><br><span class="line"><span class="comment">//val[i][j][1]: i is the first j is the last</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Qabs</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;<span class="keyword">return</span> num&gt;=<span class="number">0</span>? num:-num;&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> belong(a,b) (a&amp;(1&lt;&lt;b))</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(val,<span class="number">0x3f</span>,<span class="keyword">sizeof</span> val);</span><br><span class="line">	INF=val[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;r,&amp;c);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;r;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;c;j++)</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;mat[i][j]);</span><br><span class="line">	<span class="keyword">if</span>(r==<span class="number">1</span>)&#123;</span><br><span class="line">		ans=INF;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;c;i++)</span><br><span class="line">			ans=min(ans,Qabs(mat[<span class="number">0</span>][i]-mat[<span class="number">0</span>][i<span class="number">-1</span>]));</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;r;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;r;j++)</span><br><span class="line">			<span class="keyword">if</span>(i!=j)&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;c;k++)</span><br><span class="line">					val[i][j][<span class="number">0</span>]=min(val[i][j][<span class="number">0</span>],Qabs(mat[i][k]-mat[j][k]));</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;c<span class="number">-1</span>;k++)</span><br><span class="line">					val[i][j][<span class="number">1</span>]=min(val[i][j][<span class="number">1</span>],Qabs(mat[j][k]-mat[i][k+<span class="number">1</span>]));</span><br><span class="line">			&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> fir=<span class="number">0</span>;fir&lt;r;fir++)&#123;</span><br><span class="line">		<span class="built_in">memset</span>(vis,<span class="literal">false</span>,<span class="keyword">sizeof</span> vis);</span><br><span class="line">		<span class="built_in">memset</span>(dp,<span class="number">-1</span>,<span class="keyword">sizeof</span> dp);</span><br><span class="line">		que.push(<span class="number">1</span>&lt;&lt;fir);</span><br><span class="line">		dp[<span class="number">1</span>&lt;&lt;fir][fir]=INF;</span><br><span class="line">		<span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(!que.empty() &amp;&amp; ++cnt)&#123;</span><br><span class="line">			<span class="keyword">int</span> pre=que.front();que.pop();</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> nxt=<span class="number">0</span>;nxt&lt;r;nxt++)</span><br><span class="line">				<span class="keyword">if</span>(!belong(pre,nxt))&#123;</span><br><span class="line">					<span class="keyword">int</span> id=pre|(<span class="number">1</span>&lt;&lt;nxt);</span><br><span class="line">					<span class="keyword">for</span>(<span class="keyword">int</span> lst=<span class="number">0</span>;lst&lt;r;lst++)</span><br><span class="line">						<span class="keyword">if</span>(belong(pre,lst))&#123;</span><br><span class="line">							<span class="keyword">if</span>(lst==fir &amp;&amp; cnt&gt;r) <span class="keyword">continue</span>;</span><br><span class="line">							dp[id][nxt]=max(dp[id][nxt],min(val[lst][nxt][<span class="number">0</span>],dp[pre][lst]));</span><br><span class="line">							<span class="keyword">if</span>(id!=(<span class="number">1</span>&lt;&lt;r)<span class="number">-1</span> &amp;&amp; !vis[id]) vis[id]=<span class="literal">true</span>,que.push(id);</span><br><span class="line">						&#125;</span><br><span class="line">				&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> lst=<span class="number">0</span>;lst&lt;r;lst++)</span><br><span class="line">			ans=max(ans,min(dp[(<span class="number">1</span>&lt;&lt;r)<span class="number">-1</span>][lst],val[fir][lst][<span class="number">1</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><p>Email: <a href="mailto:lucky_glass@foxmail.com">lucky_glass@foxmail.com</a> ，欢迎提问~</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2019/OldVer18/" title="前行 - CF Round 531(Div3)">http://luckyglass.github.io/2019/OldVer18/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"><i class="fa fa-tag"></i> 贪心</a>
+              <a href="/tags/Codeforces/" rel="tag"><i class="fa fa-tag"></i> -Codeforces-</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="tag"><i class="fa fa-tag"></i> 数学-博弈论</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/OldVer27/" rel="prev" title="OI题解 - DesertWind[Topcoder 1570]">
+      <i class="fa fa-chevron-left"></i> OI题解 - DesertWind[Topcoder 1570]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/OldVer8/" rel="next" title="学习笔记 - 矩阵加速">
+      学习笔记 - 矩阵加速 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#『A-Integer-Sequence-Dividing』-〔传送门〕"><span class="nav-text">『A: Integer Sequence Dividing』 〔传送门〕</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#「题意」"><span class="nav-text">「题意」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「解析」"><span class="nav-text">「解析」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「源代码」"><span class="nav-text">「源代码」</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『B-Array-K-Coloring』-〔传送门〕"><span class="nav-text">『B: Array K-Coloring』 〔传送门〕</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#「题意」-1"><span class="nav-text">「题意」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「解析」-1"><span class="nav-text">「解析」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「源代码」-1"><span class="nav-text">「源代码」</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『C-Doors-Breaking-and-Repairing』-〔传送门〕"><span class="nav-text">『C: Doors Breaking and Repairing』 〔传送门〕</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#「题意」-2"><span class="nav-text">「题意」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「解析」-2"><span class="nav-text">「解析」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「源代码」-2"><span class="nav-text">「源代码」</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『D-Balanced-Ternary-String』-〔传送门〕"><span class="nav-text">『D: Balanced Ternary String』 〔传送门〕</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#「题意」-3"><span class="nav-text">「题意」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「解析」-3"><span class="nav-text">「解析」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「源代码」-3"><span class="nav-text">「源代码」</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『E-Monotonic-Renumeration』-〔传送门〕"><span class="nav-text">『E: Monotonic Renumeration』 〔传送门〕</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#「题意」-4"><span class="nav-text">「题意」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「解析」-4"><span class="nav-text">「解析」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「源代码」-4"><span class="nav-text">「源代码」</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『F-Elongated-Matrix』-〔传送门〕"><span class="nav-text">『F: Elongated Matrix』 〔传送门〕</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#「题意」-5"><span class="nav-text">「题意」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「解析」-5"><span class="nav-text">「解析」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「源代码」-5"><span class="nav-text">「源代码」</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-End"><span class="nav-text">The End</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共234.7k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

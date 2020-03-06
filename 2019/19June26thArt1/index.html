@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="思维难度有一点大…… 不知道如果考试的时候碰到这种题哪能想出来……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI题解 - The Last Non-zero Digit [POJ 1150]">
+<meta property="og:url" content="http://luckyglass.github.io/2019/19June26thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="思维难度有一点大…… 不知道如果考试的时候碰到这种题哪能想出来……">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-06-26T06:26:50.000Z">
+<meta property="article:modified_time" content="2019-07-26T03:43:03.521Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="数学-组合数">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="-POJ-">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://luckyglass.github.io/2019/19June26thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>OI题解 - The Last Non-zero Digit [POJ 1150] | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/luckyglass" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2019/19June26thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI题解 - The Last Non-zero Digit [POJ 1150]
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-26 14:26:50" itemprop="dateCreated datePublished" datetime="2019-06-26T14:26:50+08:00">2019-06-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-07-26 11:43:03" itemprop="dateModified" datetime="2019-07-26T11:43:03+08:00">2019-07-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/19June26thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/19June26thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>思维难度有一点大……</p>
+<p>不知道如果考试的时候碰到这种题哪能想出来……</p>
+</blockquote>
+<a id="more"></a>
+
+<hr>
+<h2 id="·-题目"><a href="#·-题目" class="headerlink" title="· 题目"></a>· 题目</h2><p>给出正整数 $n,m$ ，求 $A_n^m$ 的最后一个非零的数字。</p>
+<p>例如 $A_8^5=\frac{8!}{(8-5)!}=6720$ ，则最后一个非零的数字是 $2$ 。</p>
+<blockquote>
+<p>数据规模：$0\leq m\leq n\leq 2\times10^7$</p>
+</blockquote>
+<hr>
+<h2 id="·-解析"><a href="#·-解析" class="headerlink" title="· 解析"></a>· 解析</h2><p>显然不能直接算出来……</p>
+<h3 id="初步分析"><a href="#初步分析" class="headerlink" title="- 初步分析"></a>- 初步分析</h3><p>因为 $A_n^m=\frac{n!}{(n-m)!}$ ，可以想到我们分开算 $n!$ 以及 $(n-m)!$ 对答案的影响。也就是算阶乘对答案的影响。</p>
+<p>假设我们现在考虑 $t!$ 的影响：</p>
+<p>只要 $2$ 和 $5$ 相乘就会产生 $0$ 。<br>那么可以想到，我们可以把 $1$ 到 $t$ 中的每个数含有的因子$2$和因子$5$提出来，并且分别计算出提取出 $2,5$ 的数量记为 $t_2,t_5$。<br>（举个例子，把 “$1,2,3,4,5,6,7$” 中的因子$2,5$提出来后就变成 “$1,1,3,1,1,3,7$”，其中提取出 $2,5$ 的个数分别为 $t_2=4,t_5=1$）</p>
+<p>我们会发现提取过后剩下的数字只有 $1,3,7,9$ ，但是 $1$ 没有什么用，所以我们只需要统计 $3,7,9$ 的个数，而且这些数只会影响个位数字，所以我们只需要统计剩下的数字中末尾为 $3,7,9$ 的数的个数，并且分别记为 $t_3,t_7,t_9$。</p>
+<p>知道 $t_2,t_5,t_3,t_7,t_9$ 后，我们就可以计算出答案，至于怎么计算后面再说。</p>
+<h3 id="提取-2-5"><a href="#提取-2-5" class="headerlink" title="- 提取 $2,5$"></a>- 提取 $2,5$</h3><p>先说如何提取 $2$ ，以从数列 $1,2,3,4,5,6,7,8,9$ 中提取 $2$ 为例子：</p>
+<p>首先 $1,2,3,4,5,6,7,8,9$ 中除去不包含$2$的因数的数，则变成 $2,4,6,8$ ；<br>再将每个数提取一个$2$，可以发现能够提取出 $\lfloor\frac92\rfloor$ 个 $2$，于是数列变成 $1,2,3,4$；（我们发现数列又变成了一串连续的整数）</p>
+<p>对 $1,2,3,4$ 继续进行操作，直到数列变成 $1$。</p>
+<p>把上面的过程普遍化一下：在数列 $1,2,3,…,(n-1),n$ 中可以一次提取出 $\lfloor\frac n2\rfloor$ ，数列就变为 $1,2,3,…,\lfloor\frac n2\rfloor$ 。</p>
+<p>按照上面的思路，我们可以写出一个递归函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当前数列为 1,2,3,...,n</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Get2</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//Get2(n/2) 即在 1,2,3,...,n/2 中继续提取 2</span></span><br><span class="line">    <span class="comment">//n/2 即在 1,2,3,...,n 中能够找到 n/2 个包含因数2的数</span></span><br><span class="line">    <span class="keyword">return</span> Get2(n/<span class="number">2</span>)+n/<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实对于提取 $5$ 也是一样的，就直接结合代码解释了：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Get5</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//除去不是5的倍数的数后数列为 5,10,...,(n/5)*5 ，共有 5/n 个数</span></span><br><span class="line">    <span class="comment">//对每个元素提取出一个5后，数列变为 1,2,...,n/5 ，则继续在这个数列中提取5，即 Get5(n/5)</span></span><br><span class="line">    <span class="keyword">return</span> Get5(n/<span class="number">5</span>)+n/<span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实两个函数可以合为一个函数。</p>
+<h3 id="查找提取完因数-2-5-后末尾为-3-7-9-的数的个数"><a href="#查找提取完因数-2-5-后末尾为-3-7-9-的数的个数" class="headerlink" title="- 查找提取完因数$2,5$后末尾为$3,7,9$的数的个数"></a>- 查找提取完因数$2,5$后末尾为$3,7,9$的数的个数</h3><p>我们以查找提取完因数$2,5$后末尾为$3$的数的个数为例。</p>
+<blockquote>
+<p>假设我们要求 $1$ 到 $n$ 的数中末尾为 $3$ 的数的个数，相当于个位固定为$3$且小于等于$n$的数。<br>不妨设个位为 $3$ 且小于等于 $n$ 的数 $x=10p+3$，并且令 $n=10q+r$（$p,q$ 是<strong>非负</strong>整数，$r$ 是一位数）。则分成两类：</p>
+<ol>
+<li><p>$r&lt;3$ ：<br>$$<br>\begin{align}<br>x&amp;\leq n\<br>10p+3&amp;\leq 10q+r\<br>10p&amp;\leq 10(q-1)+(r+7)\<br>p&amp;\leq q-1+\lfloor\frac {r+7}{10}\rfloor\<br>p&amp;\leq q-1<br>\end{align}<br>$$<br>可见 $p$ 可取的值为 $0,1,…,q-1$，共 $q$ 个，则满足条件的 $x$ 有 $q$ 个，即 $\lfloor\frac n{10}\rfloor$ 个。</p>
+</li>
+<li><p>$r\ge 3$：<br>$$<br>\begin{align}<br>x&amp;\leq n\<br>10p+3&amp;\leq 10q+r\<br>10p&amp;\leq 10q+(r-3)\<br>p&amp;\leq q+\lfloor\frac{r-3}{10}\rfloor\<br>p&amp;\leq q<br>\end{align}<br>$$<br>可见 $p$ 可取的值为 $0,1,…,q$ ，共 $q+1$ 个，则满足条件的 $x$ 有 $(q+1)$ 个，即 $\lfloor\frac n{10}\rfloor+1$ 个。</p>
+</li>
+</ol>
+</blockquote>
+<p>$7,9$也是一样的，所以就 OK 了~ </p>
+<p>但是我们还要先除去因数$2,5$，所以我们写了两个函数，先后除去 $2,5$：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数k就是统计末尾为k的数的个数</span></span><br><span class="line"><span class="comment">//后除去5</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Get379_5</span><span class="params">(<span class="keyword">int</span> num,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!num) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> Get379_5(num/<span class="number">5</span>,k)+num/<span class="number">10</span>+<span class="keyword">int</span>(num%<span class="number">10</span>&gt;=k);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//先除去2</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Get379_2</span><span class="params">(<span class="keyword">int</span> num,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!num) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> Get379_2(num/<span class="number">2</span>,k)+Get379_5(num,k);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="统计答案"><a href="#统计答案" class="headerlink" title="- 统计答案"></a>- 统计答案</h3><p>根据上面的操作，我们知道最后一个非零的数字是哪些数字相乘的积的个位。</p>
+<p>我们可以发现，$x^i$ 的个位是循环的：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>$i=1$</th>
+<th>$i=2$</th>
+<th>$i=3$</th>
+<th>$i=4$</th>
+<th>$i=5$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$x=2$</td>
+<td>$2$</td>
+<td>$4$</td>
+<td>$8$</td>
+<td>$6$</td>
+<td>$2$</td>
+</tr>
+<tr>
+<td>$x=5$</td>
+<td>$5$</td>
+<td>$5$</td>
+<td>$5$</td>
+<td>$5$</td>
+<td>$5$</td>
+</tr>
+<tr>
+<td>$x=7$</td>
+<td>$7$</td>
+<td>$9$</td>
+<td>$3$</td>
+<td>$1$</td>
+<td>$7$</td>
+</tr>
+<tr>
+<td>$x=9$</td>
+<td>$9$</td>
+<td>$1$</td>
+<td>$9$</td>
+<td>$1$</td>
+<td>$9$</td>
+</tr>
+</tbody></table>
+<p>虽然 $x=5$ 和 $x=9$ 分别是以 $1,2$ 为循环节的……但是也可以看成是以 $4$ 为循环节的。</p>
+<p>那么我们就可以快速的算出 $2^i,3^i,5^i,7^i,9^i$ 的个位，从而得到它们的积的个位。</p>
+<hr>
+<h2 id="·-源代码"><a href="#·-源代码" class="headerlink" title="· 源代码"></a>· 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Get25</span><span class="params">(<span class="keyword">int</span> num,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!num) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> Get25(num/k,k)+num/k;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Get379_5</span><span class="params">(<span class="keyword">int</span> num,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!num) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> Get379_5(num/<span class="number">5</span>,k)+num/<span class="number">10</span>+<span class="keyword">int</span>(num%<span class="number">10</span>&gt;=k);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Get379_2</span><span class="params">(<span class="keyword">int</span> num,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!num) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> Get379_2(num/<span class="number">2</span>,k)+Get379_5(num,k);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> F[<span class="number">10</span>][<span class="number">4</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	F[<span class="number">2</span>][<span class="number">0</span>]=<span class="number">6</span>;F[<span class="number">2</span>][<span class="number">1</span>]=<span class="number">2</span>;F[<span class="number">2</span>][<span class="number">2</span>]=<span class="number">4</span>;F[<span class="number">2</span>][<span class="number">3</span>]=<span class="number">8</span>;</span><br><span class="line">	F[<span class="number">3</span>][<span class="number">0</span>]=<span class="number">1</span>;F[<span class="number">3</span>][<span class="number">1</span>]=<span class="number">3</span>;F[<span class="number">3</span>][<span class="number">2</span>]=<span class="number">9</span>;F[<span class="number">3</span>][<span class="number">3</span>]=<span class="number">7</span>;</span><br><span class="line">	F[<span class="number">5</span>][<span class="number">0</span>]=<span class="number">5</span>;F[<span class="number">5</span>][<span class="number">1</span>]=<span class="number">5</span>;F[<span class="number">5</span>][<span class="number">2</span>]=<span class="number">5</span>;F[<span class="number">5</span>][<span class="number">3</span>]=<span class="number">5</span>;</span><br><span class="line">	F[<span class="number">7</span>][<span class="number">0</span>]=<span class="number">1</span>;F[<span class="number">7</span>][<span class="number">1</span>]=<span class="number">7</span>;F[<span class="number">7</span>][<span class="number">2</span>]=<span class="number">9</span>;F[<span class="number">7</span>][<span class="number">3</span>]=<span class="number">3</span>;</span><br><span class="line">	F[<span class="number">9</span>][<span class="number">0</span>]=<span class="number">1</span>;F[<span class="number">9</span>][<span class="number">1</span>]=<span class="number">9</span>;F[<span class="number">9</span>][<span class="number">2</span>]=<span class="number">1</span>;F[<span class="number">9</span>][<span class="number">3</span>]=<span class="number">9</span>;</span><br><span class="line">	<span class="keyword">int</span> n,m,A,B;</span><br><span class="line">	<span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m))&#123;</span><br><span class="line">		A=n;B=n-m;</span><br><span class="line">		<span class="keyword">int</span> A2=Get25(A,<span class="number">2</span>),A5=Get25(A,<span class="number">5</span>);</span><br><span class="line">		<span class="keyword">int</span> B2=Get25(B,<span class="number">2</span>),B5=Get25(B,<span class="number">5</span>);</span><br><span class="line">		<span class="keyword">int</span> A3=Get379_2(A,<span class="number">3</span>),A7=Get379_2(A,<span class="number">7</span>),A9=Get379_2(A,<span class="number">9</span>);</span><br><span class="line">		<span class="keyword">int</span> B3=Get379_2(B,<span class="number">3</span>),B7=Get379_2(B,<span class="number">7</span>),B9=Get379_2(B,<span class="number">9</span>);</span><br><span class="line">		<span class="keyword">int</span> D2=A2-B2,D3=A3-B3,D5=A5-B5,D7=A7-B7,D9=A9-B9;</span><br><span class="line">		<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(D2&gt;D5) D2-=D5,D5=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">else</span> D5-=D2,D2=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(D2) ans=ans*F[<span class="number">2</span>][D2%<span class="number">4</span>]%<span class="number">10</span>;</span><br><span class="line">		<span class="keyword">if</span>(D3) ans=ans*F[<span class="number">3</span>][D3%<span class="number">4</span>]%<span class="number">10</span>;</span><br><span class="line">		<span class="keyword">if</span>(D5) ans=ans*F[<span class="number">5</span>][D5%<span class="number">4</span>]%<span class="number">10</span>;</span><br><span class="line">		<span class="keyword">if</span>(D7) ans=ans*F[<span class="number">7</span>][D7%<span class="number">4</span>]%<span class="number">10</span>;</span><br><span class="line">		<span class="keyword">if</span>(D9) ans=ans*F[<span class="number">9</span>][D9%<span class="number">4</span>]%<span class="number">10</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><p>Email: <a href="mailto:lucky_glass@foxmail.com">lucky_glass@foxmail.com</a> ，欢迎提问~</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2019/19June26thArt1/" title="OI题解 - The Last Non-zero Digit [POJ 1150]">http://luckyglass.github.io/2019/19June26thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E7%BB%84%E5%90%88%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 数学-组合数</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
+              <a href="/tags/POJ/" rel="tag"><i class="fa fa-tag"></i> -POJ-</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/19June25thArt1/" rel="prev" title="OI题解 - Burza [COCI 2016/2017 Round 2]">
+      <i class="fa fa-chevron-left"></i> OI题解 - Burza [COCI 2016/2017 Round 2]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/19June28thArt1/" rel="next" title="OI题解 - The Counting Problem [POJ 2282]">
+      OI题解 - The Counting Problem [POJ 2282] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#·-题目"><span class="nav-text">· 题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#·-解析"><span class="nav-text">· 解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初步分析"><span class="nav-text">- 初步分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提取-2-5"><span class="nav-text">- 提取 $2,5$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找提取完因数-2-5-后末尾为-3-7-9-的数的个数"><span class="nav-text">- 查找提取完因数$2,5$后末尾为$3,7,9$的数的个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计答案"><span class="nav-text">- 统计答案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#·-源代码"><span class="nav-text">· 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-End"><span class="nav-text">The End</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共234.7k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

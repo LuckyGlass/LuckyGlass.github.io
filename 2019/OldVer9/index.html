@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="寒假学习开始……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 - SPLAY">
+<meta property="og:url" content="http://luckyglass.github.io/2019/OldVer9/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="寒假学习开始……">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://luckyglass.github.io/2019/OldVer9/image1.png">
+<meta property="og:image" content="http://luckyglass.github.io/2019/OldVer9/OldVer9%5Cimage2.png">
+<meta property="og:image" content="http://luckyglass.github.io/2019/OldVer9/OldVer9%5Cimage3.png">
+<meta property="og:image" content="http://luckyglass.github.io/2019/OldVer9/OldVer9%5Cimage4.png">
+<meta property="article:published_time" content="2019-01-28T06:02:59.000Z">
+<meta property="article:modified_time" content="2019-11-07T15:30:29.914Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="-BZOJ-">
+<meta property="article:tag" content="数据结构-SPLAY">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://luckyglass.github.io/2019/OldVer9/image1.png">
+
+<link rel="canonical" href="http://luckyglass.github.io/2019/OldVer9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>学习笔记 - SPLAY | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/luckyglass" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2019/OldVer9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习笔记 - SPLAY
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-28 14:02:59" itemprop="dateCreated datePublished" datetime="2019-01-28T14:02:59+08:00">2019-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-07 23:30:29" itemprop="dateModified" datetime="2019-11-07T23:30:29+08:00">2019-11-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/OldVer9/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/OldVer9/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>寒假学习开始……</p>
+</blockquote>
+<a id="more"></a>
+
+<hr>
+<h2 id="『算法简述』"><a href="#『算法简述』" class="headerlink" title="『算法简述』"></a>『算法简述』</h2><p>一种非常神奇的数据结构，基于二叉排序树（但是也可以完全不一样，只是一棵二叉树），虽然并非完全意义上的“平衡树”，我们一般还是把它当做平衡树用~<br>具有优点：<br>① 好想+好写+log级别（相较于平衡树）；<br>② 能实现平衡树不能实现的区间操作；<br>③ 能实现线段树不能实现的加点删点；<br>④ 有的时候我们不一定要让它满足“堆”的性质；<br>主体为非常神奇的Splay伸展操作！（Tab. 这也是为什么它被叫做Splay、（自底向上）伸展树，但是它的原作者给出的命名为“自适应伸展树”，也就是说它不需要像其他平衡树一样刻意维护平衡，会“自适应”）</p>
+<hr>
+<h2 id="『理论依据简述』"><a href="#『理论依据简述』" class="headerlink" title="『理论依据简述』"></a>『理论依据简述』</h2><p>根据<em>势函数</em>分析，对于一棵Splay，真正被访问很多次的点大约只有 $10%$ ，这就意味着如果我们把这 $10%$ 提到比较靠近根节点的位置，我们访问的速度会加快很多。这就是为什么基本上每进行一次操作，都要将被操作的点通过一些操作（下面讲的 Splay操作）提升到根节点。</p>
+<hr>
+<h2 id="『结构』"><a href="#『结构』" class="headerlink" title="『结构』"></a>『结构』</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NODE</span>&#123;</span></span><br><span class="line">	NODE *ch[<span class="number">2</span>],*fa;</span><br><span class="line">	<span class="keyword">int</span> key,siz;</span><br><span class="line">&#125;tre[N+<span class="number">7</span>]; <span class="comment">//Splay的节点</span></span><br></pre></td></tr></table></figure>
+<p>一般来说就是上面这种结构。像线段树一样，我们还可以往里面塞各种各样我们要用的变量。指针变量<code>ch</code>是它的左右儿子（<code>ch[0]</code> 是左儿子），<code>fa</code>是它的父亲。<br><code>siz</code> 是当前点的子树的大小；<code>key</code> 是<strong>一般情况</strong>下二叉排序树点的键值，对于每个点满足左儿子的key小于该点的key小于右儿子的key。 </p>
+<blockquote>
+<p>* ：什么是一般情况呢？在下面我们会讲到Splay支持的“查询某个值在Splay中的排名”等操作，必须要求Splay有二叉排序树的性质。但是并不是总要满足，比如在“文艺平衡树”一题中，要求区间翻转，这个时候Splay扮演了线段树的角色，需要交换左右儿子，就会破坏二叉排序树性质。后面会再提到。</p>
+</blockquote>
+<p>另外我们会有几个特殊指针变量：<code>ncnt</code>,<code>NIL</code>和<code>root</code> —— <code>ncnt</code> 指向当前的一个新节点，在创建新节点时使用；<code>NIL</code> 是一个空指针，代替NULL，防止NULL指针访问出错；<code>root</code> 指向当前的空节点。</p>
+<p>那么我们需要初始化 Splay（重建Splay）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Rebuild</span><span class="params">()</span></span>&#123;</span><br><span class="line">	NIL=ncnt=&amp;tre[<span class="number">0</span>];</span><br><span class="line">	NIL-&gt;key=-INF; <span class="comment">//NIL的值可能会有影响……建议取极端值</span></span><br><span class="line">	root=NIL-&gt;ch[<span class="number">0</span>]=NIL-&gt;ch[<span class="number">1</span>]=NIL-&gt;fa=NIL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="『Rotate旋转-amp-Splay伸展』"><a href="#『Rotate旋转-amp-Splay伸展』" class="headerlink" title="『Rotate旋转 &amp; Splay伸展』"></a>『Rotate旋转 &amp; Splay伸展』</h2><p>这是Splay里面最为重要的两个函数。<br>类似于大多数平衡树，Splay的调整平衡是通过旋转操作完成的，旋转操作是基于原本的二叉排序树性质完成的，也就是说如果最初的Splay满足二叉排序树性质，Rotate过后同样满足。</p>
+<h3 id="「单旋」"><a href="#「单旋」" class="headerlink" title="「单旋」"></a>「单旋」</h3><p><img src="/2019/OldVer9/image1.png" alt="image1"></p>
+<p>如上图所示，我们要让X移动到Y的位置去，但是不能破坏二叉排序树的性质（$A&lt;X&lt;B&lt;Y&lt;C$），那么我们使用到了Rotate操作，分为左旋ZAG、右旋ZIG。<strong>为了简化代码</strong>，我们这里定义方向变量 $dir$ ——  $dir=0$ 表示右旋，$dir=1$ 表示左旋。</p>
+<p>根据上图的形式，以右旋为例。我们可以看到 X 的右儿子 B 变为了 Y 的左儿子，X Y 互换了位置。那么我们可以把右旋拆解为 $4$ 步：<br>① 将 Y 的左儿子的指针改为 X 的右儿子，（如果X有右儿子）X的右儿子的父亲指针指向 Y；<br>② 将 X 的父亲指针指向 Y 的父亲，（如果 Y 有父亲）Y 的父亲的原来指向 Y 的指针指向 X；<br>③ X 的右儿子指向 Y ， Y 的父亲指向 X；<br>④ 如果 Y 原来是 root，root 指向 X；<br>最后统计 Y 的子树的大小，这里打包成PushUp函数，很好理解，就不单独写了，见最后源代码。（至于为什么不统计 X 的子树大小我还没弄清楚，希望有高见的 reader 能够在 email 中回复我）</p>
+<p>另外左旋是刚好相反的，可以通过 $dir$ 实现~</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Rotate</span><span class="params">(NODE *x)</span></span>&#123;</span><br><span class="line">	NODE *y=x-&gt;fa;</span><br><span class="line">	<span class="keyword">int</span> dir=(y-&gt;ch[<span class="number">0</span>]==x); <span class="comment">//0 ZIG;1 ZAG 直接在内部计算是左旋还是右旋</span></span><br><span class="line">	x-&gt;fa=y-&gt;fa;<span class="keyword">if</span>(y-&gt;fa!=NIL) y-&gt;fa-&gt;ch[y-&gt;fa-&gt;ch[<span class="number">1</span>]==y]=x;</span><br><span class="line">	y-&gt;ch[!dir]=x-&gt;ch[dir];<span class="keyword">if</span>(x-&gt;ch[dir]!=NIL) x-&gt;ch[dir]-&gt;fa=y;</span><br><span class="line">	x-&gt;ch[dir]=y;y-&gt;fa=x;</span><br><span class="line">	<span class="keyword">if</span>(root==y) root=x;</span><br><span class="line">	PushUp(y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="「双旋」"><a href="#「双旋」" class="headerlink" title="「双旋」"></a>「双旋」</h3><p><strong>直线式</strong>：<br><strong><img src="/2019/OldVer9/OldVer9%5Cimage2.png" alt="image2"></strong><br>注意顺序！<strong>虽然是两次单旋，但是先旋转 Y，再旋转 X ！</strong>（不然旋转出来不一样……反向操作还无法还原）</p>
+<p><strong>折线式</strong>：<br><strong><img src="/2019/OldVer9/OldVer9%5Cimage3.png" alt="image3"></strong><br>这次是两次旋转 X！</p>
+<p>建议reader们都试一试~</p>
+<h3 id="「Splay伸展」"><a href="#「Splay伸展」" class="headerlink" title="「Splay伸展」"></a>「Splay伸展」</h3><p>它的操作内容是：把一个点x通过一系列旋转将它旋转到它的某一个祖先rt的下方（尽可能用双旋）。</p>
+<p>设 x 的父亲为 y，祖父为 z；<br>① z 就是 rt：此时我们只需要最后单旋一次，所以 <code>Rotate(x)</code> 即可；<br>② 否则就用双旋 —— 判断 x,y,z 三点是“直线式”还是“折线式”，方法见代码，然后决定旋转的先后；<br>③ 直到旋转到 rt 下方为止（也就是x是rt的一个儿子）；</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Splay</span><span class="params">(NODE *x,NODE *rt)</span></span>&#123;</span><br><span class="line">	NODE *y,*z;</span><br><span class="line">	<span class="keyword">while</span>(x-&gt;fa!=rt)&#123;</span><br><span class="line">		y=x-&gt;fa;z=y-&gt;fa;</span><br><span class="line">		<span class="keyword">if</span>(z==rt) Rotate(x);</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>((z-&gt;ch[<span class="number">0</span>]==y)^(y-&gt;ch[<span class="number">0</span>]==x)) Rotate(x); <span class="comment">//如果是折线式</span></span><br><span class="line">			<span class="keyword">else</span> Rotate(y); <span class="comment">//如果是直线式</span></span><br><span class="line">			Rotate(x); <span class="comment">//直线式和折线式都是这样</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="『NewNode新建节点-amp-Insert插入』"><a href="#『NewNode新建节点-amp-Insert插入』" class="headerlink" title="『NewNode新建节点 &amp; Insert插入』"></a>『NewNode新建节点 &amp; Insert插入』</h2><p>这里我们用了NewNode()来新建一个节点——找到新节点指针ncnt，保存为指针 p，p的儿子、父亲指针初始值全赋值为 NIL，键值key作为参数<code>_key</code>传入NewNode()。最后返回这个指针。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> NODE *<span class="title">NewNode</span><span class="params">(<span class="keyword">int</span> _key)</span></span>&#123;</span><br><span class="line">	NODE *p=++ncnt; <span class="comment">//取一个新节点</span></span><br><span class="line">	p-&gt;fa=p-&gt;ch[<span class="number">0</span>]=p-&gt;ch[<span class="number">1</span>]=NIL;</span><br><span class="line">	p-&gt;key=_key;p-&gt;siz=<span class="number">1</span>; <span class="comment">//siz是子树大小，因为新节点一定在叶子处，所以大小为1</span></span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Insert插入操作是基于二叉排序树性质的，虽然即使不满足也可以完成。大概就是从根节点开始，判断插入的值<code>_key</code> 与当前点键值的大小关系从而确定它属于当前点的左子树还是右子树（默认一个规则：<strong>如果<code>_key</code>与当前键值相同，我们定义要插入的这个值“小于”当前点，属于左子树</strong>；除非在一些题中把相同的值压入同一个点，对每个点记录<code>cnt</code>表示这个值总共有多少个）。直到访问到一个空节点，则在该节点创建新节点，修改它的父亲节点，最后Splay到根节点。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(NODE *&amp;rt,NODE *pre,<span class="keyword">int</span> _key)</span></span>&#123; <span class="comment">//rt的取值符 '&amp;' 不能少！</span></span><br><span class="line">	<span class="keyword">if</span>(rt==NIL)&#123;</span><br><span class="line">		rt=NewNode(_key);rt-&gt;fa=pre;</span><br><span class="line">		Splay(rt,NIL); <span class="comment">//别忘了</span></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	rt-&gt;siz++;</span><br><span class="line">	<span class="keyword">int</span> dir=(_key&gt;rt-&gt;key); <span class="comment">//只有大于才是右儿子，小于等于就是左儿子</span></span><br><span class="line">	Insert(rt-&gt;ch[dir],rt,_key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="『Find查找值-amp-FindPre前驱-amp-FindNxt后继-amp-FindMaxMin极值』"><a href="#『Find查找值-amp-FindPre前驱-amp-FindNxt后继-amp-FindMaxMin极值』" class="headerlink" title="『Find查找值 &amp; FindPre前驱 &amp; FindNxt后继 &amp; FindMaxMin极值』"></a>『Find查找值 &amp; FindPre前驱 &amp; FindNxt后继 &amp; FindMaxMin极值』</h2><h3 id="「Find查找特定值」【基于二叉排序树的性质】"><a href="#「Find查找特定值」【基于二叉排序树的性质】" class="headerlink" title="「Find查找特定值」【基于二叉排序树的性质】"></a>「Find查找特定值」<strong><em>【基于二叉排序树的性质】</em></strong></h3><p>Tab. 如果存在多个相同的值，我们找的是最后插入 $Splay$ 的一个节点<br>从根节点开始查找；如果当前点的键值小于查找值，那就继续找右儿子，否则找左儿子（因为在Insert的时候如果插入值和当前值相等，我们把新值传给了左儿子，所以现在找的时候如果相等是找左儿子）。</p>
+<p>如果找到给定值了，我们就把找到的点 Splay 到根，然后返回这个点；<br>但是如果没有呢，也就是说我们找到了一个NIL节点？我们不会白找一遍，还是会返回该NIL节点的父亲，并把这个父亲节点 Splay 到根。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">NODE *<span class="title">Find</span><span class="params">(NODE *rt,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(rt==NIL) <span class="keyword">return</span> NIL;</span><br><span class="line">	NODE *p;</span><br><span class="line">	<span class="keyword">if</span>(key==rt-&gt;key)&#123;</span><br><span class="line">		p=rt-&gt;ch[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">while</span>(p-&gt;ch[<span class="number">0</span>]!=NIL &amp;&amp; p-&gt;key==key) rt=p,p=p-&gt;ch[<span class="number">0</span>];</span><br><span class="line">		Splay(rt,NIL);</span><br><span class="line">		<span class="keyword">return</span> rt;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(key&lt;rt-&gt;key) p=Find(rt-&gt;ch[<span class="number">0</span>],key);</span><br><span class="line">	<span class="keyword">else</span> p=Find(rt-&gt;ch[<span class="number">1</span>],key);</span><br><span class="line">	<span class="keyword">if</span>(p==NIL) p=rt,Splay(rt,NIL);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="「FindPre查找前驱-amp-FindNxt查找后继」【基于二叉排序树的性质】"><a href="#「FindPre查找前驱-amp-FindNxt查找后继」【基于二叉排序树的性质】" class="headerlink" title="「FindPre查找前驱 &amp; FindNxt查找后继」【基于二叉排序树的性质】"></a>「FindPre查找前驱 &amp; FindNxt查找后继」<strong><em>【基于二叉排序树的性质】</em></strong></h3><p>以查找 $X$ 的前驱为例；<br>大概过程是从根节点出发，如果当前点的键值小于 $X$，就找当前位置的右儿子，否则找到左儿子，一直找到一个空节点 NIL，然后返回 NIL 开始回溯。<br>回溯过程中找到第一个小于 $X$ 点，这就是 $X$ 的前驱。</p>
+<p>然后 $X$ 的后继是反过来的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> NODE *<span class="title">FindPre</span><span class="params">(NODE *rt,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">	NODE *p;</span><br><span class="line">	<span class="keyword">if</span>(rt==NIL) <span class="keyword">return</span> NIL;</span><br><span class="line">	<span class="keyword">if</span>(key&gt;rt-&gt;key)&#123;</span><br><span class="line">		p=FindPre(rt-&gt;ch[<span class="number">1</span>],key);</span><br><span class="line">		<span class="keyword">if</span>(p==NIL) p=rt,Splay(p,NIL);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> p=FindPre(rt-&gt;ch[<span class="number">0</span>],key);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> NODE *<span class="title">FindNxt</span><span class="params">(NODE *rt,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">	NODE *p;</span><br><span class="line">	<span class="keyword">if</span>(rt==NIL) <span class="keyword">return</span> NIL;</span><br><span class="line">	<span class="keyword">if</span>(key&lt;rt-&gt;key)&#123;</span><br><span class="line">		p=FindNxt(rt-&gt;ch[<span class="number">0</span>],key);</span><br><span class="line">		<span class="keyword">if</span>(p==NIL) p=rt,Splay(p,NIL);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> p=FindNxt(rt-&gt;ch[<span class="number">1</span>],key);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="「FindMinMax-查找极值」【基于二叉排序树的性质】"><a href="#「FindMinMax-查找极值」【基于二叉排序树的性质】" class="headerlink" title="「FindMinMax 查找极值」【基于二叉排序树的性质】"></a>「FindMinMax 查找极值」<strong><em>【基于二叉排序树的性质】</em></strong></h3><p>非常简单的思路，因为满足二叉排序树性质，找最大值就是一直找右儿子，最小值就是一直找左儿子。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">NODE *<span class="title">FindMinMax</span><span class="params">(NODE *rt,<span class="keyword">bool</span> Min_Max)</span></span>&#123;</span><br><span class="line">	idf(rt==NIL) <span class="keyword">return</span> NIL;</span><br><span class="line">	NODE *p=rt;</span><br><span class="line">	<span class="keyword">while</span>(p-&gt;ch[Min_Max]!=NIL) p=p-&gt;ch[Min_Max];</span><br><span class="line">	Splay(p,NIL);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="『Select查找排名第k个-amp-GetRank查找给定值排名』"><a href="#『Select查找排名第k个-amp-GetRank查找给定值排名』" class="headerlink" title="『Select查找排名第k个 &amp; GetRank查找给定值排名』"></a>『Select查找排名第k个 &amp; GetRank查找给定值排名』</h2><p>这里排名$k$的定义是键值第 $k$ 小的点，如果两个点键值相等，我们规定先插入的点排名更高。</p>
+<h3 id="「Select查找排名第k的点」【基于二叉排序树的性质】"><a href="#「Select查找排名第k的点」【基于二叉排序树的性质】" class="headerlink" title="「Select查找排名第k的点」【基于二叉排序树的性质】"></a>「Select查找排名第k的点」<strong><em>【基于二叉排序树的性质】</em></strong></h3><p>假设我们要求排名为 $rnk$ 的点（保证存在），我们把问题引申为 “以 $rt$ 为根的子树中的排名为 $rnk$ 的点”。</p>
+<p>那么我们一开始的 $rt$ 就是根节点 $root$。<br>因为满足二叉排序树性质，$rt$ 的左子树的所有点的排名都比 $rt$ 小，右子树都比 $rt$ 大。所以 $rt$ 在以 $rt$ 为根的子树中的排名就是 “左子树大小 + $1$”。如果 $rnk$ 就等于 “左子树大小 + $1$”，就说明 $rt$ 就是我们要找的点；如果小于 “左子树大小 + $1$”，就说明我们要找的点在左子树，且该点在左子树中的排名仍然是 $rnk$；如果大于 “左子树大小 + $1$”，就说明我们要找的点在右子树，且该点在右子树中的排名为 “$rnk$ - 左子树大小 - $1$”。</p>
+<p>递推查找即可，最后把找到的点 Splay 到根。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">NODE *<span class="title">Select</span><span class="params">(<span class="keyword">int</span> rnk,NODE *rt)</span></span>&#123;</span><br><span class="line">	NODE *p=root;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(rnk==p-&gt;ch[<span class="number">0</span>]-&gt;siz+<span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">if</span>(rnk&lt;p-&gt;ch[<span class="number">0</span>]-&gt;siz+<span class="number">1</span>) p=p-&gt;ch[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">else</span> rnk-=p-&gt;ch[<span class="number">0</span>]-&gt;siz+<span class="number">1</span>,p=p-&gt;ch[<span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	Splay(p,rt);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="「GetRank查找给定值排名」【基于二叉排序树的性质】"><a href="#「GetRank查找给定值排名」【基于二叉排序树的性质】" class="headerlink" title="「GetRank查找给定值排名」【基于二叉排序树的性质】"></a>「GetRank查找给定值排名」<strong><em>【基于二叉排序树的性质】</em></strong></h3><p>从根节点出发，不一定给定值是 Splay 里的点。</p>
+<p>由于二叉排序树性质：如果给定值小于当前点的键值，那么给定值的排名就是 “给定值在左子树内的排名”；否则给定值的排名比左子树所有点和当前点都大，则排名为 “给定值在右子树中的排名 + 左子树大小 + $1$” ；递归计算，如果当前点为 NIL，则返回 $1$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetRank</span><span class="params">(NODE *rt,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(rt==NIL) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(key&gt;rt-&gt;key) <span class="keyword">return</span> rt-&gt;ch[<span class="number">0</span>]-&gt;siz+<span class="number">1</span>+GetRank(rt-&gt;ch[<span class="number">1</span>],key);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> GetRank(rt-&gt;ch[<span class="number">0</span>],key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="『Delete删除给定值节点』【基于二叉排序树的性质】"><a href="#『Delete删除给定值节点』【基于二叉排序树的性质】" class="headerlink" title="『Delete删除给定值节点』【基于二叉排序树的性质】"></a>『Delete删除给定值节点』<strong><em>【基于二叉排序树的性质】</em></strong></h2><p>非常巧妙，我们先找到给定值的排名 $rnk$。然后先将排名为 $rnk-1$ 的点 Splay 到根，再把排名为 $rnk+1$ 的点 Splay 到当前根节点的下方。那么我们会发现：</p>
+<p><strong><img src="/2019/OldVer9/OldVer9%5Cimage4.png" alt="image4"></strong></p>
+<p>我们要删除的点被移动到排名为 $rnk+1$ 的点的左儿子去了，那么此时这个点没有子节点，我们要删除它只需要将 $rnk+1$ 的点的左儿子删除（改为 NIL）就可以了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Delete</span><span class="params">(NODE *rt,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> rnk=GetRank(rt,key);</span><br><span class="line">	NODE *p=Select(rnk<span class="number">-1</span>,NIL);</span><br><span class="line">	NODE *q=Select(rnk+<span class="number">1</span>,p);</span><br><span class="line">	q-&gt;ch[<span class="number">0</span>]=NIL;</span><br><span class="line">	Splay(q,NIL); <span class="comment">//这里最好 Splay 一下</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="『源代码』"><a href="#『源代码』" class="headerlink" title="『源代码』"></a>『源代码』</h2><p>打了包，直接可以用的~</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SPLAY</span>&#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">NODE</span>&#123;</span></span><br><span class="line">		NODE *ch[<span class="number">2</span>],*fa;</span><br><span class="line">		<span class="keyword">int</span> key,siz;</span><br><span class="line">	&#125;tre[N+<span class="number">7</span>];</span><br><span class="line">	NODE *root,*ncnt,*NIL;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Rebuild</span><span class="params">()</span></span>&#123;</span><br><span class="line">		NIL=ncnt=&amp;tre[<span class="number">0</span>];</span><br><span class="line">		NIL-&gt;key=-INF;</span><br><span class="line">		root=NIL-&gt;ch[<span class="number">0</span>]=NIL-&gt;ch[<span class="number">1</span>]=NIL-&gt;fa=NIL;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> NODE *<span class="title">NewNode</span><span class="params">(<span class="keyword">int</span> _key)</span></span>&#123;</span><br><span class="line">		NODE *p=++ncnt;</span><br><span class="line">		p-&gt;fa=p-&gt;ch[<span class="number">0</span>]=p-&gt;ch[<span class="number">1</span>]=NIL;</span><br><span class="line">		p-&gt;key=_key;p-&gt;siz=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">PushUp</span><span class="params">(NODE *x)</span></span>&#123;x-&gt;siz=x-&gt;ch[<span class="number">0</span>]-&gt;siz+x-&gt;ch[<span class="number">1</span>]-&gt;siz+<span class="number">1</span>;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Rotate</span><span class="params">(NODE *x)</span></span>&#123;</span><br><span class="line">		NODE *y=x-&gt;fa;</span><br><span class="line">		<span class="keyword">int</span> dir=(y-&gt;ch[<span class="number">0</span>]==x); <span class="comment">//1 ZIG;2 ZAG</span></span><br><span class="line">		x-&gt;fa=y-&gt;fa;<span class="keyword">if</span>(y-&gt;fa!=NIL) y-&gt;fa-&gt;ch[y-&gt;fa-&gt;ch[<span class="number">1</span>]==y]=x;</span><br><span class="line">		y-&gt;ch[!dir]=x-&gt;ch[dir];<span class="keyword">if</span>(x-&gt;ch[dir]!=NIL) x-&gt;ch[dir]-&gt;fa=y;</span><br><span class="line">		x-&gt;ch[dir]=y;y-&gt;fa=x;</span><br><span class="line">		<span class="keyword">if</span>(root==y) root=x;</span><br><span class="line">		PushUp(y);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Splay</span><span class="params">(NODE *x,NODE *rt)</span></span>&#123;</span><br><span class="line">		NODE *y,*z;</span><br><span class="line">		<span class="keyword">while</span>(x-&gt;fa!=rt)&#123;</span><br><span class="line">			y=x-&gt;fa;z=y-&gt;fa;</span><br><span class="line">			<span class="keyword">if</span>(z==rt) Rotate(x);</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">if</span>((z-&gt;ch[<span class="number">0</span>]==y)^(y-&gt;ch[<span class="number">0</span>]==x)) Rotate(x);</span><br><span class="line">				<span class="keyword">else</span> Rotate(y);</span><br><span class="line">				Rotate(x);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(NODE *&amp;rt,NODE *pre,<span class="keyword">int</span> _key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(rt==NIL)&#123;</span><br><span class="line">			rt=NewNode(_key);rt-&gt;fa=pre;</span><br><span class="line">			Splay(rt,NIL);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		rt-&gt;siz++;</span><br><span class="line">		<span class="keyword">int</span> dir=(_key&gt;rt-&gt;key);</span><br><span class="line">		Insert(rt-&gt;ch[dir],rt,_key);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">NODE *<span class="title">Find</span><span class="params">(NODE *rt,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(rt==NIL) <span class="keyword">return</span> NIL;</span><br><span class="line">		NODE *p;</span><br><span class="line">		<span class="keyword">if</span>(key==rt-&gt;key)&#123;</span><br><span class="line">			p=rt-&gt;ch[<span class="number">0</span>];</span><br><span class="line">			<span class="keyword">while</span>(p-&gt;ch[<span class="number">0</span>]!=NIL &amp;&amp; p-&gt;key==key) rt=p,p=p-&gt;ch[<span class="number">0</span>];</span><br><span class="line">			Splay(rt,NIL);</span><br><span class="line">			<span class="keyword">return</span> rt;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(key&lt;rt-&gt;key) p=Find(rt-&gt;ch[<span class="number">0</span>],key);</span><br><span class="line">		<span class="keyword">else</span> p=Find(rt-&gt;ch[<span class="number">1</span>],key);</span><br><span class="line">		<span class="keyword">if</span>(p==NIL) p=rt,Splay(rt,NIL);</span><br><span class="line">		<span class="keyword">return</span> p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> NODE *<span class="title">FindPre</span><span class="params">(NODE *rt,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        NODE *p;</span><br><span class="line">        <span class="keyword">if</span>(rt==NIL) <span class="keyword">return</span> NIL;</span><br><span class="line">        <span class="keyword">if</span>(key&gt;rt-&gt;key)&#123;</span><br><span class="line">            p=FindPre(rt-&gt;ch[<span class="number">1</span>],key);</span><br><span class="line">            <span class="keyword">if</span>(p==NIL) p=rt,Splay(p,NIL);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> p=FindPre(rt-&gt;ch[<span class="number">0</span>],key);</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> NODE *<span class="title">FindNxt</span><span class="params">(NODE *rt,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        NODE *p;</span><br><span class="line">        <span class="keyword">if</span>(rt==NIL) <span class="keyword">return</span> NIL;</span><br><span class="line">        <span class="keyword">if</span>(key&lt;rt-&gt;key)&#123;</span><br><span class="line">            p=FindNxt(rt-&gt;ch[<span class="number">0</span>],key);</span><br><span class="line">            <span class="keyword">if</span>(p==NIL) p=rt,Splay(p,NIL);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> p=FindNxt(rt-&gt;ch[<span class="number">1</span>],key);</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="function">NODE *<span class="title">FindMinMax</span><span class="params">(NODE *rt,<span class="keyword">bool</span> Min_Max)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(rt==NIL) <span class="keyword">return</span> NIL;</span><br><span class="line">		NODE *p=rt;</span><br><span class="line">		<span class="keyword">while</span>(p-&gt;ch[Min_Max]!=NIL) p=p-&gt;ch[Min_Max];</span><br><span class="line">		Splay(p,NIL);</span><br><span class="line">		<span class="keyword">return</span> p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">GetRank</span><span class="params">(NODE *rt,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(rt==NIL) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(key&gt;rt-&gt;key) <span class="keyword">return</span> rt-&gt;ch[<span class="number">0</span>]-&gt;siz+<span class="number">1</span>+GetRank(rt-&gt;ch[<span class="number">1</span>],key);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> GetRank(rt-&gt;ch[<span class="number">0</span>],key);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">NODE *<span class="title">Select</span><span class="params">(<span class="keyword">int</span> rnk,NODE *rt)</span></span>&#123;</span><br><span class="line">		NODE *p=root;</span><br><span class="line">		<span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line"><span class="comment">//			PushDown(p);</span></span><br><span class="line">			<span class="keyword">if</span>(rnk==p-&gt;ch[<span class="number">0</span>]-&gt;siz+<span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">if</span>(rnk&lt;p-&gt;ch[<span class="number">0</span>]-&gt;siz+<span class="number">1</span>) p=p-&gt;ch[<span class="number">0</span>];</span><br><span class="line">			<span class="keyword">else</span> rnk-=p-&gt;ch[<span class="number">0</span>]-&gt;siz+<span class="number">1</span>,p=p-&gt;ch[<span class="number">1</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		Splay(p,rt);</span><br><span class="line">		<span class="keyword">return</span> p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Delete</span><span class="params">(NODE *rt,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> rnk=GetRank(rt,key);</span><br><span class="line">		NODE *p=Select(rnk<span class="number">-1</span>,NIL);</span><br><span class="line">		NODE *q=Select(rnk+<span class="number">1</span>,p);</span><br><span class="line">		q-&gt;ch[<span class="number">0</span>]=NIL;</span><br><span class="line">		Splay(q,NIL);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a><strong>The End</strong></h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a><strong>Thanks for reading!</strong></h4><p>Email: <a href="mailto:lucky_glass@foxmail.com">lucky_glass@foxmail.com</a> ，欢迎提问~</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2019/OldVer9/" title="学习笔记 - SPLAY">http://luckyglass.github.io/2019/OldVer9/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/BZOJ/" rel="tag"><i class="fa fa-tag"></i> -BZOJ-</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-SPLAY/" rel="tag"><i class="fa fa-tag"></i> 数据结构-SPLAY</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/OldVer7/" rel="prev" title="学习笔记 - 矩阵加速构造矩阵">
+      <i class="fa fa-chevron-left"></i> 学习笔记 - 矩阵加速构造矩阵
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/OldVer14/" rel="next" title="软件笔记 - 各类冷门函数细解">
+      软件笔记 - 各类冷门函数细解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#『算法简述』"><span class="nav-text">『算法简述』</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『理论依据简述』"><span class="nav-text">『理论依据简述』</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『结构』"><span class="nav-text">『结构』</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『Rotate旋转-amp-Splay伸展』"><span class="nav-text">『Rotate旋转 &amp; Splay伸展』</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#「单旋」"><span class="nav-text">「单旋」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「双旋」"><span class="nav-text">「双旋」</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「Splay伸展」"><span class="nav-text">「Splay伸展」</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『NewNode新建节点-amp-Insert插入』"><span class="nav-text">『NewNode新建节点 &amp; Insert插入』</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『Find查找值-amp-FindPre前驱-amp-FindNxt后继-amp-FindMaxMin极值』"><span class="nav-text">『Find查找值 &amp; FindPre前驱 &amp; FindNxt后继 &amp; FindMaxMin极值』</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#「Find查找特定值」【基于二叉排序树的性质】"><span class="nav-text">「Find查找特定值」【基于二叉排序树的性质】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「FindPre查找前驱-amp-FindNxt查找后继」【基于二叉排序树的性质】"><span class="nav-text">「FindPre查找前驱 &amp; FindNxt查找后继」【基于二叉排序树的性质】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「FindMinMax-查找极值」【基于二叉排序树的性质】"><span class="nav-text">「FindMinMax 查找极值」【基于二叉排序树的性质】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『Select查找排名第k个-amp-GetRank查找给定值排名』"><span class="nav-text">『Select查找排名第k个 &amp; GetRank查找给定值排名』</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#「Select查找排名第k的点」【基于二叉排序树的性质】"><span class="nav-text">「Select查找排名第k的点」【基于二叉排序树的性质】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「GetRank查找给定值排名」【基于二叉排序树的性质】"><span class="nav-text">「GetRank查找给定值排名」【基于二叉排序树的性质】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『Delete删除给定值节点』【基于二叉排序树的性质】"><span class="nav-text">『Delete删除给定值节点』【基于二叉排序树的性质】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#『源代码』"><span class="nav-text">『源代码』</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-End"><span class="nav-text">The End</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共234.7k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
