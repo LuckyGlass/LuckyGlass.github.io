@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="几个比较好用的函数……之前在其他博客上看不懂…… MessageBox() ; kbhit() 等~">
+  <meta name="description" content="几个比较好用的函数……之前在其他博客上看不懂……MessageBox() ; kbhit() 等~">
 <meta property="og:type" content="article">
 <meta property="og:title" content="软件笔记 - 各类冷门函数细解">
 <meta property="og:url" content="http://luckyglass.github.io/2019/OldVer14/">
 <meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
-<meta property="og:description" content="几个比较好用的函数……之前在其他博客上看不懂…… MessageBox() ; kbhit() 等~">
+<meta property="og:description" content="几个比较好用的函数……之前在其他博客上看不懂……MessageBox() ; kbhit() 等~">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://luckyglass.github.io/2019/OldVer14/image1.png">
 <meta property="og:image" content="http://luckyglass.github.io/2019/OldVer14/image2.png">
@@ -273,44 +273,27 @@
 
       
         <blockquote>
-<p>几个比较好用的函数……之前在其他博客上看不懂……<br>
-MessageBox() ; kbhit() 等~</p>
+<p>几个比较好用的函数……之前在其他博客上看不懂……<br>MessageBox() ; kbhit() 等~</p>
 </blockquote>
 <a id="more"></a>
 <hr>
-<h2 id="■题外话■">■题外话■</h2>
-<p>总觉得作为一个志向远大的 coder （٩(◕‿◕｡)۶），我觉得单单只会做题是不够的所以我开始尝试自己编写软件！初入道的我并不知道C++其实并不太适合编写软件……但是我决定开始尝试，那么写代码之前当然需要了解一些函数啊（幸好C++自带了一大堆函数）。<br>
-于是我开始上网找资料。没想到这些函数竟然大多数都是“冷门函数”，很多都搜不到，经过大量实验，我终于找到了一些函数的使用技巧，这里和大家分享一下！</p>
+<h2 id="■题外话■"><a href="#■题外话■" class="headerlink" title="■题外话■"></a>■题外话■</h2><p>总觉得作为一个志向远大的 coder （٩(◕‿◕｡)۶），我觉得单单只会做题是不够的所以我开始尝试自己编写软件！初入道的我并不知道C++其实并不太适合编写软件……但是我决定开始尝试，那么写代码之前当然需要了解一些函数啊（幸好C++自带了一大堆函数）。<br>于是我开始上网找资料。没想到这些函数竟然大多数都是“冷门函数”，很多都搜不到，经过大量实验，我终于找到了一些函数的使用技巧，这里和大家分享一下！</p>
 <hr>
-<h2 id="■冷门函数■">■冷门函数■</h2>
-<p>1.MessageBox()</p>
+<h2 id="■冷门函数■"><a href="#■冷门函数■" class="headerlink" title="■冷门函数■"></a>■冷门函数■</h2><p>1.MessageBox()</p>
 <ul>
-<li>头文件：“windows.h”</li>
-<li>作用：弹出一个窗口**（在关闭这个窗口前，主程序处于暂停状态，不会执行之后的语句）**</li>
+<li>头文件：”windows.h”</li>
+<li>作用：弹出一个窗口<strong>（在关闭这个窗口前，主程序处于暂停状态，不会执行之后的语句）</strong></li>
 <li>使用方法：Message(HWND,LPCSTR,LPCSTR,UINT)</li>
-<li>返回值(int)：不同按键返回不同值-“确定”=1，“取消”=2，“终止”=3，“重试”=4，“忽略”=5，“是”=6，“否”=7</li>
-<li>UINT 是windows系统的提示窗属性——由C++头文件&quot;windows.h&quot;中的define宏定义，主要有以下类型：<br>
-MB_COMPOSITE（<strong>终止提示</strong>） “终止”、“重试”、“忽略” 3个按钮；<br>
-MB_APPLMODAL（<strong>普通</strong>） “确定” 按钮；<br>
-MB_CUR_MAX（<strong>确认</strong>） “确定”、“取消” 2个按钮；<br>
-MB_ICONASTERISK（<strong>提示</strong>） “确定” 按钮，带有 提示图标；<br>
-MB_ICONERROR（<strong>错误</strong>） “确定” 按钮，带有 错误图标；<br>
-MB_ICONEXCLAMATION（<strong>警告</strong>） “确认” 按钮，带有 警告图标；<br>
-MB_ICONQUESTION（<strong>问题</strong>） “确认” 按钮，带有 问题图标；<br>
-MB_RETRYCANCEL（<strong>重试提示</strong>） “重试”、“取消” 2个按钮；<br>
-MB_RIGHT（<strong>右对齐窗口</strong>） “确定” 按钮；<br>
-MB_RTLREADING（<strong>标题右对齐</strong>） “确定” 按钮；<br>
-MB_USEGLYPHCHARS（<strong>判断</strong>） “是”、“否” 2个按钮；<br>
-MB_YESNOCANCEL（<strong>带取消判断</strong>） “是”、“否”、“取消” 3个按钮；</li>
+<li>返回值(int)：不同按键返回不同值-“确定”=1，”取消”=2，”终止”=3，”重试”=4，”忽略”=5，”是”=6，”否”=7</li>
+<li>UINT 是windows系统的提示窗属性——由C++头文件”windows.h”中的define宏定义，主要有以下类型：<br>MB_COMPOSITE（<strong>终止提示</strong>） “终止”、”重试”、”忽略” 3个按钮；<br>MB_APPLMODAL（<strong>普通</strong>） “确定” 按钮；<br>MB_CUR_MAX（<strong>确认</strong>） “确定”、”取消” 2个按钮；<br>MB_ICONASTERISK（<strong>提示</strong>） “确定” 按钮，带有 提示图标；<br>MB_ICONERROR（<strong>错误</strong>） “确定” 按钮，带有 错误图标；<br>MB_ICONEXCLAMATION（<strong>警告</strong>） “确认” 按钮，带有 警告图标；<br>MB_ICONQUESTION（<strong>问题</strong>） “确认” 按钮，带有 问题图标；<br>MB_RETRYCANCEL（<strong>重试提示</strong>） “重试”、”取消” 2个按钮；<br>MB_RIGHT（<strong>右对齐窗口</strong>） “确定” 按钮；<br>MB_RTLREADING（<strong>标题右对齐</strong>） “确定” 按钮；<br>MB_USEGLYPHCHARS（<strong>判断</strong>） “是”、”否” 2个按钮；<br>MB_YESNOCANCEL（<strong>带取消判断</strong>） “是”、”否”、”取消” 3个按钮；</li>
 <li>HWND - 这个作者真的没有搞懂，但是可以用NULL来代替</li>
 <li>LPCSTR 是C风格的字符串（字符数组），第一个是内容，第二个是标题，好像不能用中文字符</li>
-<li>示例：</li>
+<li>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MessageBox(NULL,&quot;Are you clever?&quot;,&quot;Title&quot;,MB_USEGLYPHCHARS);</span><br></pre></td></tr></table></figure>
+<img src="/2019/OldVer14/image1.png" alt="image1"></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MessageBox(NULL,&quot;Are you clever?&quot;,&quot;Title&quot;,MB_USEGLYPHCHARS);</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/OldVer14/image1.png" alt="image1"></p>
 <p>2.kbhit()</p>
 <ul>
-<li>头文件：“conio.h”</li>
+<li>头文件：”conio.h”</li>
 <li>作用：检测输入流是否为空（<strong>不一定是当前是否有按键！</strong>）</li>
 <li>返回值(bool)：不为空=true，空=false</li>
 <li>示例：</li>
@@ -320,78 +303,53 @@ MB_YESNOCANCEL（<strong>带取消判断</strong>） “是”、“否”、“
 <li>警告：<strong>如果在kbhit()后不读入，将会一直返回true</strong></li>
 </ul>
 <hr>
-<h2 id="■下面是一些自定义的函数■">■下面是一些自定义的函数■</h2>
-<p>1.KEY_DOWN(VK_NONAME)</p>
+<h2 id="■下面是一些自定义的函数■"><a href="#■下面是一些自定义的函数■" class="headerlink" title="■下面是一些自定义的函数■"></a>■下面是一些自定义的函数■</h2><p>1.KEY_DOWN(VK_NONAME)</p>
 <ul>
 <li>用途：判断<strong>当前这一瞬间</strong>是否按下某一个特殊按键，包括持续按下</li>
 <li>定义方式：define 宏定义</li>
 <li>返回值：按下返回1，否则返回0</li>
-<li>头文件：“windows.h”</li>
-<li>代码：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) &amp; 0x8000) ? 1:0)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>VK_NONAME：<br>
-一种系统常量，代表一个特殊按键（比如“F1”）<br>
-常见的有 ①VK_F1~VK_F24 指 F1~F24；②VK_BACK 指 退格键(Backspace)；③VK_SHIFT 指 上档键(Shift)；④MOUSE_MOVED和MOUSE_EVENT 分别指 鼠标右键、鼠标左键；⑤MOUSE_WHEELED 指 鼠标中键（滚轮），“按下”不包括滚动滚轮</li>
+<li>头文件：”windows.h”</li>
+<li>代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) &amp; 0x8000) ? 1:0)</span><br></pre></td></tr></table></figure></li>
+<li>VK_NONAME：<br>一种系统常量，代表一个特殊按键（比如“F1”）<br>常见的有 ①VK_F1~VK_F24 指 F1~F24；②VK_BACK 指 退格键(Backspace)；③VK_SHIFT 指 上档键(Shift)；④MOUSE_MOVED和MOUSE_EVENT 分别指 鼠标右键、鼠标左键；⑤MOUSE_WHEELED 指 鼠标中键（滚轮），“按下”不包括滚动滚轮</li>
 <li>注意：<strong>该函数运行速度特别快，比如运行下面程序时，按下一次可能会输出很多次，原因是检测到按下键的时间段内函数返回true</strong></li>
-<li>示例：</li>
-</ul>
+<li><p>示例：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">	<span class="keyword">if</span>(KEY_DOWN(MOUSE_MOVED))</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"1"</span>);</span><br></pre></td></tr></table></figure>
 <p>2.gotoxy(int x,int y)</p>
-<ul>
-<li>用途：转到以程序面板左上角为原点的第x行、第y列（<strong>不是以窗口右上角为原点！</strong>）</li>
+</li>
+<li><p>用途：转到以程序面板左上角为原点的第x行、第y列（<strong>不是以窗口右上角为原点！</strong>）</p>
+</li>
 <li>定义方式：函数定义</li>
 <li>返回值：void</li>
-<li>头文件：“windows.h”</li>
-<li>代码：</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gotoxy</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	COORD c;</span><br><span class="line">	c.X=y;c.Y=x;</span><br><span class="line">	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
+<li>头文件：”windows.h”</li>
+<li>代码：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gotoxy</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	COORD c;</span><br><span class="line">	c.X=y;c.Y=x;</span><br><span class="line">	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>注意：<strong>x,y由0开始</strong></li>
-<li>示例：</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">10</span>;j++)</span><br><span class="line">        gotoxy(i,<span class="number">2</span>*j),<span class="built_in">printf</span>(<span class="string">"%02d"</span>,i+j);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>运行效果：<br>
-<img src="/2019/OldVer14/image2.png" alt="image2"></li>
+<li>示例：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">10</span>;j++)</span><br><span class="line">        gotoxy(i,<span class="number">2</span>*j),<span class="built_in">printf</span>(<span class="string">"%02d"</span>,i+j);</span><br></pre></td></tr></table></figure></li>
+<li>运行效果：<br><img src="/2019/OldVer14/image2.png" alt="image2"></li>
 </ul>
 <p>3.color(int a)</p>
 <ul>
 <li>用途：从下一个输出开始，以给定的颜色输出（不会直接改变窗口中所有的颜色）</li>
 <li>定义方式：函数定义</li>
 <li>返回值：void</li>
-<li>头文件：“windows.h”</li>
-<li>代码：</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">color</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
+<li>头文件：”windows.h”</li>
+<li>代码：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">color</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>a: 一个16进制数，共2位，第一位为字体颜色，第二位为背景颜色（eg:A8 是 亮绿为背景，深灰为字体颜色）</li>
-<li>示例：</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">16</span>;i++) <span class="comment">//字体</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">16</span>;j++) <span class="comment">//背景</span></span><br><span class="line">			color(j*<span class="number">16</span>+i),<span class="built_in">printf</span>(<span class="string">"@"</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>运行效果：<br>
-<img src="/2019/OldVer14/image3.png" alt="image3"></li>
+<li>示例：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">16</span>;i++) <span class="comment">//字体</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">16</span>;j++) <span class="comment">//背景</span></span><br><span class="line">			color(j*<span class="number">16</span>+i),<span class="built_in">printf</span>(<span class="string">"@"</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行效果：<br><img src="/2019/OldVer14/image3.png" alt="image3"></li>
 </ul>
 <p>4.GetPos(POINT &amp;pt)</p>
 <ul>
 <li>用途：获取鼠标在<strong>窗口</strong>中的位置（字符）</li>
 <li>定义方式：函数定义</li>
 <li>返回值：void（获取结果储存在pt里）</li>
-<li>头文件：“windows.h”</li>
-<li>代码：</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetPos</span><span class="params">(POINT &amp;pt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HWND hwnd=GetForegroundWindow();</span><br><span class="line">	GetCursorPos(&amp;pt);</span><br><span class="line">	ScreenToClient(hwnd,&amp;pt);</span><br><span class="line">	</span><br><span class="line">	pt.y=pt.y/<span class="number">16</span>,pt.x=pt.x/<span class="number">8</span>;</span><br><span class="line">	<span class="comment">//这一段是获取鼠标当前处于窗口中第几个字符</span></span><br><span class="line">	<span class="comment">//因为默认设定一个字符高16像素，宽8像素，将横纵坐标分别除去8、16就可以得到位置</span></span><br><span class="line">	<span class="comment">//也可以选择删除这一段，就可以获取像素点的位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
+<li>头文件：”windows.h”</li>
+<li>代码：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetPos</span><span class="params">(POINT &amp;pt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HWND hwnd=GetForegroundWindow();</span><br><span class="line">	GetCursorPos(&amp;pt);</span><br><span class="line">	ScreenToClient(hwnd,&amp;pt);</span><br><span class="line">	</span><br><span class="line">	pt.y=pt.y/<span class="number">16</span>,pt.x=pt.x/<span class="number">8</span>;</span><br><span class="line">	<span class="comment">//这一段是获取鼠标当前处于窗口中第几个字符</span></span><br><span class="line">	<span class="comment">//因为默认设定一个字符高16像素，宽8像素，将横纵坐标分别除去8、16就可以得到位置</span></span><br><span class="line">	<span class="comment">//也可以选择删除这一段，就可以获取像素点的位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>注意：<strong>函数仅返回当前窗口下鼠标的位置，即使鼠标不在程序运行窗口，而在其他打开的窗口中，也会返回在那一个窗口的位置</strong></li>
-<li>示例：</li>
+<li>示例：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;conio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetPos</span><span class="params">(POINT &amp;pt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HWND hwnd=GetForegroundWindow();</span><br><span class="line">	GetCursorPos(&amp;pt);</span><br><span class="line">	ScreenToClient(hwnd,&amp;pt);</span><br><span class="line">	pt.y=pt.y/<span class="number">16</span>,pt.x=pt.x/<span class="number">8</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gotoxy</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	COORD c;</span><br><span class="line">	c.X=y;c.Y=x;</span><br><span class="line">	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	gotoxy(<span class="number">10</span>,<span class="number">5</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"D"</span>);</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		POINT mouse;</span><br><span class="line">		GetPos(mouse);</span><br><span class="line">		<span class="keyword">if</span>(mouse.y==<span class="number">10</span> &amp;&amp; mouse.x==<span class="number">5</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*只要鼠标移动到D的位置就结束程序*/</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;conio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetPos</span><span class="params">(POINT &amp;pt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HWND hwnd=GetForegroundWindow();</span><br><span class="line">	GetCursorPos(&amp;pt);</span><br><span class="line">	ScreenToClient(hwnd,&amp;pt);</span><br><span class="line">	pt.y=pt.y/<span class="number">16</span>,pt.x=pt.x/<span class="number">8</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gotoxy</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	COORD c;</span><br><span class="line">	c.X=y;c.Y=x;</span><br><span class="line">	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	gotoxy(<span class="number">10</span>,<span class="number">5</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"D"</span>);</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		POINT mouse;</span><br><span class="line">		GetPos(mouse);</span><br><span class="line">		<span class="keyword">if</span>(mouse.y==<span class="number">10</span> &amp;&amp; mouse.x==<span class="number">5</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*只要鼠标移动到D的位置就结束程序*/</span></span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="The-End"><strong>The End</strong></h2>
-<h4 id="Thanks-for-reading"><strong>Thanks for reading!</strong></h4>
-<p>Email: <a href="mailto:lucky_glass@foxmail.com">lucky_glass@foxmail.com</a> ，欢迎提问~</p>
+<h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a><strong>The End</strong></h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a><strong>Thanks for reading!</strong></h4><p>Email: lucky_glass@foxmail.com ，欢迎提问~</p>
 
     </div>
 
@@ -569,7 +527,7 @@ MB_YESNOCANCEL（<strong>带取消判断</strong>） “是”、“否”、“
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共251.4k字</span>
+  <span class="post-count">博客全站共230.6k字</span>
 </div>
 
         

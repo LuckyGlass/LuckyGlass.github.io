@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="&gt; 原文 Codeforces By andreyv 不完全翻译原文，但是大多数内容来自原文">
+  <meta name="description" content="&gt; 原文 Codeforces By andreyv不完全翻译原文，但是大多数内容来自原文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搬运 - GCC 更多编译警告">
 <meta property="og:url" content="http://luckyglass.github.io/2019/19Nov10thArt2/">
 <meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
-<meta property="og:description" content="&gt; 原文 Codeforces By andreyv 不完全翻译原文，但是大多数内容来自原文">
+<meta property="og:description" content="&gt; 原文 Codeforces By andreyv不完全翻译原文，但是大多数内容来自原文">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-11-10T06:21:35.000Z">
 <meta property="article:modified_time" content="2019-11-10T16:01:18.513Z">
@@ -269,15 +269,13 @@
 
       
         <blockquote>
-<p><strong>&gt; 原文</strong> <a href="https://codeforces.com/blog/entry/15547" target="_blank" rel="noopener"><code>Codeforces</code></a> By <strong><a href="https://codeforces.com/profile/andreyv" target="_blank" rel="noopener">andreyv</a></strong><br>
-不完全翻译原文，但是大多数内容来自原文</p>
+<p><strong>> 原文</strong> <a href="https://codeforces.com/blog/entry/15547" target="_blank" rel="noopener"><code>Codeforces</code></a> By <strong><a href="https://codeforces.com/profile/andreyv" target="_blank" rel="noopener">andreyv</a></strong><br>不完全翻译原文，但是大多数内容来自原文</p>
 </blockquote>
 <a id="more"></a>
 <hr>
 <p>对于大多数 OIer，GCC/G++ 编译选项是比较常用的，比如 <code>-O2</code> 开启 O2 优化、<code>-Wl,--stack=xxx</code> 扩栈之类的……</p>
 <p>但是 GCC 编译器有一个缺陷，它默认“所有程序员编写的代码都是正确的”。事实上，一些不经意犯的小错误常常会让我们花费很久的时间调试。</p>
-<h2 id="Part1-初识-Wall">Part1. 初识 <code>-Wall</code></h2>
-<p>对于这一点，GCC开发者写了这样一个编译选项 —— 经常会用到的*<u><strong>编译选项 <code>-Wall</code></strong></u>*，是我觉得最好用的编译选项！它可以分析一些可能错误的代码，并给出 <code>[Warning]</code> 提示，比如：</p>
+<h2 id="Part1-初识-Wall"><a href="#Part1-初识-Wall" class="headerlink" title="Part1. 初识 -Wall"></a>Part1. 初识 <code>-Wall</code></h2><p>对于这一点，GCC开发者写了这样一个编译选项 —— 经常会用到的<em><u><strong>编译选项 <code>-Wall</code></strong></u></em>，是我觉得最好用的编译选项！它可以分析一些可能错误的代码，并给出 <code>[Warning]</code> 提示，比如：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> a=<span class="number">1l</span>l&lt;&lt;<span class="number">60</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,a);</span><br></pre></td></tr></table></figure>
 <p>这个程序如果不开 <code>-Wall</code>，编译器并不会报错，然而显然是不符合我们的意思的。如果开了 <code>-Wall</code>，编译信息中就会出现：</p>
 <blockquote>
@@ -285,52 +283,41 @@
 </blockquote>
 <p>这只是 <code>-Wall</code> 的一个功能，它还能检测：</p>
 <ol>
-<li>
-<p><code>scanf/printf</code> 中参数与占位符数量不等：</p>
+<li><p><code>scanf/printf</code> 中参数与占位符数量不等：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">显示：</span></span><br><span class="line"><span class="comment">[Warning] too many arguments for format [-Wformat-extra-args]</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>没有使用的局部变量（如果你定义了一个局部变量，但是从来没有使用），显示</p>
+<li><p>没有使用的局部变量（如果你定义了一个局部变量，但是从来没有使用），显示</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Warning] unused variable &#39;b&#39; [-Wunused-variable]</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><u><em>调用未赋值的局部变量</em></u>，显示</p>
+<li><p><u><em>调用未赋值的局部变量</em></u>，显示</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Warning] &#39;a&#39; is used uninitialized in this function [-Wuninitialized]</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>调用了变量但是没有进行操作（有时候zz就忘了打运算符）比如想打 <code>cnt++;</code>，然后只写了 <code>cnt;</code><br>
-会显示：</p>
+<li><p>调用了变量但是没有进行操作（有时候zz就忘了打运算符）比如想打 <code>cnt++;</code>，然后只写了 <code>cnt;</code><br>会显示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Warning] statement has no effect [-Wunused-value]</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>好像还有一些奇怪的东西……</p>
+<li><p>好像还有一些奇怪的东西……</p>
 </li>
 </ol>
-<h2 id="Part2-深入了解-GCC-编译警告">Part2. 深入了解 GCC 编译警告</h2>
-<blockquote>
+<h2 id="Part2-深入了解-GCC-编译警告"><a href="#Part2-深入了解-GCC-编译警告" class="headerlink" title="Part2. 深入了解 GCC 编译警告"></a>Part2. 深入了解 GCC 编译警告</h2><blockquote>
 <p>以下内容多来自原文，有删改</p>
 </blockquote>
 <ol>
-<li>
-<p><code>-pedantic -std=...</code>，随着 C++ 的不断翻新，C++98 到 C++17 的差别是非常大的；</p>
+<li><p><code>-pedantic -std=...</code>，随着 C++ 的不断翻新，C++98 到 C++17 的差别是非常大的；</p>
 <p>为了增强不同版本的兼容性，有一些较新版本的写法在旧版本上编译也会判为正确。但是考试的时候，编译一般是比较严格的，就可能发生 CE 的惨案……</p>
 <p>有了这行命令会发生什么？比如下面这种写法在 C++11 及以上的版本是支持的，但是 C++98 并不支持，但是编译器并不认为错误：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NODE</span>&#123;</span><span class="keyword">int</span> x;&#125;n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	n=(NODE)&#123;<span class="number">1</span>&#125;;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果加上 <code>-pedantic -std=c++98</code>，就会警告：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Warning] ISO C++ forbids compound-literals [-Wpedantic]</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><strong><code>-Wshadow</code></strong>，也是非常有用了 —— <em><u>用于警告变量重名</u></em>，比如：</p>
+<li><p><strong><code>-Wshadow</code></strong>，也是非常有用了 —— <em><u>用于警告变量重名</u></em>，比如：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>会警告：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Warning] declaration of &#39;n&#39; shadows a global declaration [-Wshadow]</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><code>-Wfloat-equal</code>，C++ 的 <code>double</code> 有精度误差，因此很少会用 <code>a==b</code> 来判断两个 double 变量相等，而是用 <code>ABS(a-b)&lt;EPS</code>。加上这条命令，如果你用了 <code>==</code> 判断 double 变量相等，会警告：</p>
+<li><p><code>-Wfloat-equal</code>，C++ 的 <code>double</code> 有精度误差，因此很少会用 <code>a==b</code> 来判断两个 double 变量相等，而是用 <code>ABS(a-b)&lt;EPS</code>。加上这条命令，如果你用了 <code>==</code> 判断 double 变量相等，会警告：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Warning] comparing floating point with &#x3D;&#x3D; or !&#x3D; is unsafe [-Wfloat-equal]</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><strong><code>-Wconversion</code></strong>，<u><em>警告运算过程中变量的类型转换</em></u>，这些运算往往是隐性的 —— 比如一个 <code>long long</code> 乘上 <code>int</code>，<code>int</code> 会被转成 <code>long long</code>。然而这些转换是我们不知道的，加上这条命令可以让它显示出来，比如：</p>
+<li><p><strong><code>-Wconversion</code></strong>，<u><em>警告运算过程中变量的类型转换</em></u>，这些运算往往是隐性的 —— 比如一个 <code>long long</code> 乘上 <code>int</code>，<code>int</code> 会被转成 <code>long long</code>。然而这些转换是我们不知道的，加上这条命令可以让它显示出来，比如：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> a=<span class="number">1l</span>l&lt;&lt;<span class="number">40</span>;</span><br><span class="line"><span class="keyword">int</span> x=a*<span class="number">23</span>;</span><br></pre></td></tr></table></figure>
 <p>警告：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Warning] conversion to &#39;int&#39; from &#39;long long int&#39; may alter its value [-Wconversion]</span><br></pre></td></tr></table></figure>
@@ -341,9 +328,7 @@
 <p>reader 们可以在文章顶部找到原文的超链接，顺便在 Codeforces 上给原博主点个赞~</p>
 </blockquote>
 <hr>
-<h2 id="The-End">The End</h2>
-<h4 id="Thanks-for-reading">Thanks for reading!</h4>
-
+<h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4>
     </div>
 
     
@@ -520,7 +505,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共251.4k字</span>
+  <span class="post-count">博客全站共230.6k字</span>
 </div>
 
         
