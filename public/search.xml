@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>前行 - 2020校内常规测试Ⅲ</title>
+    <url>/2020/20Apr5thArt1/</url>
+    <content><![CDATA[<blockquote>
+<p>7</p>
+</blockquote>
+<h2 id><a href="#" class="headerlink" title></a><a id="more"></a></h2><h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><h3 id="A-信心-confidence"><a href="#A-信心-confidence" class="headerlink" title="A. 信心(confidence)"></a>A. 信心(confidence)</h3><p>有 $n$ 个整数 $x_1$ 到 $x_n$，其中第 $i$ 个整数 $x_i$ 满足限制：$x_i\in[l_i,r_i]$。<br><br>给定 $[l_i,r_i]$，求 $\sum\limits_{i=1}^nx_i^2$ 有多少种取值。</p>
+<p><strong>数据规模</strong>：$1\le n,l_i,r_i\le100$。</p>
+<h3 id="B-传统-tradition"><a href="#B-传统-tradition" class="headerlink" title="B. 传统(tradition)"></a>B. 传统(tradition)</h3><p>有一台生产硬币的机器。它总共可以生产 $n$ 种硬币，第 $i$ 种硬币价值 $v_i$。<br>这台机器每天可以生产若干种硬币，但是同种硬币只能生产一枚，且对于第 $i$ 种硬币，不能连续 $d_i$ 天生产这种硬币。<br><br>另外，机器最多连续工作 $k$ 天。在机器不工作的那天不能生产任何硬币。</p>
+<p>求 $m$ 天最多能够生产总价值为多少的硬币。</p>
+<p><strong>数据规模</strong>：$1\le m\le10^9$，$1\le n\le1000$，$2\le k\le 1000$，$2\le d[i]\le10^9$，$1\le v[i]\le1000 $</p>
+<h3 id="C-改编-adaptation"><a href="#C-改编-adaptation" class="headerlink" title="C. 改编(adaptation)"></a>C. 改编(adaptation)</h3><p>3只兔子在一条无限长的树桩上游戏，树桩编号为 $\dots,-2,-1,0,1,2,\dots$。一开始树桩 $a,b,c$ 上有兔子。<br><br>一轮游戏的规则为：选定一只兔子A和另一只兔子B，记剩下那只兔子为C；则A以B的位置为对称轴跳到对称的点上，要求<u>不会跳过C</u>（到达的位置也不能有兔子）。</p>
+<p>现在进行 $k$ 轮游戏，再给出终止状态——在树桩 $a’,b’,c’$ 上有兔子。问有多少种不同的游戏的方案。两种方案不同当且仅当存在至少一个中间局面不同。</p>
+<p><strong>数据规模</strong>：$1\le k\le100$，所有位置的绝对值不超过 $10^{18}$。</p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><h3 id="A-信心-confidence-1"><a href="#A-信心-confidence-1" class="headerlink" title="A. 信心(confidence)"></a>A. 信心(confidence)</h3><p>我们发现这道题并没有一个非常好的思路，就一个 $O(n^5)$ 的 DP。也就是 <code>f[i][S]</code> 表示 $\sum\limits_{j=1}^ix_j^2=S$ 是否可能，其中 $S$ 的规模是 $O(n^3)$ 的（存状态就滚动数组优化第一维）。转移也非常暴力：枚举 $x_i\in[l_i,r_i]$，然后类似背包问题转移。</p>
+<p>顶多想到转移可以用 FFT/NTT 稍微优化它一下……理论复杂度 $O(n^4\log n)$，实测 TLE 爆零了 :(</p>
+<p>然后我们发现这个DP其实是一个bool状态的……值为 false/true……0/1——二进制？如果对 bitset 熟悉的话，它的超级小的常数可以帮上大忙。<br><br>转移用左移来实现，赋值用按位或实现。</p>
+<p>复杂度 $O(n^5w)$，比 $10^8$ 稍微大一点，开上 O2 没有问题。</p>
+<h3 id="B-传统-tradition-1"><a href="#B-传统-tradition-1" class="headerlink" title="B. 传统(tradition)"></a>B. 传统(tradition)</h3><p>（坑在这儿，不会再填了 QwQ）</p>
+<h3 id="C-改编-adaptation-1"><a href="#C-改编-adaptation-1" class="headerlink" title="C. 改编(adaptation)"></a>C. 改编(adaptation)</h3><blockquote>
+<p>现场有人做过跳跳棋这道题，然后差一点 AC……</p>
+</blockquote>
+<p>我们可以把一轮游戏分为两类：</p>
+<ol>
+<li>中间往外跳</li>
+<li>两边往中间跳</li>
+</ol>
+<p>对于一个局面 $a,b,c$，$b$ 一定可以往两边跳，而 $a$ 和 $c$ 最多只有一个能往中间跳：</p>
+<ol>
+<li>$b-a&gt;c-b$：$c$ 可以往中间跳；</li>
+<li>$b-a&lt;c-b$：$a$ 可以往中间跳；</li>
+<li>$b-a=c-b$：两边都不能往中间跳。</li>
+</ol>
+<p>这像什么？画张图：<br><img src="/2020/20Apr5thArt1/png1.png" alt="png1"></p>
+<p>一个二叉树？准确的说，一个无限大的二叉树森林。</p>
+<p>那么我们就是要求有多少条从 $(a,b,c)$ 到 $(a’,b’,c’)$ 的长度为 $k$ 的路径（边可以重复）。</p>
+<p>我们先求在二叉树上 $(a,b,c)$ 和 $(a’,b’,c’)$ 的 LCA，并且求出它们分别与 LCA 的距离；当然如果它们不在一棵二叉树上就不存在这样的路径。</p>
+<blockquote>
+<p>Hint. 求LCA直接暴力枚举两个状态分别向上爬多少步就行，因为限制了路径长度，所以如果有解，那 LCA 肯定最多只用向上爬 $k$ 步。也就是 $O(k^2)$ 计算 LCA。</p>
+</blockquote>
+<p>然后定义 DP 状态：<code>f[i][j][l]</code> 表示“当前状态与 LCA 的距离为 i，结束状态与 LCA 的距离为 j，长度为 l 的路径的方案数”</p>
+<blockquote>
+<p>Tab. 定义里的 LCA 是指当前状态与结束状态的 LCA，不是起始状态与结束状态的 LCA！</p>
+</blockquote>
+<p>考虑转移，即当前状态向父亲/两个儿子移动，分3种情况：</p>
+<ol>
+<li>i&gt;0：此时无论当前状态怎么移动，LCA都不会变<ul>
+<li>向父亲移动 <code>f[i][j][l]+=f[i-1][j][l-1]</code></li>
+<li>向<u>任意</u>一个儿子移动 <code>f[i][j][l]+=f[i+1][j][l-1]*2</code></li>
+</ul>
+</li>
+<li>i=0且j&gt;0：此时当前状态就是 LCA，注意当前状态移动后 LCA 的变化！<ul>
+<li>向父亲移动 <code>f[0][j][l]+=f[0][j+1][l-1]</code></li>
+<li>向结束状态的子树移动 <code>f[0][j][l]+=f[0][j-1][l-1]</code></li>
+<li>向另一个子树移动 <code>f[0][j][l]+=f[1][j][l-1]</code></li>
+</ul>
+</li>
+<li>i=0且j=0：此时两个状态重合，仍然注意 LCA 的变化！<ul>
+<li>向父亲移动 <code>f[0][0][l]+=f[0][1][l-1]</code></li>
+<li>向<u>任意</u>儿子移动 <code>f[0][0][l]+=2*f[1][0][l-1]</code></li>
+</ul>
+</li>
+</ol>
+<p>那么就用记忆化搜索即可，可以加上几个剪枝，详见代码。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><h3 id="A-confidence-cpp"><a href="#A-confidence-cpp" class="headerlink" title="A. confidence.cpp"></a>A. confidence.cpp</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">100</span>,VAL=<span class="number">1e6</span>+<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">bitset</span>&lt;VAL&gt; dp[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RI</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">0</span>,c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>)&#123;</span><br><span class="line">        a=(a&lt;&lt;<span class="number">1</span>)+(a&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>;</span><br><span class="line">        c=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// freopen("input.txt","r",stdin);</span></span><br><span class="line">    freopen(<span class="string">"confidence.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"confidence.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    n=RI();</span><br><span class="line">    dp[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        dp[i&amp;<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> lef=RI(),rig=RI();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=lef;k&lt;=rig;k++)</span><br><span class="line">            dp[i&amp;<span class="number">1</span>]|=dp[i&amp;<span class="number">1</span>^<span class="number">1</span>]&lt;&lt;(k*k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,(<span class="keyword">int</span>)dp[n&amp;<span class="number">1</span>].count());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="B-tradition-cpp"><a href="#B-tradition-cpp" class="headerlink" title="B. tradition.cpp"></a>B. tradition.cpp</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1000</span>,VAL=<span class="number">1e6</span>,M=<span class="number">1e6</span>+<span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> day,bet,n;</span><br><span class="line"><span class="keyword">int</span> ibet[N+<span class="number">3</span>],ival[N+<span class="number">3</span>],val[N+<span class="number">3</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[M+N+<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RI</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">0</span>,c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>)&#123;</span><br><span class="line">        a=(a&lt;&lt;<span class="number">1</span>)+(a&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>;</span><br><span class="line">        c=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    freopen(<span class="string">"tradition.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"tradition.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    day=RI();bet=RI();n=RI();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        ival[i]=RI();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        ibet[i]=RI();</span><br><span class="line">    day++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> l=<span class="number">2</span>;l&lt;=bet;l++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">            val[l]+=((l<span class="number">-1</span>)-(l<span class="number">-1</span>)/ibet[i])*ival[i];</span><br><span class="line">        dp[l]=val[l];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=M;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=bet/<span class="number">2</span>+<span class="number">1</span>;j&lt;=bet;j++)</span><br><span class="line">            dp[i+j]=max(dp[i+j],dp[i]+val[j]);</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> mx=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=bet;i++)</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">1l</span>l*val[i]*mx&gt;<span class="number">1l</span>l*val[mx]*i)</span><br><span class="line">            mx=i;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=day &amp;&amp; i&lt;=M;i++)</span><br><span class="line">        ans=max(ans,dp[i]+<span class="number">1l</span>l*((day-i)/mx)*val[mx]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="C-adaptation-cpp"><a href="#C-adaptation-cpp" class="headerlink" title="C. adaptation.cpp"></a>C. adaptation.cpp</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">110</span>,MOD=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Sub</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Add</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Mul</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*a*b%MOD;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">STATUS</span>&#123;</span></span><br><span class="line">    ll a,b,c;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">MoveFa</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(a+c==b*<span class="number">2</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(b-a&gt;c-b) c=<span class="number">2</span>*b-c,swap(b,c);</span><br><span class="line">        <span class="keyword">else</span> a=<span class="number">2</span>*b-a,swap(a,b);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">ll <span class="title">RI</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ll num=<span class="number">0</span>;<span class="keyword">int</span> sig=<span class="number">1</span>,ch=getchar();</span><br><span class="line">        <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;ch) sig=ch==<span class="string">'-'</span>? <span class="number">-1</span>:sig,ch=getchar();</span><br><span class="line">        <span class="keyword">while</span>(<span class="string">'0'</span>&lt;=ch &amp;&amp; ch&lt;=<span class="string">'9'</span>) num=(num&lt;&lt;<span class="number">1</span>)+(num&lt;&lt;<span class="number">3</span>)+ch-<span class="string">'0'</span>,ch=getchar();</span><br><span class="line">        <span class="keyword">return</span> num*sig;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Read</span><span class="params">()</span></span>&#123;</span><br><span class="line">        a=RI();b=RI();c=RI();</span><br><span class="line">        <span class="keyword">if</span>(a&gt;b) swap(a,b);</span><br><span class="line">        <span class="keyword">if</span>(a&gt;c) swap(a,c);</span><br><span class="line">        <span class="keyword">if</span>(b&gt;c) swap(b,c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> ==(STATUS B)&#123;<span class="keyword">return</span> a==B.a &amp;&amp; b==B.b &amp;&amp; c==B.c;&#125;</span><br><span class="line">&#125;S,T;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cas,rot,stp,dS,dT;</span><br><span class="line"><span class="keyword">int</span> f[N+<span class="number">3</span>][N+<span class="number">3</span>][N+<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">LCA</span><span class="params">()</span></span>&#123;</span><br><span class="line">    rot=stp;</span><br><span class="line">    STATUS copS,copT=T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=stp;i++)</span><br><span class="line">        <span class="keyword">if</span>(!copT.MoveFa())&#123;</span><br><span class="line">            rot=i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    copS=S;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=stp;i++)&#123;</span><br><span class="line">        copT=T;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=stp;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(copT==copS)&#123;</span><br><span class="line">                dS=i;dT=j;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            copT.MoveFa();</span><br><span class="line">        &#125;</span><br><span class="line">        copS.MoveFa();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DP</span><span class="params">(<span class="keyword">int</span> DS,<span class="keyword">int</span> DT,<span class="keyword">int</span> LE)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[DS][DT][LE]&gt;=<span class="number">0</span>) <span class="keyword">return</span> f[DS][DT][LE];</span><br><span class="line">    <span class="keyword">if</span>(DS+DT&gt;LE || DT&gt;rot) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> &amp;ret=f[DS][DT][LE]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(DS&gt;<span class="number">0</span>) ret=Add(DP(DS<span class="number">-1</span>,DT,LE<span class="number">-1</span>),Mul(DP(DS+<span class="number">1</span>,DT,LE<span class="number">-1</span>),<span class="number">2</span>));</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(DT&gt;<span class="number">0</span>) ret=Add(DP(<span class="number">0</span>,DT+<span class="number">1</span>,LE<span class="number">-1</span>),Add(DP(<span class="number">1</span>,DT,LE<span class="number">-1</span>),DP(<span class="number">0</span>,DT<span class="number">-1</span>,LE<span class="number">-1</span>)));</span><br><span class="line">    <span class="keyword">else</span> ret=Add(DP(<span class="number">0</span>,<span class="number">1</span>,LE<span class="number">-1</span>),Mul(DP(<span class="number">1</span>,<span class="number">0</span>,LE<span class="number">-1</span>),<span class="number">2</span>));</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    freopen(<span class="string">"adaptation.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"adaptation.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span> f);f[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    S.Read();T.Read();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;stp);</span><br><span class="line">    <span class="keyword">if</span>(LCA()) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,DP(dS,dT,stp));</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"0\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h3 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h3><script type="math/tex; mode=display">
+\begin{split}
+&“\ 烽烟乱世中怀抱勇气\ 慨然孤掷手中棋\\
+&\ \ \ 放浪形骸的江湖岁月\ 滚烫一点一滴\\
+&\ \ \ 原来生死之交这命题\ 是毋庸许什么豪言誓语\\
+&\ \ \ 就并辔奔放下一世风雨\ ”\\
+&——《易水决》 By\ 泠鸢yousa
+\end{split}</script>]]></content>
+      <categories>
+        <category>前行</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>贪心</tag>
+        <tag>算法效率-STL</tag>
+        <tag>动态规划-树形DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OI - Seatfriends (Topcoder)</title>
     <url>/2020/20Apr3rdArt1/</url>
     <content><![CDATA[<blockquote>
@@ -878,8 +966,8 @@ f_4=\frac12f_0+f_3\\
         <tag>数据结构-线段树</tag>
         <tag>动态规划</tag>
         <tag>数学-期望</tag>
-        <tag>数学-高斯消元</tag>
         <tag>-GYM-</tag>
+        <tag>数学-高斯消元</tag>
       </tags>
   </entry>
   <entry>
@@ -3386,8 +3474,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>数据结构-线段树</tag>
+        <tag>数学</tag>
         <tag>贪心</tag>
         <tag>算法效率-STL</tag>
         <tag>数据结构-链表</tag>
@@ -3859,8 +3947,8 @@ ans_2=\sum_{i=0}^n\sum_{j=0}^n(-1)^{i+j}C_n^iC_n^j\times 2^{(n-i)(n-j)}\times f_
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数据结构-并查集</tag>
         <tag>算法效率-分块</tag>
+        <tag>数据结构-并查集</tag>
         <tag>-Codeforces-</tag>
         <tag>算法效率-STL</tag>
       </tags>
@@ -5554,9 +5642,9 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
         <category>前行</category>
       </categories>
       <tags>
+        <tag>数据结构-线段树</tag>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
-        <tag>数据结构-线段树</tag>
         <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
         <tag>算法效率-扫描线</tag>
@@ -5932,8 +6020,8 @@ g(i,j)=\sum_{t=1}^kg(i-t,j)\cdot b_t</script><p>然后就可以构造矩阵了�
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>数据结构-线段树</tag>
+        <tag>数学</tag>
         <tag>模拟</tag>
         <tag>算法效率-分块</tag>
       </tags>
