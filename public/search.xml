@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>小教程 - 编写 lemon 的 SPJ 文件</title>
+      <link href="/2020/20Apr9thArt1/"/>
+      <url>/2020/20Apr9thArt1/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>也是为了自己备忘</p></blockquote><a id="more"></a><hr><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="# 基本格式"></a># 基本格式</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;...&gt; //bits/stdc++.h</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> arc,<span class="keyword">char</span> **fil)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>与平时我们写的 main 函数不同的是，它带了两个参数（当然这两个参数的命名随便你）。实际上第一个int参数没有用，重要的是 <code>**fil</code> 参数。</p><p>它其实是二维字符数组，总共包含 6 个<strong>字符串</strong>（lemon 只会用到 5 个），其中：</p><ol><li><code>fil[1]</code> 是输入文件；</li><li><code>fil[2]</code> 是选手的输出文件；</li><li><code>fil[3]</code> 是提供的正确输出文件（因为支持SPJ，选手的输出和提供的输出可能不同，但是仍然正确）；</li><li><code>fil[5]</code> 是输出分值的文件；</li><li><code>fil[6]</code> 是输出错误信息的文件；</li></ol><blockquote><p>注意到 <code>fil[4]</code> 是没用的</p></blockquote><h2 id="输入输出"><a href="#输入输出" class="headerlink" title="# 输入输出"></a># 输入输出</h2><p>然后我们可以用 C++ 的 fstream 库里的 <code>ifstream,ofstream</code>（文件输入流，文件输出流）来对多个文件进行输入输出。</p><p>用法如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ifstream <span class="title">in</span><span class="params">(inputfile)</span></span>; <span class="comment">//inputfile是一个字符串（char[]），储存输入文件的路径</span></span><br><span class="line"><span class="keyword">int</span> num;</span><br><span class="line">in&gt;&gt;num; <span class="comment">//和 cin 的用法是一样的</span></span><br><span class="line"><span class="function">ofstream <span class="title">out</span><span class="params">(outputfile)</span></span>; <span class="comment">//outputfile 也是 char[]，储存输出文件的路径</span></span><br><span class="line">out&lt;&lt;num; <span class="comment">//和 cout 的用法一样</span></span><br></pre></td></tr></table></figure></p><p>那么我们可以这样实现 SPJ 的读入输出：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;...&gt; //bits/stdc++.h</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> arc,<span class="keyword">char</span> **fil)</span></span>&#123;</span><br><span class="line">    ifstream in(fil[1]),MYout(fil[2]),ACout(fil[3]);</span><br><span class="line">    ofstream score(fil[5]),info(fil[6]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><hr><h2 id="获得结果"><a href="#获得结果" class="headerlink" title="# 获得结果"></a># 获得结果</h2><p>然后就在基础框架中加入你判断输出是否正确的代码，如果输出正确，则在 <code>score</code> 中输出 <code>1</code>，否则输出 <code>0</code>。</p><blockquote><p>由于 lemon 已经在内部决定了每个测试点的分值，那么输出 1 则代表该测试点得全分，0 则得 0 分。</p></blockquote><p>如果你要提示选手是怎么答案错误的，可以在 <code>info</code> 中输出信息，将会在 lemon 的每个数据点的具体评测状态后显示 <code>(...)</code>，点开就可以看到错误信息。</p><blockquote><p>不要写中文，会乱码</p></blockquote><hr><h2 id="简单的例子"><a href="#简单的例子" class="headerlink" title="# 简单的例子"></a># 简单的例子</h2><p>输入数 a,b ，第一行输出 a*b，第二行输出 int 范围内任意小于 a 的数。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> arc,<span class="keyword">char</span> **fil)</span></span>&#123;</span><br><span class="line">    ifstream in(fil[1]),MYout(fil[2]),ACout(fil[3]);</span><br><span class="line">    ofstream score(fil[5]),info(fil[6]);</span><br><span class="line">    <span class="keyword">int</span> a,b;in&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="keyword">int</span> acout;ACout&gt;&gt;acout;</span><br><span class="line">    <span class="keyword">int</span> myout;MYout&gt;&gt;myout;</span><br><span class="line">    <span class="comment">//第一个数是确定的</span></span><br><span class="line">    <span class="keyword">if</span>(acout!=myout)&#123;info&lt;&lt;<span class="string">"a*b wrong!"</span>;score&lt;&lt;<span class="string">"0"</span>;<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">    <span class="keyword">int</span> small;MYout&gt;&gt;small;</span><br><span class="line">    <span class="keyword">if</span>(small&gt;=a)&#123;info&lt;&lt;<span class="string">"second answer wrong!"</span>;score&lt;&lt;<span class="string">"0"</span>;<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">    score&lt;&lt;<span class="string">"1"</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><hr><h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h3 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h3><script type="math/tex; mode=display">\begin{split}&“\ 来来\ 我最亲爱的朋友\\&\ \ \ 请听我\ 最后\ 遗言\\&\ \ \ 我不想就这样沦陷\ 迷失在黑夜\\&\ \ \ 我想燃烧这生命\ 就算再壮烈\\&\\&\ \ \ 拜拜\ 我最牵挂的朋友\\&\ \ \ 请不要\ 为我\ 悼念\\&\ \ \ 如果风降临在春天\ 请与我相见\\&\ \ \ 这世界\ 我仍依恋\\&\ \ \ 「请你将我救援」\ ”\\&——《绝体绝命》\ By\ 阿良良木健\end{split}</script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>前行 - 2020校内常规测试Ⅳ</title>
       <link href="/2020/20Apr7thArt1/"/>
       <url>/2020/20Apr7thArt1/</url>
@@ -80,9 +93,9 @@
       
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 数学-组合数 </tag>
+            
+            <tag> 动态规划 </tag>
             
             <tag> -Topcoder- </tag>
             
@@ -140,11 +153,11 @@
       
         <tags>
             
+            <tag> 数学 </tag>
+            
             <tag> 动态规划 </tag>
             
             <tag> 算法效率-二分查找 </tag>
-            
-            <tag> 数学 </tag>
             
             <tag> 贪心 </tag>
             
@@ -408,13 +421,13 @@
             
             <tag> 数据结构-线段树 </tag>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 数学-期望 </tag>
             
-            <tag> -GYM- </tag>
+            <tag> 动态规划 </tag>
             
             <tag> 数学-高斯消元 </tag>
+            
+            <tag> -GYM- </tag>
             
         </tags>
       
@@ -501,9 +514,9 @@
             
             <tag> 图论-二分图 </tag>
             
-            <tag> -Codeforces- </tag>
-            
             <tag> 图论-树链剖分 </tag>
+            
+            <tag> -Codeforces- </tag>
             
             <tag> 图论-网络流-最小割 </tag>
             
@@ -813,9 +826,9 @@
             
             <tag> 动态规划 </tag>
             
-            <tag> 图论-树 </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> 图论-树 </tag>
             
             <tag> 数学-容斥 </tag>
             
@@ -895,9 +908,9 @@
       
         <tags>
             
-            <tag> 动态规划-状压DP </tag>
-            
             <tag> 图论-最短路 </tag>
+            
+            <tag> 动态规划-状压DP </tag>
             
             <tag> -Codeforces- </tag>
             
@@ -1003,9 +1016,9 @@
       
         <tags>
             
-            <tag> 算法效率-二分查找 </tag>
-            
             <tag> 算法效率-倍增 </tag>
+            
+            <tag> 算法效率-二分查找 </tag>
             
             <tag> 贪心 </tag>
             
@@ -1090,9 +1103,9 @@
             
             <tag> 算法效率-哈希 </tag>
             
-            <tag> 动态规划-换根DP </tag>
-            
             <tag> -HDU- </tag>
+            
+            <tag> 动态规划-换根DP </tag>
             
         </tags>
       
@@ -1117,9 +1130,9 @@
       
         <tags>
             
-            <tag> 动态规划-换根DP </tag>
-            
             <tag> -HDU- </tag>
+            
+            <tag> 动态规划-换根DP </tag>
             
             <tag> 数学-博弈论 </tag>
             
@@ -1231,9 +1244,9 @@
       
         <tags>
             
-            <tag> 数学-期望 </tag>
-            
             <tag> 数学-组合数 </tag>
+            
+            <tag> 数学-期望 </tag>
             
             <tag> -AtCoder- </tag>
             
@@ -1260,9 +1273,9 @@
       
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 数学 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
       
@@ -1378,9 +1391,9 @@
       
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 数学-组合数 </tag>
+            
+            <tag> 动态规划 </tag>
             
             <tag> 贪心 </tag>
             
@@ -1428,9 +1441,9 @@
       
         <tags>
             
-            <tag> 数据结构-线段树 </tag>
-            
             <tag> 数学 </tag>
+            
+            <tag> 数据结构-线段树 </tag>
             
             <tag> 贪心 </tag>
             
@@ -1871,9 +1884,9 @@
       
         <tags>
             
-            <tag> 数学-素性测试 </tag>
-            
             <tag> 数学-大数分解 </tag>
+            
+            <tag> 数学-素性测试 </tag>
             
             <tag> 数学-EXGCD </tag>
             
@@ -2088,11 +2101,11 @@
       
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 数学-组合数 </tag>
             
             <tag> 数学 </tag>
+            
+            <tag> 动态规划 </tag>
             
             <tag> 数学-容斥 </tag>
             
@@ -2119,17 +2132,17 @@
       
         <tags>
             
-            <tag> 数据结构-线段树 </tag>
-            
             <tag> 图论-二分图 </tag>
             
             <tag> 数学 </tag>
             
-            <tag> 动态规划-状压DP </tag>
+            <tag> 数据结构-线段树 </tag>
             
             <tag> 贪心 </tag>
             
             <tag> 算法效率-扫描线 </tag>
+            
+            <tag> 动态规划-状压DP </tag>
             
         </tags>
       
@@ -2241,11 +2254,11 @@
       
         <tags>
             
+            <tag> 数学 </tag>
+            
             <tag> 数据结构-线段树 </tag>
             
             <tag> 模拟 </tag>
-            
-            <tag> 数学 </tag>
             
             <tag> 算法效率-分块 </tag>
             
@@ -2272,13 +2285,13 @@
       
         <tags>
             
-            <tag> 动态规划 </tag>
-            
-            <tag> 数学-期望 </tag>
-            
             <tag> 图论-二分图 </tag>
             
             <tag> 数学 </tag>
+            
+            <tag> 数学-期望 </tag>
+            
+            <tag> 动态规划 </tag>
             
             <tag> 算法效率-倍增 </tag>
             
@@ -2309,9 +2322,9 @@
             
             <tag> 模拟 </tag>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 数学-期望 </tag>
+            
+            <tag> 动态规划 </tag>
             
             <tag> 算法效率-矩阵加速 </tag>
             
@@ -2429,11 +2442,11 @@
       
         <tags>
             
-            <tag> 模拟 </tag>
-            
             <tag> 数学-组合数 </tag>
             
             <tag> 数学 </tag>
+            
+            <tag> 模拟 </tag>
             
             <tag> 算法效率-倍增 </tag>
             
@@ -2493,13 +2506,13 @@
       
         <tags>
             
-            <tag> 模拟 </tag>
-            
             <tag> 数学 </tag>
             
-            <tag> 动态规划-状压DP </tag>
+            <tag> 模拟 </tag>
             
             <tag> 贪心 </tag>
+            
+            <tag> 动态规划-状压DP </tag>
             
         </tags>
       
@@ -2605,11 +2618,11 @@
       
         <tags>
             
+            <tag> 贪心 </tag>
+            
             <tag> 动态规划-状压DP </tag>
             
             <tag> 图论-树 </tag>
-            
-            <tag> 贪心 </tag>
             
         </tags>
       
@@ -3027,11 +3040,11 @@
       
         <tags>
             
+            <tag> 数学 </tag>
+            
             <tag> 模拟 </tag>
             
             <tag> 动态规划 </tag>
-            
-            <tag> 数学 </tag>
             
             <tag> 贪心 </tag>
             
@@ -3160,9 +3173,9 @@
       
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 数学 </tag>
+            
+            <tag> 动态规划 </tag>
             
             <tag> 贪心 </tag>
             
@@ -3220,9 +3233,9 @@
       
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 数学 </tag>
+            
+            <tag> 动态规划 </tag>
             
             <tag> -Codeforces- </tag>
             
