@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="中间有几场感觉没什么必要写blog就咕了算了 ~ 另外，这场也只打算写 T1,T2 两道的博客（因为这两个是我现写的）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前行 - 2020常规赛Ⅸ">
+<meta property="og:url" content="http://luckyglass.github.io/2020/20Apr16thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="中间有几场感觉没什么必要写blog就咕了算了 ~ 另外，这场也只打算写 T1,T2 两道的博客（因为这两个是我现写的）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-16T13:24:45.000Z">
+<meta property="article:modified_time" content="2020-04-16T14:17:41.822Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="动态规划-换根DP">
+<meta property="article:tag" content="数据结构-树状数组">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://luckyglass.github.io/2020/20Apr16thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>前行 - 2020常规赛Ⅸ | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20Apr16thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前行 - 2020常规赛Ⅸ
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-16 21:24:45 / 修改时间：22:17:41" itemprop="dateCreated datePublished" datetime="2020-04-16T21:24:45+08:00">2020-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E8%A1%8C/" itemprop="url" rel="index"><span itemprop="name">前行</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Apr16thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Apr16thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>中间有几场感觉没什么必要写blog就咕了算了 ~</p>
+<p>另外，这场也只打算写 T1,T2 两道的博客（因为这两个是我现写的）</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="# 前言"></a># 前言</h2><p>虽然都是搬来的题，但是好像搬题也不轻松啊……纠结死了 QwQ</p>
+<p>所以干脆就来一场纠结的比赛算了……</p>
+<hr>
+<h2 id="题意"><a href="#题意" class="headerlink" title="# 题意"></a># 题意</h2><h3 id="T1-纠结的洗衣店-wash"><a href="#T1-纠结的洗衣店-wash" class="headerlink" title="T1. 纠结的洗衣店 wash"></a>T1. 纠结的洗衣店 wash</h3><p>有 $k$ 件衣服，$n$ 台洗衣机，$m$ 台烘干机。</p>
+<p>每件衣服需要先洗再烘干。一台洗衣机一次只能洗一件衣服，一台烘干机一次只能烘干一件衣服。</p>
+<p>第 $i$ 台洗衣机洗一件衣服要 $a_i$ 的时间，第 $i$ 台烘干机烘干一件衣服要 $b_i$ 的时间。</p>
+<p>求花费的最小时间。</p>
+<p><strong>数据规模</strong>：$1\le n,m\le10^5$，$1\le k\le10^5$，$0\le a_i,b_i\le10^9$。</p>
+<h3 id="T2-纠结的旅行-travel"><a href="#T2-纠结的旅行-travel" class="headerlink" title="T2. 纠结的旅行 travel"></a>T2. 纠结的旅行 travel</h3><p>一棵 $n$ 个节点的树，每条边 $e$ 有权值 $a_e,b_e$，每个点 $u$ 有权值 $c_u,d_u$。定义一条从 $s$ 出发的路径 $P$ 的权值为：</p>
+<script type="math/tex; mode=display">
+\sum_{e\in P}\min\{a_e+c_s,b_e+d_s\}</script><p>对于每个 $s$，求从 $s$ 出发的所有简单路径的权值之和（路径不能只含一个点）。</p>
+<p><strong>数据规模</strong>：$2\le n\le10^5$，$0\le a_e,b_e,c_u,d_u\le10^5$。</p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><h3 id="T1-wash"><a href="#T1-wash" class="headerlink" title="T1. wash"></a>T1. wash</h3><p>考虑如果只洗衣服怎么做（题目中也有这个的部分分）。<del>有一种强烈的感觉</del>可以贪心。</p>
+<p>但是怎么贪心？我们要让洗完所有衣服的时间——洗好最后一件衣服的时间最小。于是可以用堆维护<strong>当前这件衣服放在每台洗衣机中洗好的时间</strong>，当然要取这些值中最小的。</p>
+<p>稍微证明一下：维护 $t_i$ 表示当前这件衣服放进第 $i$ 台洗衣机洗完的时刻，显然 $t_i$ 是随着放入衣服而不断递增的。</p>
+<p>因此，由于所有衣服都是一样的，如果当前这件衣服取最小的 $t_x$ 是不优的，那么所有衣服此时取 $t_x$ 都是不优的，也就是说 $t_x$ 空着了。</p>
+<p>但是因为 $t_x$ 是现在 $t_i$ 中最小的，之后一定仍然是 $t_i$ 中最小的（因为 $t_i$ 只可能增加），显然对于最后一件衣服，取 $t_x$ 一定比取其他 $t_i$ 优。得证。</p>
+<p>这样可以得到第 $i$ 件衣服什么时候洗好，记为 $p_i$。</p>
+<p>再考虑有烘干机。</p>
+<p>我们惊奇地发现烘干机倒过来看就是洗衣机。于是可以“倒过来”用相同的贪心求出每件衣服什么时候烘干完，记为 $q_i$。</p>
+<p>于是把 $p_i,q_i$ 搭配一下，然后求 $\max\{p_i+q_i\}$ 就是最终答案。根据浅薄的贪心知识，显然把 $p_i$ 从小到大排序，$q_i$ 从大到小排序，然后匹配起来 $\max\{p_i+q_i\}$ 的值最小。</p>
+<h3 id="T2-travel"><a href="#T2-travel" class="headerlink" title="T2. travel"></a>T2. travel</h3><p>考虑一条边 $e$ 什么时候取 $a_e+c_s$ 或 $b_e+d_s$——当 $a_e+c_s\le b_e+d_s$ 时取 $a_e+c_s$，然后是一个常见套路——相同下标挪到一边，条件等价于 $a_e-b_e\le d_s-c_s$。</p>
+<p>于是维护一下 $a_e-b_e$，对于每个起点 $s$ 就知道该取什么值了。</p>
+<p>把现在的起点 $s$ 设为整棵树的根。在此意义下，定义 $siz_u$ 为 $u$ 的子树大小，$to_e$ 表示边 $e$ 的两端点中深度较大的一个，不难得到 $s$ 的答案：</p>
+<script type="math/tex; mode=display">
+\sum_{e\in E}siz_{to_e}\times \min\{a_e+c_s,b_e+d_s\}</script><p>按照之前的思路，分离一下：</p>
+<script type="math/tex; mode=display">
+\sum_{a_e-b_e\le d_s-c_s}siz_{to_e}\times(a_e+c_s)+\sum_{a_e-b_e>d_s-c_s}siz_{to_e}\times(b_e+d_s)</script><p>再分离成4部分</p>
+<script type="math/tex; mode=display">
+\begin{matrix}
+1:&\sum\limits_{a_e-b_e\le d_s-c_s}siz_{to_e}\times a_e\\
+2:&c_s\times\sum\limits_{a_e-b_e\le d_s-c_s}siz_{to_e}\\
+3:&\sum\limits_{a_e-b_e>d_s-c_s}siz_{to_e}\times b_e\\
+4:&d_s\times\sum\limits_{a_e-b_e>d_s-c_s}siz_{to_e}
+\end{matrix}</script><p>可见我们要维护 $siz_{to_e}\times a_e$,$siz_{to_e}\times b_e$,$siz_{to_e}$。这些大于小于该怎么维护？不难想到<strong>树状数组</strong>。</p>
+<p>又因为这道题的计算跟起点 $s$ ——树的根节点关系很大，于是可以用<strong>换根DP</strong>。每次换根只会有一个 $siz_{to_e}$ 发生改变，因此维护是 $O(\log n)$ 的，总的复杂度就是 $O(n\log n)$ 的。</p>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h3 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h3><script type="math/tex; mode=display">
+\begin{split}
+&“\ 如今连宣泄也遏制着呼吸\\
+&\ \ \ 咽喉里哽咽的言语\\
+&\ \ \ 我怨恨着所有的自己[你怨恨着所有的你]\\
+&\ \ \ 矛盾焦虑却难以自抑\\
+&\ \ \ 倘若是\\
+&\ \ \ 倘若顺服或知己知彼\\
+&\ \ \ 退让适应忽视内心\\
+&\ \ \ 偏执可曾让你窃喜\\
+&\ \ \ 徒劳无功障目自欺\\
+&\ \ \ 愚人自欺\ ”\\
+&——\text{《99°C 溺亡》By 三无MarBlue/漆柚/小五}
+\end{split}</script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2020/20Apr16thArt1/" title="前行 - 2020常规赛Ⅸ">http://luckyglass.github.io/2020/20Apr16thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"><i class="fa fa-tag"></i> 贪心</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%8D%A2%E6%A0%B9DP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-换根DP</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构-树状数组</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Apr13thArt1/" rel="prev" title="前行 - 2020校内常规赛Ⅶ">
+      <i class="fa fa-chevron-left"></i> 前行 - 2020校内常规赛Ⅶ
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text"># 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题意"><span class="nav-text"># 题意</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#T1-纠结的洗衣店-wash"><span class="nav-text">T1. 纠结的洗衣店 wash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T2-纠结的旅行-travel"><span class="nav-text">T2. 纠结的旅行 travel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#T1-wash"><span class="nav-text">T1. wash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T2-travel"><span class="nav-text">T2. travel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">138</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">95</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共251.3k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
