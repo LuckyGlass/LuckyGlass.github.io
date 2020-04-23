@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="感觉很熟悉，但是看到算法的时候又感觉比较陌生 可能是之前没学好 QwQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 - Johnson 不等式">
+<meta property="og:url" content="http://luckyglass.github.io/2020/20Apr18thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="感觉很熟悉，但是看到算法的时候又感觉比较陌生 可能是之前没学好 QwQ">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://luckyglass.github.io/2020/20Apr18thArt1/png1.png">
+<meta property="article:published_time" content="2020-04-18T07:50:28.000Z">
+<meta property="article:modified_time" content="2020-04-18T08:55:15.594Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="贪心-流水调度">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://luckyglass.github.io/2020/20Apr18thArt1/png1.png">
+
+<link rel="canonical" href="http://luckyglass.github.io/2020/20Apr18thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>学习笔记 - Johnson 不等式 | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20Apr18thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习笔记 - Johnson 不等式
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-18 15:50:28 / 修改时间：16:55:15" itemprop="dateCreated datePublished" datetime="2020-04-18T15:50:28+08:00">2020-04-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Apr18thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Apr18thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>感觉很熟悉，但是看到算法的时候又感觉比较陌生</p>
+<p>可能是之前没学好 QwQ</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="流水调度问题"><a href="#流水调度问题" class="headerlink" title="# 流水调度问题"></a># 流水调度问题</h2><p>有 $n$ 件物品、两台机器 $A,B$。第 $i$ 件物品需要先在 $A$ 上加工 $a_i$ 个单位时间，再在 $B$ 上加工 $b_i$ 个单位时间。机器每次只能处理一件物品。</p>
+<p>可以调整 $n$ 件物品的加工顺序，求最小时间。</p>
+<hr>
+<h2 id="算法理论"><a href="#算法理论" class="headerlink" title="# 算法理论"></a># 算法理论</h2><p>不难发现，最优的方案一定会使 $A,B$ 的“空闲”时间尽可能少。显然 $A$ 一定可以让它一直工作（直到所有物品在 $A$ 都加工完），于是只考虑 $B$ 的花费时间。</p>
+<p>我们可以通过若干次交换相邻两件物品的操作顺序来得到最优操作顺序（<strong>交换法</strong>）。不妨设当前两个相邻的物品为 $\{a_1,b_1\},\{a_2,b_2\}$。</p>
+<p>我们可以把 $\{a_1,b_1\}$ 排在前面的所有情况全都排出来，对应过来也就有了 $\{a_2,b_2\}$ 排在前面的所有情况：</p>
+<p><img src="/2020/20Apr18thArt1/png1.png" alt="png1"></p>
+<p>设 $\{a_1,b_1\}$ 在 A 上开始处理的时间为 $t_0$，$\{a_1,b_1\}$ 在 B 上开始处理的时间为 $\Delta t$，$\{a_2,b_2\}$ 在 B 上处理完的时间为 $T$。</p>
+<p>可以发现 $T=\max\{a_1+a_2,a_1+b_1,\Delta t+b_1\}+b_2+t_0$。</p>
+<p>那么同理，可以得到若先处理 $\{a_2,b_2\}$，则 $T’=\max\{a_1+a_2,a_2+b_2,\Delta t+b_2\}+b_1+t_0$。</p>
+<p>于是分类讨论——讨论 $a_1,a_2,b_1,b_2$ 中的最小值</p>
+<ol>
+<li><p>$a_1$ 为最小值：</p>
+<p>可得 $a_1+a_2\le a_2+b_2$，于是 $T’=\max\{a_2+b_2,\Delta t+b_2\}+b_1+t_0$；</p>
+<p>再变形，$T’=\max\{a_2+b_1,\Delta t+b_1\}+b_2+t_0$；</p>
+<p>又可得 $a_1+b_1\le a_2+b_1$，$a_1+a_2\le a_2+b_1$；</p>
+<p>所以 $\max\{a_1+a_2,a_2+b_1\}\le a_2+b_1$，则 $T\le T’$。</p>
+<p>因此可以证明 $\{a_1,b_1\}$ 先处理<strong>一定不会更差</strong>。</p>
+</li>
+<li><p>$a_2$ 为最小值：</p>
+<p>根据对称性，把 $a_1$ 最小的推导全部交换一下，可得结论：</p>
+<p>$\{a_2,b_2\}$ 先处理一定不会更差。</p>
+</li>
+<li><p>$b_1$ 为最小值：</p>
+<p>可得 $a_1+b_1\le a_1+a_2$，于是 $T’=\max\{a_1+a_2,\Delta t+b_1\}+b_2+t_0$；</p>
+<p>再变形：$T=\max\{a_1+a_2+b_2,\Delta t+b_1+b_2\}+t_0$；</p>
+<p>把 $T’$ 也变形一下：$T’=\max\{a_1+a_2+b_1,a_2+b_2+b_1,\Delta t+b_1+b_2\}+t_0$；</p>
+<p>因为 $a_1+a_2+b_1\le a_1+a_2+b_2$，$a_2+b_2+b_1\le a_1+a_2+b_2$；</p>
+<p>所以 $T\ge T’$，则 $\{a_2,b_2\}$ 先处理一定不会更差。</p>
+</li>
+<li><p>$b_2$ 为最小值：</p>
+<p>同理，根据对称性，$\{a_1,b_1\}$ 先处理一定不会更差。</p>
+</li>
+</ol>
+<hr>
+<h2 id="设计贪心"><a href="#设计贪心" class="headerlink" title="# 设计贪心"></a># 设计贪心</h2><p>从相邻两个考虑到整体——</p>
+<ol>
+<li>假如某个 $a_i$ 是 $a_1,a_2,\dots,a_n,b_1,b_2,\dots,b_n$ 的最小值，则 $\{a_i,b_i\}$ 根据之前的分析，可以一直往前挪，即应该第一个处理；</li>
+<li>假如某个 $b_i$ 是 $a_1,a_2,\dots,a_n,b_1,b_2,\dots,b_n$ 的最小值，则 $\{a_i,b_i\}$ 根据之前的分析，一直往后挪，即应该最后一个处理；</li>
+</ol>
+<p>因此，我们把所有 $a_1,a_2,\dots,a_n,b_1,b_2,\dots,b_n$ 作为 $S$，每次取出 $S$ 的最小值，若最小值是 $a_i$，则把 $\{a_i,b_i\}$ 放在前面；若是 $b_i$，则把 $\{a_i,b_i\}$ 放在后面。然后在 $S$ 中删掉 $a_i,b_i$。</p>
+<p>一直处理到结束。</p>
+<p>伪代码如下：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+1& S\leftarrow \{a_1,a_2,\dots,a_n,b_1,b_2,\dots,b_n\}\\
+2& P\leftarrow \varnothing\\ 
+3& L\leftarrow 1,R\leftarrow n\\
+4& \mathbf{while}\ S\neq \varnothing\\
+5& \qquad\mathbf{if}\ \min\{S\}\in\{a_i\}\\
+6& \qquad\mathbf{then}\ P_L\leftarrow \{a_i,b_i\},L\leftarrow L+1\\
+7& \qquad\mathbf{if} \min\{S\}\in\{b_i\}\\
+8& \qquad\mathbf{then}\ P_R\leftarrow\{a_i,b_i\},R\leftarrow R-1\\
+9& \qquad S\leftarrow S-\{a_i\}-\{b_i\}
+\end{array}</script><hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+&“\ 这一路上\ 韶华画你我模样\\
+&\ \ \ 披上戎装\ 不过为天下兴亡\\
+&\ \ \ 与子同袍\ 气吞河山见锋芒\\
+&\ \ \ 家国熙攘\ 待我浴血逐沙场\\
+&\\
+&\ \ \ 这一路上\ 岁月陪伴我成长\\
+&\ \ \ 握住月光\ 你是我心之所向\\
+&\ \ \ 势如破竹\ 浩荡间直上万丈\\
+&\ \ \ 哪怕逆风\ 也能够踏云乘浪\ ”\\
+&——《少年有为》\text{By 双笙(等)}
+\end{split}</script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2020/20Apr18thArt1/" title="学习笔记 - Johnson 不等式">http://luckyglass.github.io/2020/20Apr18thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E8%B4%AA%E5%BF%83-%E6%B5%81%E6%B0%B4%E8%B0%83%E5%BA%A6/" rel="tag"><i class="fa fa-tag"></i> 贪心-流水调度</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Apr17thArt1/" rel="prev" title="学习笔记 - 拟阵">
+      <i class="fa fa-chevron-left"></i> 学习笔记 - 拟阵
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/20Apr23rdArt1/" rel="next" title="前行 - 2020常规赛XI">
+      前行 - 2020常规赛XI <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#流水调度问题"><span class="nav-text"># 流水调度问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法理论"><span class="nav-text"># 算法理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计贪心"><span class="nav-text"># 设计贪心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共256.5k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
