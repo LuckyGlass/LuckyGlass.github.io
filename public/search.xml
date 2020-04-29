@@ -1,6 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>OI题解 - 游戏match (NOI Online Round2)</title>
+    <url>/2020/20Apr28thArt1/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p>WA?</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>有一棵 $n=2m$ 个点的树，树上每个节点要么是黑点要么是白点，且各有 $m$ 个。小 A 和小 B 在这棵树上进行 $m$ 轮游戏，每轮游戏，小 A 和小 B <strong>同时</strong>在树上选择一个<strong>之前未被选择的</strong>节点，小 A 只能选白点，小 B 只能选黑点。</p>
+<p>假如在一轮游戏中，小 A 选 $u$、小 B 选 $v$，如果 $u,v$ 之间存在祖先后代关系，则该轮游戏是“有效的”，否则为“平局”。</p>
+<p>对于每个 $i=0\text~m$，求有多少种游戏方案使得有效的轮数等于 $i$。</p>
+<p>两个游戏方案 $X,Y$ 不同当且仅当 $X$ 中存在一轮游戏，小 A 选了 $u$、小 B 选了 $v$，并且 $Y$ 中不存在任何一轮游戏，小 A 选了 $u$、小 B 选了 $v$。</p>
+<p><strong>数据规模</strong>：$1\le n\le 5000$，保证 $n$ 为偶数。</p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>显然要 DP……</p>
+<p>显然直接计算恰好 $i$ 轮有效游戏的方案数特别麻烦，不妨考虑计算大于等于 $i$ 轮有效游戏的方案数。这样定义有什么好处？我们发现如果是计算恰好 $i$ 轮游戏，我们不仅要决策哪几轮游戏是有效的，还要决策那些平局是怎样进行的（要保证除了我们决策到的有效游戏，其他游戏都是平局）……这样状态就复杂了</p>
+<blockquote>
+<p>>Tab. tly dalao 说可以定义状态 <code>f[u][i][j]</code> 表示 $u$ 的子树中有 $i$ 轮游戏有效、$j$ 轮游戏平局的方案数。</p>
+</blockquote>
+<p>而改了状态定义之后，我们可以只决策哪 $i$ 轮游戏是<strong>保证</strong>有效的，其他游戏只需要把剩下的点<strong>随便两两匹配</strong>，显然有效游戏的轮数只可能更多，也就是大于等于 $i$ 轮游戏有效。这样的话，状态就可以定义为 <code>g[u][i]</code> 表示 $u$ 的子树中，保证了至少有 $i$ 轮游戏有效的方案数。</p>
+<p>这就很像背包问题——其实就是<strong>树上背包</strong>。</p>
+<p>考虑从子树 $v$ 转移到节点 $u$：</p>
+<ol>
+<li>没有新增有效游戏：$g’_{u,i+j}\leftarrow g_{u,i}\times g_{v,j}$；</li>
+<li>新增了一个有效游戏：如何能够新增？只能是 $v$ 中的一个未匹配的节点和节点 $u$ 匹配（当然 $u,v$ 颜色不同），于是开心地发现还需要再增加一维状态——<code>g[u][i][0/1]</code> 最后的 0/1 表示 $u$ 现在是否已经匹配，如果没有匹配，就可以和 $v$ 中的一个未匹配的异色节点匹配。</li>
+</ol>
+<blockquote>
+<p>> Hint. 可以发现在更新 $u$ 的背包时，$v$ 子树中节点 $v$ 到底有没有被选并不重要</p>
+</blockquote>
+<p>既然更改了状态，那么重新梳理一下：</p>
+<ol>
+<li><p>没有新增有效游戏：</p>
+<script type="math/tex; mode=display">
+g'_{u,i+j,0}\leftarrow g_{u,i,0}\times(g_{v,j,0}+g_{v,j,1})\\
+g'_{u,i+j,1}\leftarrow g_{u,i,1}\times(g_{v,j,0}+g_{v,j,1})</script></li>
+<li><p>$u$ 与子树 $v$ 中未匹配的异色节点匹配（$cnt$ 是 $v$ 子树中与 $u$ 异色的未匹配节点的数量，这个先维护 $v$ 中黑白节点分别的数量然后直接计算）：</p>
+<script type="math/tex; mode=display">
+g'_{u,i+j+1,1}\leftarrow cnt\times g_{u,i,0}\times(g_{v,j,0}+g_{v,j,1})</script></li>
+</ol>
+<p>这样我们可以决策出“已经进行了恰好 $i$ 轮有效游戏”的方案数 $(g_{1,i,0}+g_{1,i,1})$ ，还要把剩下的 $m-i$ 轮游戏进行完。因为状态的定义是至少 $i$ 轮，那么剩下的 $m-i$ 轮游戏到底是有效还是平局其实没有关系了，所以只需要把剩下的 $m-i$ 个黑点和 $m-i$ 个白点随意匹配即可，不难发现方案数是 $(m-i)!$，把 $(g_{1,i,0}+g_{1,i,1})\times(m-i)!$ 记作 $h_i$。</p>
+<p>然后怎样通过 $g$ 倒回去求 $f$？显然一开始 $f_{1,m}=h_m$。不妨设我们现在已经求出了 $f_{1,i+1},f_{1,i+2},\dots,f_{1,m}$，要求 $f_{1,i}$。先给出结论：</p>
+<script type="math/tex; mode=display">
+h_i=\sum_{j=i}^mC_j^i f_{1,j}</script><p>什么意思呢？因为 $h_i$ 只是保证了已经有 $i$ 轮有效游戏，而 $f_{1,j}$ 是恰好进行了 $j$ 轮有效游戏，所以从 $f_{1,j}$ 的 $j$ 轮游戏中选出 $j$ 轮，就会被统计到 $h_i$ 中，因此 $f_{1,j}$ 对应的所有方案，在 $h_i$ 中实际上被计算了 $C_j^i$ 次。</p>
+<p>因此</p>
+<script type="math/tex; mode=display">
+f_{1,i}=h_i-\sum_{j=i+1}^mC_j^if_{1,j}</script><hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">5000</span>,MOD=<span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Add</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Sub</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Mul</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*a*b%MOD;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">QPow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(b)&#123;</span><br><span class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>) ret=Mul(ret,a);</span><br><span class="line">        a=Mul(a,a);</span><br><span class="line">        b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">char</span> sym[N+<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> fac[N+<span class="number">3</span>],inv[N+<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> f[N+<span class="number">3</span>][N+<span class="number">3</span>][<span class="number">2</span>],exf[N+<span class="number">3</span>],cnt[N+<span class="number">3</span>][<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> tmp[N+<span class="number">3</span>][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TREE</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to[N*<span class="number">2</span>+<span class="number">3</span>],nxt[N*<span class="number">2</span>+<span class="number">3</span>],head[N+<span class="number">3</span>],ncnt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p=++ncnt,q=++ncnt;</span><br><span class="line">        to[p]=v;nxt[p]=head[u];head[u]=p;</span><br><span class="line">        to[q]=u;nxt[q]=head[v];head[v]=q;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">operator</span> [](<span class="keyword">int</span> id)&#123;<span class="keyword">return</span> head[id];&#125;</span><br><span class="line">&#125;Tr;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">0</span>,c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>)&#123;</span><br><span class="line">        a=(a&lt;&lt;<span class="number">1</span>)+(a&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>;</span><br><span class="line">        c=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DP</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span>&#123;</span><br><span class="line">    cnt[u][sym[u]-<span class="string">'0'</span>]++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it=Tr[u];it;it=Tr.nxt[it])&#123;</span><br><span class="line">        <span class="keyword">int</span> v=Tr.to[it];</span><br><span class="line">        <span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">        DP(v,u);</span><br><span class="line">        cnt[u][<span class="number">0</span>]+=cnt[v][<span class="number">0</span>];</span><br><span class="line">        cnt[u][<span class="number">1</span>]+=cnt[v][<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> sizu=<span class="number">1</span>;</span><br><span class="line">    f[u][<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it=Tr[u];it;it=Tr.nxt[it])&#123;</span><br><span class="line">        <span class="keyword">int</span> v=Tr.to[it];</span><br><span class="line">        <span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">int</span> sizv=cnt[v][<span class="number">0</span>]+cnt[v][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=sizu/<span class="number">2</span>;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=sizv/<span class="number">2</span>;j++)&#123;</span><br><span class="line">                <span class="keyword">int</span> fvj=Add(f[v][j][<span class="number">0</span>],f[v][j][<span class="number">1</span>]);</span><br><span class="line">                tmp[i+j][<span class="number">0</span>]=Add(tmp[i+j][<span class="number">0</span>],Mul(f[u][i][<span class="number">0</span>],fvj));</span><br><span class="line">                tmp[i+j][<span class="number">1</span>]=Add(tmp[i+j][<span class="number">1</span>],Mul(f[u][i][<span class="number">1</span>],fvj));</span><br><span class="line">                <span class="keyword">int</span> tim=cnt[v][!(sym[u]-<span class="string">'0'</span>)];</span><br><span class="line">                tim-=j;</span><br><span class="line">                <span class="keyword">if</span>(tim&lt;<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">                tmp[i+j+<span class="number">1</span>][<span class="number">1</span>]=Add(tmp[i+j+<span class="number">1</span>][<span class="number">1</span>],Mul(f[u][i][<span class="number">0</span>],Mul(fvj,tim)));</span><br><span class="line">            &#125;</span><br><span class="line">        sizu+=sizv;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=sizu/<span class="number">2</span>;i++)&#123;</span><br><span class="line">            f[u][i][<span class="number">0</span>]=tmp[i][<span class="number">0</span>];</span><br><span class="line">            f[u][i][<span class="number">1</span>]=tmp[i][<span class="number">1</span>];</span><br><span class="line">            tmp[i][<span class="number">0</span>]=tmp[i][<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">return</span> Mul(fac[b],Mul(inv[a],inv[b-a]));&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=Ri();</span><br><span class="line">    fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) fac[i]=Mul(fac[i<span class="number">-1</span>],i);</span><br><span class="line">    inv[n]=QPow(fac[n],MOD<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--) inv[i]=Mul(inv[i+<span class="number">1</span>],i+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,sym+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">        Tr.AddEdge(Ri(),Ri());</span><br><span class="line">    DP(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n/<span class="number">2</span>;i++)</span><br><span class="line">        exf[i]=Mul(Add(f[<span class="number">1</span>][i][<span class="number">0</span>],f[<span class="number">1</span>][i][<span class="number">1</span>]),fac[n/<span class="number">2</span>-i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n/<span class="number">2</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;i;j++)</span><br><span class="line">            exf[j]=Sub(exf[j],Mul(exf[i],C(j,i)));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n/<span class="number">2</span>;i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,exf[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4>]]></content>
+      <categories>
+        <category>OI题解</category>
+      </categories>
+      <tags>
+        <tag>-洛谷-</tag>
+        <tag>数学-容斥</tag>
+        <tag>动态规划-树形DP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OI题解 - 序列(sequence) [NOI Online Round2]</title>
+    <url>/2020/20Apr25thArt1/</url>
+    <content><![CDATA[<blockquote>
+<p>还是自己没有继续推导下去的问题……推到一半就放弃了</p>
+<p>但是做法也略复杂了，把别人的做法写一下</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>给定一个长度为 $n$ 的正整数序列 $A_1,A_2,\dots,A_n$。定义一个函数 $f(l,r)$ 表示：序列中下标在 $[l,r]$ 范围内的子区间中，不同的整数个数。</p>
+<p>换句话说，$f(l,r)$ 就是集合 $\{A_l,A_{l+1},\dots,A_r\}$ 的 大小，这里的集合是不可重集，即集合中的元素互不相等。</p>
+<p>现在，请你求出：</p>
+<script type="math/tex; mode=display">
+\sum_{l=1}^n\sum_{r=l}^nf^2(l,r)</script><p>由于答案可能很大，请输出答案对 $(10^9+7)$ 取模的结果。</p>
+<p><strong>数据规模</strong>：$1\le n\le10^6$，$A_i\in[1,10^9]$。</p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>由于我们只是要求计算不同的数的数量，所以数的具体值并没有影响。所以先离散化一下方便一些。</p>
+<p>对于这种<strong><em>统计所有区间</em></strong> 的问题，有一个比较常见的方法——从右往左枚举左端点 $l$，用数据结构维护 $r\in[l,n]$ 的相关数据。这样 $l$ 每次向左移动一次，都只需要在数据结构中加入 $r=l-1$ 的这种情况，保证了复杂度。</p>
+<p>然后假如不是算 $f^2(l,r)$ 的和，而是 $f(l,r)$ 的和，那就非常简单——用线段树维护 $r\in[l,n]$ 的 $f(l,r)$。</p>
+<p>查询时直接查询 $[l,n]$ 区间和；考虑修改：当 <code>l--</code> 时，需要更新线段树，于是还要动态维护 <code>las[x]</code> 表示 $x$ 上一次出现的位置（初值设为 $n+1$），于是 $A_l$ 会对 $[l,las_{A_l}]$ 这段区间产生 $1$ 的贡献（区间加）。因为对于 $r\in[l,las_{A_l}]$，$[l+1,r]$ 中原本没有 $A_l$ 这个数，现在加上 $A_l$ 使得区间变为 $[l,r]$。</p>
+<p>所以就是简单的线段树区间加、区间求和。</p>
+<p>如何处理平方？假设一个区间里的数为 $\{A_l,A_{l+1},\dots,A_r\}$，考虑给这些数加上 $d$ 过后平方和变成什么：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+&\sum_{i=l}^r(A_i+d)^2\\
+=&\sum_{i=l}^r(A_i^2+2dA_i+d^2)\\
+=&\sum_{i=l}^rA_i^2+2d\sum_{i=l}^rA_i+(r-l+1)d^2
+\end{split}</script><p>可见我们维护区间的平方和 $\sum A_i^2$、区间和 $\sum A_i$ 就可以更新了。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e6</span>,MOD=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a,<span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Sub</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a,<span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a,<span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*a*b%MOD;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">QPow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(b)&#123;</span><br><span class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>) ret=Mul(ret,a);</span><br><span class="line">        a=Mul(a,a);b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> num[N+<span class="number">3</span>],las[N+<span class="number">3</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; uni;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SEGTREE</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> sqsum[N*<span class="number">2</span>+<span class="number">3</span>],sum[N*<span class="number">2</span>+<span class="number">3</span>],add[N*<span class="number">2</span>+<span class="number">3</span>];</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Index</span><span class="params">(<span class="keyword">int</span> lef,<span class="keyword">int</span> rig)</span></span>&#123;<span class="keyword">return</span> (lef+rig)|(lef!=rig);&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">PushUp</span><span class="params">(<span class="keyword">int</span> lef,<span class="keyword">int</span> rig)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(lef+rig)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        sum[Index(lef,rig)]=Add(sum[Index(lef,mid)],sum[Index(mid+<span class="number">1</span>,rig)]);</span><br><span class="line">        sqsum[Index(lef,rig)]=Add(sqsum[Index(lef,mid)],sqsum[Index(mid+<span class="number">1</span>,rig)]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span><span class="params">(<span class="keyword">int</span> lef,<span class="keyword">int</span> rig,<span class="keyword">int</span> del)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> u=Index(lef,rig),len=rig-lef+<span class="number">1</span>;</span><br><span class="line">        sqsum[u]=Add(sqsum[u],Mul(Mul(<span class="number">2</span>,del),sum[u]));</span><br><span class="line">        sqsum[u]=Add(sqsum[u],Mul(Mul(del,del),len));</span><br><span class="line">        add[u]=Add(add[u],del);</span><br><span class="line">        sum[u]=Add(sum[u],Mul(len,del));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">PushDown</span><span class="params">(<span class="keyword">int</span> lef,<span class="keyword">int</span> rig)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(lef+rig)&gt;&gt;<span class="number">1</span>,u=Index(lef,rig);</span><br><span class="line">        <span class="keyword">if</span>(!add[u]) <span class="keyword">return</span>;</span><br><span class="line">        Update(lef,mid,add[u]);</span><br><span class="line">        Update(mid+<span class="number">1</span>,rig,add[u]);</span><br><span class="line">        add[u]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Modify</span><span class="params">(<span class="keyword">int</span> lef,<span class="keyword">int</span> rig,<span class="keyword">int</span> Le,<span class="keyword">int</span> Ri)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(Le&lt;=lef &amp;&amp; rig&lt;=Ri)&#123;</span><br><span class="line">            Update(lef,rig,<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        PushDown(lef,rig);</span><br><span class="line">        <span class="keyword">int</span> mid=(lef+rig)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(Le&lt;=mid) Modify(lef,mid,Le,Ri);</span><br><span class="line">        <span class="keyword">if</span>(Ri&gt;mid) Modify(mid+<span class="number">1</span>,rig,Le,Ri);</span><br><span class="line">        PushUp(lef,rig);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">SumUp</span><span class="params">(<span class="keyword">int</span> lef,<span class="keyword">int</span> rig,<span class="keyword">int</span> Le,<span class="keyword">int</span> Ri)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(Le&lt;=lef &amp;&amp; rig&lt;=Ri) <span class="keyword">return</span> sqsum[Index(lef,rig)];</span><br><span class="line">        PushDown(lef,rig);</span><br><span class="line">        <span class="keyword">int</span> mid=(lef+rig)&gt;&gt;<span class="number">1</span>,ret=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(Le&lt;=mid) ret=Add(ret,SumUp(lef,mid,Le,Ri));</span><br><span class="line">        <span class="keyword">if</span>(Ri&gt;mid) ret=Add(ret,SumUp(mid+<span class="number">1</span>,rig,Le,Ri));</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;Se;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RI</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">0</span>,c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>)&#123;</span><br><span class="line">        a=(a&lt;&lt;<span class="number">1</span>)+(a&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>;</span><br><span class="line">        c=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    freopen(<span class="string">"sequence.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"sequence.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    n=RI();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        uni.push_back(num[i]=RI());</span><br><span class="line">    sort(uni.begin(),uni.end());</span><br><span class="line">    uni.erase(unique(uni.begin(),uni.end()),uni.end());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        num[i]=lower_bound(uni.begin(),uni.end(),num[i])-uni.begin()+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=(<span class="keyword">int</span>)uni.size();i++)</span><br><span class="line">        las[i]=n+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">int</span> lef=i,rig=las[num[i]]<span class="number">-1</span>;</span><br><span class="line">        las[num[i]]=i;</span><br><span class="line">        Se.Modify(<span class="number">1</span>,n,lef,rig);</span><br><span class="line">        <span class="keyword">int</span> res=Se.SumUp(<span class="number">1</span>,n,i,n);</span><br><span class="line">        ans=Add(ans,res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+&“\ 悬着光的水滴\ 落地窗的玻璃\\
+&\ \ \ 我正被这世界倒映\\
+&\ \ \ 若我走失在\ 时间的缝隙\\
+&\ \ \ 你\ 会不会来\ 寻觅我的踪迹\\
+&\ \ \ 多希望我们的交汇闪烁耀眼\\
+&\ \ \ 可你的世界太远\ 太远\\
+&\ \ \ 还没来得及\ 慢慢填充时间\\
+&\ \ \ 沉溺在\text~\ 你与我的画面\\
+&\\
+&\ \ \ 孤单地回想\ 你望着我弯起眼\\
+&\ \ \ 它写在我记忆的残篇\\
+&\ \ \ 如果能够再\ 续写这段温暖\\
+&\ \ \ 去让我看\\
+&\ \ \ 你的星球——我的遗憾\ ”\\
+&\text{——《遥远的相遇》By 洛天依/(编调)暗猫}
+\end{split}</script>]]></content>
+      <categories>
+        <category>OI题解</category>
+      </categories>
+      <tags>
+        <tag>数据结构-线段树</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前行 - 2020常规赛XI</title>
     <url>/2020/20Apr23rdArt1/</url>
     <content><![CDATA[<blockquote>
@@ -1622,8 +1738,8 @@ f_4=\frac12f_0+f_3\\
         <tag>数据结构-线段树</tag>
         <tag>动态规划</tag>
         <tag>数学-期望</tag>
-        <tag>-GYM-</tag>
         <tag>数学-高斯消元</tag>
+        <tag>-GYM-</tag>
       </tags>
   </entry>
   <entry>
@@ -3207,8 +3323,8 @@ dis(u,v)=\min_{c,c_v\in[0,7]}\{f(u,c)+1+f(v,c)\}=\min_{c,c_v\in[0,7]}\{f(u,c)+1+
       </categories>
       <tags>
         <tag>算法效率-二分查找</tag>
-        <tag>贪心</tag>
         <tag>算法效率-倍增</tag>
+        <tag>贪心</tag>
         <tag>-牛客-</tag>
         <tag>图论-树链剖分</tag>
       </tags>
@@ -6301,9 +6417,9 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
         <tag>数据结构-线段树</tag>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
+        <tag>算法效率-扫描线</tag>
         <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
-        <tag>算法效率-扫描线</tag>
       </tags>
   </entry>
   <entry>
@@ -7491,8 +7607,8 @@ A_i^4-kA_i&\equiv A_j^4-kA_j
       </categories>
       <tags>
         <tag>数学</tag>
-        <tag>贪心</tag>
         <tag>算法效率-倍增</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
