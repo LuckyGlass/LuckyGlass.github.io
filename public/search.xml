@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>OI题解 - 矩形(洛谷)</title>
+    <url>/2020/20May4thArt1/</url>
+    <content><![CDATA[<blockquote>
+<p>百行删尽码复来（指插头DP的代码）</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h2><p>> <a href="https://www.luogu.com.cn/problem/P4537" target="_blank" rel="noopener">洛谷 P4537</a></p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>其实这道题用插头DP真的有点小题大做 awa……但是既然在学插头DP，还是用这种方法写一下。</p>
+<p>我们发现，题目其实就是要让我们找“有多少条从边界出发、又在边界结束的<u>中间不相交、不接触到边界</u>的折线”，这条折线就会把整个矩形分成黑白两部分，而且可以保证题目中的其他要求。</p>
+<p>那用插头DP怎么写？</p>
+<p>不妨把原来的矩形看成这样：</p>
+<p><img src="/2020/20May4thArt1/png1.png" alt="png1"></p>
+<p>我们不关注这个矩形的方格，而是<strong>关注矩形内部（不包括边界）的点</strong>，并且我们把最外围的一圈点标为橙色(可见上图)。我们发现，之前提到的一条折线应该是边界的一个点与橙色点相连，中间经过若干个点，最后到达一个橙色点，再到达边界。</p>
+<p>于是可以这样考虑：忽略边界与橙色点的连边，那就相当于从橙色点出发再到橙色点。所以可以定义插头DP状态：<code>f[i][j][S][t]</code> 表示从上到下、从左到右一直决定到了点 $(i,j)$，当前的插头状态为 $\mathbb S$，而且当前已经决策出了 $t$ 个橙色点作为起点。</p>
+<p>注意这里的 $\mathbb S$，因为我们需要保证最后只有一条中途不相交的线段，所以需要维护插头的连接关系，也就是要用最小表示法或者括号序列来储存。</p>
+<p>转移非常麻烦，大概提一下：</p>
+<blockquote>
+<p>设 $nxt$ 是当前位置 $(i,j)$ 相邻的边界的数量</p>
+</blockquote>
+<ol>
+<li>如果当前位置的上面、左面都有插头，就只能连接“上-左”，此时要判断是否有环以及是否已经得到所需折线（有两个起点 $t=2$，且已经没有插头 $\mathbb S=\varnothing$）</li>
+<li>如果当前位置的上面有插头：<ul>
+<li>可以连接“上-下”，保证不是最后一行 $i\not= n$；</li>
+<li>可以连接“上-右”，保证不是最后一列 $j\not=m$；</li>
+<li>如果当前是一个橙色点，并且 $t&lt;2$，可以连接“上-边界”，也就是把当前橙色点作为一个起点，此时还需判断是否已经得到所需折线；</li>
+</ul>
+</li>
+<li>如果当前位置左面有插头，类似情况 2</li>
+<li>如果当前位置上面左面都没有插头：<ul>
+<li>可以连接“下-右”，保证不是最后一行、最后一列；</li>
+<li>如果当前是橙色点，并且 $t&lt;2$，则可以连接“下-边界”或“右-边界”；</li>
+<li>如果当前是橙色点，并且 $t=0$、$(i,j)$ 与至少两个边界相邻、当前还没有连边（$t=0$ 且 $\mathbb S=\varnothing$），则可以连接“边界-边界”，直接得到所需折线；</li>
+<li>什么都不连。</li>
+</ul>
+</li>
+</ol>
+<p>反正码码码就对了 (。・∀・)ノ</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M=<span class="number">1e6</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HASH</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> mem[M],nxt[M],head[<span class="number">3461</span>],MOD,ncnt;</span><br><span class="line">    HASH()&#123;MOD=<span class="number">3461</span>;ncnt=<span class="number">0</span>;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p=++ncnt,prt=x%MOD;</span><br><span class="line">        nxt[p]=head[prt];mem[p]=x;head[prt]=p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> it=head[x%MOD];it;it=nxt[it])</span><br><span class="line">            <span class="keyword">if</span>(mem[it]==x)</span><br><span class="line">                <span class="keyword">return</span> it;</span><br><span class="line">        Insert(x);</span><br><span class="line">        <span class="keyword">return</span> ncnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">operator</span> [](<span class="keyword">int</span> id)&#123;<span class="keyword">return</span> mem[id];&#125;</span><br><span class="line">&#125;Ha;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line">ll f[<span class="number">2</span>][M][<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> tmp[<span class="number">20</span>],Tmp[<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Inhash</span><span class="params">(<span class="keyword">int</span> has)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mx=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=m;i++,has&gt;&gt;=<span class="number">3</span>)&#123;</span><br><span class="line">        tmp[i]=Tmp[i]=has&amp;<span class="number">7</span>;</span><br><span class="line">        mx=max(mx,tmp[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mx;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Hash</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mp[<span class="number">10</span>]=&#123;&#125;,tot=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=m;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">        <span class="keyword">if</span>(tmp[i])&#123;</span><br><span class="line">            <span class="keyword">if</span>(!mp[tmp[i]]) mp[tmp[i]]=++tot;</span><br><span class="line">            tmp[i]=mp[tmp[i]];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">int</span> has=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=m;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">        has=(has&lt;&lt;<span class="number">3</span>)|tmp[i];</span><br><span class="line">    <span class="keyword">return</span> Ha.Find(has);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Recover</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=m;i++)</span><br><span class="line">        tmp[i]=Tmp[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    n--;m--;</span><br><span class="line">    <span class="keyword">if</span>(!n)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,m);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> I=<span class="number">0</span>;</span><br><span class="line">    f[I][Hash()][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">            I^=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> limS=Ha.ncnt,nxt=(i==<span class="number">1</span>)+(i==n)+(j==<span class="number">1</span>)+(j==m);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;=limS;s++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">2</span>;k++)</span><br><span class="line">                    f[I][s][k]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;=limS;s++)&#123;</span><br><span class="line">                <span class="keyword">int</span> mx=Inhash(Ha[s]);</span><br><span class="line">                <span class="keyword">int</span> lef=tmp[j<span class="number">-1</span>],up=tmp[j];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">2</span>;k++)&#123;</span><br><span class="line">                    ll thi=f[!I][s][k];</span><br><span class="line">                    <span class="keyword">if</span>(!thi) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="comment">//左上都有插头，lef!=up 判断了不会成环</span></span><br><span class="line">                    <span class="keyword">if</span>(lef &amp;&amp; up &amp;&amp; lef!=up)&#123;</span><br><span class="line">                        Recover();</span><br><span class="line">                        tmp[j]=tmp[j<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> t=<span class="number">0</span>;t&lt;=m;t++)</span><br><span class="line">                            <span class="keyword">if</span>(tmp[t]==up)</span><br><span class="line">                                tmp[t]=lef;</span><br><span class="line">                        <span class="keyword">int</span> id=Hash();</span><br><span class="line">                        <span class="keyword">if</span>(id==<span class="number">1</span>) ans+=thi; <span class="comment">//得到所需线段,S=0(S=0 哈希值为1)</span></span><br><span class="line">                        <span class="keyword">else</span> f[I][id][k]+=thi;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//有左插头</span></span><br><span class="line">                    <span class="keyword">if</span>(lef &amp;&amp; !up)&#123;</span><br><span class="line">                        <span class="comment">//左-下</span></span><br><span class="line">                        <span class="keyword">if</span>(i!=n)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=lef;tmp[j]=<span class="number">0</span>;</span><br><span class="line">                            f[I][Hash()][k]+=thi;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//左-右</span></span><br><span class="line">                        <span class="keyword">if</span>(j!=m)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=<span class="number">0</span>;tmp[j]=lef;</span><br><span class="line">                            f[I][Hash()][k]+=thi;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//左-边界</span></span><br><span class="line">                        <span class="keyword">if</span>(nxt &amp;&amp; k&lt;<span class="number">2</span>)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=tmp[j]=<span class="number">0</span>;</span><br><span class="line">                            <span class="keyword">int</span> id=Hash();</span><br><span class="line">                            <span class="keyword">if</span>(id==<span class="number">1</span>) ans+=thi*nxt; <span class="comment">//连一个边界（有nxt个边界可以选择），得到所需线段</span></span><br><span class="line">                            <span class="keyword">else</span> f[I][id][k+<span class="number">1</span>]+=thi*nxt;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//有上插头，与左插头一样</span></span><br><span class="line">                    <span class="keyword">if</span>(up &amp;&amp; !lef)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(i!=n)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=up;tmp[j]=<span class="number">0</span>;</span><br><span class="line">                            f[I][Hash()][k]+=thi;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span>(j!=m)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=<span class="number">0</span>;tmp[j]=up;</span><br><span class="line">                            f[I][Hash()][k]+=thi;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span>(nxt &amp;&amp; k&lt;<span class="number">2</span>)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j]=tmp[j<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">                            <span class="keyword">int</span> id=Hash();</span><br><span class="line">                            <span class="keyword">if</span>(id==<span class="number">1</span>)&#123;</span><br><span class="line">                                <span class="comment">// printf("[3] %lld\n",thi*nxt);</span></span><br><span class="line">                                ans+=thi*nxt;</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="keyword">else</span> f[I][id][k+<span class="number">1</span>]+=thi*nxt;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//左上都没有</span></span><br><span class="line">                    <span class="keyword">if</span>(!lef &amp;&amp; !up)&#123;</span><br><span class="line">                        <span class="comment">//右-下</span></span><br><span class="line">                        <span class="keyword">if</span>(i!=n &amp;&amp; j!=m)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j]=tmp[j<span class="number">-1</span>]=mx+<span class="number">1</span>;</span><br><span class="line">                            f[I][Hash()][k]+=thi;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//下-边界，还有插头所以不必判断是否得到答案</span></span><br><span class="line">                        <span class="keyword">if</span>(i!=n &amp;&amp; nxt &amp;&amp; k&lt;<span class="number">2</span>)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=mx+<span class="number">1</span>;tmp[j]=<span class="number">0</span>;</span><br><span class="line">                            f[I][Hash()][k+<span class="number">1</span>]+=thi*nxt;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//右-边界，还有插头，同理</span></span><br><span class="line">                        <span class="keyword">if</span>(j!=m &amp;&amp; nxt &amp;&amp; k&lt;<span class="number">2</span>)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=<span class="number">0</span>;tmp[j]=mx+<span class="number">1</span>;</span><br><span class="line">                            f[I][Hash()][k+<span class="number">1</span>]+=thi*nxt;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//直接边界-边界得到答案（与两个及以上的边界相邻，还没有起点，没有插头即没有连边）</span></span><br><span class="line">                        <span class="keyword">if</span>(nxt&gt;=<span class="number">2</span> &amp;&amp; k==<span class="number">0</span> &amp;&amp; s==<span class="number">1</span>)&#123;</span><br><span class="line">                            ans+=nxt*(nxt<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">                            <span class="comment">// printf("[4] %d\n",nxt*(nxt-1)/2);</span></span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//啥都不连</span></span><br><span class="line">                        f[I][s][k]+=thi;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//正常的插头DP切换下一行的操作</span></span><br><span class="line">        I^=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> limS=Ha.ncnt;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;=limS;s++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">2</span>;k++)</span><br><span class="line">                f[I][s][k]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;=limS;s++)&#123;</span><br><span class="line">            Inhash(Ha[s]);</span><br><span class="line">            <span class="keyword">if</span>(tmp[m]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> t=m;t&gt;=<span class="number">1</span>;t--)</span><br><span class="line">                tmp[t]=tmp[t<span class="number">-1</span>];</span><br><span class="line">            tmp[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">2</span>;k++)</span><br><span class="line">                <span class="keyword">if</span>(f[!I][s][k])</span><br><span class="line">                    f[I][Hash()][k]+=f[!I][s][k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+&“\ 这颗尚未成形的心脏\\
+&\ \ \ 有些微不足道的动摇\\
+&\ \ \ 捧起星的冠冕戴上\\
+&\ \ \ 向着泛出琉璃蓝的异乡\\
+&\ \ \ 终于尘降\\\\
+&\ \ \ 漂泊星尘\ 终于尘降\ ”\\
+&\text{——《尘降》By COP/星尘}
+\end{split}</script>]]></content>
+      <categories>
+        <category>OI题解</category>
+      </categories>
+      <tags>
+        <tag>-洛谷-</tag>
+        <tag>动态规划-插头DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OI题解 - 优秀的拆分(NOI 2016)</title>
     <url>/2020/20May3rdArt1/</url>
     <content><![CDATA[<blockquote>
@@ -636,8 +697,8 @@ b_i=\begin{cases}
       </categories>
       <tags>
         <tag>动态规划</tag>
-        <tag>算法效率-二分查找</tag>
         <tag>贪心</tag>
+        <tag>算法效率-二分查找</tag>
         <tag>图论-网络流</tag>
         <tag>数据结构-树状数组</tag>
         <tag>数学-线性基</tag>
@@ -1110,8 +1171,8 @@ p=\sum_{i=1}^mP_i^{e_i}</script><p>$P_i$ 为第 $i$ 个质数。给定 $m$ 以�
       <tags>
         <tag>数学</tag>
         <tag>动态规划</tag>
-        <tag>算法效率-二分查找</tag>
         <tag>贪心</tag>
+        <tag>算法效率-二分查找</tag>
         <tag>数学-组合计数</tag>
       </tags>
   </entry>
@@ -1792,10 +1853,10 @@ f_4=\frac12f_0+f_3\\
       </categories>
       <tags>
         <tag>数据结构-线段树</tag>
-        <tag>动态规划</tag>
         <tag>数学-期望</tag>
-        <tag>数学-高斯消元</tag>
+        <tag>动态规划</tag>
         <tag>-GYM-</tag>
+        <tag>数学-高斯消元</tag>
       </tags>
   </entry>
   <entry>
@@ -2863,8 +2924,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
       <tags>
         <tag>模拟</tag>
         <tag>动态规划</tag>
-        <tag>图论-树</tag>
         <tag>贪心</tag>
+        <tag>图论-树</tag>
         <tag>数学-容斥</tag>
         <tag>数学-组合计数</tag>
       </tags>
@@ -3378,9 +3439,9 @@ dis(u,v)=\min_{c,c_v\in[0,7]}\{f(u,c)+1+f(v,c)\}=\min_{c,c_v\in[0,7]}\{f(u,c)+1+
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>算法效率-二分查找</tag>
         <tag>算法效率-倍增</tag>
         <tag>贪心</tag>
+        <tag>算法效率-二分查找</tag>
         <tag>-牛客-</tag>
         <tag>图论-树链剖分</tag>
       </tags>
@@ -4775,8 +4836,8 @@ ans_2=\sum_{i=0}^n\sum_{j=0}^n(-1)^{i+j}C_n^iC_n^j\times 2^{(n-i)(n-j)}\times f_
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数据结构-并查集</tag>
         <tag>算法效率-分块</tag>
+        <tag>数据结构-并查集</tag>
         <tag>-Codeforces-</tag>
         <tag>算法效率-STL</tag>
       </tags>
@@ -6473,9 +6534,9 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
         <tag>数据结构-线段树</tag>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
-        <tag>动态规划-状压DP</tag>
-        <tag>贪心</tag>
         <tag>算法效率-扫描线</tag>
+        <tag>贪心</tag>
+        <tag>动态规划-状压DP</tag>
       </tags>
   </entry>
   <entry>
@@ -6725,8 +6786,8 @@ g(i,j)=\sum_{t=1}^kg(i-t,j)\cdot b_t</script><p>然后就可以构造矩阵了�
       </categories>
       <tags>
         <tag>动态规划</tag>
-        <tag>算法效率-矩阵加速</tag>
         <tag>贪心</tag>
+        <tag>算法效率-矩阵加速</tag>
       </tags>
   </entry>
   <entry>
@@ -6955,8 +7016,8 @@ x^m\equiv x\pmod {p_c}\\
       <tags>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
-        <tag>动态规划</tag>
         <tag>数学-期望</tag>
+        <tag>动态规划</tag>
         <tag>算法效率-倍增</tag>
         <tag>数据结构-并查集</tag>
       </tags>
@@ -7054,8 +7115,8 @@ x^m\equiv x\pmod {p_c}\\
       </categories>
       <tags>
         <tag>模拟</tag>
-        <tag>动态规划</tag>
         <tag>数学-期望</tag>
+        <tag>动态规划</tag>
         <tag>算法效率-矩阵加速</tag>
         <tag>算法效率-二分查找</tag>
         <tag>分治</tag>
@@ -7782,8 +7843,8 @@ A_i^4-kA_i&\equiv A_j^4-kA_j
       <tags>
         <tag>数学</tag>
         <tag>模拟</tag>
-        <tag>动态规划-状压DP</tag>
         <tag>贪心</tag>
+        <tag>动态规划-状压DP</tag>
       </tags>
   </entry>
   <entry>
@@ -8092,9 +8153,9 @@ p&\leq q
         <category>OI题解</category>
       </categories>
       <tags>
+        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
         <tag>图论-树</tag>
-        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="百行删尽码复来（指插头DP的代码）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI题解 - 矩形(洛谷)">
+<meta property="og:url" content="http://luckyglass.github.io/2020/20May4thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="百行删尽码复来（指插头DP的代码）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://luckyglass.github.io/2020/20May4thArt1/png1.png">
+<meta property="article:published_time" content="2020-05-04T14:24:26.000Z">
+<meta property="article:modified_time" content="2020-05-04T15:04:05.789Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="-洛谷-">
+<meta property="article:tag" content="动态规划-插头DP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://luckyglass.github.io/2020/20May4thArt1/png1.png">
+
+<link rel="canonical" href="http://luckyglass.github.io/2020/20May4thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>OI题解 - 矩形(洛谷) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20May4thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI题解 - 矩形(洛谷)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-04 22:24:26 / 修改时间：23:04:05" itemprop="dateCreated datePublished" datetime="2020-05-04T22:24:26+08:00">2020-05-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20May4thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20May4thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>百行删尽码复来（指插头DP的代码）</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h2><p>> <a href="https://www.luogu.com.cn/problem/P4537" target="_blank" rel="noopener">洛谷 P4537</a></p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>其实这道题用插头DP真的有点小题大做 awa……但是既然在学插头DP，还是用这种方法写一下。</p>
+<p>我们发现，题目其实就是要让我们找“有多少条从边界出发、又在边界结束的<u>中间不相交、不接触到边界</u>的折线”，这条折线就会把整个矩形分成黑白两部分，而且可以保证题目中的其他要求。</p>
+<p>那用插头DP怎么写？</p>
+<p>不妨把原来的矩形看成这样：</p>
+<p><img src="/2020/20May4thArt1/png1.png" alt="png1"></p>
+<p>我们不关注这个矩形的方格，而是<strong>关注矩形内部（不包括边界）的点</strong>，并且我们把最外围的一圈点标为橙色(可见上图)。我们发现，之前提到的一条折线应该是边界的一个点与橙色点相连，中间经过若干个点，最后到达一个橙色点，再到达边界。</p>
+<p>于是可以这样考虑：忽略边界与橙色点的连边，那就相当于从橙色点出发再到橙色点。所以可以定义插头DP状态：<code>f[i][j][S][t]</code> 表示从上到下、从左到右一直决定到了点 $(i,j)$，当前的插头状态为 $\mathbb S$，而且当前已经决策出了 $t$ 个橙色点作为起点。</p>
+<p>注意这里的 $\mathbb S$，因为我们需要保证最后只有一条中途不相交的线段，所以需要维护插头的连接关系，也就是要用最小表示法或者括号序列来储存。</p>
+<p>转移非常麻烦，大概提一下：</p>
+<blockquote>
+<p>设 $nxt$ 是当前位置 $(i,j)$ 相邻的边界的数量</p>
+</blockquote>
+<ol>
+<li>如果当前位置的上面、左面都有插头，就只能连接“上-左”，此时要判断是否有环以及是否已经得到所需折线（有两个起点 $t=2$，且已经没有插头 $\mathbb S=\varnothing$）</li>
+<li>如果当前位置的上面有插头：<ul>
+<li>可以连接“上-下”，保证不是最后一行 $i\not= n$；</li>
+<li>可以连接“上-右”，保证不是最后一列 $j\not=m$；</li>
+<li>如果当前是一个橙色点，并且 $t&lt;2$，可以连接“上-边界”，也就是把当前橙色点作为一个起点，此时还需判断是否已经得到所需折线；</li>
+</ul>
+</li>
+<li>如果当前位置左面有插头，类似情况 2</li>
+<li>如果当前位置上面左面都没有插头：<ul>
+<li>可以连接“下-右”，保证不是最后一行、最后一列；</li>
+<li>如果当前是橙色点，并且 $t&lt;2$，则可以连接“下-边界”或“右-边界”；</li>
+<li>如果当前是橙色点，并且 $t=0$、$(i,j)$ 与至少两个边界相邻、当前还没有连边（$t=0$ 且 $\mathbb S=\varnothing$），则可以连接“边界-边界”，直接得到所需折线；</li>
+<li>什么都不连。</li>
+</ul>
+</li>
+</ol>
+<p>反正码码码就对了 (。・∀・)ノ</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M=<span class="number">1e6</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HASH</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> mem[M],nxt[M],head[<span class="number">3461</span>],MOD,ncnt;</span><br><span class="line">    HASH()&#123;MOD=<span class="number">3461</span>;ncnt=<span class="number">0</span>;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p=++ncnt,prt=x%MOD;</span><br><span class="line">        nxt[p]=head[prt];mem[p]=x;head[prt]=p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> it=head[x%MOD];it;it=nxt[it])</span><br><span class="line">            <span class="keyword">if</span>(mem[it]==x)</span><br><span class="line">                <span class="keyword">return</span> it;</span><br><span class="line">        Insert(x);</span><br><span class="line">        <span class="keyword">return</span> ncnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">operator</span> [](<span class="keyword">int</span> id)&#123;<span class="keyword">return</span> mem[id];&#125;</span><br><span class="line">&#125;Ha;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line">ll f[<span class="number">2</span>][M][<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> tmp[<span class="number">20</span>],Tmp[<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Inhash</span><span class="params">(<span class="keyword">int</span> has)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mx=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=m;i++,has&gt;&gt;=<span class="number">3</span>)&#123;</span><br><span class="line">        tmp[i]=Tmp[i]=has&amp;<span class="number">7</span>;</span><br><span class="line">        mx=max(mx,tmp[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mx;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Hash</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mp[<span class="number">10</span>]=&#123;&#125;,tot=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=m;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">        <span class="keyword">if</span>(tmp[i])&#123;</span><br><span class="line">            <span class="keyword">if</span>(!mp[tmp[i]]) mp[tmp[i]]=++tot;</span><br><span class="line">            tmp[i]=mp[tmp[i]];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">int</span> has=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=m;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">        has=(has&lt;&lt;<span class="number">3</span>)|tmp[i];</span><br><span class="line">    <span class="keyword">return</span> Ha.Find(has);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Recover</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=m;i++)</span><br><span class="line">        tmp[i]=Tmp[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    n--;m--;</span><br><span class="line">    <span class="keyword">if</span>(!n)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,m);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> I=<span class="number">0</span>;</span><br><span class="line">    f[I][Hash()][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">            I^=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> limS=Ha.ncnt,nxt=(i==<span class="number">1</span>)+(i==n)+(j==<span class="number">1</span>)+(j==m);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;=limS;s++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">2</span>;k++)</span><br><span class="line">                    f[I][s][k]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;=limS;s++)&#123;</span><br><span class="line">                <span class="keyword">int</span> mx=Inhash(Ha[s]);</span><br><span class="line">                <span class="keyword">int</span> lef=tmp[j<span class="number">-1</span>],up=tmp[j];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">2</span>;k++)&#123;</span><br><span class="line">                    ll thi=f[!I][s][k];</span><br><span class="line">                    <span class="keyword">if</span>(!thi) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="comment">//左上都有插头，lef!=up 判断了不会成环</span></span><br><span class="line">                    <span class="keyword">if</span>(lef &amp;&amp; up &amp;&amp; lef!=up)&#123;</span><br><span class="line">                        Recover();</span><br><span class="line">                        tmp[j]=tmp[j<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> t=<span class="number">0</span>;t&lt;=m;t++)</span><br><span class="line">                            <span class="keyword">if</span>(tmp[t]==up)</span><br><span class="line">                                tmp[t]=lef;</span><br><span class="line">                        <span class="keyword">int</span> id=Hash();</span><br><span class="line">                        <span class="keyword">if</span>(id==<span class="number">1</span>) ans+=thi; <span class="comment">//得到所需线段,S=0(S=0 哈希值为1)</span></span><br><span class="line">                        <span class="keyword">else</span> f[I][id][k]+=thi;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//有左插头</span></span><br><span class="line">                    <span class="keyword">if</span>(lef &amp;&amp; !up)&#123;</span><br><span class="line">                        <span class="comment">//左-下</span></span><br><span class="line">                        <span class="keyword">if</span>(i!=n)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=lef;tmp[j]=<span class="number">0</span>;</span><br><span class="line">                            f[I][Hash()][k]+=thi;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//左-右</span></span><br><span class="line">                        <span class="keyword">if</span>(j!=m)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=<span class="number">0</span>;tmp[j]=lef;</span><br><span class="line">                            f[I][Hash()][k]+=thi;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//左-边界</span></span><br><span class="line">                        <span class="keyword">if</span>(nxt &amp;&amp; k&lt;<span class="number">2</span>)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=tmp[j]=<span class="number">0</span>;</span><br><span class="line">                            <span class="keyword">int</span> id=Hash();</span><br><span class="line">                            <span class="keyword">if</span>(id==<span class="number">1</span>) ans+=thi*nxt; <span class="comment">//连一个边界（有nxt个边界可以选择），得到所需线段</span></span><br><span class="line">                            <span class="keyword">else</span> f[I][id][k+<span class="number">1</span>]+=thi*nxt;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//有上插头，与左插头一样</span></span><br><span class="line">                    <span class="keyword">if</span>(up &amp;&amp; !lef)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(i!=n)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=up;tmp[j]=<span class="number">0</span>;</span><br><span class="line">                            f[I][Hash()][k]+=thi;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span>(j!=m)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=<span class="number">0</span>;tmp[j]=up;</span><br><span class="line">                            f[I][Hash()][k]+=thi;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span>(nxt &amp;&amp; k&lt;<span class="number">2</span>)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j]=tmp[j<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">                            <span class="keyword">int</span> id=Hash();</span><br><span class="line">                            <span class="keyword">if</span>(id==<span class="number">1</span>)&#123;</span><br><span class="line">                                <span class="comment">// printf("[3] %lld\n",thi*nxt);</span></span><br><span class="line">                                ans+=thi*nxt;</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="keyword">else</span> f[I][id][k+<span class="number">1</span>]+=thi*nxt;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//左上都没有</span></span><br><span class="line">                    <span class="keyword">if</span>(!lef &amp;&amp; !up)&#123;</span><br><span class="line">                        <span class="comment">//右-下</span></span><br><span class="line">                        <span class="keyword">if</span>(i!=n &amp;&amp; j!=m)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j]=tmp[j<span class="number">-1</span>]=mx+<span class="number">1</span>;</span><br><span class="line">                            f[I][Hash()][k]+=thi;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//下-边界，还有插头所以不必判断是否得到答案</span></span><br><span class="line">                        <span class="keyword">if</span>(i!=n &amp;&amp; nxt &amp;&amp; k&lt;<span class="number">2</span>)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=mx+<span class="number">1</span>;tmp[j]=<span class="number">0</span>;</span><br><span class="line">                            f[I][Hash()][k+<span class="number">1</span>]+=thi*nxt;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//右-边界，还有插头，同理</span></span><br><span class="line">                        <span class="keyword">if</span>(j!=m &amp;&amp; nxt &amp;&amp; k&lt;<span class="number">2</span>)&#123;</span><br><span class="line">                            Recover();</span><br><span class="line">                            tmp[j<span class="number">-1</span>]=<span class="number">0</span>;tmp[j]=mx+<span class="number">1</span>;</span><br><span class="line">                            f[I][Hash()][k+<span class="number">1</span>]+=thi*nxt;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//直接边界-边界得到答案（与两个及以上的边界相邻，还没有起点，没有插头即没有连边）</span></span><br><span class="line">                        <span class="keyword">if</span>(nxt&gt;=<span class="number">2</span> &amp;&amp; k==<span class="number">0</span> &amp;&amp; s==<span class="number">1</span>)&#123;</span><br><span class="line">                            ans+=nxt*(nxt<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">                            <span class="comment">// printf("[4] %d\n",nxt*(nxt-1)/2);</span></span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//啥都不连</span></span><br><span class="line">                        f[I][s][k]+=thi;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//正常的插头DP切换下一行的操作</span></span><br><span class="line">        I^=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> limS=Ha.ncnt;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;=limS;s++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">2</span>;k++)</span><br><span class="line">                f[I][s][k]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;=limS;s++)&#123;</span><br><span class="line">            Inhash(Ha[s]);</span><br><span class="line">            <span class="keyword">if</span>(tmp[m]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> t=m;t&gt;=<span class="number">1</span>;t--)</span><br><span class="line">                tmp[t]=tmp[t<span class="number">-1</span>];</span><br><span class="line">            tmp[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">2</span>;k++)</span><br><span class="line">                <span class="keyword">if</span>(f[!I][s][k])</span><br><span class="line">                    f[I][Hash()][k]+=f[!I][s][k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+&“\ 这颗尚未成形的心脏\\
+&\ \ \ 有些微不足道的动摇\\
+&\ \ \ 捧起星的冠冕戴上\\
+&\ \ \ 向着泛出琉璃蓝的异乡\\
+&\ \ \ 终于尘降\\\\
+&\ \ \ 漂泊星尘\ 终于尘降\ ”\\
+&\text{——《尘降》By COP/星尘}
+\end{split}</script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2020/20May4thArt1/" title="OI题解 - 矩形(洛谷)">http://luckyglass.github.io/2020/20May4thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%B4%9B%E8%B0%B7/" rel="tag"><i class="fa fa-tag"></i> -洛谷-</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%8F%92%E5%A4%B4DP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-插头DP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20May3rdArt1/" rel="prev" title="OI题解 - 优秀的拆分(NOI 2016)">
+      <i class="fa fa-chevron-left"></i> OI题解 - 优秀的拆分(NOI 2016)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text">题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text">解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共262.4k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
