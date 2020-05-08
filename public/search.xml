@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> 图论-最短路 </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> 图论-最短路 </tag>
             
             <tag> -LOJ- </tag>
             
@@ -105,9 +105,9 @@
       
         <tags>
             
-            <tag> -洛谷- </tag>
-            
             <tag> 数学-容斥 </tag>
+            
+            <tag> -洛谷- </tag>
             
             <tag> 动态规划-树形DP </tag>
             
@@ -134,9 +134,9 @@
       
         <tags>
             
-            <tag> 数据结构-线段树 </tag>
-            
             <tag> 数学 </tag>
+            
+            <tag> 数据结构-线段树 </tag>
             
         </tags>
       
@@ -722,9 +722,9 @@
             
             <tag> 数据结构-线段树 </tag>
             
-            <tag> 数学-期望 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 数学-期望 </tag>
             
             <tag> -Codeforces- </tag>
             
@@ -1123,13 +1123,13 @@
       
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 模拟 </tag>
             
-            <tag> 图论-树 </tag>
+            <tag> 动态规划 </tag>
             
             <tag> 贪心 </tag>
+            
+            <tag> 图论-树 </tag>
             
             <tag> 数学-容斥 </tag>
             
@@ -1317,9 +1317,9 @@
       
         <tags>
             
-            <tag> 算法效率-倍增 </tag>
-            
             <tag> 算法效率-二分查找 </tag>
+            
+            <tag> 算法效率-倍增 </tag>
             
             <tag> 贪心 </tag>
             
@@ -1742,9 +1742,9 @@
       
         <tags>
             
-            <tag> 数据结构-线段树 </tag>
-            
             <tag> 数学 </tag>
+            
+            <tag> 数据结构-线段树 </tag>
             
             <tag> 贪心 </tag>
             
@@ -2433,17 +2433,17 @@
       
         <tags>
             
-            <tag> 数据结构-线段树 </tag>
-            
             <tag> 图论-二分图 </tag>
             
             <tag> 数学 </tag>
             
+            <tag> 数据结构-线段树 </tag>
+            
+            <tag> 贪心 </tag>
+            
             <tag> 动态规划-状压DP </tag>
             
             <tag> 算法效率-扫描线 </tag>
-            
-            <tag> 贪心 </tag>
             
         </tags>
       
@@ -2555,9 +2555,9 @@
       
         <tags>
             
-            <tag> 数据结构-线段树 </tag>
-            
             <tag> 数学 </tag>
+            
+            <tag> 数据结构-线段树 </tag>
             
             <tag> 模拟 </tag>
             
@@ -2590,9 +2590,9 @@
             
             <tag> 数学 </tag>
             
-            <tag> 数学-期望 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 数学-期望 </tag>
             
             <tag> 算法效率-倍增 </tag>
             
@@ -2621,11 +2621,11 @@
       
         <tags>
             
-            <tag> 数学-期望 </tag>
+            <tag> 模拟 </tag>
             
             <tag> 动态规划 </tag>
             
-            <tag> 模拟 </tag>
+            <tag> 数学-期望 </tag>
             
             <tag> 算法效率-矩阵加速 </tag>
             
@@ -2747,9 +2747,9 @@
             
             <tag> 数学 </tag>
             
-            <tag> 算法效率-倍增 </tag>
-            
             <tag> 模拟 </tag>
+            
+            <tag> 算法效率-倍增 </tag>
             
             <tag> 图论-树 </tag>
             
@@ -2811,9 +2811,9 @@
             
             <tag> 模拟 </tag>
             
-            <tag> 动态规划-状压DP </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> 动态规划-状压DP </tag>
             
         </tags>
       
@@ -2919,11 +2919,11 @@
       
         <tags>
             
+            <tag> 贪心 </tag>
+            
             <tag> 动态规划-状压DP </tag>
             
             <tag> 图论-树 </tag>
-            
-            <tag> 贪心 </tag>
             
         </tags>
       
@@ -3343,9 +3343,9 @@
             
             <tag> 数学 </tag>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 模拟 </tag>
+            
+            <tag> 动态规划 </tag>
             
             <tag> 贪心 </tag>
             
