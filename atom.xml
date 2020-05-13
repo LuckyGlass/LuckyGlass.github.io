@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://luckyglass.github.io/"/>
-  <updated>2020-05-13T15:45:26.235Z</updated>
+  <updated>2020-05-13T15:54:14.825Z</updated>
   <id>http://luckyglass.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://luckyglass.github.io/2020/20May12thArt1/"/>
     <id>http://luckyglass.github.io/2020/20May12thArt1/</id>
     <published>2020-05-12T06:53:19.000Z</published>
-    <updated>2020-05-13T15:45:26.235Z</updated>
+    <updated>2020-05-13T15:54:14.825Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>开始着手补字符串这个大坑</p></blockquote><a id="more"></a><hr><h2 id="前缀函数"><a href="#前缀函数" class="headerlink" title="# 前缀函数"></a># 前缀函数</h2><blockquote><p>方便起见，对于字符串 $S$ 定义 $S(l,r)$ 表示 $S$ 的子串 $S_{l}S_{l+1}\dots S_r$。</p></blockquote><p>对于一个长度为 $n$ 的字符串 $S=S_0S_1\dots S_{n-1}$，定义 $\pi[i]$ （$i\in[0,n-1]$）表示以 $i$ 结尾的最长真后缀使得该后缀同时为 $S$ 的一个前缀。</p><p>换句话说 $S(0,\pi[i]-1)=S(i-\pi[i]+1,i)$。</p><p>在此定义下，不难发现 $\pi[0]=0$（注意是真后缀）。</p><hr><h2 id="求-pi-KMP"><a href="#求-pi-KMP" class="headerlink" title="# 求$\pi$ - KMP"></a># 求$\pi$ - KMP</h2><p>在过去所学习的 KMP 中，用到了一种 <code>fail</code> 指针，这样的指针为 AC 自动机的实现提供了一个基础。但是对于 KMP 算法，还有一种基于前缀函数的性质的实现。</p><p>这两种实现都是在求解 $\pi$ 函数，只是方法不同。应该基于前缀函数的理解更为简单。</p><p>同样，我们希望用到尽可能多的已经计算过的值。假设我们知道了 $\pi[0\dots i-1]$，希望求出 $\pi[i]$。</p><p>首先 $\pi[i]$ 最大为 $\pi[i-1]+1$，就相当于直接在上一个后面加上 $S_i$。于是我们定义一个指针 $j=\pi[i-1]$：</p><ol><li><p>如果 $S_j=S_i$（注意到 $S$ 是从 $0$ 开始的），则 $\pi[i]=j+1$；</p></li><li><p>否则我们需要挪动 $j$ —— 挪到下一个最长的可能匹配的位置：<br><img src="/2020/20May12thArt1/png1.png" alt="png1"></p><p>我们发现最长的可能匹配的后缀（绿色部分）其实是 $\pi[\pi[i-1]-1]$，为什么呢？</p><p><img src="/2020/20May12thArt1/png2.png" alt="png2"></p></li></ol><p>于是 $j$ 只要一直沿着 $\pi$ 函数往回跳——直到跳到 $S_j=S_i$ 或者 $j=0$（意味着可能 $S_i$ 与什么都不能匹配，或是 $\pi[i]=1$，即只匹配了 $S_i$ 一个字符）。</p><hr><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="# 伪代码"></a># 伪代码</h2><script type="math/tex; mode=display">\begin{array}{ll}1&\pi[0]\leftarrow 0\\2&\boldsymbol{for}\ i=1\rightarrow n-1\\3&\qquad j\leftarrow\pi[i-1]\\4&\qquad \boldsymbol{while}\ S_j\not= S_i \ \boldsymbol{and}\ j>0\\5&\qquad\qquad j\leftarrow\pi[j-1]\\6&\qquad\boldsymbol{if}\ S_i=S_j\ \boldsymbol{then}\ j\leftarrow j+1\\7&\qquad\pi[i]\leftarrow j\end{array}</script><hr><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="# 复杂度"></a># 复杂度</h2><p>KMP 的复杂度是 $O(n)$ 的，无论怎样实现。其复杂度决定于 $j$ 指针的移动。</p><p>为什么是 $O(n)$ 呢？之前我以为是因为 $j$ 指针沿着 $\pi$ 跳回去，可以节省复杂度，但是显然不是，因为完全可以构造字符串使得 $j$ 每次只移动一步，然后一直退回到 $0$。</p><p>而且之后的一道题 <a href="https://www.luogu.com.cn/problem/P4696" target="_blank" rel="noopener">[CEOI2011]Matching - 洛谷</a> 也充分地说明了，即使 $j$ 指针每次只向后挪动一位，复杂度仍然是 $O(n)$。</p><p>我们发现 $j$ 指针每次是从 $\pi[i-1]$ 开始，可能会往左退，然后如果匹配了，会向右 $+1$。实际上是接着上一次 $j$ 指针的位置继续移动。</p><p>于是可以发现 $j$ 只会向右移动 $n$ 次，而向左移动时 $j\ge0$，因此向左移动也不会超过 $n$ 次。复杂度为 $O(n)$。</p><hr><h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>开始着手补字符串这个大坑</p></blockquote><a id="more"></a><hr><h2 id="前缀函数"><a href="#前缀函数" class="headerlink" title="# 前缀函数"></a># 前缀函数</h2><blockquote><p>方便起见，对于字符串 $S$ 定义 $S(l,r)$ 表示 $S$ 的子串 $S_{l}S_{l+1}\dots S_r$。</p></blockquote><p>对于一个长度为 $n$ 的字符串 $S=S_0S_1\dots S_{n-1}$，定义 $\pi[i]$ （$i\in[0,n-1]$）表示以 $i$ 结尾的最长真后缀使得该后缀同时为 $S$ 的一个前缀。</p><p>换句话说 $S(0,\pi[i]-1)=S(i-\pi[i]+1,i)$。</p><p>在此定义下，不难发现 $\pi[0]=0$（注意是真后缀）。</p><hr><h2 id="求-pi-KMP"><a href="#求-pi-KMP" class="headerlink" title="# 求$\pi$ - KMP"></a># 求$\pi$ - KMP</h2><p>在过去所学习的 KMP 中，用到了一种 <code>fail</code> 指针，这样的指针为 AC 自动机的实现提供了一个基础。但是对于 KMP 算法，还有一种基于前缀函数的性质的实现。</p><p>这两种实现都是在求解 $\pi$ 函数，只是方法不同。应该基于前缀函数的理解更为简单。</p><p>同样，我们希望用到尽可能多的已经计算过的值。假设我们知道了 $\pi[0\dots i-1]$，希望求出 $\pi[i]$。</p><p>首先 $\pi[i]$ 最大为 $\pi[i-1]+1$，就相当于直接在上一个后面加上 $S_i$。于是我们定义一个指针 $j=\pi[i-1]$：</p><ol><li><p>如果 $S_j=S_i$（注意到 $S$ 是从 $0$ 开始的），则 $\pi[i]=j+1$；</p></li><li><p>否则我们需要挪动 $j$ —— 挪到下一个最长的可能匹配的位置：<br><img src="/2020/20May12thArt1/png1.png" alt="png1"></p><p>我们发现最长的可能匹配的后缀（绿色部分）其实是 $\pi[\pi[i-1]-1]$，为什么呢？</p><p><img src="/2020/20May12thArt1/png2.png" alt="png2"></p></li></ol><p>于是 $j$ 只要一直沿着 $\pi$ 函数往回跳——直到跳到 $S_j=S_i$ 或者 $j=0$（意味着可能 $S_i$ 与什么都不能匹配，或是 $\pi[i]=1$，即只匹配了 $S_i$ 一个字符）。</p><hr><h2 id="伪代码"><a href="#伪代码" class="headerlink" title="# 伪代码"></a># 伪代码</h2><script type="math/tex; mode=display">\begin{array}{ll}1&\pi[0]\leftarrow 0\\2&\boldsymbol{for}\ i=1\rightarrow n-1\\3&\qquad j\leftarrow\pi[i-1]\\4&\qquad \boldsymbol{while}\ S_j\not= S_i \ \boldsymbol{and}\ j>0\\5&\qquad\qquad j\leftarrow\pi[j-1]\\6&\qquad\boldsymbol{if}\ S_i=S_j\ \boldsymbol{then}\ j\leftarrow j+1\\7&\qquad\pi[i]\leftarrow j\end{array}</script><hr><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="# 复杂度"></a># 复杂度</h2><p>KMP 的复杂度是 $O(n)$ 的，无论怎样实现。其复杂度决定于 $j$ 指针的移动。</p><p>为什么是 $O(n)$ 呢？之前我以为是因为 $j$ 指针沿着 $\pi$ 跳回去，可以节省复杂度，但是显然不是，因为完全可以构造字符串使得 $j$ 每次只移动一步，然后一直退回到 $0$。</p><p>而且之后的一道题 <a href="https://www.luogu.com.cn/problem/P4696" target="_blank" rel="noopener">[CEOI2011]Matching - 洛谷</a> 也充分地说明了，即使 $j$ 指针每次只向后挪动一位，复杂度仍然是 $O(n)$。</p><p>我们发现 $j$ 指针每次是从 $\pi[i-1]$ 开始，可能会往左退，然后如果匹配了，会向右 $+1$。实际上是接着上一次 $j$ 指针的位置继续移动。</p><p>于是可以发现 $j$ 只会向右移动 $n$ 次，而向左移动时 $j\ge0$，因此向左移动也不会超过 $n$ 次。复杂度为 $O(n)$。</p><hr><h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">\begin{align}&“\ 忘川不映月不飞蝴蝶\\&\ \ \ 一碗汤换所有罪业\\&\ \ \ 看清每一张轻蔑\\&\ \ \ 又怎会舍得情真意切\ ”\\&\text{——《凡尘跋语》By 双笙}\end{align}</script>]]></content>
     
     <summary type="html">
     
@@ -149,9 +149,9 @@
       <category term="OI题解" scheme="http://luckyglass.github.io/categories/OI%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学-容斥" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6-%E5%AE%B9%E6%96%A5/"/>
-    
       <category term="-洛谷-" scheme="http://luckyglass.github.io/tags/%E6%B4%9B%E8%B0%B7/"/>
+    
+      <category term="数学-容斥" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6-%E5%AE%B9%E6%96%A5/"/>
     
       <category term="动态规划-树形DP" scheme="http://luckyglass.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%A0%91%E5%BD%A2DP/"/>
     
@@ -179,9 +179,9 @@
       <category term="OI题解" scheme="http://luckyglass.github.io/categories/OI%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数据结构-线段树" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="数学" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="数据结构-线段树" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
@@ -457,9 +457,9 @@
       <category term="OI题解" scheme="http://luckyglass.github.io/categories/OI%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="http://luckyglass.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
       <category term="数学-组合数" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6-%E7%BB%84%E5%90%88%E6%95%B0/"/>
+    
+      <category term="动态规划" scheme="http://luckyglass.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
       <category term="-Topcoder-" scheme="http://luckyglass.github.io/tags/Topcoder/"/>
     
@@ -518,11 +518,11 @@
       <category term="前行" scheme="http://luckyglass.github.io/categories/%E5%89%8D%E8%A1%8C/"/>
     
     
+      <category term="数学" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
+    
       <category term="动态规划" scheme="http://luckyglass.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
       <category term="算法效率-二分查找" scheme="http://luckyglass.github.io/tags/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"/>
-    
-      <category term="数学" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
     
       <category term="贪心" scheme="http://luckyglass.github.io/tags/%E8%B4%AA%E5%BF%83/"/>
     
