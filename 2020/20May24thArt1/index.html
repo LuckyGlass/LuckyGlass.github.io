@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="FWT之前学过，但是不太扎实，复习FST的时候看到了……发现已经忘了 所以重新学了一遍 QwQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 - 快速沃尔什变换FWT">
+<meta property="og:url" content="http://luckyglass.github.io/2020/20May24thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="FWT之前学过，但是不太扎实，复习FST的时候看到了……发现已经忘了 所以重新学了一遍 QwQ">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://luckyglass.github.io/2020/20May24thArt1/png1.png">
+<meta property="og:image" content="http://luckyglass.github.io/2020/20May24thArt1/png2.png">
+<meta property="article:published_time" content="2020-05-24T15:31:55.000Z">
+<meta property="article:modified_time" content="2020-05-25T05:55:50.568Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="数学-FWT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://luckyglass.github.io/2020/20May24thArt1/png1.png">
+
+<link rel="canonical" href="http://luckyglass.github.io/2020/20May24thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>学习笔记 - 快速沃尔什变换FWT | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20May24thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习笔记 - 快速沃尔什变换FWT
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-24 23:31:55" itemprop="dateCreated datePublished" datetime="2020-05-24T23:31:55+08:00">2020-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-25 13:55:50" itemprop="dateModified" datetime="2020-05-25T13:55:50+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20May24thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20May24thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>FWT之前学过，但是不太扎实，复习FST的时候看到了……发现已经忘了</p>
+<p>所以重新学了一遍 QwQ</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="什么是FWT"><a href="#什么是FWT" class="headerlink" title="# 什么是FWT"></a># 什么是FWT</h2><p>和FFT一样，是一种数列变换。</p>
+<p>我们知道 FFT 求解的是多项式乘法：$F_i=\sum\limits_{p+q=i}G_pH_q$，换句话说就是卷积。但是卷积并不局限于简单的多项式乘法……比如下面这个也是卷积：</p>
+<script type="math/tex; mode=display">
+F_i=\sum_{p\oplus q=i}G_pH_q</script><p>于是对于 FFT 来说，式子中的 $\oplus$ 是整数加法。</p>
+<p>而对于 FWT，它解决的是 $\oplus=\text{XOR,OR,AND}$（按位异或、按位或、按位与）中的任意一种。和 FFT 一样，FWT 能将原本 $O(n^2)$ 计算的卷积优化到 $O(n\log n)$。</p>
+<p>我们把一个数列 $A$ 经过 FWT 变换得到的序列记作 $FWT[A]$，以达到 $FWT[F]_i=FWT[G]_i\times FWT[H]_i$（整数乘法）的目的。</p>
+<hr>
+<h2 id="或卷积-FWTOR"><a href="#或卷积-FWTOR" class="headerlink" title="# 或卷积 FWTOR"></a># 或卷积 <code>FWTOR</code></h2><p><strong>Note. 方便起见，下文中 |,\&amp;,^ 分别代指或、与和异或</strong>。</p>
+<h3 id="理论推导"><a href="#理论推导" class="headerlink" title="- 理论推导"></a>- 理论推导</h3><p>FWT 用到的是位运算的一些性质——若 $a|c=c$ 且 $b|c=c$，则 $(a|b)|c=c$；可以从集合意义理解：$a$ 是 $c$ 的子集且 $b$ 是 $c$ 的子集，那么 $a,b$ 的并集也是 $c$ 的子集。</p>
+<p>于是我们定义：</p>
+<script type="math/tex; mode=display">
+FWT[A]_i=\sum_{j|i=i}A_j</script><p>我们是否已经达到了 $FWT[F]_i=FWT[G]_i\times FWT[H]_i$ 的目的了呢？可以验算一下：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+FWT[F]_i&=FWT[G]_i\times FWT[H]_i\\
+&=\sum_{j|i=i}G_j\times\sum_{k|i=i} H_k\\
+&=\sum_{j|i=i}\sum_{k|i=i} G_jH_k\\
+&=\sum_{(j|k)|i=i}G_jH_k\\
+&=\sum_{x|i=i}\sum_{j|k=x}G_jH_k\\
+&=\sum_{x|i=i}F_x
+\end{split}</script><p>与 $FWT[F]_i$ 的定义式是一样的，这就是或变换。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="- 代码实现"></a>- 代码实现</h3><p><strong>Note. 假设</strong> $A$ <strong>是一个有</strong> $2^n$ <strong>项的多项式</strong>。</p>
+<p>用分组计算的方法——定义临时变量 $P[0\sim n-1]$，$P[i]$ 是一个多项式，$P[i]_j$ 是 $A_x$ 的和，其中 $x$ 满足高位开始的 $i$ 个位置（二进制下）和 $j$ 相同，且记 $x$ 剩下的位置为 $x’$，$j’$ 同理，则 $x’|j’=j’$。</p>
+<p>于是我们发现 $P[n-1]=A$，$P[0]=FWT[A]$。</p>
+<p>而 $P[i]$ 是可以由 $P[i-1]$ 推过来的——</p>
+<p><img src="/2020/20May24thArt1/png1.png" alt="png1"></p>
+<p>上图的箭头表示了某一个值是由哪些值加起来得到的，比如 $P[1]_{01}$ 就是由 $P[2]_{00}+P[2]_{01}$ 得到的。逆变换也可以通过这张图得到，比如 $P[2]_{11}=P[1]_{11}-P[1]_{10}$。</p>
+<p>于是可以用类似于 FFT 的方法实现，详见文末代码。</p>
+<hr>
+<h2 id="与卷积-FWTAND"><a href="#与卷积-FWTAND" class="headerlink" title="# 与卷积 FWTAND"></a># 与卷积 <code>FWTAND</code></h2><p>这里用到了按位与的性质：若 $b\&amp;a=a$ 且 $c\&amp;a=a$，则 $(b\&amp;c)\&amp;a=a$。</p>
+<p>同理构造 $FWT[A]_i=\sum\limits_{j\&amp;i=i}A_j$。</p>
+<hr>
+<h2 id="异或卷积-FWTXOR"><a href="#异或卷积-FWTXOR" class="headerlink" title="# 异或卷积 FWTXOR"></a># 异或卷积 <code>FWTXOR</code></h2><p>相对复杂。定义运算 $i\otimes j$ 表示二进制数 $(i\&amp; j)$ 中 $1$ 的个数的<strong>奇偶性</strong>，则有性质 $(a\otimes b)\text^(a\otimes c)=a\otimes(b\text^ c)$。</p>
+<p>根据这一点，我们构造：</p>
+<script type="math/tex; mode=display">
+FWT[A]_i=\sum_{i\otimes j=0}A_j-\sum_{i\otimes j=1}A_j</script><p>同样，我们来验证一下这样构造是否达到目的：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+FWT[F]_i&=FWT[G]_i\times FWT[H]_i\\
+&=\left(\sum_{i\otimes j=0}G_j-\sum_{i\otimes j=1}G_j\right)\left(\sum_{i\otimes j=0}H_j-\sum_{i\otimes j=1}H_j\right)\\
+&=\sum_{i\otimes j=0}G_j\sum_{i\otimes k=0}H_k-\sum_{i\otimes j=1}G_j\sum_{i\otimes k=0}H_k-\sum_{i\otimes j=0}G_j\sum_{i\otimes k=1}H_k+\sum_{i\otimes j=1}G_j\sum_{i\otimes k=1}H_k\\
+&=\sum_{i\otimes(j\text^k)=0}G_jH_k-\sum_{i\otimes(j\text^k)=1}G_jH_k
+\end{split}</script><p>说明这样构造是成立的。</p>
+<p>仍然采用分组计算的方法，而画出来的图就更加复杂了：</p>
+<p><img src="/2020/20May24thArt1/png2.png" alt="png2"></p>
+<p>蓝色边表示“正向”，即箭头方向的值加上箭尾的值；橙色边表示反向，即减去箭尾的值。因为当 $1\&amp;1=1$ 时，会新增一个 $1$，则奇偶改变。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> FWT&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> MOD=<span class="number">998244353</span>;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">FAdd</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a,<span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">FSub</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a,<span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">FMul</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a,<span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*a*b%MOD;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">FPow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">int</span> ret=<span class="number">1</span>;<span class="keyword">while</span>(b)&#123;<span class="keyword">if</span>(b&amp;<span class="number">1</span>)ret=FMul(ret,a);a=FMul(a,a);b&gt;&gt;=<span class="number">1</span>;&#125;<span class="keyword">return</span> ret;&#125;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> INV2=FPow(<span class="number">2</span>,MOD<span class="number">-2</span>);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">FWTOR</span><span class="params">(<span class="keyword">int</span> *ary,<span class="keyword">const</span> <span class="keyword">int</span> &amp;len,<span class="keyword">const</span> <span class="keyword">int</span> &amp;typ)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> L=<span class="number">2</span>,T=<span class="number">1</span>;L&lt;=len;L&lt;&lt;=<span class="number">1</span>,T&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i+=L)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;i+T;j++)</span><br><span class="line">                    <span class="keyword">if</span>(typ==<span class="number">1</span>) ary[j+T]=FAdd(ary[j+T],ary[j]);</span><br><span class="line">                    <span class="keyword">else</span> ary[j+T]=FSub(ary[j+T],ary[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">FWTAND</span><span class="params">(<span class="keyword">int</span> *ary,<span class="keyword">const</span> <span class="keyword">int</span> &amp;len,<span class="keyword">const</span> <span class="keyword">int</span> &amp;typ)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> L=<span class="number">2</span>,T=<span class="number">1</span>;L&lt;=len;L&lt;&lt;=<span class="number">1</span>,T&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i+=L)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;i+T;j++)</span><br><span class="line">                    <span class="keyword">if</span>(typ==<span class="number">1</span>) ary[j]=FAdd(ary[j],ary[j+T]);</span><br><span class="line">                    <span class="keyword">else</span> ary[j]=FSub(ary[j],ary[j+T]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">FWTXOR</span><span class="params">(<span class="keyword">int</span> *ary,<span class="keyword">const</span> <span class="keyword">int</span> &amp;len,<span class="keyword">const</span> <span class="keyword">int</span> &amp;typ)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> L=<span class="number">2</span>,T=<span class="number">1</span>;L&lt;=len;L&lt;&lt;=<span class="number">1</span>,T&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i+=L)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;i+T;j++)&#123;</span><br><span class="line">                    <span class="keyword">int</span> Aj=ary[j];</span><br><span class="line">                    ary[j]=FAdd(Aj,ary[j+T]);</span><br><span class="line">                    ary[j+T]=FSub(Aj,ary[j+T]);</span><br><span class="line">                    <span class="keyword">if</span>(typ==<span class="number">-1</span>)</span><br><span class="line">                        ary[j]=FMul(ary[j],INV2),ary[j+T]=FMul(ary[j+T],INV2);</span><br><span class="line">                &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &你走吧\ 趁着落日长天\\
+&你走吧\ 此去山遥路远\\
+&愿夜里秋风温暖\ 街头不寒\\
+&你走吧\ 趁着天色未暗\\
+&你走吧\ 深知道阻且难\\
+&我献上明月一盏\ 照满河山”\\
+\text{—}&\text{—《山遥路远》By ChiliChill}
+\end{split}</script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2020/20May24thArt1/" title="学习笔记 - 快速沃尔什变换FWT">http://luckyglass.github.io/2020/20May24thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6-FWT/" rel="tag"><i class="fa fa-tag"></i> 数学-FWT</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/0May21stArt1/" rel="prev" title="OI题解 - Good Substrings (Codeforces)">
+      <i class="fa fa-chevron-left"></i> OI题解 - Good Substrings (Codeforces)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是FWT"><span class="nav-text"># 什么是FWT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#或卷积-FWTOR"><span class="nav-text"># 或卷积 FWTOR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理论推导"><span class="nav-text">- 理论推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-text">- 代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与卷积-FWTAND"><span class="nav-text"># 与卷积 FWTAND</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异或卷积-FWTXOR"><span class="nav-text"># 异或卷积 FWTXOR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">149</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共266.8k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
