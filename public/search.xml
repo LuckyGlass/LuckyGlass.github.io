@@ -14,6 +14,49 @@
 ]]></content>
   </entry>
   <entry>
+    <title>OI题解 - 道路(HNOI/AHOI)</title>
+    <url>/2020/20Jun1stArt1/</url>
+    <content><![CDATA[<blockquote>
+<p>儿童节快乐~ 尽管从某种程度上我早就不是那个能过六一节的儿童了</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> <a href="https://www.luogu.com.cn/problem/P4438" target="_blank" rel="noopener">洛谷 P4438</a></p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>题目中非常重要的提示是“树深不超过40”（可惜我以为这是限制答案不超过long long……不过讲道理<strong>限制树深确实非常特殊</strong>，应该有特别意义）</p>
+<p>因为代价的计算式中出现了 $x,y$ 的乘积项，并不方便处理，这就意味着 DP 状态中一定要储存 $x,y$ 的相关信息。对于一般的树形DP，我们往往会储存一个子树的信息，但是这道题我们可以储存当前点到根的路径上的信息：</p>
+<p>定义 <code>f[u][x][y]</code> 表示 $u$ 到 $1$ 的路径上有 $x$ 条未翻新的公路、$y$ 条未翻新的铁路对应的<u>最小子树代价和</u>。</p>
+<p>不难得到转移式：</p>
+<script type="math/tex; mode=display">
+f[u][x][y]=\min\{f[v_x][x][y]+f[v_y][x][y+1],f[v_x][x+1][y]+f[v_y][x][y]\}</script><p>$v_x$ 指 $u$ 通过公路连接的点，$v_y$ 指 $u$ 通过铁路连接的点。那么 $\min$ 中前者表示修复公路、后者表示修复铁路。</p>
+<p>如果 $v$ 是乡村，则 $f[v][x][y]=(a_{v}+x)(b_v+y)c_v$。</p>
+<p>然后<strong>从下往上</strong>DP即可，又因为出题人非常好心地让树的节点标号和树深相联系，甚至都不需要写DFS。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">2e4</span>+<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> lnk[N][<span class="number">2</span>],val[N][<span class="number">3</span>],fa[N&lt;&lt;<span class="number">1</span>],cntx[N&lt;&lt;<span class="number">1</span>],cnty[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">ll f[N][<span class="number">41</span>][<span class="number">41</span>];</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> F(u,x,y) ((u)&gt;0? f[u][x][y]:1ll*val[-u][2]*(val[-u][0]+x)*(val[-u][1]+y))</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> a=<span class="number">0</span>,b=<span class="number">1</span>,c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) b=(c==<span class="string">'-'</span>? <span class="number">-1</span>:b),c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) a=(a&lt;&lt;<span class="number">1</span>)+(a&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">    <span class="keyword">return</span> a*b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=Ri();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">2</span>;j++)&#123;</span><br><span class="line">            lnk[i][j]=Ri();</span><br><span class="line">            <span class="keyword">if</span>(lnk[i][j]&gt;<span class="number">0</span>) fa[lnk[i][j]]=i;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">3</span>;j++)</span><br><span class="line">            val[i][j]=Ri();</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">0x3f</span>,<span class="keyword">sizeof</span> f);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> u=<span class="number">2</span>;u&lt;n;u++)&#123;</span><br><span class="line">        cntx[u]=cntx[fa[u]]+(lnk[fa[u]][<span class="number">0</span>]==u);</span><br><span class="line">        cnty[u]=cnty[fa[u]]+(lnk[fa[u]][<span class="number">1</span>]==u);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> u=n<span class="number">-1</span>;u&gt;=<span class="number">1</span>;u--)&#123;</span><br><span class="line">        <span class="keyword">int</span> vx=lnk[u][<span class="number">0</span>],vy=lnk[u][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>;x&lt;=cntx[u];x++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> y=<span class="number">0</span>;y&lt;=cnty[u];y++)&#123;</span><br><span class="line">                <span class="comment">//x</span></span><br><span class="line">                f[u][x][y]=min(f[u][x][y],F(vx,x,y)+F(vy,x,y+<span class="number">1</span>));</span><br><span class="line">                <span class="comment">//y</span></span><br><span class="line">                f[u][x][y]=min(f[u][x][y],F(vx,x+<span class="number">1</span>,y)+F(vy,x,y));</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,f[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &谁的歌声轻轻\ 轻轻唱\\
+&谁的泪水静\ 静淌\\
+&那些年华\ 都付作过往\\
+&他们偎依着彼此说好要面对风浪\\
+\\
+&又是一地\ 枯黄\\
+&枫叶红了满面秋霜\\
+&这场故梦里\\
+&人生如戏唱\\
+&还有谁登场\ ”\\
+\text{—}&\text{—《故梦》 By 双笙}
+\end{split}</script>]]></content>
+      <categories>
+        <category>OI题解</category>
+      </categories>
+      <tags>
+        <tag>-洛谷-</tag>
+        <tag>动态规划-树形DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>学习笔记 - 回文自动机PAM</title>
     <url>/2020/20May30thArt2/</url>
     <content><![CDATA[<blockquote>
@@ -377,8 +420,8 @@ FWT[F]_i&=FWT[G]_i\times FWT[H]_i\\
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>图论-最短路</tag>
         <tag>贪心</tag>
+        <tag>图论-最短路</tag>
         <tag>-LOJ-</tag>
       </tags>
   </entry>
@@ -3306,8 +3349,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
       <tags>
         <tag>模拟</tag>
         <tag>动态规划</tag>
-        <tag>图论-树</tag>
         <tag>贪心</tag>
+        <tag>图论-树</tag>
         <tag>数学-容斥</tag>
         <tag>数学-组合计数</tag>
       </tags>
@@ -3567,10 +3610,10 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>图论-最短路</tag>
         <tag>动态规划-状压DP</tag>
-        <tag>-Codeforces-</tag>
+        <tag>图论-最短路</tag>
         <tag>图论-生成树</tag>
+        <tag>-Codeforces-</tag>
       </tags>
   </entry>
   <entry>
@@ -4036,8 +4079,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
       </categories>
       <tags>
         <tag>算法效率-哈希</tag>
-        <tag>动态规划-换根DP</tag>
         <tag>-HDU-</tag>
+        <tag>动态规划-换根DP</tag>
       </tags>
   </entry>
   <entry>
@@ -4121,8 +4164,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划-换根DP</tag>
         <tag>-HDU-</tag>
+        <tag>动态规划-换根DP</tag>
         <tag>数学-博弈论</tag>
       </tags>
   </entry>
@@ -6092,8 +6135,8 @@ D\times V\times \begin{bmatrix}a_0\\a_1\\a_2\\\vdots\\a_{n-1}\end{bmatrix}
       </categories>
       <tags>
         <tag>-POJ-</tag>
-        <tag>数学-素性测试</tag>
         <tag>数学-大数分解</tag>
+        <tag>数学-素性测试</tag>
         <tag>数学-EXGCD</tag>
       </tags>
   </entry>
@@ -6916,9 +6959,9 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
         <tag>数据结构-线段树</tag>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
-        <tag>动态规划-状压DP</tag>
-        <tag>贪心</tag>
         <tag>算法效率-扫描线</tag>
+        <tag>贪心</tag>
+        <tag>动态规划-状压DP</tag>
       </tags>
   </entry>
   <entry>
@@ -8225,8 +8268,8 @@ A_i^4-kA_i&\equiv A_j^4-kA_j
       <tags>
         <tag>数学</tag>
         <tag>模拟</tag>
-        <tag>动态规划-状压DP</tag>
         <tag>贪心</tag>
+        <tag>动态规划-状压DP</tag>
       </tags>
   </entry>
   <entry>
@@ -8535,9 +8578,9 @@ p&\leq q
         <category>OI题解</category>
       </categories>
       <tags>
+        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
         <tag>图论-树</tag>
-        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -9321,8 +9364,8 @@ x\equiv r_i\pmod{m_i}
         <category>前行</category>
       </categories>
       <tags>
-        <tag>算法效率-滑动窗口</tag>
         <tag>数据结构-线段树</tag>
+        <tag>算法效率-滑动窗口</tag>
         <tag>动态规划</tag>
         <tag>算法效率</tag>
         <tag>搜索</tag>
