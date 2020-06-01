@@ -14,6 +14,78 @@
 ]]></content>
   </entry>
   <entry>
+    <title>学习笔记 - 回文自动机PAM</title>
+    <url>/2020/20May30thArt2/</url>
+    <content><![CDATA[<blockquote>
+<p>一类能够接受一个主串内的所有回文子串的自动机~</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="概念"><a href="#概念" class="headerlink" title="# 概念"></a># 概念</h2><p>回文自动机PAM非常类似于后缀自动机SAM，或许是借鉴了SAM的灵感。</p>
+<p>具体地说，PAM的每个节点<strong>代表一个回文串</strong>，并且节点（除了起始节点）与主串中的所有回文子串<strong>一一对应</strong>，也具有两种边：</p>
+<ol>
+<li>转移边 <code>next[c]</code>，指向将当前节点代表的回文串的<u>两端加上字符 c</u>得到的回文串的节点。</li>
+<li>后缀边 <code>link</code>，指向当前节点代表的回文串的<u>最长的回文真后缀</u>的节点。</li>
+</ol>
+<p>所有转移边构成一个 DAG，所有后缀边构成一棵树。</p>
+<p>但是与SAM不同，PAM有两个起始节点 <code>0</code> 和 <code>-1</code>。因为回文串根据长度的奇偶可以分为两类，那么就相应地——在 <code>0</code> 的两端加字符相当于是一个偶回文串，而在 <code>-1</code> 两端加字符相当于得到一个奇回文串。</p>
+<p>除此之外，每个节点还维护了信息 $len$，即对应的回文串的长度。</p>
+<hr>
+<h2 id="构造"><a href="#构造" class="headerlink" title="# 构造"></a># 构造</h2><p>给定主串 $S$，要求构造 $S$ 的PAM。</p>
+<blockquote>
+<p>这里比SAM要简单好多</p>
+</blockquote>
+<p>初始化，不难理解：<code>0</code> 的 $len$ 为 $0$，<code>-1</code> 的 $len$ 为 $-1$。然后 <code>0</code> 的 <code>link</code> 指向 <code>-1</code>，可以这样理解：<code>0</code> 代表“偶空串”，由两个空字符组成；<code>-1</code> 代表“奇空串”，由一个空字符组成。</p>
+<p>仍然使用增量法，从上一个位置结尾的最长的回文串开始，向两边扩展。设当前要插入位置为 $i$，当前位置的字符为 $c$，上一个位置 $i-1$ 的对应节点为 $las$，初始情况 $las=-1$。</p>
+<ol>
+<li><p>如果 $S_{i}=S_{i-len[las]-1}$，也就是 $i-len[las]-1$ 到 $i$ 是一个回文串，则无需操作；</p>
+</li>
+<li><p>如果 $S_i\not= S_{i-len[las]-1}$，则将 $las$ 移动到 $link[las]$ 后再检验是否形成回文，即移动到一个更小的回文串再判断；最后一定会找到满足条件的 $las$，因为一个字符本身就是一个回文串，此时 $las$ 会跳回 $-1$。</p>
+</li>
+<li><p>如果 $next[las][c]$ 不为空，表示这个回文串已经出现过了，则 $las$ 移动到 $next[las][c]$；</p>
+</li>
+<li><p>如果 $next[las][c]$ 是空，表示这个回文串是第一次出现，则新建节点 $cur$；</p>
+<p>$len[cur]=len[las]+2$，即在原回文串的两端加上字符 $c$；</p>
+<p>然后求 $link[cur]$，从 $link[las]$ 开始沿着 $link$ 边向上跳，直到找到回文后缀为止；如果找到了回文后缀，则 $link[cur]$ 指向该位置；如果没有（可能 $cur$ 就是一个字符构成的回文），则 $link[cur]$ 指向 $0$；</p>
+</li>
+</ol>
+<hr>
+<h2 id="时空复杂度"><a href="#时空复杂度" class="headerlink" title="# 时空复杂度"></a># 时空复杂度</h2><p>PAM 的优越的复杂度基于“一个长度为 $n$ 的字符串最多有 $n$ 个本质不同的回文子串”这个事实。</p>
+<p>证明比较简单，只需要证明<strong>向原字符串的末尾添加一个字符，最多只会增加一个本质不同的回文子串</strong>。</p>
+<p><img src="/2020/20May30thArt2/png1.png" alt="png1"></p>
+<p>在原字符串末尾加上位置 $i$，则除了以 $i$ 结尾的最长的回文子串（图中黄色片段）可能是第一次出现，其他以 $i$ 结尾的回文子串（比如绿色片段）一定出现过，因为可以对称过去（以黄色片段的中点对称）找到一个一样的字符串。</p>
+<p>那么，PAM 的点数就只有 $n+2$ 个（两个起始点），空间复杂度 $O(n)$，link树的深度达到 $O(n)$。</p>
+<p>增量法构造的时间复杂度也是 $O(n)$，分析增量法中一直在移动的 $las$ 指针：</p>
+<ol>
+<li>$las$ 只会沿着 $next$ 边走 $n$ 次，每次 $len[las]$ 增加 $1$；</li>
+<li>$las$ 沿着 $link$ 边走，$len[las]$ 严格减小。</li>
+</ol>
+<p>那么由于 $len[las]\ge-1$，则沿着 $link$ 边走的次数为 $O(n)$，则时间复杂度也为 $O(n)$。</p>
+<hr>
+<h2 id="局限"><a href="#局限" class="headerlink" title="# 局限"></a># 局限</h2><p>虽然 PAM 非常优秀，但是它还是不能完全顶替 Manachar：</p>
+<ol>
+<li>PAM 的空间开销巨大，因为字符集大小一般是 26，光是 next 数组就要开 $26\times n$ 这么多；除非时间换空间，用 hash 储存图（因为 next 边的数量只有 $O(n)$）</li>
+<li>PAM 求的是以一个位置结尾的回文串，而 Manachar 求的是以一个位置为中点的回文串，有些题用 PAM 就比较麻烦</li>
+</ol>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">PAMAUTO</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> nxt[N][<span class="number">26</span>],lnk[N],len[N],ncnt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ncnt=<span class="number">2</span>;</span><br><span class="line">        len[<span class="number">1</span>]=<span class="number">-1</span>,lnk[<span class="number">1</span>]=<span class="number">1</span>; <span class="comment">//当然实际实现不可能下标用 0 和 -1</span></span><br><span class="line">        len[<span class="number">2</span>]=<span class="number">0</span>,lnk[<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Match</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">const</span> <span class="keyword">int</span> &amp;pos)</span></span>&#123; <span class="comment">//沿着link边跳，直到找到回文后缀</span></span><br><span class="line">        <span class="keyword">while</span>(str[pos]!=str[pos-len[u]<span class="number">-1</span>]) u=lnk[u];</span><br><span class="line">        <span class="keyword">return</span> u;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Build</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;L,<span class="keyword">int</span> *res)</span></span>&#123;</span><br><span class="line">        Init();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,las=<span class="number">1</span>;i&lt;L;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> c=str[i]-<span class="string">'0'</span>;</span><br><span class="line">            las=Match(las,i);</span><br><span class="line">            <span class="keyword">if</span>(!nxt[las][c])&#123; <span class="comment">//第一次出现</span></span><br><span class="line">                <span class="keyword">int</span> cur=++ncnt,tmp;</span><br><span class="line">                len[cur]=len[las]+<span class="number">2</span>;</span><br><span class="line">                tmp=Match(lnk[las],i);</span><br><span class="line">                <span class="keyword">if</span>(nxt[tmp][c]) lnk[cur]=nxt[tmp][c];</span><br><span class="line">                <span class="keyword">else</span> lnk[cur]=<span class="number">2</span>;</span><br><span class="line">                nxt[las][c]=cur,las=cur;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> las=nxt[las][c];</span><br><span class="line">            res[i]=len[las];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &当雨一点点\ 落在夜晚的地面\\
+&拉紧的窗帘\ 遮住了胆怯\\
+&那雨一点点\ 一点一点连成线\\
+&能不能缝合\ 心口的创面\ ”\\
+\text{—}&\text{—《雨线》}
+\end{split}</script>]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>字符串-PAM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前行 - NOI Online Round Ⅲ</title>
     <url>/2020/20May30thArt1/</url>
     <content><![CDATA[<blockquote>
@@ -481,8 +553,8 @@ f_{1,i}=h_i-\sum_{j=i+1}^mC_j^if_{1,j}</script><hr>
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学-容斥</tag>
         <tag>-洛谷-</tag>
+        <tag>数学-容斥</tag>
         <tag>动态规划-树形DP</tag>
       </tags>
   </entry>
@@ -3234,8 +3306,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
       <tags>
         <tag>模拟</tag>
         <tag>动态规划</tag>
-        <tag>贪心</tag>
         <tag>图论-树</tag>
+        <tag>贪心</tag>
         <tag>数学-容斥</tag>
         <tag>数学-组合计数</tag>
       </tags>
@@ -3964,8 +4036,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
       </categories>
       <tags>
         <tag>算法效率-哈希</tag>
-        <tag>-HDU-</tag>
         <tag>动态规划-换根DP</tag>
+        <tag>-HDU-</tag>
       </tags>
   </entry>
   <entry>
@@ -4049,8 +4121,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>-HDU-</tag>
         <tag>动态规划-换根DP</tag>
+        <tag>-HDU-</tag>
         <tag>数学-博弈论</tag>
       </tags>
   </entry>
@@ -6844,8 +6916,8 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
         <tag>数据结构-线段树</tag>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
-        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
+        <tag>贪心</tag>
         <tag>算法效率-扫描线</tag>
       </tags>
   </entry>
@@ -8153,8 +8225,8 @@ A_i^4-kA_i&\equiv A_j^4-kA_j
       <tags>
         <tag>数学</tag>
         <tag>模拟</tag>
-        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -8463,9 +8535,9 @@ p&\leq q
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
         <tag>图论-树</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -9249,8 +9321,8 @@ x\equiv r_i\pmod{m_i}
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数据结构-线段树</tag>
         <tag>算法效率-滑动窗口</tag>
+        <tag>数据结构-线段树</tag>
         <tag>动态规划</tag>
         <tag>算法效率</tag>
         <tag>搜索</tag>

@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="一类能够接受一个主串内的所有回文子串的自动机~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 - 回文自动机PAM">
+<meta property="og:url" content="http://luckyglass.github.io/2020/20May30thArt2/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="一类能够接受一个主串内的所有回文子串的自动机~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://luckyglass.github.io/2020/20May30thArt2/png1.png">
+<meta property="article:published_time" content="2020-05-30T09:28:27.000Z">
+<meta property="article:modified_time" content="2020-06-01T05:46:54.184Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="字符串-PAM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://luckyglass.github.io/2020/20May30thArt2/png1.png">
+
+<link rel="canonical" href="http://luckyglass.github.io/2020/20May30thArt2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>学习笔记 - 回文自动机PAM | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20May30thArt2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习笔记 - 回文自动机PAM
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-30 17:28:27" itemprop="dateCreated datePublished" datetime="2020-05-30T17:28:27+08:00">2020-05-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-01 13:46:54" itemprop="dateModified" datetime="2020-06-01T13:46:54+08:00">2020-06-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20May30thArt2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20May30thArt2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>一类能够接受一个主串内的所有回文子串的自动机~</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="概念"><a href="#概念" class="headerlink" title="# 概念"></a># 概念</h2><p>回文自动机PAM非常类似于后缀自动机SAM，或许是借鉴了SAM的灵感。</p>
+<p>具体地说，PAM的每个节点<strong>代表一个回文串</strong>，并且节点（除了起始节点）与主串中的所有回文子串<strong>一一对应</strong>，也具有两种边：</p>
+<ol>
+<li>转移边 <code>next[c]</code>，指向将当前节点代表的回文串的<u>两端加上字符 c</u>得到的回文串的节点。</li>
+<li>后缀边 <code>link</code>，指向当前节点代表的回文串的<u>最长的回文真后缀</u>的节点。</li>
+</ol>
+<p>所有转移边构成一个 DAG，所有后缀边构成一棵树。</p>
+<p>但是与SAM不同，PAM有两个起始节点 <code>0</code> 和 <code>-1</code>。因为回文串根据长度的奇偶可以分为两类，那么就相应地——在 <code>0</code> 的两端加字符相当于是一个偶回文串，而在 <code>-1</code> 两端加字符相当于得到一个奇回文串。</p>
+<p>除此之外，每个节点还维护了信息 $len$，即对应的回文串的长度。</p>
+<hr>
+<h2 id="构造"><a href="#构造" class="headerlink" title="# 构造"></a># 构造</h2><p>给定主串 $S$，要求构造 $S$ 的PAM。</p>
+<blockquote>
+<p>这里比SAM要简单好多</p>
+</blockquote>
+<p>初始化，不难理解：<code>0</code> 的 $len$ 为 $0$，<code>-1</code> 的 $len$ 为 $-1$。然后 <code>0</code> 的 <code>link</code> 指向 <code>-1</code>，可以这样理解：<code>0</code> 代表“偶空串”，由两个空字符组成；<code>-1</code> 代表“奇空串”，由一个空字符组成。</p>
+<p>仍然使用增量法，从上一个位置结尾的最长的回文串开始，向两边扩展。设当前要插入位置为 $i$，当前位置的字符为 $c$，上一个位置 $i-1$ 的对应节点为 $las$，初始情况 $las=-1$。</p>
+<ol>
+<li><p>如果 $S_{i}=S_{i-len[las]-1}$，也就是 $i-len[las]-1$ 到 $i$ 是一个回文串，则无需操作；</p>
+</li>
+<li><p>如果 $S_i\not= S_{i-len[las]-1}$，则将 $las$ 移动到 $link[las]$ 后再检验是否形成回文，即移动到一个更小的回文串再判断；最后一定会找到满足条件的 $las$，因为一个字符本身就是一个回文串，此时 $las$ 会跳回 $-1$。</p>
+</li>
+<li><p>如果 $next[las][c]$ 不为空，表示这个回文串已经出现过了，则 $las$ 移动到 $next[las][c]$；</p>
+</li>
+<li><p>如果 $next[las][c]$ 是空，表示这个回文串是第一次出现，则新建节点 $cur$；</p>
+<p>$len[cur]=len[las]+2$，即在原回文串的两端加上字符 $c$；</p>
+<p>然后求 $link[cur]$，从 $link[las]$ 开始沿着 $link$ 边向上跳，直到找到回文后缀为止；如果找到了回文后缀，则 $link[cur]$ 指向该位置；如果没有（可能 $cur$ 就是一个字符构成的回文），则 $link[cur]$ 指向 $0$；</p>
+</li>
+</ol>
+<hr>
+<h2 id="时空复杂度"><a href="#时空复杂度" class="headerlink" title="# 时空复杂度"></a># 时空复杂度</h2><p>PAM 的优越的复杂度基于“一个长度为 $n$ 的字符串最多有 $n$ 个本质不同的回文子串”这个事实。</p>
+<p>证明比较简单，只需要证明<strong>向原字符串的末尾添加一个字符，最多只会增加一个本质不同的回文子串</strong>。</p>
+<p><img src="/2020/20May30thArt2/png1.png" alt="png1"></p>
+<p>在原字符串末尾加上位置 $i$，则除了以 $i$ 结尾的最长的回文子串（图中黄色片段）可能是第一次出现，其他以 $i$ 结尾的回文子串（比如绿色片段）一定出现过，因为可以对称过去（以黄色片段的中点对称）找到一个一样的字符串。</p>
+<p>那么，PAM 的点数就只有 $n+2$ 个（两个起始点），空间复杂度 $O(n)$，link树的深度达到 $O(n)$。</p>
+<p>增量法构造的时间复杂度也是 $O(n)$，分析增量法中一直在移动的 $las$ 指针：</p>
+<ol>
+<li>$las$ 只会沿着 $next$ 边走 $n$ 次，每次 $len[las]$ 增加 $1$；</li>
+<li>$las$ 沿着 $link$ 边走，$len[las]$ 严格减小。</li>
+</ol>
+<p>那么由于 $len[las]\ge-1$，则沿着 $link$ 边走的次数为 $O(n)$，则时间复杂度也为 $O(n)$。</p>
+<hr>
+<h2 id="局限"><a href="#局限" class="headerlink" title="# 局限"></a># 局限</h2><p>虽然 PAM 非常优秀，但是它还是不能完全顶替 Manachar：</p>
+<ol>
+<li>PAM 的空间开销巨大，因为字符集大小一般是 26，光是 next 数组就要开 $26\times n$ 这么多；除非时间换空间，用 hash 储存图（因为 next 边的数量只有 $O(n)$）</li>
+<li>PAM 求的是以一个位置结尾的回文串，而 Manachar 求的是以一个位置为中点的回文串，有些题用 PAM 就比较麻烦</li>
+</ol>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">PAMAUTO</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> nxt[N][<span class="number">26</span>],lnk[N],len[N],ncnt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ncnt=<span class="number">2</span>;</span><br><span class="line">        len[<span class="number">1</span>]=<span class="number">-1</span>,lnk[<span class="number">1</span>]=<span class="number">1</span>; <span class="comment">//当然实际实现不可能下标用 0 和 -1</span></span><br><span class="line">        len[<span class="number">2</span>]=<span class="number">0</span>,lnk[<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Match</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">const</span> <span class="keyword">int</span> &amp;pos)</span></span>&#123; <span class="comment">//沿着link边跳，直到找到回文后缀</span></span><br><span class="line">        <span class="keyword">while</span>(str[pos]!=str[pos-len[u]<span class="number">-1</span>]) u=lnk[u];</span><br><span class="line">        <span class="keyword">return</span> u;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Build</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;L,<span class="keyword">int</span> *res)</span></span>&#123;</span><br><span class="line">        Init();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,las=<span class="number">1</span>;i&lt;L;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> c=str[i]-<span class="string">'0'</span>;</span><br><span class="line">            las=Match(las,i);</span><br><span class="line">            <span class="keyword">if</span>(!nxt[las][c])&#123; <span class="comment">//第一次出现</span></span><br><span class="line">                <span class="keyword">int</span> cur=++ncnt,tmp;</span><br><span class="line">                len[cur]=len[las]+<span class="number">2</span>;</span><br><span class="line">                tmp=Match(lnk[las],i);</span><br><span class="line">                <span class="keyword">if</span>(nxt[tmp][c]) lnk[cur]=nxt[tmp][c];</span><br><span class="line">                <span class="keyword">else</span> lnk[cur]=<span class="number">2</span>;</span><br><span class="line">                nxt[las][c]=cur,las=cur;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> las=nxt[las][c];</span><br><span class="line">            res[i]=len[las];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &当雨一点点\ 落在夜晚的地面\\
+&拉紧的窗帘\ 遮住了胆怯\\
+&那雨一点点\ 一点一点连成线\\
+&能不能缝合\ 心口的创面\ ”\\
+\text{—}&\text{—《雨线》}
+\end{split}</script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2020/20May30thArt2/" title="学习笔记 - 回文自动机PAM">http://luckyglass.github.io/2020/20May30thArt2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-PAM/" rel="tag"><i class="fa fa-tag"></i> 字符串-PAM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20May30thArt1/" rel="prev" title="前行 - NOI Online Round Ⅲ">
+      <i class="fa fa-chevron-left"></i> 前行 - NOI Online Round Ⅲ
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-text"># 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造"><span class="nav-text"># 构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时空复杂度"><span class="nav-text"># 时空复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局限"><span class="nav-text"># 局限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">100</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共270.1k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
