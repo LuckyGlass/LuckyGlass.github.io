@@ -290,9 +290,9 @@
       
         <tags>
             
-            <tag> -洛谷- </tag>
-            
             <tag> 数学-容斥 </tag>
+            
+            <tag> -洛谷- </tag>
             
             <tag> 动态规划-树形DP </tag>
             
@@ -1394,13 +1394,13 @@
       
         <tags>
             
-            <tag> 动态规划-状压DP </tag>
-            
             <tag> 图论-最短路 </tag>
             
-            <tag> -Codeforces- </tag>
+            <tag> 动态规划-状压DP </tag>
             
             <tag> 图论-生成树 </tag>
+            
+            <tag> -Codeforces- </tag>
             
         </tags>
       
@@ -2626,9 +2626,9 @@
             
             <tag> 贪心 </tag>
             
-            <tag> 算法效率-扫描线 </tag>
-            
             <tag> 动态规划-状压DP </tag>
+            
+            <tag> 算法效率-扫描线 </tag>
             
         </tags>
       
