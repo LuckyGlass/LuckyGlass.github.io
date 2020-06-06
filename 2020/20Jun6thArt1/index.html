@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="因为我自己也不是很擅长生成函数，所以尽可能写详细点吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI题解 - 珍珠(LOJ)">
+<meta property="og:url" content="http://luckyglass.github.io/2020/20Jun6thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="因为我自己也不是很擅长生成函数，所以尽可能写详细点吧">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-06T04:42:47.000Z">
+<meta property="article:modified_time" content="2020-06-06T05:51:26.271Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="数学-组合计数">
+<meta property="article:tag" content="数学-多项式">
+<meta property="article:tag" content="数学-生成函数">
+<meta property="article:tag" content="-LOJ-">
+<meta property="article:tag" content="数学-二项式反演">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://luckyglass.github.io/2020/20Jun6thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>OI题解 - 珍珠(LOJ) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20Jun6thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI题解 - 珍珠(LOJ)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-06 12:42:47 / 修改时间：13:51:26" itemprop="dateCreated datePublished" datetime="2020-06-06T12:42:47+08:00">2020-06-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Jun6thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Jun6thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>因为我自己也不是很擅长生成函数，所以尽可能写详细点吧</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> <a href="https://loj.ac/problem/3120" target="_blank" rel="noopener">LOJ 3120</a></p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>首先对题目的要求做一个等价的变形：在 $n$ 个变量中<u>出现次数为奇数</u>的值的个数不超过 $(n-2m)$。</p>
+<p>等价也非常显然，如果一个值出现次数为奇数，两两配对后这个值就会剩下一个。如果剩下的个数超过 $n-2m$ 个，那就不足够产生 $m$ 对了。</p>
+<p>根据这个，我们定义 $f_i$ 表示<u>出现次数为奇数</u>的值的个数<u>恰好</u>为 $i$ 的方案数，那么答案就是 $\sum\limits_{i=1}^{\min\{D,n-2m\}}f_i$。</p>
+<p>但是我们发现这样定义非常难计算（当然可以计算，有一些题解就直接算的，但是我觉得不是很好理解）……所以我们定义 $g_i$ 表示我们先<strong>钦定</strong> $i$ 个值的出现次数为奇数，其他值的出现次数不做要求的方案数。</p>
+<p><strong>Note.</strong> 这里的“钦定”意味着：如果钦定的那 $i$ 个值不同，即使最后的状态一样，也视作不同的方案。</p>
+<p>然后借助<strong>生成函数</strong>来计算 $g_i$，并且要用到<strong>指数型生成函数</strong>。先把 $g_i$ 的式子列出来：</p>
+<script type="math/tex; mode=display">
+g_i=C_D^in!\times\left\{\left(\frac{e^x-e^{-x}}{2}\right)^i\times(e^x)^{D-i}\right\}[x^n]</script><p>下面解释一下该式每个部分的含义：</p>
+<ol>
+<li><p>$C_D^i$：这里是指组合数，从 $D$ 个值中选定 $i$ 个；</p>
+</li>
+<li><p>$(e^x)^{D-i}$：$e^x$ 对应的是指数型生成函数 $1+\frac{x}{1!}+\frac{x^2}{2!}+\frac{x^3}{3!}+\dots$，可以看出 $e^x$ 的意义就是“某一个值的出现次数可以随便取”；$(e^x)^{D-i}$ 就是有 $D-i$ 个值的出现次数可以随便取。</p>
+</li>
+<li><p>$\left(\frac{e^x-e^{-x}}{2}\right)^i$：$\frac{e^x-e^{-x}}{2}=\frac{x}{1!}+\frac{x^3}{3!}+\frac{x^5}{5!}+\dots$，也就是“某一个值的出现次数只能是奇数”；$\left(\frac{e^x-e^{-x}}{2}\right)^i$ 就是钦定的那 $i$ 个值的出现次数只能是奇数；</p>
+</li>
+<li><p>$\left\{\left(\frac{e^x-e^{-x}}{2}\right)^i\times(e^x)^{D-i}\right\}[x^n]$ ：取生成函数中 $x^n$ 项的系数，$x^n$ 表示所有值的总的出现次数为 $n$；</p>
+</li>
+<li><p>$n!\times\left\{\left(\frac{e^x-e^{-x}}{2}\right)^i\times(e^x)^{D-i}\right\}[x^n]$：设在钦定 $i$ 个值出现次数为奇数时，存在方案 $K_i=\{k_{i,1},k_{i,2},\dots,k_{i,D}\}$ （$k_{i,j}$ 表示值 $j$ 的出现次数），且 $K_i$ 的方案数为 $V_i$</p>
+<p>这种出现次数 $K_i$ 对应的<u>珍珠的方案</u>为<strong>可重排</strong> $\frac{n!}{k_{i,1}!k_{i,2}!\dots k_{i,D}!}$；</p>
+<p>而生成函数的第 $n$ 项就是 $\sum\limits_{K_i}\frac{V_i}{k_{i,1}!k_{i,2}!\dots k_{i,D}!}$（分子是因为指数型生成函数）；</p>
+<p>于是第 $n$ 项与 $n!$ 相乘就是 $D$ 个值中钦定 $i$ 个出现奇数次的珍珠的方案数。</p>
+</li>
+</ol>
+<p>这个式子再化简一下：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+g_i&=C_D^in!\times\left\{\frac{\sum_{j=0}^iC_i^j(e^x)^{i-j}(-e^{-x})^{j}}{2^i}\times(e^x)^{D-i}\right\}[x^n]\\
+&=C_{D}^i\frac{n!}{2^i}\times\left\{\sum_{j=0}^i C_i^j(-1)^je^{(i-2j)x}\times e^{(D-i)x}\right\}[x^n]\\
+&=C_D^i\frac{n!}{2^i}\times\left\{\sum_{j=0}^i\frac{i!}{j!(i-j)!}\times (-1)^j\times e^{(D-2j)x}\right\}[x^n]
+\end{split}</script><p>到这一步，就要用到指数型生成函数的一个性质：$e^{ax}$ 的第 $n$ 项为 $\frac{a^n}{n!}$，于是可以继续化简：</p>
+<script type="math/tex; mode=display">
+\begin{split}
+g_i&=C_D^i\frac{n!}{2^i}\times\left(\sum_{j=0}^i\frac{i!(-1)^j(D-2j)^n}{j!(i-j)!n!}\right)\\
+&=\frac{C_D^ii!}{2^i}\times\left(\sum_{j=0}^i\frac{(-1)^j(D-2j)^n}{j!}\times\frac{1}{(i-j)!}\right)
+\end{split}</script><p>可以看到等式右边的括号就是一个<strong>卷积</strong>，于是可以算出 $g_i$。</p>
+<p>根据 $g_i,f_i$ 的定义：</p>
+<script type="math/tex; mode=display">
+g_i=\sum_{j=i}^DC_j^if_j</script><p>这个式子就可以拿来二项式反演（这个我还是不太熟悉，就忽略为什么可以拿来二项式反演了）</p>
+<script type="math/tex; mode=display">
+\begin{split}
+f_i&=\sum_{j=i}^D(-1)^{j-i}C_{j}^ig_j\\
+&=\frac1{i!}\sum_{j=i}^D\frac{(-1)^{j-i}}{(i-j)!}\times j!g_j
+\end{split}</script><p>因为 $j-(j-i)=i$ 是个定值，也是可以卷积的（或许叫做减法卷积？）具体方法就是把一个数列先 reverse 一下再卷积，最后卷积得到的数列再 reverse 一下。代码里把这两个 reverse 都标出来了。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e9</span>,D=<span class="number">4e5</span>,MOD=<span class="number">998244353</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a,<span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Sub</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a,<span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a,<span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*a*b%MOD;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">int</span> r=<span class="number">1</span>;<span class="keyword">while</span>(b)&#123;<span class="keyword">if</span>(b&amp;<span class="number">1</span>)r=Mul(r,a);a=Mul(a,a);b&gt;&gt;=<span class="number">1</span>;&#125;<span class="keyword">return</span> r;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> fac[D+<span class="number">10</span>],ifac[D+<span class="number">10</span>],inv[D+<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> rev[D+<span class="number">10</span>],lg2[D+<span class="number">10</span>],poww[<span class="number">30</span>],invw[<span class="number">30</span>];</span><br><span class="line"><span class="keyword">int</span> F[D+<span class="number">10</span>],G[D+<span class="number">10</span>],g[D+<span class="number">10</span>],f[D+<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> d,n,m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=D;i++) fac[i]=Mul(fac[i<span class="number">-1</span>],i);</span><br><span class="line">    ifac[D]=Pow(fac[D],MOD<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=D<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--) ifac[i]=Mul(ifac[i+<span class="number">1</span>],i+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=D;i++) inv[i]=Mul(ifac[i],fac[i<span class="number">-1</span>]);</span><br><span class="line">    lg2[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=D;i++) lg2[i]=lg2[i&gt;&gt;<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;<span class="number">30</span>;i++)&#123;</span><br><span class="line">        poww[i]=Pow(<span class="number">3</span>,(MOD<span class="number">-1</span>)/(<span class="number">1</span>&lt;&lt;i));</span><br><span class="line">        invw[i]=Pow(poww[i],MOD<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NTT</span><span class="params">(<span class="keyword">int</span> *A,<span class="keyword">int</span> len,<span class="keyword">int</span> typ)</span></span>&#123;</span><br><span class="line">    rev[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">        rev[i]=rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>|((i&amp;<span class="number">1</span>)&lt;&lt;(lg2[len]<span class="number">-1</span>));</span><br><span class="line">        <span class="keyword">if</span>(rev[i]&lt;i) swap(A[rev[i]],A[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> l=<span class="number">2</span>,t=<span class="number">1</span>,lgl=<span class="number">1</span>;l&lt;=len;l&lt;&lt;=<span class="number">1</span>,t&lt;&lt;=<span class="number">1</span>,lgl++)&#123;</span><br><span class="line">        <span class="keyword">int</span> per=typ==<span class="number">1</span>? poww[lgl]:invw[lgl];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;len;j+=l)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=j,cur=<span class="number">1</span>;k&lt;j+t;k++,cur=Mul(cur,per))&#123;</span><br><span class="line">                <span class="keyword">int</span> tmp=Mul(A[k+t],cur);</span><br><span class="line">                A[k+t]=Sub(A[k],tmp);</span><br><span class="line">                A[k]=Add(A[k],tmp);</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(typ==<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)</span><br><span class="line">        A[i]=Mul(A[i],inv[len]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Comb</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a,<span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a&gt;b) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> Mul(Mul(fac[b],ifac[a]),ifac[b-a]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Model</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(ret&lt;=x) ret&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Init();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;d,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=d;i++)&#123;</span><br><span class="line">        F[i]=Mul(Pow(Sub(d,i&lt;&lt;<span class="number">1</span>),n),ifac[i]);</span><br><span class="line">        G[i]=ifac[i];</span><br><span class="line">        <span class="keyword">if</span>(i&amp;<span class="number">1</span>) F[i]=Sub(<span class="number">0</span>,F[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> len=Model(d&lt;&lt;<span class="number">1</span>);</span><br><span class="line">    NTT(F,len,<span class="number">1</span>),NTT(G,len,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++) g[i]=Mul(F[i],G[i]);</span><br><span class="line">    NTT(g,len,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,tmp=inv[<span class="number">2</span>];i&lt;=d;i++,tmp=Mul(tmp,inv[<span class="number">2</span>]))</span><br><span class="line">        g[i]=Mul(Mul(g[i],fac[i]),Mul(tmp,Comb(i,d)));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=d+<span class="number">1</span>;i&lt;len;i++) g[i]=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(F,<span class="number">0</span>,<span class="keyword">sizeof</span> F),<span class="built_in">memset</span>(G,<span class="number">0</span>,<span class="keyword">sizeof</span> G);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=d;i++)&#123;</span><br><span class="line">        <span class="comment">//reverse !!</span></span><br><span class="line">        F[i]=ifac[i];</span><br><span class="line">        <span class="keyword">if</span>(i&amp;<span class="number">1</span>) F[i]=Sub(<span class="number">0</span>,F[i]);</span><br><span class="line">        G[d-i]=Mul(fac[i],g[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(F,len,<span class="number">1</span>),NTT(G,len,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++) f[i]=Mul(F[i],G[i]);</span><br><span class="line">    NTT(f,len,<span class="number">-1</span>);</span><br><span class="line">    <span class="comment">//reverse !!</span></span><br><span class="line">    reverse(f,f+d+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=min(d,n<span class="number">-2</span>*m);i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">        ans=Add(ans,Mul(f[i],ifac[i]));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &当枯等的光明终于如约而至\\
+&焚尽沉默的爱\ 追逐那灰烬所至\\
+&纷飞火种之中\ 那红了眼眶的孩子\\
+&逃向自由\ 从此刻开始\ ”\\
+\text—&\text{—《逃子》By COP}
+\end{split}</script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2020/20Jun6thArt1/" title="OI题解 - 珍珠(LOJ)">http://luckyglass.github.io/2020/20Jun6thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E7%BB%84%E5%90%88%E8%AE%A1%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 数学-组合计数</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 数学-多项式</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 数学-生成函数</a>
+              <a href="/tags/LOJ/" rel="tag"><i class="fa fa-tag"></i> -LOJ-</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94/" rel="tag"><i class="fa fa-tag"></i> 数学-二项式反演</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Jun5thArt1/" rel="prev" title="OI题解 - 旅游「2020省选模拟」">
+      <i class="fa fa-chevron-left"></i> OI题解 - 旅游「2020省选模拟」
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text"># 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共270.3k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
