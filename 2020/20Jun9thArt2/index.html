@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="一道精妙的暴力题 : (">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI题解 - 机器人高尔夫球赛(LOJ)">
+<meta property="og:url" content="http://luckyglass.github.io/2020/20Jun9thArt2/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="一道精妙的暴力题 : (">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://luckyglass.github.io/2020/20Jun9thArt2/png1.png">
+<meta property="article:published_time" content="2020-06-09T11:15:29.000Z">
+<meta property="article:modified_time" content="2020-06-09T11:59:47.876Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="算法效率-STL">
+<meta property="article:tag" content="-LOJ-">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://luckyglass.github.io/2020/20Jun9thArt2/png1.png">
+
+<link rel="canonical" href="http://luckyglass.github.io/2020/20Jun9thArt2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>OI题解 - 机器人高尔夫球赛(LOJ) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20Jun9thArt2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI题解 - 机器人高尔夫球赛(LOJ)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-09 19:15:29 / 修改时间：19:59:47" itemprop="dateCreated datePublished" datetime="2020-06-09T19:15:29+08:00">2020-06-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Jun9thArt2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Jun9thArt2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>一道精妙的暴力题 : (</p>
+</blockquote>
+<h2 id><a href="#" class="headerlink" title></a><a id="more"></a></h2><h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> <a href="https://loj.ac/problem/3193" target="_blank" rel="noopener">LOJ 3193</a></p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>要有打表的意识 awa（<del>其实我打了表还是不知道怎么做</del>）</p>
+<p>首先可以得到一个非常暴力的$O(nm)$ 的DP：<code>f[i][j][0/1]</code> 表示此时球在 $(i,j)$，且现在是先手/后手击球，得分会是多少，转移太简单就不写了。</p>
+<p>什么意思呢？我们发现偌大的 $10^9\times 10^9$ 的矩形上，竟然只有 $10^5$ 个洞。于是想到，我们看一下一个洞会对 DP 数组造成什么影响。</p>
+<p>假设一开始木有洞，那么就是全 0 的DP数组，然后在某个位置出现了一个 hole，假设其值为 1（&gt;0）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;(a,b) 表示 (f[i][j][0]&#x3D;a,f[i][j][1]&#x3D;b)</span><br><span class="line">(1,0) (0,1) (0,0) (0,0) (0,0) (0,0)</span><br><span class="line">(0,1) (1,0) (0,1) (0,0) (0,0) (0,0)</span><br><span class="line">(0,0) (0,1) (1,0) (0,1) (0,0) (0,0)</span><br><span class="line">(0,0) (0,0) (0,1) (1,0) (0,1) (0,0)</span><br><span class="line">(0,0) (0,0) (0,0) (0,1) (1,0) (0,1)</span><br><span class="line">(0,0) (0,0) (0,0) (0,0) (0,1) (1,1)</span><br></pre></td></tr></table></figure>
+<p>非常开心的发现其实它只会影响到一个对角线形的较小的一块区域，而且看起来非常的有规律。</p>
+<p>有什么规律？观察我们DP的次序，其实可以看成下面这样的顺序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;数字表示转移的先后（较小的先计算）</span><br><span class="line">8 7 6 5 4</span><br><span class="line">7 6 5 4 3</span><br><span class="line">6 5 4 3 2</span><br><span class="line">5 4 3 2 1</span><br><span class="line">4 3 2 1 0</span><br></pre></td></tr></table></figure></p>
+<p>于是我们大胆猜测，从左下到右上的对角线之间是有规律的，再次打表，的确有规律：</p>
+<p><img src="/2020/20Jun9thArt2/png1.png" alt="png1"></p>
+<p>（相同颜色是相同的DP值）假如橙色虚线往上就没有 hole 了，那么DP数组的这几条对角线将会一直保持这样。</p>
+<p>然后考虑这样有规律的 DP 数组可能会被一个 hole 给打乱。但是我们发现一个 hole 只会影响以它为右下角的 $3\times3$ 的矩阵。于是对于这 9 个位置直接暴力 DP 一下值即可。</p>
+<p>综上所述，在DP数组中，其实有值的位置很少，并且左下-右上对角线存在规律。</p>
+<p>所以我们用 map 维护一下当前的左下-右上对角线上有值的位置的 DP 值。只暴力计算每个 hole 对应的 $3\times3$ 的位置的 DP 值即可。</p>
+<p>至于计算答案，因为一条左上-右下对角线上的 DP 值——除非被暴力计算修改掉——是一直不变的。所以可以在暴力修改时计算当前左上-右下对角线原来的 DP 值出现了多少次，从而算出答案。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fir first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sec second</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>,MOD=<span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;A,<span class="keyword">const</span> <span class="keyword">int</span> &amp;B)</span></span>&#123;<span class="keyword">return</span> A+B&gt;=MOD? A+B-MOD:A+B;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;A,<span class="keyword">const</span> <span class="keyword">int</span> &amp;B)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*A*B%MOD;&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; las;</span><br><span class="line"><span class="built_in">map</span>&lt;pii,<span class="keyword">int</span>&gt; key;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> rol,col,n;</span><br><span class="line"><span class="built_in">vector</span>&lt;pii&gt; sp;</span><br><span class="line">pii f[N&lt;&lt;<span class="number">4</span>]; <span class="comment">//min(first),max(second)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> a=<span class="number">0</span>,b=<span class="number">1</span>,c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) b=c==<span class="string">'-'</span>? <span class="number">-1</span>:b,c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) a=(a&lt;&lt;<span class="number">1</span>)+(a&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">    <span class="keyword">return</span> a*b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(pii A,pii B)</span></span>&#123;<span class="keyword">return</span> A.fir+A.sec==B.fir+B.sec? A.fir&lt;B.fir:A.fir+A.sec&gt;B.fir+B.sec;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> pii <span class="title">Calc</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(key.count(make_pair(x,y))) <span class="keyword">return</span> make_pair(key[make_pair(x,y)],key[make_pair(x,y)]);</span><br><span class="line">    pii key1(0,0),key2(0,0);</span><br><span class="line">    <span class="keyword">if</span>(las.count(x-y+<span class="number">1</span>)) key1=f[las[x-y+<span class="number">1</span>]];</span><br><span class="line">    <span class="keyword">if</span>(las.count(x-y<span class="number">-1</span>)) key2=f[las[x-y<span class="number">-1</span>]];</span><br><span class="line">    <span class="keyword">return</span> make_pair(min(key1.sec,key2.sec),max(key1.fir,key2.fir));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Model</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;x)</span></span>&#123;<span class="keyword">return</span> (x%MOD+MOD)%MOD;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    rol=Ri(),col=Ri(),n=Ri();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> x=Ri(),y=Ri(),val=Ri();</span><br><span class="line">        key[make_pair(x,y)]=val;</span><br><span class="line">        <span class="comment">//枚举3*3的矩阵，标记这些位置要暴力计算</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> p=<span class="number">0</span>;p&lt;=<span class="number">2</span> &amp;&amp; x-p&gt;<span class="number">0</span>;p++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> q=<span class="number">0</span>;q&lt;=<span class="number">2</span> &amp;&amp; y-q&gt;<span class="number">0</span>;q++)</span><br><span class="line">                sp.push_back(make_pair(x-p,y-q));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//把要暴力计算的位置排序、去重</span></span><br><span class="line">    sort(sp.begin(),sp.end(),cmp);</span><br><span class="line">    sp.erase(unique(sp.begin(),sp.end()),sp.end());</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> o=<span class="number">0</span>,lo=sp.size();o&lt;lo;o++)&#123;</span><br><span class="line">        <span class="keyword">int</span> tag=sp[o].fir+sp[o].sec,beg=o;</span><br><span class="line">        <span class="keyword">while</span>(o+<span class="number">1</span>&lt;lo &amp;&amp; sp[o+<span class="number">1</span>].fir+sp[o+<span class="number">1</span>].sec==tag) o++;</span><br><span class="line">        <span class="comment">//找到在同一条左下-右上对角线上的暴力计算的点</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=beg;i&lt;=o;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> x=sp[i].fir,y=sp[i].sec;</span><br><span class="line">            <span class="comment">//统计当前左上-右下对角线原来的DP值出现的次数并计算贡献</span></span><br><span class="line">            <span class="keyword">if</span>(las.count(x-y)) ans=Add(ans,Mul(Model(f[las[x-y]].fir),sp[las[x-y]].fir-x));</span><br><span class="line">            f[i]=Calc(x,y);</span><br><span class="line">            las[x-y]=i; <span class="comment">//记录当前左上-右下对角线的 DP 值</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//还有一些 DP 值的贡献</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;::iterator it=las.begin();it!=las.end();it++)</span><br><span class="line">        ans=Add(ans,Mul(Model(f[it-&gt;sec].fir),min(sp[it-&gt;sec].fir,sp[it-&gt;sec].sec)));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &苔绿青石板街\\
+&斑驳了流水般岁月\\
+&小酌三盏两杯\\
+&理不清缠绕的情结\\
+&在你淡漠眉间\\
+&瞥见离人的喜悲霜雪\ ”\\
+\text—&\text{—《霜雪千年(Cover)》 By 双笙/封茗囧菌}
+\end{split}</script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2020/20Jun9thArt2/" title="OI题解 - 机器人高尔夫球赛(LOJ)">http://luckyglass.github.io/2020/20Jun9thArt2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87-STL/" rel="tag"><i class="fa fa-tag"></i> 算法效率-STL</a>
+              <a href="/tags/LOJ/" rel="tag"><i class="fa fa-tag"></i> -LOJ-</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Jun9thArt1/" rel="prev" title="OI题解 - 卡片占卜(LOJ)">
+      <i class="fa fa-chevron-left"></i> OI题解 - 卡片占卜(LOJ)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text"># 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">156</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共272.4k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
