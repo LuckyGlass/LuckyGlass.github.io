@@ -23,21 +23,21 @@
     var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
   </script>
 
-  <meta name="description" content="儿童节快乐~ 尽管从某种程度上我早就不是那个能过六一节的儿童了">
+  <meta name="description" content="一道自己非常想做的题（但是好难啊……还是不能独立想出来）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OI题解 - 道路(HNOI&#x2F;AHOI)">
-<meta property="og:url" content="http://luckyglass.github.io/2020/20Jun1stArt1/">
+<meta property="og:title" content="OI题解 - Desant(LOJ)">
+<meta property="og:url" content="http://luckyglass.github.io/2020/20Jun11thArt2/">
 <meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
-<meta property="og:description" content="儿童节快乐~ 尽管从某种程度上我早就不是那个能过六一节的儿童了">
+<meta property="og:description" content="一道自己非常想做的题（但是好难啊……还是不能独立想出来）">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-01T14:41:09.000Z">
-<meta property="article:modified_time" content="2020-06-03T05:44:31.903Z">
+<meta property="article:published_time" content="2020-06-11T14:37:58.000Z">
+<meta property="article:modified_time" content="2020-06-11T15:04:27.185Z">
 <meta property="article:author" content="Lucky_Glass">
-<meta property="article:tag" content="-洛谷-">
-<meta property="article:tag" content="动态规划-树形DP">
+<meta property="article:tag" content="动态规划-状压DP">
+<meta property="article:tag" content="-LOJ-">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://luckyglass.github.io/2020/20Jun1stArt1/">
+<link rel="canonical" href="http://luckyglass.github.io/2020/20Jun11thArt2/">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>OI题解 - 道路(HNOI/AHOI) | Lucky_Glass's Blog</title>
+  <title>OI题解 - Desant(LOJ) | Lucky_Glass's Blog</title>
   
 
 
@@ -202,7 +202,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20Jun1stArt1/">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20Jun11thArt2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -215,7 +215,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          OI题解 - 道路(HNOI/AHOI)
+          OI题解 - Desant(LOJ)
         </h1>
 
         <div class="post-meta">
@@ -224,16 +224,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-06-01 22:41:09" itemprop="dateCreated datePublished" datetime="2020-06-01T22:41:09+08:00">2020-06-01</time>
+              <time title="创建时间：2020-06-11 22:37:58 / 修改时间：23:04:27" itemprop="dateCreated datePublished" datetime="2020-06-11T22:37:58+08:00">2020-06-11</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-03 13:44:31" itemprop="dateModified" datetime="2020-06-03T13:44:31+08:00">2020-06-03</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -260,8 +254,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/20Jun1stArt1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Jun1stArt1/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/20Jun11thArt2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Jun11thArt2/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -277,42 +271,47 @@
 
       
         <blockquote>
-<p>儿童节快乐~ 尽管从某种程度上我早就不是那个能过六一节的儿童了</p>
+<p>一道自己非常想做的题（但是好难啊……还是不能独立想出来）</p>
 </blockquote>
 <a id="more"></a>
 <hr>
-<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> <a href="https://www.luogu.com.cn/problem/P4438" target="_blank" rel="noopener">洛谷 P4438</a></p>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> <a href="https://loj.ac/problem/3217" target="_blank" rel="noopener">LOJ 3217</a></p>
 <hr>
-<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>题目中非常重要的提示是“树深不超过40”（可惜我以为这是限制答案不超过long long……不过讲道理<strong>限制树深确实非常特殊</strong>，应该有特别意义）</p>
-<p>因为代价的计算式中出现了 $x,y$ 的乘积项，并不方便处理，这就意味着 DP 状态中一定要储存 $x,y$ 的相关信息。对于一般的树形DP，我们往往会储存一个子树的信息，但是这道题我们可以储存当前点到根的路径上的信息：</p>
-<p>定义 <code>f[u][x][y]</code> 表示 $u$ 到 $1$ 的路径上有 $x$ 条未翻新的公路、$y$ 条未翻新的铁路对应的<u>最小子树代价和</u>。</p>
-<p>不难得到转移式：</p>
-<script type="math/tex; mode=display">
-f[u][x][y]=\min\{f[v_x][x][y]+f[v_y][x][y+1],f[v_x][x+1][y]+f[v_y][x][y]\}</script><p>$v_x$ 指 $u$ 通过公路连接的点，$v_y$ 指 $u$ 通过铁路连接的点。那么 $\min$ 中前者表示修复公路、后者表示修复铁路。</p>
-<p>如果 $v$ 是乡村，则 $f[v][x][y]=(a_{v}+x)(b_v+y)c_v$。</p>
-<p>然后<strong>从下往上</strong>DP即可，又因为出题人非常好心地让树的节点标号和树深相联系，甚至都不需要写DFS。</p>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>显然是DP，而且 $n$ 很小容易往状压这个方向想。虽说是状压，但也不是简单的 $2^n$ 状压能够解决的。</p>
+<p>我们考虑从左到右决策每个 $a_i$ 是否选入子序列。但是我们还要能够从状态计算出新增的逆序对的数量，于是考虑再加一维状态压缩 $S$。</p>
+<p>> <strong>Tab.</strong> 注意下文中提到的“数字”和“位置”的区分，“位置i”指的是数组中的 $a_i$</p>
+<p>下面来具体阐述一下 $S$ 的定义：</p>
+<ul>
+<li>对于每个<strong>数字</strong>定义 <code>unfix[i]</code> 表示 “<strong>数字i</strong> 是否选入子序列”是否已经确定（=true 是不确定）。我们从左到右决策每个<strong>位置i</strong>，如果<strong>位置i</strong>已经被决策，则<strong>数字</strong>$a_i$则是确定的。</li>
+<li>在数轴上，考虑没有确定的数字把数轴分成若干段，储存每一段中被选入序列的数字的数量。</li>
+<li>$S$ 即“储存每一段中已经确定的数字的数量”状压的结果。</li>
+</ul>
+<p>（难点主要就是定义……）</p>
+<p>考虑如何转移：</p>
+<ul>
+<li>先枚举 $S$，然后把 $S$ 还原成数组；</li>
+<li>当我们决策了位置i后，$a_i$ 变为确定，则数组需要合并两个相邻元素；</li>
+<li>如果 $a_i$ 要选入序列，则对应段的选入序列的数字数量+1，增加的逆序对的数量为数轴上比 $a_i$ 大的选入序列的数的数量；</li>
+<li>如果不选入序列，则直接更新答案。</li>
+</ul>
 <hr>
-<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><html>
-<details>
-<summary>点击展开/折叠代码</summary>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">2e4</span>+<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> lnk[N][<span class="number">2</span>],val[N][<span class="number">3</span>],fa[N&lt;&lt;<span class="number">1</span>],cntx[N&lt;&lt;<span class="number">1</span>],cnty[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">ll f[N][<span class="number">41</span>][<span class="number">41</span>];</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> F(u,x,y) ((u)&gt;0? f[u][x][y]:1ll*val[-u][2]*(val[-u][0]+x)*(val[-u][1]+y))</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> a=<span class="number">0</span>,b=<span class="number">1</span>,c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) b=(c==<span class="string">'-'</span>? <span class="number">-1</span>:b),c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) a=(a&lt;&lt;<span class="number">1</span>)+(a&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">    <span class="keyword">return</span> a*b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=Ri();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">2</span>;j++)&#123;</span><br><span class="line">            lnk[i][j]=Ri();</span><br><span class="line">            <span class="keyword">if</span>(lnk[i][j]&gt;<span class="number">0</span>) fa[lnk[i][j]]=i;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">3</span>;j++)</span><br><span class="line">            val[i][j]=Ri();</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">0x3f</span>,<span class="keyword">sizeof</span> f);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> u=<span class="number">2</span>;u&lt;n;u++)&#123;</span><br><span class="line">        cntx[u]=cntx[fa[u]]+(lnk[fa[u]][<span class="number">0</span>]==u);</span><br><span class="line">        cnty[u]=cnty[fa[u]]+(lnk[fa[u]][<span class="number">1</span>]==u);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> u=n<span class="number">-1</span>;u&gt;=<span class="number">1</span>;u--)&#123;</span><br><span class="line">        <span class="keyword">int</span> vx=lnk[u][<span class="number">0</span>],vy=lnk[u][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>;x&lt;=cntx[u];x++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> y=<span class="number">0</span>;y&lt;=cnty[u];y++)&#123;</span><br><span class="line">                <span class="comment">//x</span></span><br><span class="line">                f[u][x][y]=min(f[u][x][y],F(vx,x,y)+F(vy,x,y+<span class="number">1</span>));</span><br><span class="line">                <span class="comment">//y</span></span><br><span class="line">                f[u][x][y]=min(f[u][x][y],F(vx,x+<span class="number">1</span>,y)+F(vy,x,y));</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,f[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</details>
-</html>
-
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">43</span>,INF=(<span class="number">1</span>&lt;&lt;<span class="number">29</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DATA</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> val;ll num;</span><br><span class="line">	DATA()&#123;&#125;</span><br><span class="line">	DATA(<span class="keyword">const</span> <span class="keyword">int</span> _v,<span class="keyword">const</span> ll _n):val(_v),num(_n)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">DATA <span class="title">Update</span><span class="params">(<span class="keyword">const</span> DATA &amp;A,<span class="keyword">const</span> DATA &amp;B)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(A.val==B.val) <span class="keyword">return</span> DATA(A.val,A.num+B.num);</span><br><span class="line">	<span class="keyword">return</span> A.val&lt;B.val? A:B;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,A[N];</span><br><span class="line"><span class="keyword">bool</span> unfix[N];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; per[<span class="number">2</span>],mul[<span class="number">2</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;DATA&gt; f[<span class="number">2</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ary;</span><br><span class="line">DATA ans[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;A[i]);</span><br><span class="line">		A[i]--,unfix[A[i]]=<span class="literal">true</span>;</span><br><span class="line">		ans[i]=DATA(INF,<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	f[<span class="number">0</span>].push_back(DATA(<span class="number">0</span>,<span class="number">1</span>));</span><br><span class="line">	mul[<span class="number">0</span>].push_back(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		per[<span class="number">0</span>].push_back(<span class="number">1</span>);</span><br><span class="line">		mul[<span class="number">0</span>].push_back(mul[<span class="number">0</span>].back()*per[<span class="number">0</span>].back());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,I=<span class="number">1</span>;i&lt;=n;i++,I^=<span class="number">1</span>)&#123;</span><br><span class="line">		per[I].clear(),mul[I].clear();</span><br><span class="line">		<span class="keyword">int</span> pos=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;A[i];j++)</span><br><span class="line">			pos+=unfix[j];</span><br><span class="line">		unfix[A[i]]=<span class="literal">false</span>;</span><br><span class="line">		mul[I].push_back(<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">int</span> las=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">			<span class="keyword">if</span>(unfix[j])&#123;</span><br><span class="line">				per[I].push_back(j-las);</span><br><span class="line">				mul[I].push_back(mul[I].back()*per[I].back());</span><br><span class="line">				las=j;</span><br><span class="line">			&#125;</span><br><span class="line">		per[I].push_back(n-las);</span><br><span class="line">		mul[I].push_back(mul[I].back()*per[I].back());</span><br><span class="line">		f[I]=<span class="built_in">vector</span>&lt;DATA&gt;(mul[I].back(),DATA(INF,<span class="number">0</span>));</span><br><span class="line">		<span class="keyword">int</span> J=!I,sizI=per[I].size(),sizJ=per[J].size();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> S=<span class="number">0</span>;S&lt;mul[J].back();S++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!f[J][S].num) <span class="keyword">continue</span>;</span><br><span class="line">			ary.clear();</span><br><span class="line">			<span class="comment">//Transform from last array to now</span></span><br><span class="line">			<span class="comment">//1. Uncode the array</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>,tmp=S;j&lt;sizJ;j++)</span><br><span class="line">				ary.push_back(tmp%per[J][j]),tmp/=per[J][j];</span><br><span class="line">			<span class="comment">//2. Culculate the new pairs(If choose A[i])</span></span><br><span class="line">			<span class="keyword">int</span> add=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=pos+<span class="number">1</span>;j&lt;sizJ;j++)</span><br><span class="line">				add+=ary[j];</span><br><span class="line">			<span class="comment">//3. The statue of A[i] is fixed</span></span><br><span class="line">			ary[pos]+=ary[pos+<span class="number">1</span>];</span><br><span class="line">			ary.erase(ary.begin()+pos+<span class="number">1</span>);</span><br><span class="line">			<span class="comment">//4. Recode the array</span></span><br><span class="line">			<span class="keyword">int</span> toS=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;sizI;j++)</span><br><span class="line">				toS+=mul[I][j]*ary[j];</span><br><span class="line">			<span class="comment">//Not choose A[i]</span></span><br><span class="line">			f[I][toS]=Update(f[I][toS],f[J][S]);</span><br><span class="line">			<span class="comment">//Choose A[i]</span></span><br><span class="line">			toS+=mul[I][pos];</span><br><span class="line">			DATA tmpd=f[J][S];</span><br><span class="line">			tmpd.val+=add;</span><br><span class="line">			f[I][toS]=Update(f[I][toS],tmpd);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> I=n&amp;<span class="number">1</span>,sizI=per[I].size();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> S=<span class="number">0</span>;S&lt;mul[I].back();S++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!f[I][S].num) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> tmp=S,j=<span class="number">0</span>;j&lt;sizI;j++)</span><br><span class="line">			cnt+=tmp%per[I][j],tmp/=per[I][j];</span><br><span class="line">		ans[cnt]=Update(ans[cnt],f[I][S]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d %lld\n"</span>,ans[i].val,ans[i].num);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
 \begin{split}
-“\ &谁的歌声轻轻\ 轻轻唱\\
-&谁的泪水静\ 静淌\\
-&那些年华\ 都付作过往\\
-&他们偎依着彼此说好要面对风浪\\
-\\
-&又是一地\ 枯黄\\
-&枫叶红了满面秋霜\\
-&这场故梦里\\
-&人生如戏唱\\
-&还有谁登场\ ”\\
-\text{—}&\text{—《故梦》 By 双笙}
+“\ &某年某月某日天欲晚\\
+&我自饮马长川\\
+&暮色恰如诗中的阑珊\\
+&忽我身着哪个千年前\\
+&落魄王侯的衣冠\\
+&放逐到\ 这片蘅皋之岸\\\\
+&那些去国怀乡的伤感\\
+&早已与我无关\\
+&日月只为有情人流转\\
+&天地冥冥之中静待谁\\
+&如约而至得悄然\\
+&只与我\ 相逢洛水之岸\ ”\\
+\text—&\text{—《多情岸(Cover)》By 泠鸢yousa}
 \end{split}</script>
     </div>
 
@@ -328,7 +327,7 @@ f[u][x][y]=\min\{f[v_x][x][y]+f[v_y][x][y+1],f[v_x][x+1][y]+f[v_y][x][y]\}</scri
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://luckyglass.github.io/2020/20Jun1stArt1/" title="OI题解 - 道路(HNOI&#x2F;AHOI)">http://luckyglass.github.io/2020/20Jun1stArt1/</a>
+    <a href="http://luckyglass.github.io/2020/20Jun11thArt2/" title="OI题解 - Desant(LOJ)">http://luckyglass.github.io/2020/20Jun11thArt2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -340,8 +339,8 @@ f[u][x][y]=\min\{f[v_x][x][y]+f[v_y][x][y+1],f[v_x][x+1][y]+f[v_y][x][y]\}</scri
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E6%B4%9B%E8%B0%B7/" rel="tag"><i class="fa fa-tag"></i> -洛谷-</a>
-              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%A0%91%E5%BD%A2DP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-树形DP</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E7%8A%B6%E5%8E%8BDP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-状压DP</a>
+              <a href="/tags/LOJ/" rel="tag"><i class="fa fa-tag"></i> -LOJ-</a>
           </div>
 
         
@@ -350,13 +349,10 @@ f[u][x][y]=\min\{f[v_x][x][y]+f[v_y][x][y+1],f[v_x][x+1][y]+f[v_y][x][y]\}</scri
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/20May30thArt2/" rel="prev" title="学习笔记 - 回文自动机PAM">
-      <i class="fa fa-chevron-left"></i> 学习笔记 - 回文自动机PAM
+    <a href="/2020/20Jun11thArt1/" rel="prev" title="学习笔记 - 拉格朗日插值">
+      <i class="fa fa-chevron-left"></i> 学习笔记 - 拉格朗日插值
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/20Jun5thArt1/" rel="next" title="OI题解 - 旅游「2020省选模拟」">
-      OI题解 - 旅游「2020省选模拟」 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
