@@ -372,9 +372,9 @@
       <category term="OI题解" scheme="http://luckyglass.github.io/categories/OI%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="图论-最短路" scheme="http://luckyglass.github.io/tags/%E5%9B%BE%E8%AE%BA-%E6%9C%80%E7%9F%AD%E8%B7%AF/"/>
-    
       <category term="贪心" scheme="http://luckyglass.github.io/tags/%E8%B4%AA%E5%BF%83/"/>
+    
+      <category term="图论-最短路" scheme="http://luckyglass.github.io/tags/%E5%9B%BE%E8%AE%BA-%E6%9C%80%E7%9F%AD%E8%B7%AF/"/>
     
       <category term="-LOJ-" scheme="http://luckyglass.github.io/tags/LOJ/"/>
     
@@ -488,9 +488,9 @@
       <category term="OI题解" scheme="http://luckyglass.github.io/categories/OI%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="数据结构-线段树" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="数学" scheme="http://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
