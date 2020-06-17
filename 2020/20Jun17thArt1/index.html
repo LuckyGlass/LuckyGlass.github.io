@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="马上要省选了啊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI题解 - 字符串问题(LOJ)">
+<meta property="og:url" content="http://luckyglass.github.io/2020/20Jun17thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="马上要省选了啊">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-17T13:57:04.000Z">
+<meta property="article:modified_time" content="2020-06-17T14:25:21.320Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="算法效率-扫描线">
+<meta property="article:tag" content="数学-拉格朗日插值">
+<meta property="article:tag" content="-LOJ-">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://luckyglass.github.io/2020/20Jun17thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>OI题解 - 字符串问题(LOJ) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20Jun17thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI题解 - 字符串问题(LOJ)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-17 21:57:04 / 修改时间：22:25:21" itemprop="dateCreated datePublished" datetime="2020-06-17T21:57:04+08:00">2020-06-17</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Jun17thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Jun17thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>马上要省选了啊</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><blockquote>
+<p><a href="loj.ac/problem/3049">LOJ 3049</a></p>
+</blockquote>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>先考虑暴力的做法，我们可以想到一个DP——$f_i$ 表示当前的字符串 $T$ 以第 $i$ 个A串结尾，$|T|$ 的最大值。</p>
+<p>然后转移就找到 $A_i$ 支配的一个 B串 $B_j$；再枚举 $A_k$，如果 $B_j$ 是 $A_k$ 的前缀，那么就可以从 $f_i$ 转移到 $f_k$ 了——$f_k=\max\{f_k,f_i+|A_k|\}$。</p>
+<p>如何判是不是可以无限循环？那么可以想到把转移边看成有向边，然后用拓扑跑一次DP，就可以在计算DP值的同时判断是否有环了；如果有环，因为转移边的权值 $|A_k|$ 都是正数，所以出现环就说明可以无限循环。</p>
+<p>但是非常明显的，这样建图有 $n^2$ 条边。</p>
+<p>看到“前缀”，我们可以把串整个倒过来就成了“后缀”，于是可以建SAM！如果 SAM 上代表串 $B_j$ 的节点是 $Q_j$，那么以 $B_j$ 为前缀（即倒转后以 $B_j$ 为后缀）的串就是 parent 树上 $Q_j$ 的后代节点代表的串。</p>
+<p>于是考虑这样优化建图：对于每一个 $A_i$，记 SAM 上对应的节点为 $P_i$，同时新建一个节点 $T_i$；对于每一个 $B_i$ 记 SAM 上对应的节点为 $Q_i$。</p>
+<ol>
+<li>parent 树上定义树边的方向为“从父亲指向儿子”，这样就能从 $Q_i$ 走到以 $B_j$ 为前缀的串了；</li>
+<li>$P_i$ 向 $T_i$ 连边，即表示把 $A_i$ 接在当前串的末尾；</li>
+<li>如果 $A_i$ 支配 $B_j$ 则 $T_i$ 向 $Q_j$ 连边，即借助 $B_j$ 找到下一个A串；</li>
+</ol>
+<p>DP仍然是拓扑DP，每到达 $T_i$ 点，DP值就增加 $|A_i|$。</p>
+<p>这样DP看起来正确，其实错的也很显然，因为 SAM 的一个节点代表了多个长度连续的字符串。于是如果一个点可以代表多个A串或B串，则需把它拆成长度递增的一条链——使得拆点之后，每个点要么不代表AB串，要么只代表一个本质不同的AB串（如果两个串长得一模一样，当然可以用同一个点代表）。</p>
+<p>这样就没有任何问题了……就是记得多测要清空</p>
+<hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> a = <span class="number">0</span>, c = getchar();</span><br><span class="line">    <span class="keyword">while</span> (c &lt; <span class="string">'0'</span> || <span class="string">'9'</span> &lt; c) c = getchar();</span><br><span class="line">    <span class="keyword">while</span> (<span class="string">'0'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'9'</span>) a = (a &lt;&lt; <span class="number">1</span>) + (a &lt;&lt; <span class="number">3</span>) + c - <span class="string">'0'</span>, c = getchar();</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SAM</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">NODE</span> &#123;</span></span><br><span class="line">        <span class="keyword">int</span> nxt[<span class="number">26</span>], lnk, len;</span><br><span class="line">        <span class="keyword">int</span> &amp;<span class="keyword">operator</span>[](<span class="keyword">const</span> <span class="keyword">int</span> &amp;c) &#123; <span class="keyword">return</span> nxt[c]; &#125;</span><br><span class="line">    &#125; nod[N &lt;&lt; <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> ncnt, lst, ton[N &lt;&lt; <span class="number">1</span>], sot[N &lt;&lt; <span class="number">1</span>], anc[N &lt;&lt; <span class="number">1</span>][<span class="number">20</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ncnt = lst = <span class="number">1</span>;</span><br><span class="line">        nod[<span class="number">1</span>] = nod[<span class="number">0</span>], nod[<span class="number">1</span>].lnk = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">NewNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p = ++ncnt;</span><br><span class="line">        nod[p] = nod[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Expand</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> cur = NewNode(), p = lst;</span><br><span class="line">        lst = cur;</span><br><span class="line">        nod[cur].len = nod[p].len + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> ((~p) &amp;&amp; !nod[p][c]) nod[p][c] = cur, p = nod[p].lnk;</span><br><span class="line">        <span class="keyword">if</span> (~p) &#123;</span><br><span class="line">            <span class="keyword">int</span> q = nod[p][c];</span><br><span class="line">            <span class="keyword">if</span> (nod[q].len == nod[p].len + <span class="number">1</span>)</span><br><span class="line">                nod[cur].lnk = q;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> nq = NewNode();</span><br><span class="line">                nod[nq] = nod[q], nod[nq].len = nod[p].len + <span class="number">1</span>;</span><br><span class="line">                nod[cur].lnk = nod[q].lnk = nq;</span><br><span class="line">                <span class="keyword">while</span> ((~p) &amp;&amp; nod[p][c] == q) nod[p][c] = nq, p = nod[p].lnk;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span></span><br><span class="line">            nod[cur].lnk = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">IniAnc</span><span class="params">(<span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(ton, <span class="number">0</span>, <span class="keyword">sizeof</span> ton);</span><br><span class="line">        <span class="built_in">memset</span>(anc, <span class="number">0</span>, <span class="keyword">sizeof</span> anc);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= ncnt; i++) ton[nod[i].len]++;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++) ton[i] += ton[i - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= ncnt; i++) sot[ton[nod[i].len]--] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> it = <span class="number">1</span>; it &lt;= ncnt; it++) &#123;</span><br><span class="line">            <span class="keyword">int</span> i = sot[it];</span><br><span class="line">            anc[i][<span class="number">0</span>] = nod[i].lnk;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; <span class="number">20</span>; j++) anc[i][j] = anc[anc[i][j - <span class="number">1</span>]][j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Search</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">19</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">            <span class="keyword">if</span> (nod[anc[u][i]].len &gt;= len)</span><br><span class="line">                u = anc[u][i];</span><br><span class="line">        <span class="keyword">return</span> u;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; Sa;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GRAPH</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> head[N * <span class="number">5</span>], du[N * <span class="number">5</span>], nxt[N * <span class="number">8</span>], to[N * <span class="number">8</span>], ncnt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//		printf("+ %d %d\n",u,v);</span></span><br><span class="line">        <span class="keyword">int</span> p = ++ncnt;</span><br><span class="line">        nxt[p] = head[v], to[p] = u, head[v] = p;</span><br><span class="line">        du[u]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(<span class="keyword">int</span> siz)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= siz; i++) head[i] = du[i] = <span class="number">0</span>;</span><br><span class="line">        ncnt = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">operator</span>[](<span class="keyword">const</span> <span class="keyword">int</span> &amp;u) &#123; <span class="keyword">return</span> head[u]; &#125;</span><br><span class="line">&#125; Gr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line"><span class="keyword">int</span> nA, nB, n, m, mcnt, ed[N];</span><br><span class="line"><span class="keyword">int</span> rem[N &lt;&lt; <span class="number">1</span>], rlen[N &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> sotA[N], sotB[N];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[N * <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RANG</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> le, ri, lo;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        le = Ri(), ri = Ri();</span><br><span class="line">        lo = Sa.Search(ed[le], ri - le + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Len</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> ri - le + <span class="number">1</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">RANG Ra[N], Rb[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmpA</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span> </span>&#123; <span class="keyword">return</span> Ra[a].Len() &gt; Ra[b].Len(); &#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmpB</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b)</span> </span>&#123; <span class="keyword">return</span> Rb[a].Len() &gt; Rb[b].Len(); &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Match</span><span class="params">(RANG &amp;A)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> org = A.lo;</span><br><span class="line">    <span class="keyword">if</span> (rlen[org] == A.Len())</span><br><span class="line">        A.lo = rem[org];</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        mcnt++;</span><br><span class="line">        rlen[org] = A.Len();</span><br><span class="line">        Gr.AddEdge(mcnt, rem[org]);</span><br><span class="line">        rem[org] = mcnt;</span><br><span class="line">        A.lo = mcnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//	freopen("input.txt","r",stdin);</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> cas = Ri(); cas; cas--) &#123;</span><br><span class="line">        <span class="comment">// Read &amp; Init SAM</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>, str + <span class="number">1</span>);</span><br><span class="line">        n = <span class="built_in">strlen</span>(str + <span class="number">1</span>);</span><br><span class="line">        Sa.Init();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--) ed[i] = Sa.Expand(str[i] - <span class="string">'a'</span>);</span><br><span class="line">        Sa.IniAnc(n);</span><br><span class="line">        nA = Ri();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= nA; i++) Ra[i].Read(), sotA[i] = i;</span><br><span class="line">        nB = Ri();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= nB; i++) Rb[i].Read(), sotB[i] = i;</span><br><span class="line">        <span class="comment">// Rebuild Tree</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= Sa.ncnt; i++) rem[i] = i, rlen[i] = Sa.nod[i].len;</span><br><span class="line">        sort(sotA + <span class="number">1</span>, sotA + nA + <span class="number">1</span>, cmpA);</span><br><span class="line">        sort(sotB + <span class="number">1</span>, sotB + nB + <span class="number">1</span>, cmpB);</span><br><span class="line">        <span class="keyword">int</span> pA = <span class="number">1</span>, pB = <span class="number">1</span>, qA = sotA[pA], qB = sotB[pB];</span><br><span class="line">        mcnt = Sa.ncnt;</span><br><span class="line">        <span class="keyword">while</span> (pA &lt;= nA &amp;&amp; pB &lt;= nB) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Ra[qA].Len() &gt;= Rb[qB].Len())</span><br><span class="line">                Match(Ra[qA]), qA = sotA[++pA];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                Match(Rb[qB]), qB = sotB[++pB];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (pA &lt;= nA) Match(Ra[qA]), qA = sotA[++pA];</span><br><span class="line">        <span class="keyword">while</span> (pB &lt;= nB) Match(Rb[qB]), qB = sotB[++pB];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= Sa.ncnt; i++) Gr.AddEdge(Sa.nod[i].lnk, rem[i]);</span><br><span class="line">        <span class="comment">// Build Graph</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= nA; i++) Gr.AddEdge(Ra[i].lo, mcnt + i), dp[Ra[i].lo] = Ra[i].Len();</span><br><span class="line">        m = Ri();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> A = Ri(), B = Ri();</span><br><span class="line">            Gr.AddEdge(mcnt + A, Rb[B].lo);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Run</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= mcnt + nA; i++)</span><br><span class="line">            <span class="keyword">if</span> (!Gr.du[i])</span><br><span class="line">                que.push(i);</span><br><span class="line">        <span class="keyword">int</span> cir = mcnt + nA;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!que.empty()) &#123;</span><br><span class="line">            cir--;</span><br><span class="line">            <span class="keyword">int</span> u = que.front();</span><br><span class="line">            que.pop();</span><br><span class="line">            ans = max(ans, dp[u]);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> it = Gr[u]; it; it = Gr.nxt[it]) &#123;</span><br><span class="line">                <span class="keyword">int</span> v = Gr.to[it];</span><br><span class="line">                <span class="keyword">if</span> (v &lt;= mcnt)</span><br><span class="line">                    dp[v] = max(dp[v], dp[u]);</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    dp[v] = max(dp[v], dp[u] + Ra[v - mcnt].Len());</span><br><span class="line">                Gr.du[v]--;</span><br><span class="line">                <span class="keyword">if</span> (!Gr.du[v])</span><br><span class="line">                    que.push(v);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (cir)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">        <span class="comment">// Clear</span></span><br><span class="line">        Gr.Init(mcnt + nA);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= mcnt + nA; i++) dp[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &所谓命运\ 羁绊而行\\
+&樱花路过了四季\\
+&此处寻你\\
+&岁月便是\ 你的痕迹\ ”\\
+\text{——}&\text{《寄往明天的回忆之歌》By 封茗囧菌/洛少爷}
+\end{split}</script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2020/20Jun17thArt1/" title="OI题解 - 字符串问题(LOJ)">http://luckyglass.github.io/2020/20Jun17thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87-%E6%89%AB%E6%8F%8F%E7%BA%BF/" rel="tag"><i class="fa fa-tag"></i> 算法效率-扫描线</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC/" rel="tag"><i class="fa fa-tag"></i> 数学-拉格朗日插值</a>
+              <a href="/tags/LOJ/" rel="tag"><i class="fa fa-tag"></i> -LOJ-</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Jun13thArt1/" rel="prev" title="OI题解 - 机器人(LOJ)">
+      <i class="fa fa-chevron-left"></i> OI题解 - 机器人(LOJ)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text"># 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">102</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共278.5k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
