@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="参考 (知乎)矩阵树定理（Matrix-tree Theorem）笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 - Matrix-Tree矩阵树定理">
+<meta property="og:url" content="http://luckyglass.github.io/2020/20Jun28thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="参考 (知乎)矩阵树定理（Matrix-tree Theorem）笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-28T04:57:29.000Z">
+<meta property="article:modified_time" content="2020-06-28T14:59:14.863Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="图论-矩阵树定理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://luckyglass.github.io/2020/20Jun28thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>学习笔记 - Matrix-Tree矩阵树定理 | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luckyglass.github.io/2020/20Jun28thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习笔记 - Matrix-Tree矩阵树定理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-28 12:57:29 / 修改时间：22:59:14" itemprop="dateCreated datePublished" datetime="2020-06-28T12:57:29+08:00">2020-06-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Jun28thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Jun28thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>参考 <a href="https://zhuanlan.zhihu.com/p/108209378" target="_blank" rel="noopener">(知乎)矩阵树定理（Matrix-tree Theorem）笔记</a></p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="线代基础"><a href="#线代基础" class="headerlink" title="# 线代基础"></a># 线代基础</h2><p>行列式——在矩阵树定理中要用到其中的一些性质，这里只列出：</p>
+<h3 id="定义（并不严谨）"><a href="#定义（并不严谨）" class="headerlink" title="- 定义（并不严谨）"></a>- 定义（并不严谨）</h3><p>行列式是对一个方阵定义的运算，结果为标量。对 $A$ 方阵进行行列式运算可记作 $|A|$ 或 $\det A$。</p>
+<p>具体来说，运算规则如下：若 $A$ 是一个 $n\times n$ 的方阵；记 $P=\{p_1,p_2,\dots,p_n\}$ 为 $1,2,\dots,n$ 的一个排列，$f(P)$ 为 $P$ 中逆序对的数量；则：</p>
+<script type="math/tex; mode=display">
+\det A=\sum_{P}(-1)^{f(P)}\prod_{i=1}^na_{ip_i}</script><p>（上式对 $P$ 求和意为对 $P$ 取 $1,2,\dots,n$ 的所有排列求和）</p>
+<h3 id="重要性质"><a href="#重要性质" class="headerlink" title="- 重要性质"></a>- 重要性质</h3><ol>
+<li>记 $A’$ 为 $A$ 的两行或两列互换后得到的方阵，则 $|A’|=-|A|$。</li>
+<li>如果 $A$ 的某一行或列全为 $0$，则 $|A|=0$；如果方阵 $A$ 有两行或两列完全相同，则 $|A|=0$。</li>
+<li>记 $A^T$ 为 $A$ 的转置矩阵</li>
+</ol>
+<p>推论：将 $A$ 的第 $i$ 行的每个元素乘上 $k$ 再加到第 $j$ 行上（$i\neq j$），$A$ 的行列式运算结果不变。</p>
+<hr>
+<h2 id="Matrix-Tree-定理"><a href="#Matrix-Tree-定理" class="headerlink" title="# Matrix-Tree 定理"></a># Matrix-Tree 定理</h2><h3 id="定义-amp-性质"><a href="#定义-amp-性质" class="headerlink" title="- 定义&amp;性质"></a>- 定义&amp;性质</h3><blockquote>
+<p>于是在简单地记住行列式的几个性质后，我们就可以粗略地证明一下矩阵树定理了</p>
+</blockquote>
+<p>最基础的矩阵树定理定义在一个<strong>无向图</strong>上，记无向图 $G=(V,E)$ 有 $n$ 个点 $m$ 条边，其中 $E=\{e_1,e_2,\dots,e_m\}$，$V=\{v_1,v_2,\dots,v_n\}$。</p>
+<p>定义 $G$ 的<strong>关联矩阵</strong> $M$ 如下。先给 $G$ 的每条边任意指定一个方向，则 $M$ 是一个 $n\times m$ 的矩阵：</p>
+<script type="math/tex; mode=display">
+M_{ij}=\begin{cases}
+-1&(e_j是v_i的一条出边)\\
+1&(e_j是v_i的一条入边)\\
+0&(e_j与v_i不相邻)\\
+\end{cases}</script><p>再定义一个<strong>拉普拉斯矩阵</strong> $L$：记无向图 $G$ 中 $v_i,v_j$ 之间有 $m_{ij}$ 条边，$v_i$ 的度数为 $d_i$，</p>
+<script type="math/tex; mode=display">
+L_{ij}=\begin{cases}
+d_i&(i=j)\\
+-m_{ij}&(i\neq j)\\
+\end{cases}</script><p>根据 $L$ 的实际意义，可以得到 $L=M\times M^T$（$M^T$ 是 $M$ 的转置矩阵，即 $M$ 沿对角线翻转，乘法为矩阵乘法）</p>
+<html>
+<head>
+<style type="text/css">
+summary.sum{
+    background-color:#D5D5D5;
+    border-radius:.3rem;
+    height: 10;
+}
+details.de{
+    background-color:#E6E6E6;
+}
+</style>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+<body>
+<details class="de">
+<summary class="sum">$L=M\times M^T$ 的证明</summary>
+<p>首先 $L_{ij}=\sum_k M_{ik}M^T_{kj}=\sum_k M_{ik}M_{jk}$；</p>
+<p>考虑两种情况即 $i=j$ 和 $i\neq j$：</p>
+<ul>
+<li>$i=j$，则当且仅当 $e_k$ 与 $v_i$ 相邻时，$M_{ik}M_{jk}=1$，否则为 $0$，所以是 $v_i$ 的度数；</li>
+<li>$i\neq j$，如果 $e_k$ 是 $v_i,v_j$ 之间的边（无论方向），则 $M_{ik}M_{jk}=-1$，否则为 $0$，因此为 $-m_{ij}$。</li>
+</ul>
+</details>
+<br>
+</body>
+</html>
+
+<p>根据 $M$ 矩阵，我们再定义 $M_0$ 为 $M$ 删除最后一行的余矩阵。</p>
+<p>根据 $M_0$，定义子矩阵 $M_0[S]$（$S$ 为一个大小为 $n-1$ 的集合，$S$ 的每个元素都是 $1$ 到 $m$ 的整数）表示：将 $M_0$ 中所有 $i\in S$ 列都取出来得到的子矩阵。</p>
+<h3 id="矩阵树定理"><a href="#矩阵树定理" class="headerlink" title="- 矩阵树定理"></a>- 矩阵树定理</h3><p>可以知道 $M_0[S]$ 中 $S$ 的 $n-1$ 个元素指代的是 $G$ 的 $n-1$ 条边，则有：</p>
+<blockquote>
+<p>如果 $S$ 中的 $n-1$ 条边构成一棵生成树，则 $M_0[S]=\pm1$，否则 $M_0[S]=0$。</p>
+</blockquote>
+<p>(因为我不会严谨的证明，就简单地说明一下，应该可以意会)</p>
+<html>
+<head>
+<style type="text/css">
+summary.sum{
+    background-color:#D5D5D5;
+    border-radius:.3rem;
+    height: 10;
+}
+details.de{
+    background-color:#E6E6E6;
+}
+</style>
+</head>
+<body>
+<details class="de">
+<summary class="sum">上述引理的证明</summary>
+<p>
+<ul>
+<li>如果 $S$ 构成生成树，则可以将生成树中的每个节点拓扑排序，注意到 $M_0$ 是一个 $n-1$ 行的矩阵，因为我们删除了 $M$ 的最后一行（代表 $v_n$ 的那行）。因此在拓扑排序时，我们强制使 $v_n$ 成为最后被拓扑到的那个节点。<br>
+然后按拓扑序枚举 $v_i$，设拓扑时与 $v_i$ 唯一相邻的节点为 $v_j$、$v_i$ 与 $v_j$ 相邻的边为 $e_k$，则我们将 $M_0[S]$ 的第 $j$ 行加上第 $i$ 行，可以知道此时 $M_0[S]_{jk}=0$，并且 $|M_0[S]|$ 不变。
+<br>显然第一个拓扑到的 $v_i$ 对应的 $M_0[S]$ 的第 $i$ 行只有一个位置为 $\pm1$，其余位置为 $0$。根据数学归纳，当我们枚举到 $v_i$ 时 $M_0[S]$ 的第 $i$ 行只有一个位置为 $\pm1$。<br>
+当我们处理完所有 $n-1$ 次操作后，$M_0[S]$ 变成了一个每行、每列都只有一个元素为 $\pm1$ 的矩阵，再排个序就可以得到对角线只有 $\pm1$，其他位置都是 $0$ 的一个矩阵，此矩阵的行列式运算结果为 $\pm1$。</li>
+<li>
+如果 $S$ 中存在环（不存在环是构成生成树的充要条件），则将环中的 $k$ 个点对应的 $k$ 行与环中的边对应的 $k$ 列提取出来得到子矩阵，该 $k\times k$ 的子矩阵的行列式运算结果为 $0$。则对应的原矩阵运算结果亦为 $0$。
+</li>
+</ul>
+</p>
+</details>
+<br>
+</body>
+</html>
+
+<p>则矩阵树定理为：定义 $L_0$ 为矩阵 $L$ 删去任意一行与任意一列（一般是删去最后一行最后一列）得到的矩阵，则 $\det L_0$ 就是生成树的个数。</p>
+<p>在证明这个定理时，还需要用到一个结论——Binet-Cauchy Theorem：</p>
+<blockquote>
+<p>设 $A$,$B$ 为两个 $n\times m$ 的矩阵，则：</p>
+<script type="math/tex; mode=display">
+\det AB=\sum_{|S|=n}(\det A[S])(\det B[S])</script><p>其中 $S$ 是一个大小为 $n$ 的集合，元素范围为 $[1,m]$。$A[S],B[S]$ 定义类似 $M_0[S]$ 的定义。</p>
+</blockquote>
+<p>则对矩阵树定理的简单证明如下：</p>
+<blockquote>
+<p>证明同 $L=M\times M^T$，可以得到 $L_0=M_0\times M^T_0$；</p>
+<script type="math/tex; mode=display">
+\begin{split}
+\det L_0&=\sum_{|S|=n-1} (\det M_0[S])(\det M_0^T[S])\\
+&=\sum_{|S|=n-1}(\det M_0[S])^2
+\end{split}</script><p>其中 $M_0^T[S]$ 表示取 $M_0^T$ 的属于集合 $S$ 的列。<br>等式第二行是因为矩阵转置后行列式不变。</p>
+<p>可以知道 $S$ 构成生成树时，$\det M_0[S]=\pm 1$，则 $(\det M_0[S])^2=1$，否则 $(\det M_0[S])^2=0$，因此对所有 $S$ 求和，得到的答案就是生成树的方案数。</p>
+</blockquote>
+<hr>
+<h2 id="THE-end"><a href="#THE-end" class="headerlink" title="THE end"></a>THE end</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &悬浮在水中央\\
+&迎向末日的光\\
+&聚拢在如此耀眼忧伤\\
+&徒有鲜活的皮囊\\
+&失去灵魂的魔法\\
+&比不上你一丝一毫\\
+&像笨拙的我藏入你怀抱\\
+&故事终结在这一刻就好\ ”\\
+——&\text{《蒸汽金鱼（人声本家）》By 三无Marblue}
+\end{split}</script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://luckyglass.github.io/2020/20Jun28thArt1/" title="学习笔记 - Matrix-Tree矩阵树定理">http://luckyglass.github.io/2020/20Jun28thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BE%E8%AE%BA-%E7%9F%A9%E9%98%B5%E6%A0%91%E5%AE%9A%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 图论-矩阵树定理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Jun21stArt1/" rel="prev" title="前行 - 2020省选游记">
+      <i class="fa fa-chevron-left"></i> 前行 - 2020省选游记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线代基础"><span class="nav-text"># 线代基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义（并不严谨）"><span class="nav-text">- 定义（并不严谨）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重要性质"><span class="nav-text">- 重要性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matrix-Tree-定理"><span class="nav-text"># Matrix-Tree 定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义-amp-性质"><span class="nav-text">- 定义&amp;性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵树定理"><span class="nav-text">- 矩阵树定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-end"><span class="nav-text">THE end</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共282k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
