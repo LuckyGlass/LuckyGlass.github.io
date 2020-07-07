@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="morPySQeBU" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+summary.fold{
+	background-color:#555555;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold{
+	background-color:#EEEEEE;
+	border-radius:.3rem;
+}
+p.fold{
+	padding-left:10px;
+	padding-right:10px;
+}
+p.block{
+	background-color:#EEEEEE;
+	border-radius:.3rem;
+	padding-left:5px;
+	padding-right:5px;
+}
+</blockquote>
+</style>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 - 支配树">
+<meta property="og:url" content="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-06T13:41:15.000Z">
+<meta property="article:modified_time" content="2020-07-07T08:03:03.410Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="图论-支配树">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>学习笔记 - 支配树 | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习笔记 - 支配树
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-06 21:41:15" itemprop="dateCreated datePublished" datetime="2020-07-06T21:41:15+08:00">2020-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-07 16:03:03" itemprop="dateModified" datetime="2020-07-07T16:03:03+08:00">2020-07-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Jul6thArt2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Jul6thArt2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">我还没写完</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="1e3b48e18820dc97c7baccb660264197d3da59cef77624b00e348a3ec67b6270">8cd550753fb196435e9090909184b6f3c63911a946eea28dc24b2c316b8f4acb29e40c630c0022fef2022269c141d354120650adf92b7ba553de3195340fa38d8b141a1c4d9b8fcb6e302b12765ae5371698c16d9c5f9244f73c616f85fa6e79bc5b8b5f7fae0c2aa9053b852d87d02dc608ad81360996bb50906d1dc91174ebcf6cfc62005966c9bb69265f289899e07e28c54a6edfe73de31214529c5db2780a841d7b2c7fb30973c98b599cd76867c609fc9ffda32ed3d2dc29beedb6b9a51162d6469d7be7561d94185951638c93dc29395e4e94e27f5839f63bf1ee3b32319702201128eb0207219b052e95433e99c4dc9fd69672b3180d1a534c7c4be83cd91ff3054dae549c76c32f2de534fa57345ad5fde488b256e4f8a34c48a646d019a4f09c489b485bec273295facb8a0826ee89487f961fc15731342905b0b1b2767cd30f7cebcfe4b30fee017944c865f9d9b52b8942a0c81251cfd07e22b6ffb810f897dff733176de19d59ac9dc4d04d9005941cf1b15571f038a12d4455b22f44f361c72cd7ff753c2b8e0527c0c1137c022bc61909befb86e11305c0b8b5e1936d848221662c0e9410306e6919133c14a144e245da8ffea6db1f979e958efdfb90cb99dc18f2f358e206e6d606708cb5f60804e0aa6193b1d041e0bd310be705ab873abcae1e16f75ff0966034d7c421e339f7ff95530dc9ccb92ed5ee37bde75d2ac7fa288d7a49d63b027cc0e930b4c58d07d6104d6cee68030b5e17dc7f27ef2693aa2c353161bd69e533529ce57e59370d2022957933436bc8ffbb5e7c7e0c4c1ed4a1ce005c1c2f0e48067392899e7f2874315bff2354c5a9ee57f0419c4195c605737ae618874c8e109ad41d93636e4efebfbc5ca9e8e067099de3f56d1027bacbb5d69ff2615afaee7c376dcfb6999a6c6de6ef828a6fe513830414a98538992c7a65698aba7c3fcebdc875f11763bfeb9e34729be81b311aca5810499c7b7bedb7361ba58b4635de73dc2f60ede2d283d39e2be0ea6299752e3cde2f2a5ed2654b4721290111cb33144a3877179466e882c1307a192b8fcb9c2473bb80f32d71b7488ce1d480465151253029be20172b8f554ef0ac83507797af3c985eb792d1954e64f83209acf6d25f9131171ae22c7c066ec95aeb39d56eab3e1b0e0b5e58d379e9de7ba7a0af31047f26ea7a4710522d6a80ffea0d7a5ab1e4190a66da114b9f66adc94f9fdaf8e602f78fa343fb227653ba24d9d588666eef68fcf4772d49d9ee02a91ad4069a52fa9a802bd0e13827561c48cdb0703f147a930972e207720b80dd0de150d10e30bc80956d1b7b12b28abc1dbef516895422ac06bbbfac9cb3cd3f10a897d01dfc48b960220019dc838fd315b705c0e87b371c65d356c099154b59b8bc785c4b8f6fae8412c9464f63f6abdc7058e697193dd99ae652cc4e590448a0fdb2233bb9775b6012955002012a68178f14dc81cbadce8bd2c42e35d6a56c495dc0cbdca1ee89b067596f95afc0f89d3f42bf84f41f774b35e31c6b616139e8237e325d2702c8ae092d08f7815dec63704afecb0bcf08f56a98ebdfd99c77feb0f8c1df2c704fad79e51acb16337cdff3f79dde01bc5af8bff47503318ff5d0e3ad44b59ed8afb60be921ecd21a1a1feb8ee6aba8e1a434e5dc9bb1a4f6f33967cee99d89d3d7d0de5201f55395def9b09a96a865fc0ae744ca1546b65d6972d9a6e621abd58092c43d617c7316ae6cf80615ed2db993e137a3e840af8edb7b7d9364ae11f84160b4c7bd6874de7b0f047f564ef8b5d0a8872f5ed2c8390f985531b7482cc4609adeda0eac696adefb104734ae096cd29293119bb37a13f5f7ef27a7342c47741739edf6b3abb873e888d9050044efca684cea102a89aa22b0c74a15054addca63690f0102a671c93200d69cc2dfdac2f713c9b9aa673f41bd131dce189a98e7297de10783173c363fa9681af3af4227ad6518843ab823f5361a89414fe27de1154ae3a264e0aeaece757302280cc6d5f5a6426d156648d40e65b8c870fee313e845acba581dbdc6b812d45ee8664146c30ba262bbfbd98ed9983ee5a122c02ba14412c033539a5e39ac6abe571c66d84bc04be23a966bf3df25b43857d89f3b3bc3f845960f06ee6ef283f95684f4cda09f34ff171fb1eef08be1c649d08e57c895b36fec0ca09f16b8de50b6a5ca2ab79b1194e5b27f2e70abd291bc4050bc3b26416424487b50292234d7eab27576cf0c04052ca2f86b4e7536b23bbe88a95a4b61ae246cb8fc75afa930858717a5e5f0d71ed9e08431c1f7a983b112d94b43b6a8f777c5599188d4a442fc96774613198625c3f05db721a3e62aa68c538f7f62205f8fd31e98e9bc933db4d15962b3a015266415ca598ccac2dc6c1f93d719ffe9b7979513906a6d7d0ef98c8f2bf2cb788451e74ba3dccbff8bd2b31b2ac774dbe365418c5fbecba8f01354956fca0e12008fc759ce8e9bc8c7ef79c5b2bb1367541f0accc3c31b187862d982c1e0e61f491f3545b63fee22ca42ea327dcd94e176818cd8271f64ba35a11b2ab9919634727d6eee53c0512f21a0acc69358e9730596d919f8789abcb7e26a177a42a1a625d511e8bdc6a38b0f3aca1549c1f78f470cc901d70b6c17d12868b25ded16342a001f4127878c613de244aab26536041fed3cf65a9bd3fc0619a49ada3b446816d152f71cd96e18cfa1440e14ec87e122cdf5f1143a4f8875bfe1a6f4bd691debb01cea64845853c837288666d03fa48ea53c06af9400070798caf85c2a24cdd032fbe44e28474cd85dbdd52b865283d87a2b2deaac29a69528d912330cd2694cfa66f642e44de7711612cf57730f9654f234a8967c71a73b663dd2ffbbd6c350e11449fa097860977e0cc44ae07ba847b40f4ce03e5cea84954527e904f7d5722bf0c53eb4adc47d087b9ed1c7ff29cb11f063bc5eaa9560dc45866f772fa0bde1a99874cc2db9fc7762e9210b0b89f51dbe960cb6cb892ca497f27ee542e1c933c7a004e7d1b64e7e044cf9485976a8e66b1a64124ce9177a31bc2620534665c7ab8880c97c075d69d39d8ecdbcb8e9257f8e1238c09b9b636231445ad19f283e1937a2801fad365f74e7ed82af74b28f321fee716885d69fa02a04062c9378fa0c387862027d0a798f69e33a3392a01ebdaaf65ecef36edf2df3ef93c8ef4a089a60833420b19aaf1dded95b50e6b6e4f1d011b5551f5af0befe50c4f69076a058d49b3d260a98dc047eb9282aab4e231f600200281facf64026be6b00b3e0562f8eff7c9e70dd9746724b154516e735db3c9654e66fc91a2de82c49b484a706b65e3dbf55ab974d16a37a17f55c3bfaf2f261d1b18af92fa49736846db3f794264f85dc1f4965e5639b4eacb7a07c3c19826b62b334c8c0b0027781a320db1608434be867d883db0d19c70a10acb7ca1f9619f4ca62c0a10fa4062f43f5e3329d61bd25c798156c4b10fb6300f1d324ea96c01a4ea0bec50a4f625b5ae958353d51b467c43d2834ba610d4f48c7b9d51ab7de9f75b437f3e9e6f9f4512911adf7afa48fb0517615cf5017c5d4c48fd5111ce4157a28180c681e9e2156cc3c370b4e2d7a43dc56f54115e90efee77671308f8563dec5e663f3af53aa6e39c568d7cd2053a12a055a36922362c811b05a6c190bff4ce44983afae4d49772f4e4dfbd57cc79068fe4f080c13cde3bf9ab43a4c3bdf3c9a3fd1429cb0c98707816fbc177f7b0f3996880d644ec164069d46215d6db0728601186757f84e7d0df499164c405528d3c0776cf619b6f69c99ebd8acaeebbea4d765cd5c9045086c576bcf431b50fbe4ee06be1b092c3f0d13619ce617147bb14b11aa3c1a0b741c8156ac46ce3fdada434777216edbabdcf3aa5d3ccfa4a2b5cf5acbcf9aeb2b4aa3ea8fe20e38ec0c6364d67e0125e8bc92997cfc1a289185bdb9</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/" title="学习笔记 - 支配树">https://4rds5h.coding-pages.com/2020/20Jul6thArt2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BE%E8%AE%BA-%E6%94%AF%E9%85%8D%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i> 图论-支配树</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Jul6thArt1/" rel="prev" title="OI - 信号传递(洛谷)">
+      <i class="fa fa-chevron-left"></i> OI - 信号传递(洛谷)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/20Jul7thArt1/" rel="next" title="学习笔记 - 多项式小结">
+      学习笔记 - 多项式小结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">170</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共290.9k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
