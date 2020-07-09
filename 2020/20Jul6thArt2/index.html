@@ -44,6 +44,7 @@ p.block{
 	border-radius:.3rem;
 	padding-left:5px;
 	padding-right:5px;
+	padding-bottom:5px;
 }
 </blockquote>
 </style>
@@ -53,23 +54,27 @@ p.block{
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
   </script>
 
-  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+  <meta name="description" content="理性愉悦(×)在线自闭(√)（和析合树有得一拼） 要感谢大神的博客：Meowww~（本文的证明思路同上博客）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习笔记 - 支配树">
-<meta property="og:url" content="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/">
+<meta property="og:url" content="https://luckyglass.github.io/2020/20Jul6thArt2/">
 <meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="理性愉悦(×)在线自闭(√)（和析合树有得一拼） 要感谢大神的博客：Meowww~（本文的证明思路同上博客）">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://luckyglass.github.io/2020/20Jul6thArt2/png1.png">
+<meta property="og:image" content="https://luckyglass.github.io/2020/20Jul6thArt2/png2.png">
+<meta property="og:image" content="https://luckyglass.github.io/2020/20Jul6thArt2/png3.png">
 <meta property="article:published_time" content="2020-07-06T13:41:15.000Z">
-<meta property="article:modified_time" content="2020-07-07T08:03:03.410Z">
+<meta property="article:modified_time" content="2020-07-09T06:54:41.313Z">
 <meta property="article:author" content="Lucky_Glass">
 <meta property="article:tag" content="图论-支配树">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luckyglass.github.io/2020/20Jul6thArt2/png1.png">
 
-<link rel="canonical" href="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/">
+<link rel="canonical" href="https://luckyglass.github.io/2020/20Jul6thArt2/">
 
 
 <script id="page-configurations">
@@ -233,7 +238,7 @@ p.block{
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/">
+    <link itemprop="mainEntityOfPage" href="https://luckyglass.github.io/2020/20Jul6thArt2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -263,7 +268,7 @@ p.block{
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-07 16:03:03" itemprop="dateModified" datetime="2020-07-07T16:03:03+08:00">2020-07-07</time>
+                <time title="修改时间：2020-07-09 14:54:41" itemprop="dateModified" datetime="2020-07-09T14:54:41+08:00">2020-07-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -307,15 +312,130 @@ p.block{
     <div class="post-body" itemprop="articleBody">
 
       
-        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <div class="hbe-input-container">
-  <input type="password" id="hbePass" placeholder="" />
-    <label for="hbePass">我还没写完</label>
-    <div class="bottom-line"></div>
-  </div>
-  <script id="hbeData" type="hbeData" data-hmacdigest="1e3b48e18820dc97c7baccb660264197d3da59cef77624b00e348a3ec67b6270">8cd550753fb196435e9090909184b6f3c63911a946eea28dc24b2c316b8f4acb29e40c630c0022fef2022269c141d354120650adf92b7ba553de3195340fa38d8b141a1c4d9b8fcb6e302b12765ae5371698c16d9c5f9244f73c616f85fa6e79bc5b8b5f7fae0c2aa9053b852d87d02dc608ad81360996bb50906d1dc91174ebcf6cfc62005966c9bb69265f289899e07e28c54a6edfe73de31214529c5db2780a841d7b2c7fb30973c98b599cd76867c609fc9ffda32ed3d2dc29beedb6b9a51162d6469d7be7561d94185951638c93dc29395e4e94e27f5839f63bf1ee3b32319702201128eb0207219b052e95433e99c4dc9fd69672b3180d1a534c7c4be83cd91ff3054dae549c76c32f2de534fa57345ad5fde488b256e4f8a34c48a646d019a4f09c489b485bec273295facb8a0826ee89487f961fc15731342905b0b1b2767cd30f7cebcfe4b30fee017944c865f9d9b52b8942a0c81251cfd07e22b6ffb810f897dff733176de19d59ac9dc4d04d9005941cf1b15571f038a12d4455b22f44f361c72cd7ff753c2b8e0527c0c1137c022bc61909befb86e11305c0b8b5e1936d848221662c0e9410306e6919133c14a144e245da8ffea6db1f979e958efdfb90cb99dc18f2f358e206e6d606708cb5f60804e0aa6193b1d041e0bd310be705ab873abcae1e16f75ff0966034d7c421e339f7ff95530dc9ccb92ed5ee37bde75d2ac7fa288d7a49d63b027cc0e930b4c58d07d6104d6cee68030b5e17dc7f27ef2693aa2c353161bd69e533529ce57e59370d2022957933436bc8ffbb5e7c7e0c4c1ed4a1ce005c1c2f0e48067392899e7f2874315bff2354c5a9ee57f0419c4195c605737ae618874c8e109ad41d93636e4efebfbc5ca9e8e067099de3f56d1027bacbb5d69ff2615afaee7c376dcfb6999a6c6de6ef828a6fe513830414a98538992c7a65698aba7c3fcebdc875f11763bfeb9e34729be81b311aca5810499c7b7bedb7361ba58b4635de73dc2f60ede2d283d39e2be0ea6299752e3cde2f2a5ed2654b4721290111cb33144a3877179466e882c1307a192b8fcb9c2473bb80f32d71b7488ce1d480465151253029be20172b8f554ef0ac83507797af3c985eb792d1954e64f83209acf6d25f9131171ae22c7c066ec95aeb39d56eab3e1b0e0b5e58d379e9de7ba7a0af31047f26ea7a4710522d6a80ffea0d7a5ab1e4190a66da114b9f66adc94f9fdaf8e602f78fa343fb227653ba24d9d588666eef68fcf4772d49d9ee02a91ad4069a52fa9a802bd0e13827561c48cdb0703f147a930972e207720b80dd0de150d10e30bc80956d1b7b12b28abc1dbef516895422ac06bbbfac9cb3cd3f10a897d01dfc48b960220019dc838fd315b705c0e87b371c65d356c099154b59b8bc785c4b8f6fae8412c9464f63f6abdc7058e697193dd99ae652cc4e590448a0fdb2233bb9775b6012955002012a68178f14dc81cbadce8bd2c42e35d6a56c495dc0cbdca1ee89b067596f95afc0f89d3f42bf84f41f774b35e31c6b616139e8237e325d2702c8ae092d08f7815dec63704afecb0bcf08f56a98ebdfd99c77feb0f8c1df2c704fad79e51acb16337cdff3f79dde01bc5af8bff47503318ff5d0e3ad44b59ed8afb60be921ecd21a1a1feb8ee6aba8e1a434e5dc9bb1a4f6f33967cee99d89d3d7d0de5201f55395def9b09a96a865fc0ae744ca1546b65d6972d9a6e621abd58092c43d617c7316ae6cf80615ed2db993e137a3e840af8edb7b7d9364ae11f84160b4c7bd6874de7b0f047f564ef8b5d0a8872f5ed2c8390f985531b7482cc4609adeda0eac696adefb104734ae096cd29293119bb37a13f5f7ef27a7342c47741739edf6b3abb873e888d9050044efca684cea102a89aa22b0c74a15054addca63690f0102a671c93200d69cc2dfdac2f713c9b9aa673f41bd131dce189a98e7297de10783173c363fa9681af3af4227ad6518843ab823f5361a89414fe27de1154ae3a264e0aeaece757302280cc6d5f5a6426d156648d40e65b8c870fee313e845acba581dbdc6b812d45ee8664146c30ba262bbfbd98ed9983ee5a122c02ba14412c033539a5e39ac6abe571c66d84bc04be23a966bf3df25b43857d89f3b3bc3f845960f06ee6ef283f95684f4cda09f34ff171fb1eef08be1c649d08e57c895b36fec0ca09f16b8de50b6a5ca2ab79b1194e5b27f2e70abd291bc4050bc3b26416424487b50292234d7eab27576cf0c04052ca2f86b4e7536b23bbe88a95a4b61ae246cb8fc75afa930858717a5e5f0d71ed9e08431c1f7a983b112d94b43b6a8f777c5599188d4a442fc96774613198625c3f05db721a3e62aa68c538f7f62205f8fd31e98e9bc933db4d15962b3a015266415ca598ccac2dc6c1f93d719ffe9b7979513906a6d7d0ef98c8f2bf2cb788451e74ba3dccbff8bd2b31b2ac774dbe365418c5fbecba8f01354956fca0e12008fc759ce8e9bc8c7ef79c5b2bb1367541f0accc3c31b187862d982c1e0e61f491f3545b63fee22ca42ea327dcd94e176818cd8271f64ba35a11b2ab9919634727d6eee53c0512f21a0acc69358e9730596d919f8789abcb7e26a177a42a1a625d511e8bdc6a38b0f3aca1549c1f78f470cc901d70b6c17d12868b25ded16342a001f4127878c613de244aab26536041fed3cf65a9bd3fc0619a49ada3b446816d152f71cd96e18cfa1440e14ec87e122cdf5f1143a4f8875bfe1a6f4bd691debb01cea64845853c837288666d03fa48ea53c06af9400070798caf85c2a24cdd032fbe44e28474cd85dbdd52b865283d87a2b2deaac29a69528d912330cd2694cfa66f642e44de7711612cf57730f9654f234a8967c71a73b663dd2ffbbd6c350e11449fa097860977e0cc44ae07ba847b40f4ce03e5cea84954527e904f7d5722bf0c53eb4adc47d087b9ed1c7ff29cb11f063bc5eaa9560dc45866f772fa0bde1a99874cc2db9fc7762e9210b0b89f51dbe960cb6cb892ca497f27ee542e1c933c7a004e7d1b64e7e044cf9485976a8e66b1a64124ce9177a31bc2620534665c7ab8880c97c075d69d39d8ecdbcb8e9257f8e1238c09b9b636231445ad19f283e1937a2801fad365f74e7ed82af74b28f321fee716885d69fa02a04062c9378fa0c387862027d0a798f69e33a3392a01ebdaaf65ecef36edf2df3ef93c8ef4a089a60833420b19aaf1dded95b50e6b6e4f1d011b5551f5af0befe50c4f69076a058d49b3d260a98dc047eb9282aab4e231f600200281facf64026be6b00b3e0562f8eff7c9e70dd9746724b154516e735db3c9654e66fc91a2de82c49b484a706b65e3dbf55ab974d16a37a17f55c3bfaf2f261d1b18af92fa49736846db3f794264f85dc1f4965e5639b4eacb7a07c3c19826b62b334c8c0b0027781a320db1608434be867d883db0d19c70a10acb7ca1f9619f4ca62c0a10fa4062f43f5e3329d61bd25c798156c4b10fb6300f1d324ea96c01a4ea0bec50a4f625b5ae958353d51b467c43d2834ba610d4f48c7b9d51ab7de9f75b437f3e9e6f9f4512911adf7afa48fb0517615cf5017c5d4c48fd5111ce4157a28180c681e9e2156cc3c370b4e2d7a43dc56f54115e90efee77671308f8563dec5e663f3af53aa6e39c568d7cd2053a12a055a36922362c811b05a6c190bff4ce44983afae4d49772f4e4dfbd57cc79068fe4f080c13cde3bf9ab43a4c3bdf3c9a3fd1429cb0c98707816fbc177f7b0f3996880d644ec164069d46215d6db0728601186757f84e7d0df499164c405528d3c0776cf619b6f69c99ebd8acaeebbea4d765cd5c9045086c576bcf431b50fbe4ee06be1b092c3f0d13619ce617147bb14b11aa3c1a0b741c8156ac46ce3fdada434777216edbabdcf3aa5d3ccfa4a2b5cf5acbcf9aeb2b4aa3ea8fe20e38ec0c6364d67e0125e8bc92997cfc1a289185bdb9</script>
-</div>
-<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+        <blockquote>
+<p>理性愉悦(×)在线自闭(√)（和析合树有得一拼）</p>
+<p>要感谢大神的博客：<a href="https://www.cnblogs.com/meowww/p/6475952.html" target="_blank" rel="noopener">Meowww~</a>（本文的证明思路同上博客）</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="概念"><a href="#概念" class="headerlink" title="# 概念"></a># 概念</h2><p>支配树是建立在<strong>单源有向图</strong>上的有根树。单源有向图又被称为“流程图”，其特点除了有向，还有存在一个源点使得源点可以到达任意一个点。</p>
+<p>在流程图上定义<strong>支配关系</strong>，设源点为 $r$：如果 $r$ 到 $v$ 的每一条路径都经过了 $u$，则 $u$ 支配 $v$。</p>
+<p>非常显然的，对于 $v$（$v\neq r$） 来说，有两个平凡的支配点 $v,r$，一般来说都不会考虑 $v$ 本身作为 $v$ 的支配点。但是我们知道，往往是其他不平凡的支配点比较重要。</p>
+<p class="block"><u>定义1-最近支配点</u><br>对于一个点 $v$（$v\neq r$），如果 $u$ 是 $v$ 的一个支配点，并且任意一个 $v$ 的支配点都支配 $u$，则称 $u$ 为 $v$ 的最近支配点；记作 $idom(v)=u$。</p>
+
+<p class="block"><u>定理1</u><br>对于点 $v$，存在唯一的 $idom(v)$。</p>
+
+<p>首先支配关系具有一定的“传递性”，即如果 $a$ 支配 $b$、$b$ 支配 $c$ 则 $a$ 支配 $c$。则可以证明：</p>
+<p class="block"><u>推论1</u><br>如果 $a$ 支配 $c$、$b$ 支配 $c$，则 $a$ 支配 $b$ 或 $b$ 支配 $a$。否则存在 $r$ 经过 $b$ 到达 $v$ 的路径不经过 $a$，与 $a$ 支配 $c$ 矛盾。</p>
+
+<p>那么有且仅有一个 $v$ 的支配点支配 $v$ 的所有支配点，即 $idom(v)$。</p>
+<p>那么将 $idom(v)$ 作为 $v$ 的父亲，可以获得一棵有根树，称为<strong>支配树</strong>。</p>
+<p>接下来会介绍 Lengauer-Tarjan 算法，在 $O(n\log n)$ 时间复杂度内求出支配树，进而获得支配关系。</p>
+<hr>
+<h2 id="一些记号"><a href="#一些记号" class="headerlink" title="# 一些记号"></a># 一些记号</h2><p>先从流程图的源点出发DFS整张流程图，得到DFS树以及对应的DFS序。DFS树上有 4 种边：树边，前向边，后向边和横插边</p>
+<p><img src="/2020/20Jul6thArt2/png1.png" alt="png1"></p>
+<p>注意到横插边只会从右边的子树指向左边的子树，因此前向边和树边都是从低DFS序指向高DFS序，后向边和横插边就反过来。</p>
+<ul>
+<li>$u\to v$，表示 $u$ 到 $v$ 的一条有向边；</li>
+<li>$u\leadsto v$，表示存在 $u$ 到 $v$ 的一条路径；</li>
+<li>$u\overset .\to v$ 表示 $u$ 到 $v$ 的一条只经过树边的路径；</li>
+<li>$u\overset+\to v$ 表示 $u\overset.\to v$ 且 $u\neq v$；</li>
+<li>$dfn_u$ 表示 $u$ 的DFS序。</li>
+</ul>
+<hr>
+<h2 id="理论证明"><a href="#理论证明" class="headerlink" title="# 理论证明"></a># 理论证明</h2><p class="block"><u>引理1（路径引理）</u><br>若 $dfn_u\le dfn_v$ 则 $u$ 到 $v$ 的路径必经过 u,v 的公共祖先。</p>
+
+<p>要么 v 是 u 的祖先要么 v 是 u 的更右边的子树中的点。</p>
+<ul>
+<li>若是第一种情况，v 就是公共祖先，必须经过；</li>
+<li>若是第二种情况，考虑删去 u,v 的 LCA 到 r 的所有点（也就是删去所有公共祖先），此时不可能通过树边从 u 的子树到达 v 的子树，另外前向边、后向边都不跨子树，而横插边只从右边的子树指向左边的子树，于是不存在向右跨越子树的边，于是不可能到达。</li>
+</ul>
+<p>由于并不好计算 $idom(u)$，所以考虑引入一些定义来<strong>辅助计算</strong>——</p>
+<p class="block"><u>定义2-半支配点</u><br>点 v 满足存在到达 u 的路径且该路径上除去 u,v 两点不存在 dfn 比 u 小的点；满足上述条件的最小的点 v 称为 u 的半支配点，记作 $sdom(u)$。<br>形式化的定义为：
+$$
+sdom(u)=\min\left\{v|\ \exists v\leadsto u=(v,a_1,a_2,\dots,a_m,u),\forall a_i< u\right\}
+$$
+</p>
+
+<p>注意到 $sdom(u)$ 并不一定是 u 的一个支配点，比如下面：<br><img src="/2020/20Jul6thArt2/png2.png" alt="png2"></p>
+<p>v 是 u 的半支配点但是显然不支配 u。</p>
+<p>但是 $sdom(u)$ 是<strong>有潜力</strong>成为支配点的点，在之后的证明中我们会看到任何一个点的 $idom(u)$ 要么是 $sdom(u)$，要么是另一个点的 $sdom(v)$。</p>
+<p>而且我们发现 $sdom(u)&lt;u$（$u\neq r$），因为 $fa(u)$ 一定是 u 的半支配点的“候选”。</p>
+<p class="block"><u>引理2</u><br>对于任意 $u\neq r$，有 $idom(u)\overset+\to u$ 且 $sdom(u)\overset+\to u$。</p>
+
+<p>如果 $idom(u)$ 不是 u 的祖先，那么 r 就可以直接经过树边到达 u，就与 $idom(u)$ 支配 u 矛盾。</p>
+<p>如果 $sdom(u)$ 不是 u 的祖先，首先不可能是右边的子树或者 u 的儿子，因为 $sdom(u)&lt;u$，那么只能是左边的子树，根据路径引理，从 dfn 小的点到大的点必然经过公共祖先，而 $u$ 和 $sdom(u)$ 的公共祖先一定比 $u$ 小，违背了 $sdom(u)$ 的定义。</p>
+<p class="block"><u>引理3</u><br>对于任意 $u\neq r$，有 $idom(u)\overset.\to sdom(u)$。</p>
+
+<p>考虑反证，根据引理2，我们知道相反情况就是 $sdom(u)\overset+\to idom(u)$，因为 $sdom(u)$ 可以不经过比 u 小的点到达 u，即可以不经过 $idom(u)$，则存在 $r\overset.\to sdom(u)\leadsto u$ 不经过 $idom(u)$，矛盾。</p>
+<p class="block"><u>引理4</u><br>对于点 w，任意 $v\overset.\to w$ 满足 $v\overset.\to idom(w)$ 或 $idom(w)\overset.\to idom(v)$。</p>
+
+<p>由引理2，可以推得 $idom(w),idom(v),w,v$ 是在 r 到 w 的树链上的。</p>
+<p>仍然考虑反证，相反情况只有下面这样：<br><img src="/2020/20Jul6thArt2/png3.png" alt="png3"></p>
+<p>a,b 分别为 $idom(v),idom(w)$，显然有路径 $r\overset.\to a\leadsto v\overset.\to w$ 不经过 b，矛盾。</p>
+<blockquote>
+<p>完备的引理是对定理的铺垫~</p>
+</blockquote>
+<p class="block"><u>定理2</u><br>对于 $u\neq r$，若所有满足 $sdom(u)\overset+\to v\overset.\to u$ 的点 v 都满足 $sdom(v)\ge sdom(w)$，则 $idom(w)=sdom(w)$。</p>
+
+<p>这个定理就让 $idom(u)$ 和 $sdom(u)$ 有联系了~</p>
+<p>由引理3，我们知道 $idom(u)\overset.\to sdom(u)$，则只需证明 $sdom(u)$ 支配 u。</p>
+<p>反证，若 $sdom(u)$ 不支配 u，则存在 $r\leadsto u$ 不经过 $sdom(u)$，令 x 为该路径上最后一个 $x&lt;sdom(u)$ 的点。则 $x\leadsto u$ 上一定存在点 y 满足 $sdom(u)\overset.\to y\overset+\to u$（y 在 $sdom(u)$ 和 u 之间的链上），否则 x 就会成为 $sdom(u)$，我们取所有满足条件的 y 中最小的。</p>
+<p>若 $y\neq sdom(u)$，由定理2中的条件得 $sdom(y)\ge sdom(u)$，说明 $x\leadsto y$ 的路径上还有一个点 z 满足 $z&lt;y$，那么也有 $z&lt;u$，但是 y 是最小的 $y&lt;u$ 的点，于是矛盾。则 $y=sdom(u)$，因此 $r\leadsto u$ 一定经过 $sdom(u)$，即 $sdom(u)$ 支配 u。</p>
+<p class="block"><u>定理3</u><br>对于 $w\neq r$，若存在 u 满足 $sdom(w)\overset+\to u\overset.\to w$ 使得 $sdom(u)< sdom(w)$，使 u 取所有满足条件的点中 $sdom(u)$ 最小的一个，则 $idom(u)=idom(w)$。</p>
+
+<p>相当于是对定理2的补充。</p>
+<p>由引理4，要么 $u\overset.\to idom(w)$ 要么 $idom(w)\overset.\to idom(u)$；又由引理3，$idom(w)\overset.\to sdom(w)\overset+\to u$；则只可能是 $idom(w)\overset.\to idom(u)$。也就是说只要证明 $idom(u)$ 支配 $w$ 即可说明 $idom(u)=idom(w)$。</p>
+<p>与定理2类似，如果 $idom(u)=r$，则 $idom(u)$ 一定支配 w；则考虑 $idom(u)\neq r$，任意取一条路径 $r\leadsto w$，令其最后一个小于 $idom(u)$ 的点为 x，则存在 y 使得 $idom(u)\overset.\to y\overset+\to w$，我们取满足条件的最小的一个点作为 y。</p>
+<p>因为 y 是满足条件的最小点，则不存在 v 使得 $idom(u)\overset.\to v\overset+\to y$，即 x 作为 $sdom(y)$ 的“候选”，$sdom(y)\le x$。由于 $x&lt;idom(u)\le sdom(u)$，u 是 所有 $sdom(w)\overset+\to u\overset.\to w$ 的点中 $sdom(u)$ 最小的，所以 y 一定不满足 $sdom(w)\overset+\to y\overset.\to w$，就只能是 $idom(u)\overset.\to y\overset.\to sdom(w)$。</p>
+<p>然后要么 $y=idom(u)$，要么 $y\neq idom(u)$（<del>废话</del>），若 $y\neq idom(u)$，因为 $x\ge sdom(y)$，则存在 $r\overset.\to sdom(y)\leadsto y\overset.\to u$，由于 $sdom(y)$ 的性质，存在 $sdom(y)\leadsto y$ 不经过比 y 小的点 $idom(u)$，则 $r\overset.\to sdom(y)\leadsto y\overset.\to u$ 不经过 $idom(u)$，矛盾。于是 $y=idom(u)$，则任何一条 $r\leadsto w$ 都经过 $idom(u)$，即 $idom(u)$ 支配 w。</p>
+<p>得证，$idom(u)=idom(w)$。</p>
+<p class="block"><u>推论2</u><br>对于 $w\neq r$，令 u 为 $sdom(w)\overset+\to u\overset.\to w$ 中 $sdom(u)$ 最小的，则有：
+$$
+idom(w)=\begin{cases}sdom(w)&sdom(u)\ge sdom(w)\\idom(u)&sdom(u)< sdom(w)\end{cases}
+$$
+</p>
+
+<p>其实就是定理2,3 的综合。</p>
+<p class="block"><u>定理4</u><br>对于 $w\neq r$，有
+$$
+sdom(w)=\min\{\{v|(v,w)\in E\}\cup\{sdom(u)|u>w,\exists(v,w)\in E,u\overset.\to v\}\}
+$$
+</p>
+
+<p>显然集合所描述的条件都满足了 $sdom(w)$ 的条件，只要证明 $sdom(w)$ 一定包含在集合中，分两种情况：</p>
+<ol>
+<li>$sdom(w)\leadsto w$ 只有一条边，对应第一个集合；</li>
+<li>$sdom(w)\leadsto w$ 大于一条边，对应第二个集合，令第二个集合中最小值为 k，则一定有 $sdom(w)\le k$。<br><br>令 x 是 $sdom(w)\leadsto w$ 中 w 的前一个点，再令 y 是该路径上除去端点 $sdom(w),w$ 外  $y\overset.\to x$ 的最小点（可能取到 x），又因为 y 取最小点，所以 $sdom(w)\leadsto y$ 不经过比 y 小的点，即 $sdom(w)$ 是 $sdom(y)$ 的候选。同时我们发现 y 满足第二个集合的条件，则 $sdom(w)$ 是该集合候选，则 $k\le sdom(w)$，也就是说 $k=sdom(w)$。</li>
+</ol>
+<p>得证。</p>
+<hr>
+<h2 id="Lengauer-Tarjan"><a href="#Lengauer-Tarjan" class="headerlink" title="# Lengauer-Tarjan"></a># Lengauer-Tarjan</h2><p>有了上述定理作为基础，Lengauer-Tarjan算法就被设计出来，以 $O(n\log n)$ 的复杂度计算 $idom(u),sdom(u)$。</p>
+<p>算法流程大概如下：</p>
+<ol>
+<li>先DFS一遍，求一个DFS树，然后初始化 $sdom(u)=u$（为了方便……）；</li>
+<li>根据定理4，<strong>按dfn从大到小</strong>枚举 w，计算 $sdom(w)$（在每次计算前，&gt;w 的 $sdom()$ 已经计算好了）：<br><br>枚举<strong>连向</strong> w 的点 u，计算 u 沿着 $fa(u)$ 往上爬到第一个dfn小于 w 的点，这条路径上最小的 $sdom()$。<br><br>当然我们不会直接枚举 $fa(u)$ 向上跳，需要用<strong>带权并查集</strong>维护有根树结构——每次计算完 $sdom(w)$，就把 w 在并查集中连向 $fa(w)$，并查集用<strong>路径压缩</strong>，压缩时更新路径上最小的 $sdom(u)$ 对应的 $u$（详见代码）。</li>
+<li>当我们计算完 $sdom(w)$ 时，在并查集上 w 的子树上所有点一定都连向了 $fa(w)$，因此可以枚举 $sdom(u)$ 为 $fa(w)$ 的点 u，根据推论2，用带权并查集求出 u 到 $sdom(u)$ 的路径上最小的 $sdom(v)$ 对应的 v，若 $sdom(v)&lt;sdom(u)$，则给 $idom(u)$ 打上“v 的标记标记”，表示 $idom(u)=idom(v)$，否则直接 $idom(u)=sdom(u)$。</li>
+<li>最后再扫一遍 $idom(u)$，把有标记 $v$ 的 $idom(u)$ 的值赋值为 $idom(v)$。</li>
+</ol>
+<blockquote>
+<p>Hint. 因为我们时常要取一个点的dfn做大小比较，写代码的时候注意变量到底代表的是dfn还是一个点本身。</p>
+</blockquote>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><p>> <a href="https://www.luogu.com.cn/problem/P5180" target="_blank" rel="noopener">洛谷 P5180</a></p>
+<p>对应题目P5180【模板】支配树<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">2e5</span>+<span class="number">10</span>,M=<span class="number">3e5</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LISTBLOCK</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> head[N],to[M],nxt[M],ncnt;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Push</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;ncnt++;to[ncnt]=v,nxt[ncnt]=head[u],head[u]=ncnt;&#125;</span><br><span class="line">	<span class="keyword">int</span> <span class="keyword">operator</span> [](<span class="keyword">const</span> <span class="keyword">int</span> &amp;u)&#123;<span class="keyword">return</span> head[u];&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(<span class="keyword">int</span> siz)</span></span>&#123;<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=siz;i++) head[i]=<span class="number">0</span>;ncnt=<span class="number">0</span>;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Clear</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;head[id]=<span class="number">0</span>;&#125;</span><br><span class="line">&#125;In,Out,Bucket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,ndfn;</span><br><span class="line"><span class="keyword">int</span> idfn[N],dfn[N],pre[N];</span><br><span class="line"><span class="keyword">int</span> idom[N],sdom[N];</span><br><span class="line"><span class="keyword">int</span> ans[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CalcAns</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	ans[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> it=Out[u];it;it=Out.nxt[it])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=Out.to[it];</span><br><span class="line">		CalcAns(v);</span><br><span class="line">		ans[u]+=ans[v];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DSU</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> fa[N],val[N];</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(u==fa[u]) <span class="keyword">return</span> u;</span><br><span class="line">		<span class="keyword">int</span> res=Find(fa[u]);</span><br><span class="line">		<span class="keyword">if</span>(sdom[val[fa[u]]]&lt;sdom[val[u]]) val[u]=val[fa[u]];</span><br><span class="line">		<span class="keyword">return</span> fa[u]=res;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Eval</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;Find(u);<span class="keyword">return</span> val[u];&#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Link</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">		u=Find(u),v=Find(v);</span><br><span class="line">		<span class="keyword">if</span>(u==v) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		fa[u]=v;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(<span class="keyword">int</span> siz)</span></span>&#123;<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=siz;i++)fa[i]=i,val[i]=i;&#125;</span><br><span class="line">&#125;Ds;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> a=<span class="number">0</span>,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) a=(a&lt;&lt;<span class="number">1</span>)+(a&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">	<span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	idfn[sdom[u]=dfn[u]=++ndfn]=u;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> it=Out[u];it;it=Out.nxt[it])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=Out.to[it];</span><br><span class="line">		<span class="keyword">if</span>(dfn[v]) <span class="keyword">continue</span>;</span><br><span class="line">		pre[v]=u,DFS(v);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	n=Ri(),m=Ri();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> u=Ri(),v=Ri();</span><br><span class="line">		In.Push(v,u),Out.Push(u,v);</span><br><span class="line">	&#125;</span><br><span class="line">	DFS(<span class="number">1</span>);</span><br><span class="line">	Ds.Init(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=ndfn;i&gt;=<span class="number">2</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">int</span> u=idfn[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> it=In[u],v=In.to[it];it;it=In.nxt[it],v=In.to[it])</span><br><span class="line">			<span class="keyword">if</span>(dfn[v])</span><br><span class="line">				sdom[u]=min(sdom[u],sdom[Ds.Eval(v)]);</span><br><span class="line">		Bucket.Push(idfn[sdom[u]],u);</span><br><span class="line">		<span class="comment">// printf("! %d %d\n",u,idfn[sdom[u]]);</span></span><br><span class="line">		Ds.Link(u,pre[u]);</span><br><span class="line">		<span class="keyword">int</span> pu=pre[u];</span><br><span class="line">		<span class="comment">// printf("? %d\n",pu);</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> it=Bucket[pu];it;it=Bucket.nxt[it])&#123;</span><br><span class="line">			<span class="keyword">int</span> iv=Bucket.to[it],iu=Ds.Eval(iv);</span><br><span class="line">			idom[iv]=sdom[iu]==sdom[iv]? pu:iu;</span><br><span class="line">		&#125;</span><br><span class="line">		Bucket.Clear(pu);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>,u=idfn[i];i&lt;=ndfn;i++,u=idfn[i])</span><br><span class="line">	 	idom[u]=idfn[sdom[u]]==idom[u]? idom[u]:idom[idom[u]];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>,u=idfn[i];i&lt;=ndfn;i++,u=idfn[i])</span><br><span class="line">		sdom[u]=idfn[sdom[u]];</span><br><span class="line">	Out.Init(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++) Out.Push(idom[i],i);</span><br><span class="line">	CalcAns(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d%c"</span>,ans[i],i==n?<span class="string">'\n'</span>:<span class="string">' '</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &只要极致\ 谁比我放肆\\
+&展开双翅\ 去奔跑 像个孩子\\
+&写下你的名字\ 在风中化成诗\\
+&再说一次\ 不在乎方式\\
+&哪怕重新开始\ 那也要坚持\\
+&别去拔你的刺\ 那是你最美丽的旗帜\ ”\\
+——&\text{《奔赴》By 司南}
+\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=1446251992&amp;userid=303853271" target="_blank" rel="noopener">奔赴-网易云</a></p>
+
     </div>
 
     
@@ -330,7 +450,7 @@ p.block{
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/" title="学习笔记 - 支配树">https://4rds5h.coding-pages.com/2020/20Jul6thArt2/</a>
+    <a href="https://luckyglass.github.io/2020/20Jul6thArt2/" title="学习笔记 - 支配树">https://luckyglass.github.io/2020/20Jul6thArt2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -418,6 +538,7 @@ p.block{
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-text"># 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些记号"><span class="nav-text"># 一些记号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理论证明"><span class="nav-text"># 理论证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lengauer-Tarjan"><span class="nav-text"># Lengauer-Tarjan</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -497,7 +618,7 @@ p.block{
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共290.9k字</span>
+  <span class="post-count">博客全站共294.3k字</span>
 </div>
 
         
