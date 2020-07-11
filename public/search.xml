@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>OI - 作业题「十二省联考2020」</title>
+      <link href="/2020/20Jul11thArt2/"/>
+      <url>/2020/20Jul11thArt2/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>口胡Matrix-Tree定理就是香啊~ (。・∀・)ノ</p></blockquote><a id="more"></a><hr><h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> <a href="https://www.luogu.com.cn/problem/P6624" target="_blank" rel="noopener">洛谷P6624</a></p><details class="fold"><summary class="fold">点击展开/折叠题面</summary><p class="fold">给定一个 n 个顶点 m 条边（点和边都从 1 开始编号）的无向图 G，保证图中无重边和无自环。每一条边有一个正整数边权 $w_i$​，对于一棵 G 的生成树 T，定义 T 的价值为：T 所包含的边的边权的最大公约数乘以边权之和，即：</p><p class="fold">$$val(T)=\left(\sum\limits_{i=1}^{n-1} w_{e_i}\right) \times \gcd(w_{e_1},w_{e_2},\dots,w_{e_{n-1}})$$</p><p class="fold">其中 $e_1,e_2,\dots,e_{n-1}$ 为 T 包含的边的编号。</p><p class="fold">求 G 的所有生成树 T 的价值之和对 998244353 取模后的结果。</p></details><hr><h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>补了一下莫比乌斯反演，又新学了 Matrix-Tree 定理，这道题就会做了……</p><p>碰到 GCD，又要求和，往莫比乌斯反演这方面想，就会想到一个结论（你也可以把它当作 $\varphi(n)$ 的性质，不过实际上是通过莫比乌斯反演得到的）：</p><script type="math/tex; mode=display">\sum_{d|n}\varphi(d)=n</script><p>这个式子就经常被拿来拆 GCD，比如这道题：</p><script type="math/tex; mode=display">\operatorname{val}(T)=\left(\sum_{e_i\in T}w_{e_i}\right)\times\sum_{d\mid\gcd}\varphi(d)</script><p>然后我们就要求（$d|T$ 表示 d 整除 T 中每一条边的边权）：</p><script type="math/tex; mode=display">\begin{aligned}\sum_{T}\operatorname{val}(T)&=\sum_{T}\left(\sum_{e_i\in T}w_{e_i}\right)\times\sum_{d\mid\gcd}\varphi(d)\\&=\sum_{d=1}^{\max w_i}\varphi(d)\sum_{d|T}\sum_{e_i\in T}w_{e_i}\end{aligned}</script><p>然后 $\varphi(d)$ 和后面那一<del>坨</del>些求和式就分开了，考虑求和式的意义：取所有权被 d 整除的边构成生成子图 $G_d$，求 $G_d$ 所有生成树的权值和，生成树的权值定义为生成树上所有边的边权和。</p><p>求无向图所有生成树的边权和问题也是一个比较经典的 trick~</p><p>如果考虑暴力计算，即枚举图上的一条边 $i$，计算有多少个生成树有这条边，记为 $n_i$，则它对答案的贡献为 $w_in_i$；所有边都算一遍就可以了。</p><p>但是这样太慢了——能不能一遍算出 $\sum w_in_i$？我们发现可以把生成函数的思想运用到 Matrix-Tree 的矩阵上，把一条边的贡献写成<strong>多项式</strong> $(1+w_ix)$。则 Matrix-Tree 的基尔霍夫矩阵可以形式化地表示为（记 $E_i$ 为与点 i 相连的边集）：</p><script type="math/tex; mode=display">M_{i,j}=\begin{cases}\sum\limits_{e\in E_i}(1+w_ex)&i=j\\-\sum\limits_{e\in E_i\cap E_j}(1+w_ex)&i\neq j\end{cases}</script><p>多项式的加减乘除均是在模 $x^2$ 意义下进行（这意味着你需要手推一下模 $x^2$ 意义下多项式的逆元），这样求得的行列式的值也是一个多项式，该多项式的一次项系数就是 $\sum w_in_i$。</p><p>为什么？因为是一次项，在所有多项式中只有一个多项式取了 $w_ix$ 这一项，其余都是取的常数项，若只看这些常数项的乘积，便是 $n_i$，再乘上 $w_ix$，就是 $n_iw_ix$（意会一下）。</p><p>于是可以先枚举 d，然后把被 d 整除的边建生成子图 $G_d$，求生成子图的所有生成树的权值和即可。但是这样复杂度是 $O(n^3\max w_i)$ 的，看起来好像卡不过去。</p><p>但是我们注意到能让 $G_d$ 的边数大于等于 $(n-1)$（有生成树的必要条件）的 d 很少，于是先看 $G_d$ 的边数，若有 $(n-1)$，再做 Matrix-Tree。</p><blockquote><p>洛谷上开O2跑到榜3了（至少现在是） awa</p></blockquote><hr><h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">33</span>,M=N*N,V=<span class="number">153000</span>,MOD=<span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fir first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sec second</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> cs const int &amp;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Sub</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*a*b%MOD;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">int</span> r=<span class="number">1</span>;<span class="keyword">while</span>(b)&#123;<span class="keyword">if</span>(b&amp;<span class="number">1</span>)r=Mul(a,r);a=Mul(a,a),b&gt;&gt;=<span class="number">1</span>;&#125;<span class="keyword">return</span> r;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Div</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> Mul(a,Pow(b,MOD<span class="number">-2</span>));&#125;</span><br><span class="line"></span><br><span class="line">pii <span class="keyword">operator</span> +(<span class="keyword">const</span> pii &amp;A,<span class="keyword">const</span> pii &amp;B)&#123;<span class="keyword">return</span> make_pair(Add(A.fir,B.fir),Add(A.sec,B.sec));&#125;</span><br><span class="line">pii <span class="keyword">operator</span> -(<span class="keyword">const</span> pii &amp;A,<span class="keyword">const</span> pii &amp;B)&#123;<span class="keyword">return</span> make_pair(Sub(A.fir,B.fir),Sub(A.sec,B.sec));&#125;</span><br><span class="line">pii <span class="keyword">operator</span> *(<span class="keyword">const</span> pii &amp;A,<span class="keyword">const</span> pii &amp;B)&#123;<span class="keyword">return</span> make_pair(Mul(A.fir,B.fir),Add(Mul(A.fir,B.sec),Mul(B.fir,A.sec)));&#125;</span><br><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span> ~(<span class="keyword">const</span> pii &amp;A)&#123;<span class="keyword">return</span> A.fir!=<span class="number">0</span> || A.sec!=<span class="number">0</span>;&#125;</span><br><span class="line">pii <span class="keyword">operator</span> -(<span class="keyword">const</span> pii &amp;A)&#123;<span class="keyword">return</span> make_pair(Sub(<span class="number">0</span>,A.fir),Sub(<span class="number">0</span>,A.sec));&#125;</span><br><span class="line">pii <span class="keyword">operator</span> *(<span class="keyword">const</span> pii &amp;A,<span class="keyword">const</span> <span class="keyword">int</span> &amp;B)&#123;<span class="keyword">return</span> make_pair(Mul(A.fir,B),Mul(A.sec,B));&#125;</span><br><span class="line"><span class="function">pii <span class="title">Inv</span><span class="params">(<span class="keyword">const</span> pii &amp;A)</span></span>&#123;<span class="keyword">return</span> make_pair(Pow(A.fir,MOD<span class="number">-2</span>),Sub(<span class="number">0</span>,Div(A.sec,Mul(A.fir,A.fir))));&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> edg[M][<span class="number">3</span>],cnt[V],phi[V],prn[V];</span><br><span class="line"><span class="keyword">bool</span> vis[V];</span><br><span class="line">pii E[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Det</span><span class="params">(<span class="keyword">int</span> siz)</span></span>&#123;</span><br><span class="line"><span class="function">pii <span class="title">ret</span><span class="params">(<span class="number">1</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;siz;i++)&#123;</span><br><span class="line"><span class="keyword">int</span> it=<span class="number">-1</span>,better=<span class="number">-1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;siz;j++)</span><br><span class="line"><span class="keyword">if</span>(~E[j][i])&#123;</span><br><span class="line"><span class="keyword">if</span>(E[j][i].fir) better=j;</span><br><span class="line">it=j;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(~better) it=better;</span><br><span class="line"><span class="keyword">if</span>(it==<span class="number">-1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(i!=it)&#123;</span><br><span class="line">ret=-ret;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;siz;j++) swap(E[i][j],E[it][j]);</span><br><span class="line">&#125;</span><br><span class="line">ret=ret*E[i][i];</span><br><span class="line"><span class="keyword">if</span>(E[i][i].fir)&#123;</span><br><span class="line">pii dv=Inv(E[i][i]);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;siz;j++) E[i][j]=E[i][j]*dv;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;siz;j++)</span><br><span class="line"><span class="keyword">if</span>(~E[j][i])&#123;</span><br><span class="line">pii mul=E[j][i];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> k=i;k&lt;siz;k++) E[j][k]=E[j][k]-E[i][k]*mul;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line"><span class="keyword">int</span> dv=Pow(E[i][i].sec,MOD<span class="number">-2</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;siz;j++) E[i][j].sec=Mul(E[i][j].sec,dv);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;siz;j++)</span><br><span class="line"><span class="keyword">if</span>(~E[j][i])&#123;</span><br><span class="line"><span class="keyword">int</span> mul=E[j][i].sec;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> k=i;k&lt;siz;k++) E[j][k]=E[j][k]-E[i][k]*mul;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> ret.sec;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Prepare</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> nprn=<span class="number">0</span>;</span><br><span class="line">phi[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;V;i++)&#123;</span><br><span class="line"><span class="keyword">if</span>(!vis[i]) prn[++nprn]=i,phi[i]=i<span class="number">-1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=nprn &amp;&amp; prn[j]*i&lt;V;j++)&#123;</span><br><span class="line">vis[i*prn[j]]=<span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span>(i%prn[j]) phi[i*prn[j]]=Mul(phi[i],phi[prn[j]]);</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">phi[i*prn[j]]=Mul(phi[i],prn[j]);</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar();</span><br><span class="line"><span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line"><span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line"><span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">Prepare();</span><br><span class="line">n=Ri(),m=Ri();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">edg[i][<span class="number">0</span>]=Ri(),edg[i][<span class="number">1</span>]=Ri(),edg[i][<span class="number">2</span>]=Ri();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j*j&lt;=edg[i][<span class="number">2</span>];j++)</span><br><span class="line"><span class="keyword">if</span>(edg[i][<span class="number">2</span>]%j==<span class="number">0</span>)&#123;</span><br><span class="line">cnt[j]++;</span><br><span class="line"><span class="keyword">if</span>(edg[i][<span class="number">2</span>]!=j*j) cnt[edg[i][<span class="number">2</span>]/j]++;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> d=<span class="number">1</span>;d&lt;=V;d++)&#123;</span><br><span class="line"><span class="keyword">if</span>(cnt[d]&lt;n<span class="number">-1</span>) <span class="keyword">continue</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line"><span class="keyword">if</span>(edg[i][<span class="number">2</span>]%d) <span class="keyword">continue</span>;</span><br><span class="line"><span class="function">pii <span class="title">thi</span><span class="params">(<span class="number">1</span>,edg[i][<span class="number">2</span>])</span></span>;</span><br><span class="line"><span class="keyword">int</span> u=edg[i][<span class="number">0</span>],v=edg[i][<span class="number">1</span>];</span><br><span class="line">E[u][u]=E[u][u]+thi,E[v][v]=E[v][v]+thi;</span><br><span class="line">E[u][v]=E[u][v]-thi,E[v][u]=E[v][u]-thi;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> res=Det(n);</span><br><span class="line"><span class="comment">// printf("%d %d\n",d,res);</span></span><br><span class="line">ans=Add(ans,Mul(phi[d],res));</span><br><span class="line"><span class="built_in">memset</span>(E,<span class="number">0</span>,<span class="keyword">sizeof</span> E);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">\begin{split}“\ &凉薄如水的月光\\&能映出什么吗\\&但仍向你祈求着啊\\&若是你\ 灰烬般飘洒\\&在破晓的刹那\\&你会因我而歌唱吗\ ”\\——&\text{《灼之花》By 洛天依/乐正绫/COP}\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=34923853&amp;userid=303853271" target="_blank" rel="noopener">灼之花-网易云</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> OI题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> -洛谷- </tag>
+            
+            <tag> 图论-矩阵树定理 </tag>
+            
+            <tag> 数学-莫比乌斯反演 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>OI - Unicyclic Graph Counting(Atcoder)</title>
       <link href="/2020/20Jul11thArt1/"/>
       <url>/2020/20Jul11thArt1/</url>
@@ -20,9 +49,9 @@
       
         <tags>
             
-            <tag> 数学-组合数 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 数学-组合数 </tag>
             
             <tag> -Atcoder- </tag>
             
@@ -819,9 +848,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 数据结构-线段树 </tag>
+            
+            <tag> 数学 </tag>
             
         </tags>
       
@@ -954,9 +983,9 @@
             
             <tag> 动态规划 </tag>
             
-            <tag> 贪心 </tag>
-            
             <tag> 算法效率-二分查找 </tag>
+            
+            <tag> 贪心 </tag>
             
             <tag> 图论-网络流 </tag>
             
@@ -1079,9 +1108,9 @@
       
         <tags>
             
-            <tag> 数学-组合数 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 数学-组合数 </tag>
             
             <tag> -Topcoder- </tag>
             
@@ -1139,13 +1168,13 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 动态规划 </tag>
             
-            <tag> 贪心 </tag>
-            
             <tag> 算法效率-二分查找 </tag>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 贪心 </tag>
             
             <tag> 数学-组合计数 </tag>
             
@@ -1469,9 +1498,9 @@
             
             <tag> 图论-二分图 </tag>
             
-            <tag> 图论-网络流 </tag>
-            
             <tag> -AtCoder- </tag>
+            
+            <tag> 图论-网络流 </tag>
             
             <tag> 搜索 </tag>
             
@@ -1812,9 +1841,9 @@
             
             <tag> 动态规划 </tag>
             
-            <tag> 贪心 </tag>
-            
             <tag> 图论-树 </tag>
+            
+            <tag> 贪心 </tag>
             
             <tag> 数学-容斥 </tag>
             
@@ -1898,9 +1927,9 @@
             
             <tag> 图论-最短路 </tag>
             
-            <tag> 图论-生成树 </tag>
-            
             <tag> -Codeforces- </tag>
+            
+            <tag> 图论-生成树 </tag>
             
         </tags>
       
@@ -2002,11 +2031,11 @@
       
         <tags>
             
-            <tag> 贪心 </tag>
+            <tag> 算法效率-二分查找 </tag>
             
             <tag> 算法效率-倍增 </tag>
             
-            <tag> 算法效率-二分查找 </tag>
+            <tag> 贪心 </tag>
             
             <tag> -牛客- </tag>
             
@@ -2230,9 +2259,9 @@
       
         <tags>
             
-            <tag> 数学-组合数 </tag>
-            
             <tag> 数学-期望 </tag>
+            
+            <tag> 数学-组合数 </tag>
             
             <tag> -AtCoder- </tag>
             
@@ -2259,9 +2288,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 数学 </tag>
             
         </tags>
       
@@ -2377,9 +2406,9 @@
       
         <tags>
             
-            <tag> 数学-组合数 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 数学-组合数 </tag>
             
             <tag> 贪心 </tag>
             
@@ -2427,9 +2456,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 数据结构-线段树 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 贪心 </tag>
             
@@ -2489,9 +2518,9 @@
             
             <tag> 数学 </tag>
             
-            <tag> 图论-网络流 </tag>
-            
             <tag> -AtCoder- </tag>
+            
+            <tag> 图论-网络流 </tag>
             
         </tags>
       
@@ -2587,9 +2616,9 @@
       
         <tags>
             
-            <tag> 算法效率-分块 </tag>
-            
             <tag> 数据结构-并查集 </tag>
+            
+            <tag> 算法效率-分块 </tag>
             
             <tag> -Codeforces- </tag>
             
@@ -3087,11 +3116,11 @@
       
         <tags>
             
-            <tag> 数学-组合数 </tag>
+            <tag> 动态规划 </tag>
             
             <tag> 数学 </tag>
             
-            <tag> 动态规划 </tag>
+            <tag> 数学-组合数 </tag>
             
             <tag> 数学-容斥 </tag>
             
@@ -3118,15 +3147,15 @@
       
         <tags>
             
-            <tag> 图论-二分图 </tag>
+            <tag> 数据结构-线段树 </tag>
             
             <tag> 数学 </tag>
             
-            <tag> 数据结构-线段树 </tag>
-            
-            <tag> 贪心 </tag>
+            <tag> 图论-二分图 </tag>
             
             <tag> 动态规划-状压DP </tag>
+            
+            <tag> 贪心 </tag>
             
             <tag> 算法效率-扫描线 </tag>
             
@@ -3211,9 +3240,9 @@
       
         <tags>
             
-            <tag> 算法效率-矩阵加速 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 算法效率-矩阵加速 </tag>
             
             <tag> 贪心 </tag>
             
@@ -3240,11 +3269,11 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 数据结构-线段树 </tag>
             
             <tag> 模拟 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 算法效率-分块 </tag>
             
@@ -3271,13 +3300,13 @@
       
         <tags>
             
-            <tag> 图论-二分图 </tag>
-            
-            <tag> 数学 </tag>
-            
             <tag> 动态规划 </tag>
             
             <tag> 数学-期望 </tag>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 图论-二分图 </tag>
             
             <tag> 算法效率-倍增 </tag>
             
@@ -3308,11 +3337,11 @@
             
             <tag> 模拟 </tag>
             
-            <tag> 算法效率-矩阵加速 </tag>
-            
             <tag> 动态规划 </tag>
             
             <tag> 数学-期望 </tag>
+            
+            <tag> 算法效率-矩阵加速 </tag>
             
             <tag> 算法效率-二分查找 </tag>
             
@@ -3343,15 +3372,15 @@
       
         <tags>
             
-            <tag> 搜索-IDA* </tag>
+            <tag> 数学 </tag>
             
             <tag> 图论-二分图 </tag>
+            
+            <tag> 搜索-IDA* </tag>
             
             <tag> 图论-Floyd </tag>
             
             <tag> 数学-组合数 </tag>
-            
-            <tag> 数学 </tag>
             
         </tags>
       
@@ -3428,13 +3457,13 @@
       
         <tags>
             
-            <tag> 数学-组合数 </tag>
+            <tag> 模拟 </tag>
             
             <tag> 数学 </tag>
             
-            <tag> 模拟 </tag>
-            
             <tag> 算法效率-倍增 </tag>
+            
+            <tag> 数学-组合数 </tag>
             
             <tag> 图论-树 </tag>
             
@@ -3465,9 +3494,9 @@
             
             <tag> 数学 </tag>
             
-            <tag> 贪心 </tag>
-            
             <tag> 算法效率-倍增 </tag>
+            
+            <tag> 贪心 </tag>
             
         </tags>
       
@@ -3492,13 +3521,13 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 模拟 </tag>
             
-            <tag> 贪心 </tag>
+            <tag> 数学 </tag>
             
             <tag> 动态规划-状压DP </tag>
+            
+            <tag> 贪心 </tag>
             
         </tags>
       
@@ -3575,9 +3604,9 @@
       
         <tags>
             
-            <tag> 数学-组合数 </tag>
-            
             <tag> 数学 </tag>
+            
+            <tag> 数学-组合数 </tag>
             
             <tag> -POJ- </tag>
             
@@ -3604,11 +3633,11 @@
       
         <tags>
             
-            <tag> 贪心 </tag>
-            
             <tag> 动态规划-状压DP </tag>
             
             <tag> 图论-树 </tag>
+            
+            <tag> 贪心 </tag>
             
         </tags>
       
@@ -4026,11 +4055,11 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 模拟 </tag>
             
             <tag> 动态规划 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 贪心 </tag>
             
@@ -4130,9 +4159,9 @@
       
         <tags>
             
-            <tag> 算法效率-矩阵加速 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 算法效率-矩阵加速 </tag>
             
             <tag> -HihoCoder- </tag>
             
@@ -4159,9 +4188,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 贪心 </tag>
             
@@ -4219,9 +4248,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> -Codeforces- </tag>
             
