@@ -70,9 +70,9 @@
     
       <category term="动态规划" scheme="https://luckyglass.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="-Atcoder-" scheme="https://luckyglass.github.io/tags/Atcoder/"/>
-    
       <category term="图论-prufer数列" scheme="https://luckyglass.github.io/tags/%E5%9B%BE%E8%AE%BA-prufer%E6%95%B0%E5%88%97/"/>
+    
+      <category term="-Atcoder-" scheme="https://luckyglass.github.io/tags/Atcoder/"/>
     
   </entry>
   
@@ -342,9 +342,9 @@
     
       <category term="算法效率-扫描线" scheme="https://luckyglass.github.io/tags/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87-%E6%89%AB%E6%8F%8F%E7%BA%BF/"/>
     
-      <category term="数学-拉格朗日插值" scheme="https://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6-%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC/"/>
-    
       <category term="-LOJ-" scheme="https://luckyglass.github.io/tags/LOJ/"/>
+    
+      <category term="数学-拉格朗日插值" scheme="https://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6-%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC/"/>
     
   </entry>
   
@@ -371,9 +371,9 @@
     
       <category term="动态规划-区间DP" scheme="https://luckyglass.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E5%8C%BA%E9%97%B4DP/"/>
     
-      <category term="数学-拉格朗日插值" scheme="https://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6-%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC/"/>
-    
       <category term="-LOJ-" scheme="https://luckyglass.github.io/tags/LOJ/"/>
+    
+      <category term="数学-拉格朗日插值" scheme="https://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6-%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC/"/>
     
   </entry>
   
