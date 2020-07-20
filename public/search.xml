@@ -14,6 +14,84 @@
 ]]></content>
   </entry>
   <entry>
+    <title>OI - 货币系统(LOJ)</title>
+    <url>/2020/20Jul20thArt2/</url>
+    <content><![CDATA[<blockquote>
+<p>一道不算难的题居然可以挖出这么多东西……</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><details class="fold">
+    <summary class="fold">点击展开/折叠题面</summary>
+    <p class="fold">一共有 n 种面额不同的货币，第 i 种面额为 $a_i$；这 n 种货币构成一个货币系统。如果这 n 种货币（每种货币使用任意多次）恰好能够支付金额 b，则称“该货币系统可以表示 b”。</p>
+    <p class="fold">现给出该货币系统，求出一个包含货币种类数最少的货币系统，使得任意金额要么两个系统都不能表示，要么两个系统都可以表示。输出最少的货币种类数。</p>
+</details>
+
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><h3 id="线性空间（用来证明一些性质）"><a href="#线性空间（用来证明一些性质）" class="headerlink" title="- 线性空间（用来证明一些性质）"></a>- 线性空间（用来证明一些性质）</h3><p>对于货币系统 $\{a_i\}$，定义它的“表示集合”：</p>
+<script type="math/tex; mode=display">
+B=\left\{b\mid \exists\{t_i\}(t_i\in \mathbb Z,t_i\ge 0),b=\sum_{i=1}^nt_ia_i\right\}</script><p>其实就是一个线性空间，数集 $F$ 是非负整数集、$V=\{a_i\}$ 是定义在 $F$ 上的线性空间，那么 $B$ 就是 $V$ 的张成 $\operatorname{span}(V)$。</p>
+<p>要求出另一个 $V’$ 使得 $\operatorname{span}(V’)=\operatorname{span}(V)$，则根据线性空间的性质，$V’$ 是 $V$ 的极大线性无关组——基。</p>
+<p>也就是说 $V’\subset V$ 且对于任意 $a\in V’$ 不能被 $V-\{a\}$ 线性表出。</p>
+<h3 id="完全背包"><a href="#完全背包" class="headerlink" title="- 完全背包"></a>- 完全背包</h3><p>有了线性空间的性质，背包起来就容易多了——其实只需要删去 $a\in V$ 且可以被 $V-\{a\}$ 线性表出的 a 即可。</p>
+<p>由于数集是非负整数，a 一定是被比它小的数线性表出的。则我们从小到大枚举 $a_i$，顺便维护当前能够线性表出的集合——就是一个完全背包，每次用 $a_i$ 去更新背包状态，这里可以用 bitset 优化，但是没啥必要……如果枚举到的 $a_i$ 已经可以被线性表出，那么就删掉它。</p>
+<p>设 $m=\max\{a_i\}$，则复杂度为 $O(nm)$，比较简单、也是网上常见的做法，就不提供代码了。</p>
+<h3 id="生成函数"><a href="#生成函数" class="headerlink" title="- 生成函数"></a>- 生成函数</h3><p>完全背包本质上就是个生成函数——我们可以定义如下生成函数：</p>
+<script type="math/tex; mode=display">
+F_i(x)=\sum_{j=0}^{+\infty}x^{a_ij},H(x)=\prod_{i=1}^nF_i(x)</script><p>那么 $H(x)$ 第 $i$ 次项系数就是 $i$ 能够被多少种方案线性表出。根据线性空间的结论，$a_i\in V’$ 不能被 $V-\{a_i\}$ 线性表出，那么如果 $a_i\in V’$，则 $a_i$ 只能被 $V$ 用一种方法线性表出——即它本身。对应到 $H(x)$ 则是第 $a_i$ 次项系数为 1。</p>
+<p>但是直接上 NTT 是 $O(nm\log m)$，并跑不过（本来常数就大）。</p>
+<p>然后就有一个比较常规但是挺巧妙的操作：</p>
+<script type="math/tex; mode=display">
+\prod_{i=1}^nF_i(x)=\exp \sum_{i=1}^n\ln F_i(x)\pmod {x^{m+1}}</script><p>只写到这一步还不够——根据泰勒展开（也可以用微积分硬推，但是tly告诉我这就是泰勒展开）：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\ln F(x)&=\ln\sum_{i=1}^{+\infty}x^{a_ij}\\
+&=\ln\frac1{1-x^{a_i}}\\
+&=\ln(1-x^{a_i})^{-1}\\
+&=-\ln(1-x^{a_i})\\
+&=\sum_{j=1}^{+\infty}\frac{x^{a_ij}}j&\text{泰勒展开:}\ln(1-x)=-\sum_{i=1}^{+\infty}x^i
+\end{aligned}</script><p>于是</p>
+<script type="math/tex; mode=display">
+H(x)=\exp\sum_{i=1}^n\sum_{j=1}^{+\infty}\frac{x^{a_ij}}j\pmod {x^{m+1}}</script><p>然后可以调和级数 $O(m\log m)$ 处理出 exp 后面的式子，然后再 $O(m\log m)$ 做个 exp。但是……多项式常数还是大啊，LOJ 卡 80pt。</p>
+<h3 id="同余最短路"><a href="#同余最短路" class="headerlink" title="- 同余最短路"></a>- 同余最短路</h3><blockquote>
+<p>第一次见到 :)</p>
+</blockquote>
+<p>同余最短路的一个用法就是求哪些数可以被 $\{a_i\}$ 表示（可以用无限多次）。</p>
+<p>首先非常显然的，如果 $x$ 可以被 $V$ 表示，那么 $x+a_i$ 也可以被表示。定义 $a_i$ 的剩余系 $[a_i]=\{0,1,\dots,a_i-1\}$，则设 $d(x)$ 表示 $V$ 的张成中最小的模 $a_i$ 余 x 的数，即 $d(x)=\min\limits_{b\bmod a_i=x}b(b\in\operatorname{span}(V))$，则有</p>
+<script type="math/tex; mode=display">
+\operatorname{span}(V)=\bigcup_{j=0}^{a_i-1}\{ka_i+d(j)\mid k\in\mathbb Z,k\ge 0\}</script><p>并且我们发现，$\operatorname{span}(V)=\operatorname{span}(V’)$ 当且仅当 V 和 V’ 在 $a_i$（$a_i\in V\cap V’$）的剩余系下 $d(x)$ 完全相同。证明非常简单，因为 $d(x)\bmod a_i=x$，如果存在 $d(x)$ 在 V 和 V’ 中不同，例如 V 中 $d(x)$ 比 V’ 中小，则 V 的 $d(x)$ 一定不能在 V’ 中被表示。换句话说，$d(x)$ 是 V 中能够被表示出的模 $a_i$ 余 x 的最小的数。</p>
+<p>如何求 $d(x)$？可以想到最短路——点集 $V$、有向边集 $E$：</p>
+<script type="math/tex; mode=display">
+V=(v_0,v_1,\dots,v_{a_i-1})\\
+E=\bigcup_{j\neq i}\{(v_u,v_{(u+a_j)\bmod a_i},a_j)\}</script><p>比较直观，以 $v_i$ 为源点跑一个最短路，$v_i$ 与 $v_{x}$ 的距离就是 $d(x)$。</p>
+<p>根据线性空间，现在要从 V 中删除一些数得到 V’ 使得 $\operatorname{span}(V)=\operatorname{span}(V’)$。我们知道 $a_1$（假设 ${a_i}$ 是升序）一定同时在 $V$ 和 $V’$ 中，所以选定 $a_1$ 作为剩余系模数，建图。相当于在原图上删掉一些边，使得最短路不变，求剩下的边中不同长度的边的数量最小是多少。</p>
+<p>那么在做最短路的时候，我们储存一下点 $v_x$ 的最短距离是从哪种边权的边转移过来的，记作 <code>tra[x]</code>。如果有多种转移方式，则取边权最小的作为 <code>tra[x]</code>，这样可以使剩下的边权的数量最小。特别的，<code>tra[0]=-1</code>（初始值，没有任何转移的边）。</p>
+<p>最后求 <code>tra[]</code> 数组有多少种不同的值即可。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><h3 id="生成函数-80pt"><a href="#生成函数-80pt" class="headerlink" title="- 生成函数 80pt"></a>- 生成函数 80pt</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">524288</span>,MOD=<span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> cs const int &amp;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a) (memset(a,0,sizeof a))</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Sub</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*a*b%MOD;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">int</span> r=<span class="number">1</span>;<span class="keyword">while</span>(b)&#123;<span class="keyword">if</span>(b&amp;<span class="number">1</span>)r=Mul(r,a);a=Mul(a,a),b&gt;&gt;=<span class="number">1</span>;&#125;<span class="keyword">return</span> r;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> POLY&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> G=<span class="number">3</span>;</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> clean(A,l,r) std::fill(A+(l),A+(r),0)</span></span><br><span class="line">	<span class="keyword">int</span> rev[N],powg[<span class="number">30</span>],invg[<span class="number">30</span>],lg2[N],inv[N];</span><br><span class="line">	<span class="keyword">int</span> fac[N],ifac[N];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(<span class="keyword">int</span> siz)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=siz;i++) lg2[i]=lg2[i&gt;&gt;<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">20</span>;i++) powg[i]=Pow(G,(MOD<span class="number">-1</span>)&gt;&gt;i),invg[i]=Pow(powg[i],MOD<span class="number">-2</span>);</span><br><span class="line">		inv[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">		fac[<span class="number">0</span>]=<span class="number">1</span>;<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=siz;i++) fac[i]=Mul(fac[i<span class="number">-1</span>],i);</span><br><span class="line">		ifac[siz]=Pow(fac[siz],MOD<span class="number">-2</span>);<span class="keyword">for</span>(<span class="keyword">int</span> i=siz<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--) ifac[i]=Mul(ifac[i+<span class="number">1</span>],i+<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=siz;i++) inv[i]=Mul(ifac[i],fac[i<span class="number">-1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">NTT</span><span class="params">(<span class="keyword">int</span> *A,cs len,cs typ)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> lgl=lg2[len];</span><br><span class="line">		<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">			rev[i]=rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>|((i&amp;<span class="number">1</span>)&lt;&lt;(lgl<span class="number">-1</span>));</span><br><span class="line">			<span class="keyword">if</span>(i&lt;rev[i]) <span class="built_in">std</span>::swap(A[i],A[rev[i]]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> l=<span class="number">2</span>,t=<span class="number">1</span>,lgn=<span class="number">1</span>;l&lt;=len;l&lt;&lt;=<span class="number">1</span>,lgn++,t&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="keyword">int</span> per=typ==<span class="number">1</span>?powg[lgn]:invg[lgn];</span><br><span class="line">			<span class="keyword">for</span>(j=i=<span class="number">0</span>;i&lt;len;j=(i+=l))</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> cur=<span class="number">1</span>;j&lt;i+t;j++,cur=Mul(cur,per))&#123;</span><br><span class="line">					<span class="keyword">int</span> tmp=Mul(cur,A[j+t]);</span><br><span class="line">					A[j+t]=Sub(A[j],tmp);</span><br><span class="line">					A[j]=Add(A[j],tmp);</span><br><span class="line">				&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(typ==<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">int</span> invn=inv[len];</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;len;i++) A[i]=Mul(A[i],invn);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Copy</span><span class="params">(<span class="keyword">int</span> *A,<span class="keyword">int</span> *B,cs len)</span></span>&#123;<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++) B[i]=A[i];&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">InvPoly</span><span class="params">(<span class="keyword">int</span> len,<span class="keyword">int</span> *A,<span class="keyword">int</span> *B)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(len==<span class="number">1</span>)&#123;B[<span class="number">0</span>]=Pow(A[<span class="number">0</span>],MOD<span class="number">-2</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">		InvPoly((len+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>,A,B);</span><br><span class="line">		<span class="keyword">int</span> Len=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(Len&lt;(len&lt;&lt;<span class="number">1</span>)) Len&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> tmp[N];</span><br><span class="line">		Copy(A,tmp,len),clean(tmp,len,Len);</span><br><span class="line">		clean(B,(len+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>,Len);</span><br><span class="line">		NTT(tmp,Len,<span class="number">1</span>),NTT(B,Len,<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;Len;i++) B[i]=Mul(Sub(<span class="number">2</span>,Mul(tmp[i],B[i])),B[i]);</span><br><span class="line">		NTT(B,Len,<span class="number">-1</span>);</span><br><span class="line">		clean(B,len,Len);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Derv</span><span class="params">(<span class="keyword">int</span> *A,<span class="keyword">int</span> *B,cs len)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len<span class="number">-1</span>;i++) B[i]=Mul(A[i+<span class="number">1</span>],i+<span class="number">1</span>);</span><br><span class="line">		B[len<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Inte</span><span class="params">(<span class="keyword">int</span> *A,<span class="keyword">int</span> *B,cs len)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=len;i++) B[i]=Mul(inv[i],A[i<span class="number">-1</span>]);</span><br><span class="line">		B[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Ln</span><span class="params">(<span class="keyword">int</span> *A,<span class="keyword">int</span> len,<span class="keyword">int</span> *B)</span></span>&#123;</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> tmp1[N],tmp2[N];mem(tmp1),mem(tmp2);</span><br><span class="line">		Derv(A,tmp1,len);</span><br><span class="line">		InvPoly(len,A,tmp2);</span><br><span class="line">		<span class="keyword">int</span> Len=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(Len&lt;len*<span class="number">2</span>) Len&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">		NTT(tmp1,Len,<span class="number">1</span>),NTT(tmp2,Len,<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;Len;i++) tmp1[i]=Mul(tmp1[i],tmp2[i]);</span><br><span class="line">		NTT(tmp1,Len,<span class="number">-1</span>),clean(tmp1,len<span class="number">-1</span>,Len);</span><br><span class="line">		Inte(tmp1,B,len<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">EXP</span><span class="params">(<span class="keyword">int</span> len,<span class="keyword">int</span> *A,<span class="keyword">int</span> *B)</span></span>&#123;</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> tmp3[N];</span><br><span class="line">		<span class="keyword">if</span>(len==<span class="number">1</span>)&#123;B[<span class="number">0</span>]=<span class="number">1</span>;<span class="keyword">return</span>;&#125;</span><br><span class="line">		EXP((len+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>,A,B);</span><br><span class="line">		Ln(B,len,tmp3);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++) tmp3[i]=Sub(A[i],tmp3[i]);</span><br><span class="line">		tmp3[<span class="number">0</span>]=Add(tmp3[<span class="number">0</span>],<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">int</span> Len=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(Len&lt;(len&lt;&lt;<span class="number">1</span>)) Len&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">		clean(tmp3,len,Len),NTT(tmp3,Len,<span class="number">1</span>);</span><br><span class="line">		clean(B,len,Len),NTT(B,Len,<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;Len;i++) B[i]=Mul(B[i],tmp3[i]);</span><br><span class="line">		NTT(B,Len,<span class="number">-1</span>);</span><br><span class="line">		clean(B,len,Len);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> A[N];</span><br><span class="line"><span class="keyword">int</span> p1[N],p2[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">"money.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"money.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">	POLY::Init(N<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> cas=Ri();cas;cas--)&#123;</span><br><span class="line">		<span class="keyword">int</span> n=Ri();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) A[i]=Ri();</span><br><span class="line">		sort(A+<span class="number">1</span>,A+<span class="number">1</span>+n);</span><br><span class="line">		<span class="keyword">int</span> len=A[n]+<span class="number">1</span>;</span><br><span class="line">		mem(p1),mem(p2);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">1</span>;j*A[i]&lt;len;j++)</span><br><span class="line">				p1[j*A[i]]+=POLY::inv[j];</span><br><span class="line">		POLY::EXP(len,p1,p2);</span><br><span class="line">		<span class="keyword">int</span> ans=n;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">			<span class="keyword">if</span>(p2[A[i]]&gt;<span class="number">1</span>)</span><br><span class="line">				ans--;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="同余最短路-1"><a href="#同余最短路-1" class="headerlink" title="- 同余最短路"></a>- 同余最短路</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">105</span>,M=<span class="number">2.5E4</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,A[N];</span><br><span class="line"><span class="keyword">int</span> dis[M],tra[M];</span><br><span class="line"><span class="keyword">bool</span> fix[M];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GRAPH</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> head[M],nxt[N*M],to[N*M],val[N*M],ncnt;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">		ncnt++;</span><br><span class="line">		nxt[ncnt]=head[u],to[ncnt]=v,val[ncnt]=key,head[u]=ncnt;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> <span class="keyword">operator</span> [](<span class="keyword">const</span> <span class="keyword">int</span> &amp;u)&#123;<span class="keyword">return</span> head[u];&#125;;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Clear</span><span class="params">(<span class="keyword">int</span> siz)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=siz;i++)&#123;</span><br><span class="line">			dis[i]=(<span class="number">1</span>&lt;&lt;<span class="number">29</span>);</span><br><span class="line">			tra[i]=(<span class="number">1</span>&lt;&lt;<span class="number">29</span>);</span><br><span class="line">			head[i]=<span class="number">0</span>;</span><br><span class="line">			fix[i]=<span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		ncnt=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;Gr;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line">priority_queue&lt; pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; &gt; que;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">()</span></span>&#123;</span><br><span class="line">	que.push(make_pair(dis[<span class="number">0</span>]=<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line">	<span class="keyword">while</span>(!que.empty())&#123;</span><br><span class="line">		<span class="keyword">int</span> u=que.top().second;que.pop();</span><br><span class="line">		<span class="keyword">if</span>(fix[u]) <span class="keyword">continue</span>;</span><br><span class="line">		fix[u]=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> it=Gr[u];it;it=Gr.nxt[it])&#123;</span><br><span class="line">			<span class="keyword">int</span> v=Gr.to[it];</span><br><span class="line">			<span class="keyword">if</span>(dis[v]&lt;=dis[u]+Gr.val[it])&#123;</span><br><span class="line">				<span class="keyword">if</span>(dis[v]==dis[u]+Gr.val[it]) tra[v]=min(tra[v],Gr.val[it]);</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			dis[v]=dis[u]+Gr.val[it];</span><br><span class="line">			tra[v]=Gr.val[it];</span><br><span class="line">			que.push(make_pair(-dis[v],v));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">"money.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"money.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> cas=Ri();cas;cas--)&#123;</span><br><span class="line">		n=Ri();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) A[i]=Ri();</span><br><span class="line">		sort(A+<span class="number">1</span>,A+<span class="number">1</span>+n);</span><br><span class="line">		Gr.Clear(A[<span class="number">1</span>]);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> u=<span class="number">0</span>;u&lt;A[<span class="number">1</span>];u++)</span><br><span class="line">				Gr.AddEdge(u,(u+A[i])%A[<span class="number">1</span>],A[i]);</span><br><span class="line">		Dijkstra();</span><br><span class="line">		sort(tra,tra+A[<span class="number">1</span>]);</span><br><span class="line">		<span class="keyword">int</span> ans=unique(tra,tra+A[<span class="number">1</span>])-tra;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &任岁月流淌\\
+&也任心事随风而扬\\
+&又何妨\\
+&喜怒哀乐要同享\ ”\\
+——&\text{《离忧》By 司南}
+\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=1421339963&amp;userid=303853271" target="_blank" rel="noopener">离忧</a>-网易云</p>
+]]></content>
+      <categories>
+        <category>OI题解</category>
+      </categories>
+      <tags>
+        <tag>图论-最短路</tag>
+        <tag>数学-多项式</tag>
+        <tag>-LOJ-</tag>
+        <tag>数学-线性代数</tag>
+        <tag>数学-剩余系</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OI - 积木大赛(LOJ)</title>
     <url>/2020/20Jul20thArt1/</url>
     <content><![CDATA[<blockquote>
@@ -21,13 +99,8 @@
 </blockquote>
 <a id="more"></a>
 <hr>
-<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><details class="fold">
-    <summary class="fold">点击展开/折叠题面</summary>
-    <p class="fold">给定数组 $a_i$ 以及一个最初全 0 的数组 $b_i$。可以进行操作——指定 $L,R$，给数组 $b_i$ 区间 $[L,R]$ 加 1。要使 $b_i$ 与 $a_i$ 完全相同，求最小需要操作多少次。</p>
-</details>
-
-<hr>
-<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>（第一想法）这不是笛卡尔树吗？线段树/st表维护一下最小值然后把笛卡尔树建出来，再计算每个节点和父亲节点的深度差之和不久好了？</p>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p><details class="fold"><br>    <summary class="fold">点击展开/折叠题面</summary><br>    <p class="fold">给定数组 $a_i$ 以及一个最初全 0 的数组 $b_i$。可以进行操作——指定 $L,R$，给数组 $b_i$ 区间 $[L,R]$ 加 1。要使 $b_i$ 与 $a_i$ 完全相同，求最小需要操作多少次。</p></details></p>
+<h2 id="lt-details-gt"><a href="#lt-details-gt" class="headerlink" title="&lt;/details&gt;"></a>&lt;/details&gt;</h2><h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>（第一想法）这不是笛卡尔树吗？线段树/st表维护一下最小值然后把笛卡尔树建出来，再计算每个节点和父亲节点的深度差之和不久好了？</p>
 <p>（第二想法）第一道题数据结构这就离谱 →_→</p>
 <p>我们为什么要用笛卡尔树？因为有一个废话一样的贪心性质：每次肯定使 $[L,R]$ 尽可能长（尽可能往两边扩展）。</p>
 <p>比如下面这样，把数组具象化为直方图：</p>
@@ -45,7 +118,8 @@
 &要翻越理想的墙\ 穿越层层的路障\\
 &若你迷茫\ 谁会替你点亮\ ”\\
 ——&\text{《sonder》By 司南}
-\end{split}</script>]]></content>
+\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=1410210736&amp;userid=303853271" target="_blank" rel="noopener">sonder</a>-网易云</p>
+]]></content>
       <categories>
         <category>OI题解</category>
       </categories>
@@ -1954,8 +2028,8 @@ f_{1,i}=h_i-\sum_{j=i+1}^mC_j^if_{1,j}</script><hr>
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>-洛谷-</tag>
         <tag>数学-容斥</tag>
+        <tag>-洛谷-</tag>
         <tag>动态规划-树形DP</tag>
       </tags>
   </entry>
@@ -2480,8 +2554,8 @@ b_i=\begin{cases}
       </categories>
       <tags>
         <tag>动态规划</tag>
-        <tag>算法效率-二分查找</tag>
         <tag>贪心</tag>
+        <tag>算法效率-二分查找</tag>
         <tag>图论-网络流</tag>
         <tag>数据结构-树状数组</tag>
         <tag>数学-线性基</tag>
@@ -2954,8 +3028,8 @@ p=\sum_{i=1}^mP_i^{e_i}</script><p>$P_i$ 为第 $i$ 个质数。给定 $m$ 以�
       <tags>
         <tag>数学</tag>
         <tag>动态规划</tag>
-        <tag>算法效率-二分查找</tag>
         <tag>贪心</tag>
+        <tag>算法效率-二分查找</tag>
         <tag>数学-组合计数</tag>
       </tags>
   </entry>
@@ -3636,8 +3710,8 @@ f_4=\frac12f_0+f_3\\
       </categories>
       <tags>
         <tag>数据结构-线段树</tag>
-        <tag>动态规划</tag>
         <tag>数学-期望</tag>
+        <tag>动态规划</tag>
         <tag>-Codeforces-</tag>
         <tag>数学-高斯消元</tag>
       </tags>
@@ -4705,8 +4779,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
         <category>前行</category>
       </categories>
       <tags>
-        <tag>模拟</tag>
         <tag>动态规划</tag>
+        <tag>模拟</tag>
         <tag>贪心</tag>
         <tag>图论-树</tag>
         <tag>数学-容斥</tag>
@@ -5222,9 +5296,9 @@ dis(u,v)=\min_{c,c_v\in[0,7]}\{f(u,c)+1+f(v,c)\}=\min_{c,c_v\in[0,7]}\{f(u,c)+1+
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>算法效率-二分查找</tag>
         <tag>算法效率-倍增</tag>
         <tag>贪心</tag>
+        <tag>算法效率-二分查找</tag>
         <tag>-牛客-</tag>
         <tag>图论-树链剖分</tag>
       </tags>
@@ -5437,8 +5511,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
       </categories>
       <tags>
         <tag>算法效率-哈希</tag>
-        <tag>动态规划-换根DP</tag>
         <tag>-HDU-</tag>
+        <tag>动态规划-换根DP</tag>
       </tags>
   </entry>
   <entry>
@@ -5522,8 +5596,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划-换根DP</tag>
         <tag>-HDU-</tag>
+        <tag>动态规划-换根DP</tag>
         <tag>数学-博弈论</tag>
       </tags>
   </entry>
@@ -8799,8 +8873,8 @@ x^m\equiv x\pmod {p_c}\\
       <tags>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
-        <tag>动态规划</tag>
         <tag>数学-期望</tag>
+        <tag>动态规划</tag>
         <tag>算法效率-倍增</tag>
         <tag>数据结构-并查集</tag>
       </tags>
@@ -8897,9 +8971,9 @@ x^m\equiv x\pmod {p_c}\\
         <category>前行</category>
       </categories>
       <tags>
-        <tag>模拟</tag>
-        <tag>动态规划</tag>
         <tag>数学-期望</tag>
+        <tag>动态规划</tag>
+        <tag>模拟</tag>
         <tag>算法效率-矩阵加速</tag>
         <tag>算法效率-二分查找</tag>
         <tag>分治</tag>
@@ -9375,8 +9449,8 @@ x_N+x_1=2y_N&&(N)
       <tags>
         <tag>数学-组合数</tag>
         <tag>数学</tag>
-        <tag>模拟</tag>
         <tag>算法效率-倍增</tag>
+        <tag>模拟</tag>
         <tag>图论-树</tag>
         <tag>算法效率-离线</tag>
       </tags>
@@ -10814,8 +10888,8 @@ dp[i+1][j]=min\{dp[i+1][j],dp[i][j]\}</script><p>而且最后女儿不一定要�
       </categories>
       <tags>
         <tag>数学</tag>
-        <tag>模拟</tag>
         <tag>动态规划</tag>
+        <tag>模拟</tag>
         <tag>贪心</tag>
         <tag>-Codeforces-</tag>
       </tags>
