@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="morPySQeBU" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+summary.fold{
+	background-color:#555555;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold{
+	background-color:#EEEEEE;
+	border-radius:.3rem;
+}
+p.fold{
+	padding-left:10px;
+	padding-right:10px;
+}
+p.block{
+	background-color:#EEEEEE;
+	border-radius:.3rem;
+	padding-left:5px;
+	padding-right:5px;
+	padding-bottom:5px;
+}
+</blockquote>
+</style>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="口胡起来倒是挺快乐的，码代码就……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI - &quot;动态 DP&quot;&amp;动态树分治(洛谷)">
+<meta property="og:url" content="https://luckyglass.github.io/2020/20Jul26thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="口胡起来倒是挺快乐的，码代码就……">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://luckyglass.github.io/2020/20Jul26thArt1/png1.png">
+<meta property="article:published_time" content="2020-07-26T11:36:36.000Z">
+<meta property="article:modified_time" content="2020-07-26T12:42:34.975Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="数据结构-线段树">
+<meta property="article:tag" content="-洛谷-">
+<meta property="article:tag" content="图论-树链剖分">
+<meta property="article:tag" content="动态规划-动态DP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luckyglass.github.io/2020/20Jul26thArt1/png1.png">
+
+<link rel="canonical" href="https://luckyglass.github.io/2020/20Jul26thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>OI - "动态 DP"&动态树分治(洛谷) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://luckyglass.github.io/2020/20Jul26thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="一个OIer的博客小家">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI - "动态 DP"&动态树分治(洛谷)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-26 19:36:36 / 修改时间：20:42:34" itemprop="dateCreated datePublished" datetime="2020-07-26T19:36:36+08:00">2020-07-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Jul26thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Jul26thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>口胡起来倒是挺快乐的，码代码就……</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> <a href="https://www.luogu.com.cn/problem/P4719" target="_blank" rel="noopener">洛谷 P4719</a></p>
+<details class="fold">
+    <summary class="fold">点击展开/折叠题面</summary>
+    <p class="fold">给定一棵 $n$ 个点的树，点带点权。</p><p>
+    </p><p class="fold">有 $m$ 次操作，每次操作给定 $x,y$，表示修改点 $x$ 的权值为 $y$。</p>
+    <p class="fold">你需要在每次操作之后求出这棵树的最大权独立集的权值大小。</p>
+</details>
+
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>如果没有修改操作，这就是一个简单的树的独立集DP，即 $f_{u,0},f_{u,1}$ 分别表示子树 u 中，节点 u 不选/选的最大权独立集的权。</p>
+<p>然后就可以写出一个 DP 转移式：</p>
+<script type="math/tex; mode=display">f_{u,0}=\sum_{v\in son_u}\max\{f_{v,0},f_{v,1}\}\\f_{u,1}=\sum_{v\in son_u}f_{v,0}+val_u</script><p>既然这道题是动态 DP 的模板题，而我们知道动态 DP 经常用<strong>线段树</strong>维护DP转移，迁移到树上就是树链剖分，因此我们要处理出 u 的DP值与 u 的<strong>重儿子</strong>的DP值之间的关系。</p>
+<p>记 $son’_u$ 是 u 的轻儿子的点集，则定义 $g_{u,0},g_{u,1}$：</p>
+<script type="math/tex; mode=display">g_{u,0}=\sum_{v\in son'_u}\max\{f_{v,0},f_{v,1}\}\\g_{u,1}=\sum_{v\in son'_u}f_{v,0}+val_u</script><p>> Tab. $wei_u$ 表示 u 的重儿子</p>
+<p>则有：</p>
+<script type="math/tex; mode=display">f_{u,0}=g_{u,0}+\max\{f_{wei_u,0},f_{wei_u,1}\}\\f_{u,1}=g_{u,1}+f_{wei_u,0}</script><p>再构造转移矩阵：</p>
+<script type="math/tex; mode=display">\begin{bmatrix}f_{u,0}\\f_{u,1}\end{bmatrix}=\begin{bmatrix}g_{u,0}&g_{u,0}\\g_{u,1}&-\infty\end{bmatrix}\times\begin{bmatrix}f_{wei_u,0}\\f_{wei_u,1}\end{bmatrix}</script><p>> Tab. 下面记 $M_u$ 表示中间那个 $2\times2$ 的转移矩阵</p>
+<p>接下来我们对整棵树重链剖分，设以 $u$ 为 $top$ 的重链的链尾为 $bot_u$。然后稍加推导，我们发现：</p>
+<script type="math/tex; mode=display">\begin{bmatrix}f_{u,0}\\f_{u,1}\end{bmatrix}=\prod_{x=u}^{bot_u} M_{x}\times\begin{bmatrix}0\\0\end{bmatrix}</script><p>所以我们要算点 $1$ 的DP值，只需要查 $1$ 的重链的 $\prod M_x$。</p>
+<p>然后如何修改呢？</p>
+<p>不妨设直接修改点权的点为 $u$，可以用一张图概括树链剖分维护的<strong>矩阵</strong>的改变情况：</p>
+<p><img src="/2020/20Jul26thArt1/png1.png" alt="png1"></p>
+<p>我们发现，只有<strong>轻儿子</strong>的 $f$ 改变才会使其父节点的 $g$ 改变，从而使其父亲的 $M$ 改变。</p>
+<p>在上图中，修改 $val_U$ 后，直接影响到 $g_{U,1}$（即 $M_U$ 会改变）。间接影响到的是 $f_T$，从而影响到 $g_F$（即 $M_T$）。</p>
+<p>$M_F$ 改变后，又会影响到 $F$ 的重链顶点的 $f$，则重链顶点的父亲的 $g$ 就会改变……一直到重链顶点是 $1$，因为 $1$ 没有父亲，所以不会有节点的 $M$ 会改变。</p>
+<p>根据重链剖分的性质，一次修改只有 $O(\log n)$ 的点的 $M$ 会改变，所以复杂度正确。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>,INF=<span class="number">1e9</span>+<span class="number">10</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxc(a,b) (a=max(a,b))</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,ndfn;</span><br><span class="line"><span class="keyword">int</span> val[N];</span><br><span class="line"><span class="keyword">int</span> dfn[N],tp[N],dep[N],siz[N],anc[N],wei[N],idfn[N],bot[N];</span><br><span class="line"><span class="keyword">int</span> f[N][<span class="number">2</span>],g[N][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GRAPH</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> head[N],nxt[N&lt;&lt;<span class="number">1</span>],to[N&lt;&lt;<span class="number">1</span>],ncnt;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> p=++ncnt,q=++ncnt;</span><br><span class="line">		nxt[p]=head[u],to[p]=v,head[u]=p;</span><br><span class="line">		nxt[q]=head[v],to[q]=u,head[v]=q;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> <span class="keyword">operator</span> [](<span class="keyword">const</span> <span class="keyword">int</span> &amp;u)&#123;<span class="keyword">return</span> head[u];&#125;</span><br><span class="line">&#125;Gr;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MATRIX</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> rol,col,mt[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">	<span class="keyword">int</span>* <span class="keyword">operator</span> [](<span class="keyword">const</span> <span class="keyword">int</span> &amp;i)&#123;<span class="keyword">return</span> mt[i];&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(<span class="keyword">int</span> r,<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">		rol=r,col=c;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;r;i++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;c;j++)</span><br><span class="line">				mt[i][j]=-INF;</span><br><span class="line">	&#125;</span><br><span class="line">	MATRIX <span class="keyword">operator</span> *(MATRIX B)&#123;</span><br><span class="line">		MATRIX ret;ret.Init(rol,B.col);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;rol;i++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;B.col;j++)</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;col;k++)</span><br><span class="line">					<span class="keyword">if</span>(mt[i][k]!=-INF &amp;&amp; B[k][j]!=-INF)</span><br><span class="line">						maxc(ret[i][j],mt[i][k]+B[k][j]);</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SEGTREE</span>&#123;</span></span><br><span class="line">	MATRIX num[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> idx(l,r) (((l)!=(r))|((l)+(r)))</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Update</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> po)</span></span>&#123;</span><br><span class="line">		num[u].Init(<span class="number">2</span>,<span class="number">2</span>);po=idfn[po];</span><br><span class="line">		num[u][<span class="number">0</span>][<span class="number">0</span>]=g[po][<span class="number">0</span>],num[u][<span class="number">0</span>][<span class="number">1</span>]=g[po][<span class="number">0</span>];</span><br><span class="line">		num[u][<span class="number">1</span>][<span class="number">0</span>]=g[po][<span class="number">1</span>],num[u][<span class="number">1</span>][<span class="number">1</span>]=-INF;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">PushUp</span><span class="params">(<span class="keyword">int</span> le,<span class="keyword">int</span> ri)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		num[idx(le,ri)]=num[idx(le,mi)]*num[idx(mi+<span class="number">1</span>,ri)];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Build</span><span class="params">(<span class="keyword">int</span> le,<span class="keyword">int</span> ri)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> u=idx(le,ri);</span><br><span class="line">		<span class="keyword">if</span>(le==ri)&#123;Update(idx(le,ri),le);<span class="keyword">return</span>;&#125;</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		Build(le,mi),Build(mi+<span class="number">1</span>,ri);</span><br><span class="line">		PushUp(le,ri);</span><br><span class="line">		<span class="comment">// printf("%d %d %d %d\n",num[u][0][0],num[u][0][1],num[u][1][0],num[u][1][1]);</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">MATRIX <span class="title">Query</span><span class="params">(<span class="keyword">int</span> le,<span class="keyword">int</span> ri,<span class="keyword">int</span> Le,<span class="keyword">int</span> Ri)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(Le&lt;=le &amp;&amp; ri&lt;=Ri) <span class="keyword">return</span> num[idx(le,ri)];</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(Ri&lt;=mi) <span class="keyword">return</span> Query(le,mi,Le,Ri);</span><br><span class="line">		<span class="keyword">if</span>(mi&lt;Le) <span class="keyword">return</span> Query(mi+<span class="number">1</span>,ri,Le,Ri);</span><br><span class="line">		<span class="keyword">return</span> Query(le,mi,Le,Ri)*Query(mi+<span class="number">1</span>,ri,Le,Ri);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Modify</span><span class="params">(<span class="keyword">int</span> le,<span class="keyword">int</span> ri,<span class="keyword">int</span> po)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(le==ri)&#123;Update(idx(le,ri),le);<span class="keyword">return</span>;&#125;</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(po&lt;=mi) Modify(le,mi,po);</span><br><span class="line">		<span class="keyword">else</span> Modify(mi+<span class="number">1</span>,ri,po);</span><br><span class="line">		PushUp(le,ri);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;Se;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MModify</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">	g[u][<span class="number">1</span>]+=key-val[u];val[u]=key;</span><br><span class="line">	Se.Modify(<span class="number">1</span>,n,dfn[u]);</span><br><span class="line">	<span class="keyword">while</span>(tp[u]!=<span class="number">1</span>)&#123;</span><br><span class="line">		u=tp[u];</span><br><span class="line">		MATRIX res=Se.Query(<span class="number">1</span>,n,dfn[u],dfn[bot[u]]);</span><br><span class="line">		<span class="keyword">int</span> fa=anc[u];</span><br><span class="line">		g[fa][<span class="number">0</span>]-=max(f[u][<span class="number">0</span>],f[u][<span class="number">1</span>]);</span><br><span class="line">		g[fa][<span class="number">1</span>]-=f[u][<span class="number">0</span>];</span><br><span class="line">		f[u][<span class="number">0</span>]=res[<span class="number">0</span>][<span class="number">0</span>],f[u][<span class="number">1</span>]=res[<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">		<span class="comment">// printf("! [%d] %d %d\n",u,f[u][0],f[u][1]);</span></span><br><span class="line">		g[fa][<span class="number">0</span>]+=max(f[u][<span class="number">0</span>],f[u][<span class="number">1</span>]);</span><br><span class="line">		g[fa][<span class="number">1</span>]+=f[u][<span class="number">0</span>];</span><br><span class="line">		Se.Modify(<span class="number">1</span>,n,dfn[fa]);</span><br><span class="line">		u=fa;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">MATRIX <span class="title">MQuery</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;<span class="keyword">return</span> Se.Query(<span class="number">1</span>,n,<span class="number">1</span>,dfn[u]);&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar(),b=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) b=c==<span class="string">'-'</span>? <span class="number">-1</span>:b,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r*b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span>&#123;</span><br><span class="line">	siz[u]=<span class="number">1</span>;dep[u]=dep[fa]+<span class="number">1</span>;anc[u]=fa;</span><br><span class="line">	f[u][<span class="number">1</span>]=val[u];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> it=Gr[u];it;it=Gr.nxt[it])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=Gr.to[it];</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		DFS(v,u);</span><br><span class="line">		f[u][<span class="number">0</span>]+=max(f[v][<span class="number">0</span>],f[v][<span class="number">1</span>]);</span><br><span class="line">		f[u][<span class="number">1</span>]+=f[v][<span class="number">0</span>];</span><br><span class="line">		siz[u]=siz[u]+siz[v];</span><br><span class="line">		<span class="keyword">if</span>(siz[wei[u]]&lt;siz[v]) wei[u]=v;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS2</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> tp_)</span></span>&#123;</span><br><span class="line">	tp[u]=tp_;idfn[dfn[u]=++ndfn]=u;</span><br><span class="line">	g[u][<span class="number">1</span>]=val[u];</span><br><span class="line">	<span class="keyword">if</span>(wei[u]) DFS2(wei[u],tp_);</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		bot[tp_]=u;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> it=Gr[u];it;it=Gr.nxt[it])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=Gr.to[it];</span><br><span class="line">		<span class="keyword">if</span>(v==wei[u] || v==anc[u]) <span class="keyword">continue</span>;</span><br><span class="line">		g[u][<span class="number">0</span>]+=max(f[v][<span class="number">0</span>],f[v][<span class="number">1</span>]);</span><br><span class="line">		g[u][<span class="number">1</span>]+=f[v][<span class="number">0</span>];</span><br><span class="line">		DFS2(v,v);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// freopen("input.txt","r",stdin);</span></span><br><span class="line">	n=Ri(),m=Ri();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) val[i]=Ri();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++) Gr.AddEdge(Ri(),Ri());</span><br><span class="line">	DFS(<span class="number">1</span>,<span class="number">0</span>),DFS2(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">	Se.Build(<span class="number">1</span>,n);</span><br><span class="line">	<span class="keyword">while</span>(m--)&#123;</span><br><span class="line">		<span class="keyword">int</span> u=Ri(),key=Ri();</span><br><span class="line">		MModify(u,key);</span><br><span class="line">		MATRIX res=MQuery(bot[<span class="number">1</span>]);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,max(res[<span class="number">0</span>][<span class="number">0</span>],res[<span class="number">1</span>][<span class="number">0</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &拨开扬尘\ 迈步倾身\\
+&掩藏内心\ 变得愚笨\\
+&在帷幕后的冰冷\\
+&我一个人\\
+&这孤单是为谁而生？\ ”\\
+——&\text{《小丑的品格》By 泠鸢yousa}
+\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=510371017&amp;userid=303853271" target="_blank" rel="noopener">小丑的品格</a>-网易云</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://luckyglass.github.io/2020/20Jul26thArt1/" title="OI - &quot;动态 DP&quot;&amp;动态树分治(洛谷)">https://luckyglass.github.io/2020/20Jul26thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i> 数据结构-线段树</a>
+              <a href="/tags/%E6%B4%9B%E8%B0%B7/" rel="tag"><i class="fa fa-tag"></i> -洛谷-</a>
+              <a href="/tags/%E5%9B%BE%E8%AE%BA-%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/" rel="tag"><i class="fa fa-tag"></i> 图论-树链剖分</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E5%8A%A8%E6%80%81DP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-动态DP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Jul23rdArt1/" rel="prev" title="OI - Tourists(Codeforces)">
+      <i class="fa fa-chevron-left"></i> OI - Tourists(Codeforces)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text"># 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">一个OIer的博客小家</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">177</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">112</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共304.9k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
