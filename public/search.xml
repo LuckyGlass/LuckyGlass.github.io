@@ -2405,8 +2405,8 @@ f_{1,i}=h_i-\sum_{j=i+1}^mC_j^if_{1,j}</script><hr>
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>-洛谷-</tag>
         <tag>数学-容斥</tag>
+        <tag>-洛谷-</tag>
         <tag>动态规划-树形DP</tag>
       </tags>
   </entry>
@@ -5158,8 +5158,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
       <tags>
         <tag>模拟</tag>
         <tag>动态规划</tag>
-        <tag>图论-树</tag>
         <tag>贪心</tag>
+        <tag>图论-树</tag>
         <tag>数学-容斥</tag>
         <tag>数学-组合计数</tag>
       </tags>
@@ -5419,8 +5419,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划-状压DP</tag>
         <tag>图论-最短路</tag>
+        <tag>动态规划-状压DP</tag>
         <tag>-Codeforces-</tag>
         <tag>图论-生成树</tag>
       </tags>
@@ -7070,8 +7070,8 @@ ans_2=\sum_{i=0}^n\sum_{j=0}^n(-1)^{i+j}C_n^iC_n^j\times 2^{(n-i)(n-j)}\times f_
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>算法效率-分块</tag>
         <tag>数据结构-并查集</tag>
+        <tag>算法效率-分块</tag>
         <tag>-Codeforces-</tag>
         <tag>算法效率-STL</tag>
       </tags>
@@ -7944,8 +7944,8 @@ D\times V\times \begin{bmatrix}a_0\\a_1\\a_2\\\vdots\\a_{n-1}\end{bmatrix}
       </categories>
       <tags>
         <tag>-POJ-</tag>
-        <tag>数学-素性测试</tag>
         <tag>数学-大数分解</tag>
+        <tag>数学-素性测试</tag>
         <tag>数学-EXGCD</tag>
       </tags>
   </entry>
@@ -8768,9 +8768,9 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
         <tag>数据结构-线段树</tag>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
+        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
         <tag>算法效率-扫描线</tag>
-        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -10077,8 +10077,8 @@ A_i^4-kA_i&\equiv A_j^4-kA_j
       <tags>
         <tag>数学</tag>
         <tag>模拟</tag>
-        <tag>动态规划-状压DP</tag>
         <tag>贪心</tag>
+        <tag>动态规划-状压DP</tag>
       </tags>
   </entry>
   <entry>
@@ -10387,9 +10387,9 @@ p&\leq q
         <category>OI题解</category>
       </categories>
       <tags>
+        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
         <tag>图论-树</tag>
-        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
