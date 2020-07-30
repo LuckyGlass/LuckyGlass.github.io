@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://luckyglass.github.io/2020/20Jul30thArt1-1/</loc>
+    <loc>https://luckyglass.github.io/2020/20Jul30thArt2/</loc>
     
-    <lastmod>2020-07-30T10:51:56.055Z</lastmod>
+    <lastmod>2020-07-30T11:27:13.228Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://luckyglass.github.io/newtags/</loc>
+    
+    <lastmod>2020-07-30T10:55:02.262Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>https://luckyglass.github.io/2020/20Jul30thArt1/</loc>
     
     <lastmod>2020-07-30T01:35:22.615Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://luckyglass.github.io/newtags/</loc>
-    
-    <lastmod>2020-07-30T01:30:37.765Z</lastmod>
     
   </url>
   
