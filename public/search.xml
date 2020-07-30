@@ -14,9 +14,50 @@
 ]]></content>
   </entry>
   <entry>
-    <title>20Jul30thArt1</title>
+    <title>OI - F(x) (HDU)</title>
     <url>/2020/20Jul30thArt1/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<blockquote>
+<p>发现和自己以前写的数位DP不一样，用记忆化搜索实现改变边界的多次查询。</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> Linked <a href="http://acm.hdu.edu.cn/showproblem.php?pid=4734" target="_blank" rel="noopener">HDU 4734</a></p>
+<details class="fold">
+    <summary class="fold">点击展开/折叠题面</summary>
+    <p class="fold">给你两个数 $A,B$，定义一种函数 $F(x)$，设 $x$ 的数位第 $i$ 位（从第 $0$ 位开始）为 $x_i$，则</p>
+    <p class="fold">$$F(x)=\sum2^ix_i$$</p>
+    <p class="fold">求满足 $x\in[0,B]$ 且 $F(x)\le F(A)$ 的 $x$ 的数量。</p>
+    <p class="fold">多组询问。</p>
+</details>
+
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>显然是数位DP，然后又发现 $F(x)$ 最大（即 $F(10^9-1)$）才 $4599$，于是可以定义状态：<code>f[i][j][0/1]</code> 表示前 $i$ 位确定、此时 $F(x)=j$、后面的数位是否受到限制的方案数。</p>
+<p>状态数是 $10^5$，可以轻松跑过一次查询，但是查询有 $10^4$ 就会 TLE 了（而且时限还是 500ms QwQ）。</p>
+<p>考虑另外一种记忆化搜索实现的数位DP，并且改变状态定义：<code>f[i][j]</code> 表示考虑了前 $i$ 位，第 $i$ 位已经不受数位限制，且 $F(x)\le i$ 的方案数。</p>
+<p>注意到我们只储存了第 $i$ 位不受限制的答案，而<strong>受限制的每次询问要重新计算</strong>。</p>
+<p>这种做法的正确性显然，但是为什么时间复杂度也正确？</p>
+<p>当一个位置受限制，当且仅当更高位的每一位都相同，其实这样的状态只有 $len$ 个（$len$ 是 $x$ 的数位长度），于是在计算出一次 DP 值过后，每次只会额外计算不超过 $10$ 次，在多次询问时表现得非常优秀。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">4600</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dig[<span class="number">11</span>];</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">11</span>][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Calc</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret=<span class="number">0</span>,per=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)&#123;</span><br><span class="line">        ret+=x%<span class="number">10</span>*per;</span><br><span class="line">        x/=<span class="number">10</span>,per&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j,<span class="keyword">bool</span> lim)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>) <span class="keyword">return</span> j&gt;=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(j&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(!lim &amp;&amp; (~f[i][j])) <span class="keyword">return</span> f[i][j];</span><br><span class="line">    <span class="keyword">int</span> lk=lim? dig[i]:<span class="number">9</span>;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=lk;k++)</span><br><span class="line">        ans+=DFS(i<span class="number">-1</span>,j-(<span class="number">1</span>&lt;&lt;(i<span class="number">-1</span>))*k,lim&amp;&amp;k==lk);</span><br><span class="line">    <span class="keyword">if</span>(!lim) f[i][j]=ans;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Solve</span><span class="params">(<span class="keyword">int</span> A,<span class="keyword">int</span> B)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(B) dig[++n]=B%<span class="number">10</span>,B/=<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">return</span> DFS(n,Calc(A),<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span> f);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> ca=<span class="number">1</span>,cas=Ri();ca&lt;=cas;ca++)&#123;</span><br><span class="line">        <span class="keyword">int</span> A=Ri(),B=Ri();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case #%d: %d\n"</span>,ca,Solve(A,B));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &那些与你\ 一同刻下的痕迹\\
+&多留恋\ 多疼惜\\
+&潮汐来时\ 注定抹去\\
+&随地平线\\
+&渐渐模糊的轮廓\\
+&被缤纷的潮水\ 淹没\ ”\\
+——&\text{《朝汐》By 泠鸢yousa/双笙}
+\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=1316479227&amp;userid=303853271" target="_blank" rel="noopener">朝汐</a>-网易云</p>
+]]></content>
+      <categories>
+        <category>OI题解</category>
+      </categories>
+      <tags>
+        <tag>-HDU-</tag>
+        <tag>动态规划-数位DP</tag>
+      </tags>
   </entry>
   <entry>
     <title>OI - GCD Counting(Codeforces)</title>
@@ -2234,8 +2275,8 @@ FWT[F]_i&=FWT[G]_i\times FWT[H]_i\\
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>图论-最短路</tag>
         <tag>贪心</tag>
+        <tag>图论-最短路</tag>
         <tag>-LOJ-</tag>
       </tags>
   </entry>
@@ -5679,8 +5720,8 @@ dis(u,v)=\min_{c,c_v\in[0,7]}\{f(u,c)+1+f(v,c)\}=\min_{c,c_v\in[0,7]}\{f(u,c)+1+
       </categories>
       <tags>
         <tag>算法效率-二分查找</tag>
-        <tag>算法效率-倍增</tag>
         <tag>贪心</tag>
+        <tag>算法效率-倍增</tag>
         <tag>-牛客-</tag>
         <tag>图论-树链剖分</tag>
       </tags>
@@ -7075,8 +7116,8 @@ ans_2=\sum_{i=0}^n\sum_{j=0}^n(-1)^{i+j}C_n^iC_n^j\times 2^{(n-i)(n-j)}\times f_
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数据结构-并查集</tag>
         <tag>算法效率-分块</tag>
+        <tag>数据结构-并查集</tag>
         <tag>-Codeforces-</tag>
         <tag>算法效率-STL</tag>
       </tags>
@@ -7949,8 +7990,8 @@ D\times V\times \begin{bmatrix}a_0\\a_1\\a_2\\\vdots\\a_{n-1}\end{bmatrix}
       </categories>
       <tags>
         <tag>-POJ-</tag>
-        <tag>数学-大数分解</tag>
         <tag>数学-素性测试</tag>
+        <tag>数学-大数分解</tag>
         <tag>数学-EXGCD</tag>
       </tags>
   </entry>
@@ -9963,8 +10004,8 @@ A_i^4-kA_i&\equiv A_j^4-kA_j
       </categories>
       <tags>
         <tag>数学</tag>
-        <tag>算法效率-倍增</tag>
         <tag>贪心</tag>
+        <tag>算法效率-倍增</tag>
       </tags>
   </entry>
   <entry>
