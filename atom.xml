@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://luckyglass.github.io/"/>
-  <updated>2020-07-30T01:35:22.615Z</updated>
+  <updated>2020-07-30T10:51:56.055Z</updated>
   <id>https://luckyglass.github.io/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>20Jul30thArt1</title>
+    <link href="https://luckyglass.github.io/2020/20Jul30thArt1-1/"/>
+    <id>https://luckyglass.github.io/2020/20Jul30thArt1-1/</id>
+    <published>2020-07-30T10:51:56.000Z</published>
+    <updated>2020-07-30T10:51:56.055Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>OI - F(x) (HDU)</title>
@@ -559,30 +574,6 @@
     
     
       <category term="图论-矩阵树定理" scheme="https://luckyglass.github.io/tags/%E5%9B%BE%E8%AE%BA-%E7%9F%A9%E9%98%B5%E6%A0%91%E5%AE%9A%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前行 - 2020省选游记</title>
-    <link href="https://luckyglass.github.io/2020/20Jun21stArt1/"/>
-    <id>https://luckyglass.github.io/2020/20Jun21stArt1/</id>
-    <published>2020-06-21T08:09:44.000Z</published>
-    <updated>2020-06-21T10:07:13.644Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>想不到八中就换电脑就能举办省选了 →_→<br>CCF的面包又变贵了……</p></blockquote><h2 id><a href="#" class="headerlink" title></a><a id="more"></a></h2><h2 id="Part0-小引"><a href="#Part0-小引" class="headerlink" title="# Part0. 小引"></a># Part0. 小引</h2><p>（游记之前有一个“小引”……已经习惯了）</p><p>省选在自己学校举办，本以为可以看看外边其他的学校，<del>扩充一下自己的照片墙，</del>不过确实方便了许多。这边是参加2020省选的OIer，隔壁就能看到准备2020高考学长；在熟悉的机房，做不熟悉的题；还真是不一样的感觉。</p><p>这次并没有像去年初三的时候去划水……趁现在成绩还没有公布（自己也并不想测民间数据），先写一篇“游记”。</p><hr><h2 id="Part1-准备"><a href="#Part1-准备" class="headerlink" title="# Part1. 准备"></a># Part1. 准备</h2><p>去年其实还复习了很久，和现在已经预备高考的高2020级学长们一起训练（然而我好像去颓废了╯︿╰）；相反，这次并没有留多少时间（指两天）来给我们自己复习之前的知识，而是一直在讲新知识，或者是把以前讲过但是弄得不是很清楚的算法再讲一遍。</p><p>For Example:</p><ul><li>FWT</li><li>动态DP</li><li>拉格朗日插值</li><li>插头DP</li><li>（下面是复习了）KMP &amp; 前缀函数</li><li>AC自动机</li><li>SAM</li><li>PAM</li><li>SA</li></ul><p>不管怎么说，还是给我提供了不少的思路<del>，虽然这次居然没有考字符串</del>。</p><p>另外，这学期才引入的团队互测在深入了解算法以及解题思路（说白了就是套路方面有很大作用。也能找到一些实现细节上的问题。</p><hr><h2 id="Part2-DAY1"><a href="#Part2-DAY1" class="headerlink" title="# Part2. DAY1"></a># Part2. DAY1</h2><h3 id="Part2-1"><a href="#Part2-1" class="headerlink" title="# Part2.1"></a># Part2.1</h3><p>在科技楼一楼的大厅里挤了好多人……但还是把从初二到高二的所有OIer都拉到“2020省选”的大屏幕前面照了合影。本来就只剩8个人的高一OIer可惜还有两位没有参加，显得人特别少（看到巴蜀有好多人参赛……）</p><p>教练和班主任都说着“不要紧张，要经常保存文件”之类的话，其实我自己还没有去年紧张。毕竟已经经历过一次省选了，早就做好了面对难题和新题（指交互和提答）的准备；不过比较安心的是打开pdf的时候看到的是三个“传统”。</p><p>还是跟原来一样读了题面，知道三道题的意思，也大概知道难度顺序是递增的（据说第二题如果知道套路的话就比较简单，但是我不熟悉这些套路，还是觉得难度应该是递增的）。这次考试时长延长成了 4.5h，可以每道题 1.5h……但是显然尽量把能AC的题A掉，所以决定T3直接上暴力，T1,T2花较多的时间。</p><h3 id="Part2-2"><a href="#Part2-2" class="headerlink" title="# Part2.2"></a># Part2.2</h3><p>很快发现T1是一个单增函数和一个单减函数取 min 求最大值，显然是一个单峰函数——三分？（说实话我不太会三分）但是怎么修改？看起来要区间修改函数的值，再套上线段树不就 $O(n\log^2n)$了？然后换个思路，直接用线段树维护两个函数。</p><p>写着写着就发现好像不能简单地打懒标记直接区间修改，因为这样不能维护单峰函数的 max……只有在该区间内两个函数的值域不相交才能直接修改。然后忽然就想到了吉司机线段树（？？？），暴力地修改线段树——如果当前区间两个函数值域不交就直接改，否则递归子区间。</p><p>当时就直接这样写了，改了好多遍终于过了大样例。</p><p>赛后想了一下，似乎复杂度就是 $O(n\log n)$ 的，也不需要势能分析，因为是单峰函数，只会有 $O(\log n)$ 个区间是函数值有交的，于是只会在这个区间内暴力递归到底，其他区间都可以直接改。</p><h3 id="Part2-3"><a href="#Part2-3" class="headerlink" title="# Part2.3"></a># Part2.3</h3><p>T2就一直比较爆炸……做T1用了超过1.5h，于是显得有些急迫。先是把非常好拿的 30pt 暴力写了（差点不知道怎么在没有逆元的情况下求组合数了……）。</p><p>想不出正解，就开始骗分……但是啥都不会，做了1h就放掉了。</p><h3 id="Part2-4"><a href="#Part2-4" class="headerlink" title="# Part2.4"></a># Part2.4</h3><p>T3读完题面就想到——线性基？还是最大权、最小权线性基？还有点小开心，因为赛前才和tly说到这个东西。</p><p>但是一想，又不一样……分析出题目给出的两个线性基里的每个元素都不能被其他元素替代，似乎是有一个两两变量之间的大小关系——差分约束？</p><p>但是题目并不是要求这些变量的值的总和最小之类的，而是一个带平方的式子最小……当时就自闭了，差分约束顶多来判断一下有没有解（话说有没有可能无解？）</p><p>于是开始看部分分……啥也不会QwQ看起来第一个的数据规模非常的小，似乎可以穷竭搜索一下，于是就写了，也不知道能骗多少分（可能0pt）</p><h3 id="Part2-5"><a href="#Part2-5" class="headerlink" title="# Part2.5"></a># Part2.5</h3><p>大概还有 30min 的时候就开始检查代码了，先是按教练说的放在 Linux 虚拟机上编译了一下，看起来没啥问题，又检查了一下文件名，拿文件测试了一下输入输出。</p><p>最后还剩个20min……啥也写不出来了，就开始估分……不把估的分写出来了（太菜了万一爆炸了还得真香一下……还是tly nb）。</p><hr><h2 id="Part3-DAY2"><a href="#Part3-DAY2" class="headerlink" title="# Part3. DAY2"></a># Part3. DAY2</h2><h3 id="Part3-1"><a href="#Part3-1" class="headerlink" title="# Part3.1"></a># Part3.1</h3><p>这次就没去这么早，到大厅的时候其他人基本上到了。</p><p>第二天的题肯定比较难。一来就看到时限 2s,2s,3s，这是要卡常吗？ :(</p><h3 id="Part3-2"><a href="#Part3-2" class="headerlink" title="# Part3.2"></a># Part3.2</h3><p>一开始觉得还是T1稍微友好一点<del>结果友好个锤子</del></p><p>想到了 $O(m^22^m)$ 的状压DP，非常快乐的过了两个小样例，然后测大样例……等了30+s终于跑出来了，还好答案是对的。</p><p>在草稿上列思路的时候就感觉有一个 $O(m)$ 的计算应该要优化掉，于是推了一下就知道可以用递推来代替重复计算，理论复杂度 $O(m\log m)$，好像非常优秀。写完跑了一下大样例，还是用了 10+s？？？这常数这么大？&gt;_&lt;</p><p>正准备优化常数，突然看到自己的数组开了 2e8！<del>cao</del>MLE就凉了……于是拼命地想把内存砍下来，修改了一堆诸如变量枚举顺序、循环数组、数组重复利用等小优化，最后把内存砍到了 $O(23\times C_{22}^{11})$，当然目标是 80pt。</p><p>把内存开大一点跑了一下大样例，好像是 7s……大概是没有希望了，就改回 80pt。（其实预计是60pt，m&lt;=20跑的挺快的，0.6s左右）</p><h3 id="Part3-3"><a href="#Part3-3" class="headerlink" title="# Part3.3"></a># Part3.3</h3><p>T2是个什么东西？</p><p>不管想哪个数据点都被“整体加一个数，求异或和”给难住了……</p><p>最后想 $v_i=1$ 的点，一个点的贡献只与其相对于子树的根的深度有关；于是准备分层统计个数，DSU on Tree?还是不得不面对整体加1再计算异或和的问题……最后只留下了一个惨不忍睹的 10pt。</p><h3 id="Part3-4"><a href="#Part3-4" class="headerlink" title="# Part3.4"></a># Part3.4</h3><p>T3又是个什么东西 (+_+)?</p><p>生成树计数？然而忘了怎么做了 QwQ，似乎 $w_i$ 全相等就是求生成树计数。</p><p>别的啥也不会……还是只写了 30pt 的暴力。</p><hr><h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">\begin{split}“\ &偏不肯收敛\ 这桀骜不驯\\&偏不知天高地厚\ 霸剑风流\\&笑饮一壶英雄酒\ 何不潇洒到尽头\ ”\\\text{——}&\text{《问剑江湖》By 双笙}\end{split}</script>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;想不到八中就换电脑就能举办省选了 →_→&lt;br&gt;CCF的面包又变贵了……&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title&gt;&lt;/a&gt;&lt;/h2&gt;
-    
-    </summary>
-    
-    
-      <category term="前行" scheme="https://luckyglass.github.io/categories/%E5%89%8D%E8%A1%8C/"/>
-    
     
   </entry>
   
