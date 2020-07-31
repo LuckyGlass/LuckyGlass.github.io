@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://luckyglass.github.io/"/>
-  <updated>2020-07-30T11:30:01.612Z</updated>
+  <updated>2020-07-31T08:19:09.989Z</updated>
   <id>https://luckyglass.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OI - 大括号树(洛谷)</title>
+    <link href="https://luckyglass.github.io/2020/20Jul31stArt1/"/>
+    <id>https://luckyglass.github.io/2020/20Jul31stArt1/</id>
+    <published>2020-07-31T08:02:21.000Z</published>
+    <updated>2020-07-31T08:19:09.989Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>和同学完成了一次改编，成功的把一道简单题变成了毒瘤题 (lll￢ω￢)</p></blockquote><a id="more"></a><hr><h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> <a href="https://www.luogu.com.cn/problem/T141420" target="_blank" rel="noopener">洛谷团队题库</a></p><details class="fold">    <summary class="fold">点击展开/折叠题面</summary>    <p class="fold">大括号树是一棵节点上有字符 <code>(</code> 或 <code>)</code> 的树，以 $1$ 为根，点 $i$ 的父亲为 $A_i$（$A_i< i$）。</p>    <p class="fold">Little Q 觉得原题只能从根节点出发太无趣了，对于他这样追求 Freedom 的 OIer，当然要能够从节点 $P$ 出发，经过一条简单路径到达节点 $Q$。</p>    <p class="fold">从 $P$ 到 $Q$ 的过程中，他每到一个节点，就会记录下这个节点的字符（包括 $P$,$Q$ 两点的字符），最后他得到了一个括号串。凭借他高超的手玩能力，他马上计算出了这个字符串中有多少个<strong>子串</strong>是正则匹配的，并记录这个值为 $\operatorname{ans}(P,Q)$。</p>    <p class="fold">Little Q 实在是闲得无聊，把整棵树走了个遍，于是他想要知道：</p>    <p>$$\sum_{P=1}^N\sum_{Q=1}^N\operatorname{ans}(P,Q)$$</p>    <p class="fold">他发现这个值可能很大，于是他要求你计算出该值对 $998244353$ 取模的结果。</p></details><hr><h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>因为写了PPT的题解……就转成PDF放上来了 awa</p><div class="block"><embed src="./pdf1.pdf" width="100%" height="460px"></div><hr><h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">\begin{split}“\ &努力微笑\ 可眼泪\ 还是会掉\ 有多忐忑\\&听着以往的歌 笑过哭过\\&不用谁附和\\&那些年感叹过悲欢离合\\&终将会被岁月消磨\\&我又能记得多少呢\ 剩此刻\ 浅浅勾勒\ ”\\——&\text{《予你成歌》By 歌手组合}\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=1344200357&amp;userid=303853271" target="_blank" rel="noopener">予你成歌</a>-网易云</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;和同学完成了一次改编，成功的把一道简单题变成了毒瘤题 (lll￢ω￢)&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="OI题解" scheme="https://luckyglass.github.io/categories/OI%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="-洛谷-" scheme="https://luckyglass.github.io/tags/%E6%B4%9B%E8%B0%B7/"/>
+    
+      <category term="动态规划-树形DP" scheme="https://luckyglass.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%A0%91%E5%BD%A2DP/"/>
+    
+      <category term="启发式合并" scheme="https://luckyglass.github.io/tags/%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>OI - 树上染色(洛谷)</title>
@@ -362,9 +391,9 @@
       <category term="OI题解" scheme="https://luckyglass.github.io/categories/OI%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="https://luckyglass.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
       <category term="数学-组合数" scheme="https://luckyglass.github.io/tags/%E6%95%B0%E5%AD%A6-%E7%BB%84%E5%90%88%E6%95%B0/"/>
+    
+      <category term="动态规划" scheme="https://luckyglass.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
       <category term="-AtCoder-" scheme="https://luckyglass.github.io/tags/AtCoder/"/>
     
@@ -563,31 +592,6 @@
     
     
       <category term="-洛谷-" scheme="https://luckyglass.github.io/tags/%E6%B4%9B%E8%B0%B7/"/>
-    
-      <category term="图论-矩阵树定理" scheme="https://luckyglass.github.io/tags/%E5%9B%BE%E8%AE%BA-%E7%9F%A9%E9%98%B5%E6%A0%91%E5%AE%9A%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>学习笔记 - Matrix-Tree矩阵树定理</title>
-    <link href="https://luckyglass.github.io/2020/20Jun28thArt1/"/>
-    <id>https://luckyglass.github.io/2020/20Jun28thArt1/</id>
-    <published>2020-06-28T04:57:29.000Z</published>
-    <updated>2020-06-28T14:59:14.863Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>参考 <a href="https://zhuanlan.zhihu.com/p/108209378" target="_blank" rel="noopener">(知乎)矩阵树定理（Matrix-tree Theorem）笔记</a></p></blockquote><a id="more"></a><hr><h2 id="线代基础"><a href="#线代基础" class="headerlink" title="# 线代基础"></a># 线代基础</h2><p>行列式——在矩阵树定理中要用到其中的一些性质，这里只列出：</p><h3 id="定义（并不严谨）"><a href="#定义（并不严谨）" class="headerlink" title="- 定义（并不严谨）"></a>- 定义（并不严谨）</h3><p>行列式是对一个方阵定义的运算，结果为标量。对 $A$ 方阵进行行列式运算可记作 $|A|$ 或 $\det A$。</p><p>具体来说，运算规则如下：若 $A$ 是一个 $n\times n$ 的方阵；记 $P=\{p_1,p_2,\dots,p_n\}$ 为 $1,2,\dots,n$ 的一个排列，$f(P)$ 为 $P$ 中逆序对的数量；则：</p><script type="math/tex; mode=display">\det A=\sum_{P}(-1)^{f(P)}\prod_{i=1}^na_{ip_i}</script><p>（上式对 $P$ 求和意为对 $P$ 取 $1,2,\dots,n$ 的所有排列求和）</p><h3 id="重要性质"><a href="#重要性质" class="headerlink" title="- 重要性质"></a>- 重要性质</h3><ol><li>记 $A’$ 为 $A$ 的两行或两列互换后得到的方阵，则 $|A’|=-|A|$。</li><li>如果 $A$ 的某一行或列全为 $0$，则 $|A|=0$；如果方阵 $A$ 有两行或两列完全相同，则 $|A|=0$。</li><li>记 $A^T$ 为 $A$ 的转置矩阵</li></ol><p>推论：将 $A$ 的第 $i$ 行的每个元素乘上 $k$ 再加到第 $j$ 行上（$i\neq j$），$A$ 的行列式运算结果不变。</p><hr><h2 id="Matrix-Tree-定理"><a href="#Matrix-Tree-定理" class="headerlink" title="# Matrix-Tree 定理"></a># Matrix-Tree 定理</h2><h3 id="定义-amp-性质"><a href="#定义-amp-性质" class="headerlink" title="- 定义&amp;性质"></a>- 定义&amp;性质</h3><blockquote><p>于是在简单地记住行列式的几个性质后，我们就可以粗略地证明一下矩阵树定理了</p></blockquote><p>最基础的矩阵树定理定义在一个<strong>无向图</strong>上，记无向图 $G=(V,E)$ 有 $n$ 个点 $m$ 条边，其中 $E=\{e_1,e_2,\dots,e_m\}$，$V=\{v_1,v_2,\dots,v_n\}$。</p><p>定义 $G$ 的<strong>关联矩阵</strong> $M$ 如下。先给 $G$ 的每条边任意指定一个方向，则 $M$ 是一个 $n\times m$ 的矩阵：</p><script type="math/tex; mode=display">M_{ij}=\begin{cases}-1&(e_j是v_i的一条出边)\\1&(e_j是v_i的一条入边)\\0&(e_j与v_i不相邻)\\\end{cases}</script><p>再定义一个<strong>拉普拉斯矩阵</strong> $L$：记无向图 $G$ 中 $v_i,v_j$ 之间有 $m_{ij}$ 条边，$v_i$ 的度数为 $d_i$，</p><script type="math/tex; mode=display">L_{ij}=\begin{cases}d_i&(i=j)\\-m_{ij}&(i\neq j)\\\end{cases}</script><p>根据 $L$ 的实际意义，可以得到 $L=M\times M^T$（$M^T$ 是 $M$ 的转置矩阵，即 $M$ 沿对角线翻转，乘法为矩阵乘法）</p><html><head><style type="text/css">summary.sum{    background-color:#D5D5D5;    border-radius:.3rem;    height: 10;}details.de{    background-color:#E6E6E6;}</style><link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml"></head><body><details class="de"><summary class="sum">$L=M\times M^T$ 的证明</summary><p>首先 $L_{ij}=\sum_k M_{ik}M^T_{kj}=\sum_k M_{ik}M_{jk}$；</p><p>考虑两种情况即 $i=j$ 和 $i\neq j$：</p><ul><li>$i=j$，则当且仅当 $e_k$ 与 $v_i$ 相邻时，$M_{ik}M_{jk}=1$，否则为 $0$，所以是 $v_i$ 的度数；</li><li>$i\neq j$，如果 $e_k$ 是 $v_i,v_j$ 之间的边（无论方向），则 $M_{ik}M_{jk}=-1$，否则为 $0$，因此为 $-m_{ij}$。</li></ul></details><br></body></html><p>根据 $M$ 矩阵，我们再定义 $M_0$ 为 $M$ 删除最后一行的余矩阵。</p><p>根据 $M_0$，定义子矩阵 $M_0[S]$（$S$ 为一个大小为 $n-1$ 的集合，$S$ 的每个元素都是 $1$ 到 $m$ 的整数）表示：将 $M_0$ 中所有 $i\in S$ 列都取出来得到的子矩阵。</p><h3 id="矩阵树定理"><a href="#矩阵树定理" class="headerlink" title="- 矩阵树定理"></a>- 矩阵树定理</h3><p>可以知道 $M_0[S]$ 中 $S$ 的 $n-1$ 个元素指代的是 $G$ 的 $n-1$ 条边，则有：</p><blockquote><p>如果 $S$ 中的 $n-1$ 条边构成一棵生成树，则 $M_0[S]=\pm1$，否则 $M_0[S]=0$。</p></blockquote><p>(因为我不会严谨的证明，就简单地说明一下，应该可以意会)</p><html><head><style type="text/css">summary.sum{    background-color:#D5D5D5;    border-radius:.3rem;    height: 10;}details.de{    background-color:#E6E6E6;}</style></head><body><details class="de"><summary class="sum">上述引理的证明</summary><p><ul><li>如果 $S$ 构成生成树，则可以将生成树中的每个节点拓扑排序，注意到 $M_0$ 是一个 $n-1$ 行的矩阵，因为我们删除了 $M$ 的最后一行（代表 $v_n$ 的那行）。因此在拓扑排序时，我们强制使 $v_n$ 成为最后被拓扑到的那个节点。<br>然后按拓扑序枚举 $v_i$，设拓扑时与 $v_i$ 唯一相邻的节点为 $v_j$、$v_i$ 与 $v_j$ 相邻的边为 $e_k$，则我们将 $M_0[S]$ 的第 $j$ 行加上第 $i$ 行，可以知道此时 $M_0[S]_{jk}=0$，并且 $|M_0[S]|$ 不变。<br>显然第一个拓扑到的 $v_i$ 对应的 $M_0[S]$ 的第 $i$ 行只有一个位置为 $\pm1$，其余位置为 $0$。根据数学归纳，当我们枚举到 $v_i$ 时 $M_0[S]$ 的第 $i$ 行只有一个位置为 $\pm1$。<br>当我们处理完所有 $n-1$ 次操作后，$M_0[S]$ 变成了一个每行、每列都只有一个元素为 $\pm1$ 的矩阵，再排个序就可以得到对角线只有 $\pm1$，其他位置都是 $0$ 的一个矩阵，此矩阵的行列式运算结果为 $\pm1$。</li><li>如果 $S$ 中存在环（不存在环是构成生成树的充要条件），则将环中的 $k$ 个点对应的 $k$ 行与环中的边对应的 $k$ 列提取出来得到子矩阵，该 $k\times k$ 的子矩阵的行列式运算结果为 $0$。则对应的原矩阵运算结果亦为 $0$。</li></ul></p></details><br></body></html><p>则矩阵树定理为：定义 $L_0$ 为矩阵 $L$ 删去任意一行与任意一列（一般是删去最后一行最后一列）得到的矩阵，则 $\det L_0$ 就是生成树的个数。</p><p>在证明这个定理时，还需要用到一个结论——Binet-Cauchy Theorem：</p><blockquote><p>设 $A$,$B$ 为两个 $n\times m$ 的矩阵，则：</p><script type="math/tex; mode=display">\det AB=\sum_{|S|=n}(\det A[S])(\det B[S])</script><p>其中 $S$ 是一个大小为 $n$ 的集合，元素范围为 $[1,m]$。$A[S],B[S]$ 定义类似 $M_0[S]$ 的定义。</p></blockquote><p>则对矩阵树定理的简单证明如下：</p><blockquote><p>证明同 $L=M\times M^T$，可以得到 $L_0=M_0\times M^T_0$；</p><script type="math/tex; mode=display">\begin{split}\det L_0&=\sum_{|S|=n-1} (\det M_0[S])(\det M_0^T[S])\\&=\sum_{|S|=n-1}(\det M_0[S])^2\end{split}</script><p>其中 $M_0^T[S]$ 表示取 $M_0^T$ 的属于集合 $S$ 的列。<br>等式第二行是因为矩阵转置后行列式不变。</p><p>可以知道 $S$ 构成生成树时，$\det M_0[S]=\pm 1$，则 $(\det M_0[S])^2=1$，否则 $(\det M_0[S])^2=0$，因此对所有 $S$ 求和，得到的答案就是生成树的方案数。</p></blockquote><hr><h2 id="THE-end"><a href="#THE-end" class="headerlink" title="THE end"></a>THE end</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">\begin{split}“\ &悬浮在水中央\\&迎向末日的光\\&聚拢在如此耀眼忧伤\\&徒有鲜活的皮囊\\&失去灵魂的魔法\\&比不上你一丝一毫\\&像笨拙的我藏入你怀抱\\&故事终结在这一刻就好\ ”\\——&\text{《蒸汽金鱼（人声本家）》By 三无Marblue}\end{split}</script>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;参考 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/108209378&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;(知乎)矩阵树定理（Matrix-tree Theorem）笔记&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="https://luckyglass.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
     
       <category term="图论-矩阵树定理" scheme="https://luckyglass.github.io/tags/%E5%9B%BE%E8%AE%BA-%E7%9F%A9%E9%98%B5%E6%A0%91%E5%AE%9A%E7%90%86/"/>
     
