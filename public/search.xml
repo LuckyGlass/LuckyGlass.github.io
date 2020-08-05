@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>OI - Company Acquisitions(Codeforces)</title>
+      <link href="/2020/20Aug5thArt1/"/>
+      <url>/2020/20Aug5thArt1/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>然而势能函数觉得自己不止可以分析时间复杂度……</p></blockquote><a id="more"></a><hr><h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> <a href="http://codeforces.com/problemset/problem/1025/G" target="_blank" rel="noopener">Codeforces 1025G</a></p><details class="fold">    <summary class="fold">点击展开/折叠题面</summary>    <p class="fold">有 $n$ 个公司，每个公司要么是独立的，要么附属于一个<strong>独立的</strong>公司。</p>    <p class="fold">每天会发生一个事件：随机选择两个不同的<strong>独立的</strong>公司 $A,B$，$A$ 有一半的概率吞并 $B$，$B$ 也有一半的概率吞并 $A$。若一个公司 $P$ 吞并了另一个公司 $Q$（在此之前 $P,Q$ 是独立的），则 $Q$ 成为 $P$ 的附属公司，而原来所有附属于 $Q$ 的公司变为独立的。</p>    <p class="fold">给出初始时公司的附属情况，求期望经过多少天，只剩下一个独立公司。</p></details><hr><h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>定义状态 $S$ 为一个可重集合，集合内包含了每个独立公司的附属公司的数量。显然这种状态是可以进行转移的，设发生一次事件后转移到的状态为 $T$，即从 $S$ 中选择两个数 $s_p,s_q$：</p><p>若 $p$ 吞并 $q$，则 $S$ 中删除 $s_q$，$s_p$ 增加 $1$，并且新加入 $s_q$ 个 “$0$”；$q$ 吞并 $p$ 类似。</p><p>目标状态为 $S=\{n-1\}$。</p><p>我们发现这个状态数量庞大，因此需要用一种函数来统一这些状态。</p><p>定义 $S$ 的势能函数为 $f(S)$：</p><script type="math/tex; mode=display">f(S)=\sum_{s_i\in S}(2^{s_i}-1)</script><p>考虑发生一次事件后，$S$ 的势能函数期望改变量，即考虑任意一对独立公司发生吞并事件（假设两公司的附属公司数量分别为 $p,q$）：</p><ul><li>若 $p$ 吞并 $q$，则 $\Delta f(x)=(2^{p+1}-1)-(2^p-1)-(2^q-1)$</li><li>若 $q$ 吞并 $p$，则 $\Delta f(x)=(2^{q+1}-1)-(2^p-1)-(2^q-1)$</li></ul><p>因为两种结果的概率均为 $\frac12$，所以期望改变值整理可得</p><script type="math/tex; mode=display">\begin{aligned}\Delta f(x)&=\frac12[(2^{p+1}-1)+(2^{q+1}-1)]-(2^p-1)-(2^q-1)\\&=1\end{aligned}</script><p>也就是说无论哪两个公司发生合并事件，$f(S)$ 的改变值都为 $1$……所以两个状态的势能函数相差多少，期望天数就是多少。</p><p>设起始状态为 $S_1$，结束状态为 $S_2$，则期望为 $f(S_2)-f(S_1)$。</p><hr><h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Read</span><span class="params">(<span class="keyword">int</span> &amp;x)</span></span>&#123;</span><br><span class="line">x=<span class="number">0</span>;<span class="keyword">int</span> c=getchar(),b=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) b=c==<span class="string">'-'</span>?<span class="number">-1</span>:b,c=getchar();</span><br><span class="line"><span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">x*=b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> cs const int &amp;</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD=<span class="number">1e9</span>+<span class="number">7</span>,N=<span class="number">505</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Sub</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> <span class="keyword">int</span>(<span class="number">1l</span>l*a*b%MOD);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">int</span> r=<span class="number">1</span>;<span class="keyword">while</span>(b)&#123;<span class="keyword">if</span>(b&amp;<span class="number">1</span>)r=Mul(r,a);a=Mul(a,a),b&gt;&gt;=<span class="number">1</span>;&#125;<span class="keyword">return</span> r;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> cnt[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">Read(n);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,tmp;i&lt;=n;i++)&#123;</span><br><span class="line">Read(tmp);</span><br><span class="line"><span class="keyword">if</span>(~tmp) cnt[tmp]++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> now=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line"><span class="keyword">if</span>(cnt[i])</span><br><span class="line">now=Add(now,Sub(Pow(<span class="number">2</span>,cnt[i]),<span class="number">1</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,Sub(Sub(Pow(<span class="number">2</span>,n<span class="number">-1</span>),<span class="number">1</span>),now));</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">\begin{split}“\ &写意的风景被冲刷\\&工笔的线条\ 勾不出未来\\&繁世岑静后\ 洗铅华\\&万物归一恰似\ 水墨画\ ”\\——&\text{《忆墨》By 洛天依/乐正绫}\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=540695702&amp;userid=303853271" target="_blank" rel="noopener">忆墨</a>-网易云</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> OI题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> -Codeforces- </tag>
+            
+            <tag> 数学-势能函数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>OI - Game on a Circle(HDU)</title>
       <link href="/2020/20Aug2ndArt1/"/>
       <url>/2020/20Aug2ndArt1/</url>
@@ -310,9 +337,9 @@
       
         <tags>
             
-            <tag> -Codeforces- </tag>
-            
             <tag> 图论-树链剖分 </tag>
+            
+            <tag> -Codeforces- </tag>
             
             <tag> 图论-圆方树 </tag>
             
@@ -1227,9 +1254,9 @@
       
         <tags>
             
-            <tag> 数学-容斥 </tag>
-            
             <tag> -洛谷- </tag>
+            
+            <tag> 数学-容斥 </tag>
             
             <tag> 动态规划-树形DP </tag>
             
@@ -1256,9 +1283,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 数据结构-线段树 </tag>
+            
+            <tag> 数学 </tag>
             
         </tags>
       
@@ -1939,9 +1966,9 @@
             
             <tag> 图论-网络流 </tag>
             
-            <tag> -Codeforces- </tag>
-            
             <tag> 图论-树链剖分 </tag>
+            
+            <tag> -Codeforces- </tag>
             
         </tags>
       
@@ -2335,9 +2362,9 @@
             
             <tag> 动态规划-状压DP </tag>
             
-            <tag> 图论-生成树 </tag>
-            
             <tag> -Codeforces- </tag>
+            
+            <tag> 图论-生成树 </tag>
             
         </tags>
       
@@ -2864,9 +2891,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 数据结构-线段树 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 贪心 </tag>
             
@@ -3555,11 +3582,11 @@
       
         <tags>
             
+            <tag> 数据结构-线段树 </tag>
+            
             <tag> 图论-二分图 </tag>
             
             <tag> 数学 </tag>
-            
-            <tag> 数据结构-线段树 </tag>
             
             <tag> 贪心 </tag>
             
@@ -3677,9 +3704,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 数据结构-线段树 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 模拟 </tag>
             
