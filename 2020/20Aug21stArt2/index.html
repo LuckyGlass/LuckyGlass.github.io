@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="morPySQeBU" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+details.fold{
+	background-color:#EEEEEE;
+	border-radius:.3rem;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+details.fold summary{
+	background-color:#555555;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold p{
+	padding-left:10px;
+	padding-right:10px;
+}
+summary.fold{
+	background-color:#555555;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+p.fold{
+	padding-left:10px;
+	padding-right:10px;
+}
+p.block{
+	background-color:#EEEEEE;
+	border-radius:.3rem;
+	padding-left:5px;
+	padding-right:5px;
+	padding-bottom:5px;
+}
+div.block{
+	background-color: #EEEEEE;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+}
+div.block p{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+}
+p.headline{
+	font-weight: bold;
+	background-color: #808080;
+	color: white;
+	border-top-left-radius: .3rem;
+	border-top-right-radius: .3rem;
+	margin-bottom: 0px;
+}
+</style>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="国集神犇果然还是国集神犇，我见得太少了QwQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前行 - NOI2020同步赛">
+<meta property="og:url" content="https://luckyglass.github.io/2020/20Aug21stArt2/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="国集神犇果然还是国集神犇，我见得太少了QwQ">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-21T08:49:54.000Z">
+<meta property="article:modified_time" content="2020-08-23T11:55:52.146Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="数据结构-线段树">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="算法效率-矩阵加速">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://luckyglass.github.io/2020/20Aug21stArt2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>前行 - NOI2020同步赛 | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://luckyglass.github.io/2020/20Aug21stArt2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="玻璃易碎，但打碎玻璃的人也将被玻璃划伤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前行 - NOI2020同步赛
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-21 16:49:54" itemprop="dateCreated datePublished" datetime="2020-08-21T16:49:54+08:00">2020-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-23 19:55:52" itemprop="dateModified" datetime="2020-08-23T19:55:52+08:00">2020-08-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E8%A1%8C/" itemprop="url" rel="index"><span itemprop="name">前行</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Aug21stArt2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Aug21stArt2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>国集神犇果然还是国集神犇，我见得太少了QwQ</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="Part1-纪"><a href="#Part1-纪" class="headerlink" title="# Part1. 纪"></a># Part1. 纪</h2><p>第一次打 NOI，离省队比较遥远只能打同步赛。</p>
+<p>CCF的管理员开小差去了，同步赛延时了十多分钟才开，刚打开又没有题面，有了题面又没有大样例……</p>
+<p>还是先把题目从头到尾看完了，感觉到应该是按照难度排序的，所以先攻第一题。看到 $T$ 极大而 $n$ 极小就想到大概要矩阵加速，然后就按照之前的思路从（我能想到的）最暴力的DP开始优化。<code>f[t][u][i]</code> 表示第 $t$ 天时，还有 $i$ 天到达点 $u$ 的最大美味值，暂时没有考虑美食节。</p>
+<p>然后想了20min没有优化出来，回来看题目才看到 $t$ 只有 $5$，一时心头生艹，就开始码代码。写着写着想起还有美食节，看时间还比较可控，就又停下想美食节。于是就联想到 NOI Online 的一道几乎一样的题——把DP过程分段；回忆那道题的解题思路，很快就把 $O(tn^3\log n)$ 优化到 $O(tn^2\log n)$ 了，调程序花了 30min……</p>
+<p>跑大样例感觉有点卡常，最后回头再加了些 <code>register</code> 之类的东西。</p>
+<p>然后T2想了10min感觉“不可做”，然后就想骗分。暴力显然就不管它，然后看 $m$ 很小就想要状压，推式子发现要或卷积，整个人都懵了，最后写了个最水的暴力走人……</p>
+<p>T3看到题目的时候笑了一发（这个出题人在造梗）。初步整理思路肯定要扫描线，然后写了一个主席树来处理矩阵求和，把暴力分得了。一开始读题没有看到每列有且只有一个点……后面看到了才知道之前想的莫队复杂度是对的 QwQ 时间不太多了，最后莫队常数巨大跑不出来……</p>
+<p>Day1 打完 13:30（虽然CCF延长了15min），然而多校赛 12:00 开始……就去打多校了，感觉聚聚都去NOI了，这一场多校的中学格外的少。</p>
+<p>Day2什么东西，不想写……</p>
+<hr>
+<h2 id="Part2-解-amp-补"><a href="#Part2-解-amp-补" class="headerlink" title="# Part2. 解&amp;补"></a># Part2. 解&amp;补</h2><h3 id="D1T1-美食家-delicacy"><a href="#D1T1-美食家-delicacy" class="headerlink" title="- D1T1. 美食家(delicacy)"></a>- D1T1. 美食家(delicacy)</h3><p>先从暴力DP考虑，要处理一下某个时刻处于一条边上还没有走完的情况，$f_{t,u,i}$ 表示时刻 $t$ 正在前往 $u$，还剩 $i$ 天到达 $u$（如果 $i=0$，则表示已经到了 $u$）。</p>
+<p>转移是：</p>
+<script type="math/tex; mode=display">
+f_{t+1,v,t_{e}-1}=f_{t,v,0}+w_u\\
+f_{t+1,u,i-1}=f_{t,u,i}</script><p>因为一条边花费的时间 $t_e$ 只有 $5$，我们发现第三维只有 $0\sim4$ 的取值，所以干脆把一个点 $u$ 按时间拆成 $u_0,u_1,\dots,u_4$，$5n$ 仍然很小，可以支持矩阵加速。</p>
+<p>然后就是处理美食节。注意到只有美食节当天的转移会发生变化，于是可以把美食节作为阶段的划分点，一个阶段内的转移方程是不变的，可以矩阵加速。</p>
+<p>此时复杂度是 $O((5n)^3\log nk)$（$k$ 为美食节数量），过不了。但是在 NOI Online 里面有一个一模一样的操作——$O(n^3\log n)$ 预处理转移矩阵的 $2^0,2^1,2^2\dots$ 次幂，做转移时可以用储存当前状态的单列矩阵做 $\log n$ 次乘法，这样做一次复杂度是 $O((5n)^2\log n)$ 的，于是优化到 $O((5n^3)\log n+(5n)^2k\log n)$ 可过。</p>
+<h3 id="D1T2-命运-destiny"><a href="#D1T2-命运-destiny" class="headerlink" title="- D1T2. 命运(destiny)"></a>- D1T2. 命运(destiny)</h3><p>方法很多，可以容斥，也有不容斥的做法。我采用的是不容斥的。</p>
+<p>> Tab. 下文直接说成“黑白边染色”了，即要求给定路径上要有黑边。</p>
+<p>先考虑 DP。对于一条边定义其深度为较深的一个端点的深度，则先预处理出每个点 $u$ 作为路径的下端点时，至少在多深必须要染黑边。比较显然，如果有多条路径的下端点是 $u$，则上端点的深度取 $\max$，记这个值为 $pre_u$（若 $u$ 不是路径下端点，则 $pre_u=0$）。另外记 $dep_u$ 表示 $u$ 的深度。</p>
+<p>根据这个限制进行黑白染色：定义DP状态 $f_{u,d}$ 表示节点 $u$ 上方的第一条黑边的深度是 $d$ 的合法方案数。</p>
+<p>从子树 $v$ 到当前节点 $u$ 的转移只需考虑边 $(u,v)$ 是否染黑，即：</p>
+<script type="math/tex; mode=display">
+f_{u,d}=\prod_{v}(f_{v,d}+f_{v,dep_v})</script><p>又要求 $u$ 满足作为 $pre_u$ 的限制，上式的 $d\in[pre_u,dep_u]$。实际代码实现时，我们可以把 $d\in[pre_u,dep_u]$ 的 $f_{u,d}$ 的初值赋为 $1$，其余为 $0$。</p>
+<p>这样就得到了一个 $O(n^2)$ 的 DP，接下来要用到线段树合并进行优化——</p>
+<p>我们发现之前DP进行的操作：</p>
+<ul>
+<li>赋初值：区间修改（区间加）；</li>
+<li>$(f_{v,d}+f_{v,dep_v})$：区间加；</li>
+<li>$\prod(f_{v,d}+f_{v,dep_v})$：按位乘。</li>
+</ul>
+<p>于是线段树需要支持这些操作。</p>
+<p>可以维护一个 <code>pair</code>（代码中为 <code>DATA</code>）作为懒标记 $(a,b)$，其意义为 $x\times (a,b)=ax+b$。</p>
+<p>这样的话区间加容易处理，按位乘需要线段树合并——一直递归到线段树的叶子节点（注意因为是动态开点，所以叶子节点不一定是缩成一个点的线段），然后乘法合并。懒标记的乘法合并直接推导一下就行了。</p>
+<p>$v$ 子树内的点在参与合并后就没用了，可以 restore 一下节省空间。</p>
+<h3 id="D2T1-制作菜品-dish"><a href="#D2T1-制作菜品-dish" class="headerlink" title="- D2T1. 制作菜品(dish)"></a>- D2T1. 制作菜品(dish)</h3><p>> Linked <a href="./2020/20Aug23rdArt1/">另外写了一篇博客</a></p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><h3 id="D1T1-delicacy-cpp"><a href="#D1T1-delicacy-cpp" class="headerlink" title="- D1T1 delicacy.cpp"></a>- D1T1 delicacy.cpp</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> reg register int</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> cs const int &amp;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">55</span>,M=<span class="number">505</span>,SIZ=<span class="number">260</span>;</span><br><span class="line"><span class="comment">//还剩i时刻到达u</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> hsh(u,i) ((u)*5-(i))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> upd(a,b) (a=max(a,b))</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,T,Q,siz;</span><br><span class="line"><span class="keyword">int</span> val[N];</span><br><span class="line"><span class="keyword">int</span> fest[M][<span class="number">3</span>],festid[M];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MATRIX</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> r,c;</span><br><span class="line">	ll mat[SIZ][SIZ];</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Init</span><span class="params">(cs R,cs C)</span></span>&#123;</span><br><span class="line">		r=R,c=C;</span><br><span class="line">		<span class="keyword">for</span>(reg i=<span class="number">1</span>;i&lt;=R;i++)</span><br><span class="line">			<span class="keyword">for</span>(reg j=<span class="number">1</span>;j&lt;=C;j++)</span><br><span class="line">				mat[i][j]=<span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;ini,now,tmp,pini[<span class="number">32</span>];</span><br><span class="line"><span class="function">MATRIX <span class="title">Mul</span><span class="params">(<span class="keyword">const</span> MATRIX &amp;A,<span class="keyword">const</span> MATRIX &amp;B)</span></span>&#123;</span><br><span class="line">	MATRIX res;res.Init(A.r,B.c);</span><br><span class="line">	<span class="keyword">for</span>(reg i=<span class="number">1</span>;i&lt;=A.r;i++)</span><br><span class="line">		<span class="keyword">for</span>(reg j=<span class="number">1</span>;j&lt;=B.c;j++)</span><br><span class="line">			<span class="keyword">for</span>(reg k=<span class="number">1</span>;k&lt;=A.c;k++)</span><br><span class="line">				<span class="keyword">if</span>((~A.mat[i][k]) &amp;&amp; (~B.mat[k][j]))</span><br><span class="line">					upd(res.mat[i][j],A.mat[i][k]+B.mat[k][j]);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GRAPH</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> head[N],to[M],nxt[M],tim[M],ncnt;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(cs u,cs v,cs t)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> p=++ncnt;</span><br><span class="line">		nxt[p]=head[u],to[p]=v,tim[p]=t;</span><br><span class="line">		head[u]=p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">int</span> <span class="keyword">operator</span> [](cs u)&#123;<span class="keyword">return</span> head[u];&#125;</span><br><span class="line">&#125;Gr;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> fest[a][<span class="number">0</span>]&lt;fest[b][<span class="number">0</span>];&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">"delicacy.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"delicacy.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">	n=Read(),m=Read(),T=Read(),Q=Read();</span><br><span class="line">	siz=n*<span class="number">5</span>;</span><br><span class="line">	<span class="keyword">for</span>(reg i=<span class="number">1</span>;i&lt;=n;i++) val[i]=Read();</span><br><span class="line">	<span class="keyword">for</span>(reg i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> u=Read(),v=Read(),t=Read();</span><br><span class="line">		Gr.AddEdge(u,v,t);</span><br><span class="line">	&#125;</span><br><span class="line">	ini.Init(siz,siz);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> u=<span class="number">1</span>;u&lt;=n;u++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(reg i=<span class="number">4</span>;i&gt;=<span class="number">1</span>;i--)</span><br><span class="line">			upd(ini.mat[hsh(u,i<span class="number">-1</span>)][hsh(u,i)],<span class="number">0l</span>l);</span><br><span class="line">		<span class="keyword">for</span>(reg it=Gr[u];it;it=Gr.nxt[it])&#123;</span><br><span class="line">			<span class="keyword">int</span> v=Gr.to[it],t=Gr.tim[it];</span><br><span class="line">			upd(ini.mat[hsh(v,t<span class="number">-1</span>)][hsh(u,<span class="number">0</span>)],(ll)val[u]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	pini[<span class="number">0</span>]=ini;</span><br><span class="line">	<span class="keyword">for</span>(reg t=<span class="number">1</span>;t&lt;<span class="number">32</span>;t++)</span><br><span class="line">		pini[t]=Mul(pini[t<span class="number">-1</span>],pini[t<span class="number">-1</span>]);</span><br><span class="line">	now.Init(siz,<span class="number">1</span>);now.mat[hsh(<span class="number">1</span>,<span class="number">0</span>)][<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(reg i=<span class="number">1</span>;i&lt;=Q;i++)&#123;</span><br><span class="line">		festid[i]=i;</span><br><span class="line">		<span class="keyword">for</span>(reg j=<span class="number">0</span>;j&lt;<span class="number">3</span>;j++)</span><br><span class="line">			fest[i][j]=Read();</span><br><span class="line">	&#125;</span><br><span class="line">	sort(festid+<span class="number">1</span>,festid+<span class="number">1</span>+Q,cmp);</span><br><span class="line">	<span class="keyword">int</span> las=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(reg i=<span class="number">1</span>;i&lt;=Q;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> tim=fest[festid[i]][<span class="number">0</span>],pos=fest[festid[i]][<span class="number">1</span>],ext=fest[festid[i]][<span class="number">2</span>];</span><br><span class="line">		<span class="keyword">int</span> bet=tim-las;las=tim;</span><br><span class="line">		<span class="keyword">for</span>(reg j=<span class="number">0</span>;j&lt;=<span class="number">30</span>;j++)</span><br><span class="line">			<span class="keyword">if</span>(bet&gt;&gt;j&amp;<span class="number">1</span>)&#123;</span><br><span class="line">				tmp=now;</span><br><span class="line">				now=Mul(pini[j],tmp);</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">if</span>(~now.mat[hsh(pos,<span class="number">0</span>)][<span class="number">1</span>])</span><br><span class="line">			now.mat[hsh(pos,<span class="number">0</span>)][<span class="number">1</span>]+=ext;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> bet=T-las;</span><br><span class="line">	<span class="keyword">for</span>(reg j=<span class="number">0</span>;j&lt;=<span class="number">30</span>;j++)</span><br><span class="line">		<span class="keyword">if</span>(bet&gt;&gt;j&amp;<span class="number">1</span>)&#123;</span><br><span class="line">			tmp=now;</span><br><span class="line">			now=Mul(pini[j],tmp);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">if</span>(~now.mat[hsh(<span class="number">1</span>,<span class="number">0</span>)][<span class="number">1</span>]) <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,now.mat[hsh(<span class="number">1</span>,<span class="number">0</span>)][<span class="number">1</span>]+val[<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="D1T2-destiny-cpp"><a href="#D1T2-destiny-cpp" class="headerlink" title="- D1T2 destiny.cpp"></a>- D1T2 destiny.cpp</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+(c^<span class="string">'0'</span>),c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">5e5</span>+<span class="number">10</span>,MOD=<span class="number">998244353</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> cs const int &amp;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Sub</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(cs a,cs b)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*a*b%MOD;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GRAPH</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> head[N],to[N&lt;&lt;<span class="number">1</span>],nxt[N&lt;&lt;<span class="number">1</span>],ncnt;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(cs u,cs v)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> p=++ncnt,q=++ncnt;</span><br><span class="line">		nxt[p]=head[u],to[p]=v,head[u]=p;</span><br><span class="line">		nxt[q]=head[v],to[q]=u,head[v]=q;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">int</span> <span class="keyword">operator</span> [](cs u)&#123;<span class="keyword">return</span> head[u];&#125;</span><br><span class="line">&#125;Gr;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DATA</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a,b;</span><br><span class="line">	<span class="comment">//dp * (a,b) = a * dp + b</span></span><br><span class="line">	<span class="comment">//in fact, b is equal to the dp value, as initial dp value is 0</span></span><br><span class="line">	DATA()&#123;&#125;</span><br><span class="line">	DATA(cs A,cs B):a(A),b(B)&#123;&#125;</span><br><span class="line">	<span class="comment">//merge two lazy-tag</span></span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">friend</span> DATA <span class="keyword">operator</span> *(<span class="keyword">const</span> DATA &amp;A,<span class="keyword">const</span> DATA &amp;B)&#123;<span class="keyword">return</span> DATA(Mul(A.a,B.a),Add(B.b,Mul(A.b,B.a)));&#125;</span><br><span class="line">	<span class="keyword">inline</span> DATA <span class="keyword">operator</span> *=(<span class="keyword">const</span> DATA &amp;B)&#123;<span class="keyword">return</span> (*<span class="keyword">this</span>)=(*<span class="keyword">this</span>)*B,*<span class="keyword">this</span>;&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">friend</span> <span class="keyword">bool</span> <span class="keyword">operator</span> ==(<span class="keyword">const</span> DATA &amp;A,<span class="keyword">const</span> DATA &amp;B)&#123;<span class="keyword">return</span> A.a==B.a &amp;&amp; A.b==B.b;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//the empty lazy tag</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> DATA <span class="title">NIL</span><span class="params">(<span class="number">1</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SEGTREE</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt[N&lt;&lt;<span class="number">6</span>][<span class="number">2</span>],mem[N&lt;&lt;<span class="number">6</span>],rt[N],nmem,nspr;</span><br><span class="line">	DATA key[N&lt;&lt;<span class="number">6</span>];</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">NewNode</span><span class="params">(<span class="keyword">const</span> DATA &amp;val)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> p=nmem? mem[nmem--]:++nspr;</span><br><span class="line">		nxt[p][<span class="number">0</span>]=nxt[p][<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">		key[p]=val;</span><br><span class="line">		<span class="keyword">return</span> p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">PushDown</span><span class="params">(cs u)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(key[u]==NIL) <span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">if</span>(!nxt[u][<span class="number">0</span>]) nxt[u][<span class="number">0</span>]=NewNode(key[u]);</span><br><span class="line">		<span class="keyword">else</span> key[nxt[u][<span class="number">0</span>]]*=key[u];</span><br><span class="line">		<span class="keyword">if</span>(!nxt[u][<span class="number">1</span>]) nxt[u][<span class="number">1</span>]=NewNode(key[u]);</span><br><span class="line">		<span class="keyword">else</span> key[nxt[u][<span class="number">1</span>]]*=key[u];</span><br><span class="line">		key[u]=NIL;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Modify</span><span class="params">(cs u,cs le,cs ri,cs Le,cs Ri,<span class="keyword">const</span> DATA &amp;now)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(Le&gt;Ri) <span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">if</span>(Le&lt;=le &amp;&amp; ri&lt;=Ri)&#123;</span><br><span class="line">			key[u]*=now;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		PushDown(u);</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(Le&lt;=mi) Modify(nxt[u][<span class="number">0</span>],le,mi,Le,Ri,now);</span><br><span class="line">		<span class="keyword">if</span>(mi&lt;Ri) Modify(nxt[u][<span class="number">1</span>],mi+<span class="number">1</span>,ri,Le,Ri,now);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//query dp[po]</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Query</span><span class="params">(cs u,cs po,cs le,cs ri)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(le==ri) <span class="keyword">return</span> key[u].b;</span><br><span class="line">		PushDown(u);</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(po&lt;=mi) <span class="keyword">return</span> Query(nxt[u][<span class="number">0</span>],po,le,mi);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> Query(nxt[u][<span class="number">1</span>],po,mi+<span class="number">1</span>,ri);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> &amp;u,<span class="keyword">int</span> &amp;v)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!nxt[u][<span class="number">0</span>] &amp;&amp; !nxt[u][<span class="number">1</span>]) swap(u,v);</span><br><span class="line">		<span class="comment">//dp[u][i]*=dp[v][i]</span></span><br><span class="line">		<span class="keyword">if</span>(!nxt[v][<span class="number">0</span>] &amp;&amp; !nxt[v][<span class="number">1</span>]) <span class="keyword">return</span> key[u]*=DATA(key[v].b,<span class="number">0</span>),u;</span><br><span class="line">		PushDown(u),PushDown(v);</span><br><span class="line">		nxt[u][<span class="number">0</span>]=Merge(nxt[u][<span class="number">0</span>],nxt[v][<span class="number">0</span>]);</span><br><span class="line">		nxt[u][<span class="number">1</span>]=Merge(nxt[u][<span class="number">1</span>],nxt[v][<span class="number">1</span>]);</span><br><span class="line">		<span class="keyword">return</span> u;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Restore</span><span class="params">(<span class="keyword">int</span> &amp;u)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!u) <span class="keyword">return</span>;</span><br><span class="line">		Restore(nxt[u][<span class="number">0</span>]),Restore(nxt[u][<span class="number">1</span>]);</span><br><span class="line">		mem[++nmem]=u;</span><br><span class="line">		u=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">int</span>&amp; <span class="keyword">operator</span> [](cs u)&#123;<span class="keyword">return</span> rt[u];&#125;</span><br><span class="line">&#125;Se;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> dep[N],pre[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DP</span><span class="params">(cs u,cs fa)</span></span>&#123;</span><br><span class="line">	pre[u]=max(pre[u],pre[fa]);</span><br><span class="line">	Se[u]=Se.NewNode(DATA(<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	the first edge can be chosen from (pre[u],dep[u]]</span></span><br><span class="line"><span class="comment">	dp[ pre[u]+1~dep[u] ] += 1</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	Se.Modify(Se[u],<span class="number">1</span>,n,pre[u]+<span class="number">1</span>,dep[u],DATA(<span class="number">0</span>,<span class="number">1</span>));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> it=Gr[u];it;it=Gr.nxt[it])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=Gr.to[it];</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		DP(v,u);</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		the initial transport is "f[u][i]=prod(f[v][i]+f[v][dep[v]])";</span></span><br><span class="line"><span class="comment">		we can firstly let f[v][i]:=f[v][i]+f[v][dep[v]];</span></span><br><span class="line"><span class="comment">		and then f'[u][i]=f[u][i]*f[v][i]</span></span><br><span class="line"><span class="comment">		*/</span></span><br><span class="line">		Se[u]=Se.Merge(Se[u],Se[v]);</span><br><span class="line">		<span class="comment">//restore the nodes in segment-tree[v]</span></span><br><span class="line">		Se.Restore(Se[v]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(u!=<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">int</span> tmp=Se.Query(Se[u],dep[u],<span class="number">1</span>,n);</span><br><span class="line">		<span class="comment">//dp[ 1~dep[u]-1 ] += dp[dep[u]]</span></span><br><span class="line">		Se.Modify(Se[u],<span class="number">1</span>,n,<span class="number">1</span>,dep[u]<span class="number">-1</span>,DATA(<span class="number">1</span>,tmp));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(cs u,cs fa)</span></span>&#123;</span><br><span class="line">	dep[u]=dep[fa]+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> it=Gr[u];it;it=Gr.nxt[it])</span><br><span class="line">		<span class="keyword">if</span>(Gr.to[it]!=fa)</span><br><span class="line">			DFS(Gr.to[it],u);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">"destiny.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"destiny.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">	n=Read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++) Gr.AddEdge(Read(),Read());</span><br><span class="line">	m=Read();</span><br><span class="line">	DFS(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> u=Read(),v=Read();</span><br><span class="line">		pre[v]=max(pre[v],dep[u]);</span><br><span class="line">	&#125;</span><br><span class="line">	DP(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,Se.Query(Se[<span class="number">1</span>],<span class="number">1</span>,<span class="number">1</span>,n));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &我放出自己残缺的魂魄\\
+&在镜子背面那一搏\\
+&一路上从没有忘掉过那些徒劳奔波\\
+&却不曾完整的我\\
+&谁能解开我缠结的冷漠\\
+&连同这结局的枷锁\\
+&怎样才明白你的承诺\\
+&便是能够拯救的法则\ ”\\
+——&\text{《零和Zero-Sum》By 星尘}
+\end{split}</script><p>> Linked <a href="https://www.bilibili.com/video/av839237850" target="_blank" rel="noopener">零和 Zero-Sum</a>-Bilibili</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://luckyglass.github.io/2020/20Aug21stArt2/" title="前行 - NOI2020同步赛">https://luckyglass.github.io/2020/20Aug21stArt2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i> 数据结构-线段树</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87-%E7%9F%A9%E9%98%B5%E5%8A%A0%E9%80%9F/" rel="tag"><i class="fa fa-tag"></i> 算法效率-矩阵加速</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Aug21stArt1/" rel="prev" title="OI - Quantifier Question(Codeforces)">
+      <i class="fa fa-chevron-left"></i> OI - Quantifier Question(Codeforces)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/20Aug23rdArt1/" rel="next" title="OI - 制作菜品(NOI 2020)">
+      OI - 制作菜品(NOI 2020) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part1-纪"><span class="nav-text"># Part1. 纪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part2-解-amp-补"><span class="nav-text"># Part2. 解&amp;补</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#D1T1-美食家-delicacy"><span class="nav-text">- D1T1. 美食家(delicacy)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D1T2-命运-destiny"><span class="nav-text">- D1T2. 命运(destiny)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D2T1-制作菜品-dish"><span class="nav-text">- D2T1. 制作菜品(dish)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#D1T1-delicacy-cpp"><span class="nav-text">- D1T1 delicacy.cpp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D1T2-destiny-cpp"><span class="nav-text">- D1T2 destiny.cpp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">玻璃易碎，但打碎玻璃的人也将被玻璃划伤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">122</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共331.1k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
