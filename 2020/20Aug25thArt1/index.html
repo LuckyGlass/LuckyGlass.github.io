@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="morPySQeBU" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+details.fold{
+	background-color:#EEEEEE;
+	border-radius:.3rem;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+details.fold summary{
+	background-color:#555555;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold p{
+	padding-left:10px;
+	padding-right:10px;
+}
+summary.fold{
+	background-color:#555555;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+p.fold{
+	padding-left:10px;
+	padding-right:10px;
+}
+p.block{
+	background-color:#EEEEEE;
+	border-radius:.3rem;
+	padding-left:5px;
+	padding-right:5px;
+	padding-bottom:5px;
+}
+div.block{
+	background-color: #EEEEEE;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+}
+div.block p{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+}
+p.headline{
+	font-weight: bold;
+	background-color: #808080;
+	color: white;
+	border-top-left-radius: .3rem;
+	border-top-right-radius: .3rem;
+	margin-bottom: 0px;
+}
+</style>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="什么都不会只能膜拜出题人的代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI - Play osu! on Your Tablet(HDU)">
+<meta property="og:url" content="https://luckyglass.github.io/2020/20Aug25thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="什么都不会只能膜拜出题人的代码">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-25T00:57:34.000Z">
+<meta property="article:modified_time" content="2020-08-25T01:55:37.920Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="OI题解">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://luckyglass.github.io/2020/20Aug25thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>OI - Play osu! on Your Tablet(HDU) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://luckyglass.github.io/2020/20Aug25thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="玻璃易碎，但打碎玻璃的人也将被玻璃划伤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI - Play osu! on Your Tablet(HDU)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-25 08:57:34 / 修改时间：09:55:37" itemprop="dateCreated datePublished" datetime="2020-08-25T08:57:34+08:00">2020-08-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HDU/" itemprop="url" rel="index"><span itemprop="name">-HDU-</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HDU/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" itemprop="url" rel="index"><span itemprop="name">动态规划</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HDU/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%AE%B5%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">数据结构-线段树</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HDU/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%AE%B5%E6%A0%91/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-TREAP/" itemprop="url" rel="index"><span itemprop="name">数据结构-TREAP</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HDU/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%AE%B5%E6%A0%91/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-TREAP/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%BD%92%E5%B9%B6%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">数据结构-归并树</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Aug25thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Aug25thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>什么都不会只能膜拜出题人的代码</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6800" target="_blank" rel="noopener">HDU 6800</a></p>
+<details class="fold">
+    <summary>点击展开/折叠 题面翻译</summary>
+    <p>你在玩音游(osu)。屏幕上会<strong>按顺序</strong>出现 $n$ 个节奏点 $(x_i,y_i)$，你需要移动手指去点击节奏点（你用左右手玩游戏）。</p>
+    <p>两个节奏点之间的距离定义为曼哈顿距离。你希望两只手移动的距离的总和最小，求这个最小值。</p>
+</details>
+
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>不难想到DP—— $f_{i,j}$ 表示现在已经点击了前 $i$ 个点，此时当然有一只手在点 $i$，另一只手在点 $j$ （$j&lt; i$）的最小总距离。这样可以有一个“我为人人”的转移方式（记 $d(i,j)$ 表示 $i,j$ 两点的曼哈顿距离）：</p>
+<script type="math/tex; mode=display">
+f_{i,j}\overset{+d(i,i+1)}\to f_{i+1,j}\\
+f_{i,j}\overset{+d(i,j)}\to f_{i+1,i}</script><p>这样是 $O(n^2)$ 的 DP，状态和转移均无法优化，只能从一种名为“<strong>整体DP</strong>”的角度来优化——用数据结构维护DP数组，同时处理多次转移。</p>
+<p><strong>观察DP转移</strong>：</p>
+<ul>
+<li>第一个转移的第二维不变，且对于同一个 $i$，DP值的增加量都是固定的$d(i,i+1)$；</li>
+<li>第二个转移对于同一个 $i$，转移目标 $f_{i+1,i}$ 固定，可以换种写法：$f_{i+1,i}=\min\{f_{i,j}+d(i,j)\}$。</li>
+</ul>
+<p>于是便有了下面两种方法（虽然第一种我写TLE了 QwQ）</p>
+<h3 id="线段树-非旋TREAP"><a href="#线段树-非旋TREAP" class="headerlink" title="- 线段树+非旋TREAP"></a>- 线段树+非旋TREAP</h3><p>用树套树来维护 $f_i$。</p>
+<p>因为是曼哈顿距离，想到按一个点把平面分成 $4$ 块从而去掉绝对值。可以把 $f_{i,j}$ 的DP值附加在点 $(x_j,y_j)$ 上，然后就是要维护一个矩阵内 $(f+x+y,f+x-y,f-x+y,f-x-y)$ 这四种值的最小值了。</p>
+<p>就可以横坐标离散化后用线段树，纵坐标直接作为 TREAP 的键值建立线段树套平衡树。</p>
+<ol>
+<li>第一种转移，整棵线段树中的点的权值全部附加 $d(i,i+1)$；</li>
+<li>新增一个点——枚举到 $i$ 的时候新增点为 $(f_{i+1,i},x_{i},y_{i})$，就把这个点插入树套树中；</li>
+</ol>
+<p>查询就按 $(x_{i+1},y_{i+1})$ 把平面分成 $4$ 块求对应维护的最小值。另外比较特别的是 $f_{i,0}$ 这种状态，即有一只手还没用，特殊维护一下。</p>
+<p>理论时间复杂度 $O(n\log^2 n)$，空间复杂度 $O(n\log n)$（不能是 $O(n\log^2 n)$ 会 MLE），不知道为什么跑得极慢。</p>
+<h3 id="归并树-线段树"><a href="#归并树-线段树" class="headerlink" title="- 归并树+线段树"></a>- 归并树+线段树</h3><p>仍然是把平面分成 $4$ 块，要维护一个矩阵内的信息。</p>
+<p><strong>先按横坐标排序然后按纵坐标建立归并树</strong>，这样归并树的每个节点中<strong>横坐标连续而纵坐标有序</strong>。既然纵坐标有序就可以对每个节点按纵坐标建立线段树，外层归并树因为横坐标连续，所以用法跟线段树基本上一样。</p>
+<p>可以预先给每个点留个位置赋为 $+\infty$，这个点出现过后再改权值。</p>
+<p>更新值就直接在归并树上向对应区间递归，每一层都要在对应的线段树上修改值。查询值比较特别，若询问点横坐标落在左区间，则计算右区间的点对它的贡献，然后递归左区间；落在右区间同理。</p>
+<p>实现代码的时候要动态分配内存（线段树的节点个数为 $2n$），std 的指针+内存池分配内存运用得极好。</p>
+<p>理论时间复杂度 $O(n\log^2n)$，空间复杂度 $O(n\log n)$，用了些STL的函数（<code>inplace_merge</code> 内置归并排序函数）跑得极快。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><h3 id="线段树-TREAP"><a href="#线段树-TREAP" class="headerlink" title="- 线段树+TREAP"></a>- 线段树+TREAP</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>,M=<span class="number">1e9</span>,SIZ=N*<span class="number">20</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll INF=<span class="number">1l</span>l&lt;&lt;<span class="number">60</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ci const int &amp;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> cl const ll &amp;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fir first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sec second</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FastIO</span> &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> S = <span class="number">1e7</span>;</span><br><span class="line">    <span class="keyword">int</span> wpos;</span><br><span class="line">    <span class="keyword">char</span> wbuf[S];</span><br><span class="line">    FastIO() : wpos(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">xchar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">char</span> buf[S];</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">int</span> len = <span class="number">0</span>, pos = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (pos == len)</span><br><span class="line">            pos = <span class="number">0</span>, len = fread(buf, <span class="number">1</span>, S, <span class="built_in">stdin</span>);</span><br><span class="line">        <span class="keyword">if</span> (pos == len) <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> buf[pos++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">xuint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> c = xchar(), x = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (c &lt;= <span class="number">32</span>) c = xchar();</span><br><span class="line">        <span class="keyword">for</span> (; <span class="string">'0'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'9'</span>; c = xchar()) x = x * <span class="number">10</span> + c - <span class="string">'0'</span>;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">xint</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> s = <span class="number">1</span>, c = xchar(), x = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (c &lt;= <span class="number">32</span>) c = xchar();</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">'-'</span>) s = <span class="number">-1</span>, c = xchar();</span><br><span class="line">        <span class="keyword">for</span> (; <span class="string">'0'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'9'</span>; c = xchar()) x = x * <span class="number">10</span> + c - <span class="string">'0'</span>;</span><br><span class="line">        <span class="keyword">return</span> x * s;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">xstring</span><span class="params">(<span class="keyword">char</span> *s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> c = xchar();</span><br><span class="line">        <span class="keyword">while</span> (c &lt;= <span class="number">32</span>) c = xchar();</span><br><span class="line">        <span class="keyword">for</span> (; c &gt; <span class="number">32</span>; c = xchar()) * s++ = c;</span><br><span class="line">        *s = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">wchar</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (wpos == S) fwrite(wbuf, <span class="number">1</span>, S, <span class="built_in">stdout</span>), wpos = <span class="number">0</span>;</span><br><span class="line">        wbuf[wpos++] = x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">wint</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>) wchar(<span class="string">'-'</span>), x = -x;</span><br><span class="line">        <span class="keyword">char</span> s[<span class="number">24</span>];</span><br><span class="line">        <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (x || !n) s[n++] = <span class="string">'0'</span> + x % <span class="number">10</span>, x /= <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">while</span> (n--) wchar(s[n]);</span><br><span class="line">        wchar(<span class="string">'\n'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">wstring</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (*s) wchar(*s++);</span><br><span class="line">    &#125;</span><br><span class="line">    ~FastIO()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (wpos) fwrite(wbuf, <span class="number">1</span>, wpos, <span class="built_in">stdout</span>), wpos = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; io;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; unx;</span><br><span class="line"><span class="keyword">int</span> cas,n,nnod;</span><br><span class="line"><span class="keyword">int</span> pnt[N][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NODE</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> nxt[<span class="number">2</span>],fix,key,x,y;</span><br><span class="line">    ll val[<span class="number">4</span>],mn[<span class="number">4</span>],add;</span><br><span class="line">    <span class="keyword">inline</span> <span class="keyword">int</span>&amp; <span class="keyword">operator</span> [](ci i)&#123;<span class="keyword">return</span> nxt[i];&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span><span class="params">(ll cur)</span></span>&#123;</span><br><span class="line">        add+=cur;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++) val[i]+=cur,mn[i]+=cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;nod[N*<span class="number">20</span>];</span><br><span class="line"><span class="keyword">namespace</span> TREAP&#123;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">PushUp</span><span class="params">(ci u)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;</span><br><span class="line">            nod[u].mn[i]=nod[u].val[i];</span><br><span class="line">            <span class="keyword">if</span>(nod[u][<span class="number">0</span>]) nod[u].mn[i]=min(nod[u].mn[i],nod[nod[u][<span class="number">0</span>]].mn[i]);</span><br><span class="line">            <span class="keyword">if</span>(nod[u][<span class="number">1</span>]) nod[u].mn[i]=min(nod[u].mn[i],nod[nod[u][<span class="number">1</span>]].mn[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">PushDown</span><span class="params">(ci u)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!nod[u].add) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(nod[u][<span class="number">0</span>]) nod[nod[u][<span class="number">0</span>]].Update(nod[u].add);</span><br><span class="line">        <span class="keyword">if</span>(nod[u][<span class="number">1</span>]) nod[nod[u][<span class="number">1</span>]].Update(nod[u].add);</span><br><span class="line">        nod[u].add=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">NewNode</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,cl f)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p=++nnod;</span><br><span class="line">        x=unx[x<span class="number">-1</span>];</span><br><span class="line">        nod[p].x=x,nod[p].y=y;</span><br><span class="line">        nod[p].fix=rand(),nod[p].key=y;</span><br><span class="line">        nod[p].add=<span class="number">0</span>;</span><br><span class="line">        nod[p][<span class="number">0</span>]=nod[p][<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">        nod[p].val[<span class="number">0</span>]=nod[p].mn[<span class="number">0</span>]=f+x+y;</span><br><span class="line">        nod[p].val[<span class="number">1</span>]=nod[p].mn[<span class="number">1</span>]=f-x+y;</span><br><span class="line">        nod[p].val[<span class="number">2</span>]=nod[p].mn[<span class="number">2</span>]=f+x-y;</span><br><span class="line">        nod[p].val[<span class="number">3</span>]=nod[p].mn[<span class="number">3</span>]=f-x-y;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> pii <span class="title">SplitKey</span><span class="params">(ci u,ci key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!u) <span class="keyword">return</span> make_pair(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        PushDown(u);</span><br><span class="line">        <span class="keyword">if</span>(nod[u].key&lt;=key)&#123;</span><br><span class="line">            pii res=SplitKey(nod[u][<span class="number">1</span>],key);</span><br><span class="line">            nod[u][<span class="number">1</span>]=res.first,PushUp(u);</span><br><span class="line">            res.first=u;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            pii res=SplitKey(nod[u][<span class="number">0</span>],key);</span><br><span class="line">            nod[u][<span class="number">0</span>]=res.second,PushUp(u);</span><br><span class="line">            res.second=u;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Merge</span><span class="params">(ci u,ci v)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!u || !v) <span class="keyword">return</span> u|v;</span><br><span class="line">        PushDown(u),PushDown(v);</span><br><span class="line">        <span class="keyword">if</span>(nod[u].fix&gt;nod[v].fix)&#123;</span><br><span class="line">            nod[u][<span class="number">1</span>]=Merge(nod[u][<span class="number">1</span>],v);</span><br><span class="line">            PushUp(u);</span><br><span class="line">            <span class="keyword">return</span> u;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            nod[v][<span class="number">0</span>]=Merge(u,nod[v][<span class="number">0</span>]);</span><br><span class="line">            PushUp(v);</span><br><span class="line">            <span class="keyword">return</span> v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">int</span> &amp;rt,ci x,ci y,cl f)</span></span>&#123;</span><br><span class="line">        pii dv=SplitKey(rt,y);</span><br><span class="line">        rt=Merge(dv.fir,Merge(NewNode(x,y,f),dv.sec));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">ll <span class="title">Query</span><span class="params">(<span class="keyword">int</span> &amp;rt,ci i,ci le,ci ri)</span></span>&#123;</span><br><span class="line">        pii dv1=SplitKey(rt,ri),</span><br><span class="line">            dv2=SplitKey(dv1.fir,le<span class="number">-1</span>);</span><br><span class="line">        ll res=dv2.sec? nod[dv2.sec].mn[i]:INF;</span><br><span class="line">        rt=Merge(Merge(dv2.fir,dv2.sec),dv1.sec);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">ll <span class="title">Value</span><span class="params">(ci rt)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!rt) <span class="keyword">return</span> INF;</span><br><span class="line">        PushDown(rt);</span><br><span class="line">        ll res=(nod[rt].val[<span class="number">0</span>]+nod[rt].val[<span class="number">3</span>])/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(nod[rt][<span class="number">0</span>]) res=min(res,Value(nod[rt][<span class="number">0</span>]));</span><br><span class="line">        <span class="keyword">if</span>(nod[rt][<span class="number">1</span>]) res=min(res,Value(nod[rt][<span class="number">1</span>]));</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SEGTREE</span>&#123;</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">define</span> idx(l,r) (((l)+(r))|((l)!=(r)))</span></span><br><span class="line">    <span class="keyword">int</span> tr[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">    ll add[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span><span class="params">(ci le,ci ri,ll key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(tr[idx(le,ri)]) nod[tr[idx(le,ri)]].Update(key);</span><br><span class="line">        add[idx(le,ri)]+=key;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">PushDown</span><span class="params">(ci le,ci ri)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> u=idx(le,ri),mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(!add[u]) <span class="keyword">return</span>;</span><br><span class="line">        Update(le,mi,add[u]),Update(mi+<span class="number">1</span>,ri,add[u]);</span><br><span class="line">        add[u]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(ci le,ci ri,ci x,ci y,cl f)</span></span>&#123;</span><br><span class="line">        TREAP::Insert(tr[idx(le,ri)],x,y,f);</span><br><span class="line">        <span class="keyword">if</span>(le==ri) <span class="keyword">return</span>;</span><br><span class="line">        PushDown(le,ri);</span><br><span class="line">        <span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(x&lt;=mi) Insert(le,mi,x,y,f);</span><br><span class="line">        <span class="keyword">else</span> Insert(mi+<span class="number">1</span>,ri,x,y,f);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">ll <span class="title">Query</span><span class="params">(ci le,ci ri,ci xL,ci xR,ci kL,ci kR,ci i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(xL&gt;xR || kL&gt;kR) <span class="keyword">return</span> INF;</span><br><span class="line">        <span class="keyword">if</span>(xL&lt;=le &amp;&amp; ri&lt;=xR) <span class="keyword">return</span> TREAP::Query(tr[idx(le,ri)],i,kL,kR);</span><br><span class="line">        PushDown(le,ri);</span><br><span class="line">        <span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(xR&lt;=mi) <span class="keyword">return</span> Query(le,mi,xL,xR,kL,kR,i);</span><br><span class="line">        <span class="keyword">if</span>(mi&lt;xL) <span class="keyword">return</span> Query(mi+<span class="number">1</span>,ri,xL,xR,kL,kR,i);</span><br><span class="line">        <span class="keyword">return</span> min(Query(le,mi,xL,xR,kL,kR,i),Query(mi+<span class="number">1</span>,ri,xL,xR,kL,kR,i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Build</span><span class="params">(ci le,ci ri)</span></span>&#123;</span><br><span class="line">        tr[idx(le,ri)]=<span class="number">0</span>;add[idx(le,ri)]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(le==ri) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        Build(le,mi),Build(mi+<span class="number">1</span>,ri);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">ll <span class="title">Value</span><span class="params">(ci le,ci ri)</span></span>&#123;<span class="keyword">return</span> TREAP::Value(tr[idx(le,ri)]);&#125;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">undef</span> idx</span></span><br><span class="line">&#125;Se;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">eABS</span><span class="params">(ci x)</span></span>&#123;<span class="keyword">return</span> x&lt;<span class="number">0</span>? -x:x;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Dist</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> eABS(unx[pnt[a][<span class="number">0</span>]<span class="number">-1</span>]-unx[pnt[b][<span class="number">0</span>]<span class="number">-1</span>])+eABS(pnt[a][<span class="number">1</span>]-pnt[b][<span class="number">1</span>]);&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    unx.clear();</span><br><span class="line">    nnod=n=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Input</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=io.xint();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        pnt[i][<span class="number">0</span>]=io.xint(),pnt[i][<span class="number">1</span>]=io.xint();</span><br><span class="line">        unx.push_back(pnt[i][<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    sort(unx.begin(),unx.end());</span><br><span class="line">    unx.erase(unique(unx.begin(),unx.end()),unx.end());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        pnt[i][<span class="number">0</span>]=lower_bound(unx.begin(),unx.end(),pnt[i][<span class="number">0</span>])-unx.begin()+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//srand(time(NULL));</span></span><br><span class="line">    cas=io.xint();</span><br><span class="line">    <span class="keyword">while</span>(cas--)&#123;</span><br><span class="line">        Init();</span><br><span class="line">        Input();</span><br><span class="line">        <span class="keyword">int</span> m=unx.size();</span><br><span class="line">        Se.Build(<span class="number">1</span>,m);</span><br><span class="line">        ll fi0=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            ll res=min(</span><br><span class="line">                min(</span><br><span class="line">                    Se.Query(<span class="number">1</span>,m,pnt[i+<span class="number">1</span>][<span class="number">0</span>],m,pnt[i+<span class="number">1</span>][<span class="number">1</span>],M,<span class="number">0</span>)-unx[pnt[i+<span class="number">1</span>][<span class="number">0</span>]<span class="number">-1</span>]-pnt[i+<span class="number">1</span>][<span class="number">1</span>],</span><br><span class="line">                    Se.Query(<span class="number">1</span>,m,<span class="number">1</span>,pnt[i+<span class="number">1</span>][<span class="number">0</span>],pnt[i+<span class="number">1</span>][<span class="number">1</span>],M,<span class="number">1</span>)+unx[pnt[i+<span class="number">1</span>][<span class="number">0</span>]<span class="number">-1</span>]-pnt[i+<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">                ),min(</span><br><span class="line">                    Se.Query(<span class="number">1</span>,m,pnt[i+<span class="number">1</span>][<span class="number">0</span>],m,<span class="number">0</span>,pnt[i+<span class="number">1</span>][<span class="number">1</span>],<span class="number">2</span>)-unx[pnt[i+<span class="number">1</span>][<span class="number">0</span>]<span class="number">-1</span>]+pnt[i+<span class="number">1</span>][<span class="number">1</span>],</span><br><span class="line">                    Se.Query(<span class="number">1</span>,m,<span class="number">1</span>,pnt[i+<span class="number">1</span>][<span class="number">0</span>],<span class="number">0</span>,pnt[i+<span class="number">1</span>][<span class="number">1</span>],<span class="number">3</span>)+unx[pnt[i+<span class="number">1</span>][<span class="number">0</span>]<span class="number">-1</span>]+pnt[i+<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">                )</span><br><span class="line">            );</span><br><span class="line">            <span class="comment">//Se.Print(1,m);</span></span><br><span class="line">            <span class="keyword">if</span>(i)&#123;</span><br><span class="line">                Se.Update(<span class="number">1</span>,m,Dist(i,i+<span class="number">1</span>));</span><br><span class="line">                Se.Insert(<span class="number">1</span>,m,pnt[i][<span class="number">0</span>],pnt[i][<span class="number">1</span>],min(fi0,res));</span><br><span class="line">                fi0+=Dist(i,i+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        io.wint(min(Se.Value(<span class="number">1</span>,m),fi0));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="归并树-线段树-1"><a href="#归并树-线段树-1" class="headerlink" title="- 归并树+线段树"></a>- 归并树+线段树</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ci const int &amp;</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> MEMORY&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> M=N*<span class="number">18</span>,L=M*<span class="number">8</span>;</span><br><span class="line">    <span class="keyword">int</span> pol[M],*npol;</span><br><span class="line">    ll ifo[L],*nifo;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Reset</span><span class="params">()</span></span>&#123;npol=pol,nifo=ifo;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span>* <span class="title">Ask32</span><span class="params">(<span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> *ret=npol;</span><br><span class="line">        npol+=len;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> ll* <span class="title">Ask64</span><span class="params">(<span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">        ll *ret=nifo;</span><br><span class="line">        nifo+=len;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,nuni;</span><br><span class="line">ll dp[N];</span><br><span class="line">pii seq[N],uni[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">UpdMin</span><span class="params">(ll &amp;x,ll y)</span></span>&#123;x&gt;=y &amp;&amp; (x=y);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">cmpY</span><span class="params">(ci u,ci v)</span></span>&#123;<span class="keyword">return</span> uni[u].second&lt;uni[v].second;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SEGMENT</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> ytot,*yque;</span><br><span class="line">    ll *ifo;</span><br><span class="line">&#125;seg[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> idx(l,r) (((l)+(r))|((l)!=(r)))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化归并区间内线段树</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SegInitInner</span><span class="params">(SEGMENT &amp;rt,ci le,ci ri)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(le==ri) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    SegInitInner(rt,le,mi),SegInitInner(rt,mi+<span class="number">1</span>,ri);</span><br><span class="line">    ll *cur=rt.ifo+(idx(le,ri)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">    ll *lef=rt.ifo+(idx(le,mi)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">    ll *rig=rt.ifo+(idx(mi+<span class="number">1</span>,ri)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">    <span class="comment">//PushUp</span></span><br><span class="line">    cur[<span class="number">0</span>]=min(lef[<span class="number">0</span>],rig[<span class="number">0</span>]);</span><br><span class="line">    cur[<span class="number">1</span>]=min(lef[<span class="number">1</span>],rig[<span class="number">1</span>]);</span><br><span class="line">    cur[<span class="number">2</span>]=min(lef[<span class="number">2</span>],rig[<span class="number">2</span>]);</span><br><span class="line">    cur[<span class="number">3</span>]=min(lef[<span class="number">3</span>],rig[<span class="number">3</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SegInitOuter</span><span class="params">(ci le,ci ri)</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> ord[N];</span><br><span class="line">    <span class="keyword">if</span>(le&lt;ri)&#123;</span><br><span class="line">        <span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        SegInitOuter(le,mi),SegInitOuter(mi+<span class="number">1</span>,ri);</span><br><span class="line">        <span class="comment">//归并区间[l,r]内所有点按纵坐标建归并树</span></span><br><span class="line">        inplace_merge(ord+le,ord+mi+<span class="number">1</span>,ord+ri+<span class="number">1</span>,cmpY);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> ord[le]=le;</span><br><span class="line">    SEGMENT &amp;rt=seg[idx(le,ri)];</span><br><span class="line">    <span class="comment">//ytot：归并区间中不同的纵坐标的个数</span></span><br><span class="line">    rt.ytot=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=le+<span class="number">1</span>;i&lt;=ri;i++)</span><br><span class="line">        rt.ytot+=cmpY(ord[i<span class="number">-1</span>],ord[i]);</span><br><span class="line">    <span class="comment">//分配内存池，归并区间建线段树</span></span><br><span class="line">    rt.yque=MEMORY::Ask32(rt.ytot);</span><br><span class="line">    rt.ifo=MEMORY::Ask64(((rt.ytot<span class="number">-1</span>)&lt;&lt;<span class="number">1</span>|<span class="number">1</span>)&lt;&lt;<span class="number">2</span>); <span class="comment">//(n-1)&lt;&lt;1|1 个节点，每个节点需要4个位置</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=le,j=<span class="number">0</span>;i&lt;=ri;j++)&#123;</span><br><span class="line">        <span class="keyword">int</span> u=ord[i++],y=uni[u].second,xL=uni[u].first,xR=xL;</span><br><span class="line">        <span class="comment">//取出纵坐标相同的一段点，求横坐标范围[xL,xR]</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v;i&lt;=ri &amp;&amp; !cmpY(u,v=ord[i]);i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp=uni[v].first;</span><br><span class="line">            <span class="keyword">if</span>(tmp&lt;xL) xL=tmp;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(tmp&gt;xR) xR=tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        rt.yque[j]=y;</span><br><span class="line">        <span class="comment">//单点初始化权</span></span><br><span class="line">        ll *val=rt.ifo+(idx(j,j)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">        val[<span class="number">0</span>]=-xR-y; <span class="comment">//左下</span></span><br><span class="line">        val[<span class="number">1</span>]=-xR+y; <span class="comment">//左上</span></span><br><span class="line">        val[<span class="number">2</span>]=xL-y; <span class="comment">//右下</span></span><br><span class="line">        val[<span class="number">3</span>]=xL+y; <span class="comment">//右上</span></span><br><span class="line">    &#125;</span><br><span class="line">    SegInitInner(rt,<span class="number">0</span>,rt.ytot<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//查询点横坐标在左边</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">SegQueryRightInner</span><span class="params">(SEGMENT &amp;rt,<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    ll ret=LLONG_MAX;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> L=<span class="number">0</span>,R=rt.ytot<span class="number">-1</span>;L&lt;=R;)&#123;</span><br><span class="line">        ll *cur=rt.ifo+(idx(L,R)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">        <span class="comment">//若递归出界</span></span><br><span class="line">        <span class="keyword">if</span>(y&lt;=rt.yque[L])&#123;</span><br><span class="line">            UpdMin(ret,cur[<span class="number">3</span>]-y);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(y&gt;=rt.yque[R])&#123;</span><br><span class="line">            UpdMin(ret,cur[<span class="number">2</span>]+y);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> M=(L+R)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(y&lt;=rt.yque[M])&#123;</span><br><span class="line">            ll *rig=rt.ifo+(idx(M+<span class="number">1</span>,R)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">            UpdMin(ret,rig[<span class="number">3</span>]-y);</span><br><span class="line">            R=M;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            ll *lef=rt.ifo+(idx(L,M)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">            UpdMin(ret,lef[<span class="number">2</span>]+y);</span><br><span class="line">            L=M+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ret!=LLONG_MAX) ret-=x;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//查询点横坐标在右边</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">SegQueryLeftInner</span><span class="params">(SEGMENT &amp;rt,<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    ll ret=LLONG_MAX;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> L=<span class="number">0</span>,R=rt.ytot<span class="number">-1</span>;L&lt;=R;)&#123;</span><br><span class="line">        ll *cur=rt.ifo+(idx(L,R)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span>(y&lt;=rt.yque[L])&#123;</span><br><span class="line">            UpdMin(ret,cur[<span class="number">1</span>]-y);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(y&gt;=rt.yque[R])&#123;</span><br><span class="line">            UpdMin(ret,cur[<span class="number">0</span>]+y);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> M=(L+R)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(y&lt;=rt.yque[M])&#123;</span><br><span class="line">            ll *rig=rt.ifo+(idx(M+<span class="number">1</span>,R)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">            UpdMin(ret,rig[<span class="number">1</span>]-y);</span><br><span class="line">            R=M;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            ll *lef=rt.ifo+(idx(L,M)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">            UpdMin(ret,lef[<span class="number">0</span>]+y);</span><br><span class="line">            L=M+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ret!=LLONG_MAX) ret+=x;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">SegQueryOuter</span><span class="params">(ci po)</span></span>&#123;</span><br><span class="line">    <span class="comment">//查询点 (x,y)</span></span><br><span class="line">    <span class="keyword">int</span> x=uni[po].first,y=uni[po].second;</span><br><span class="line">    ll ret=dp[po];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> L=<span class="number">0</span>,R=nuni<span class="number">-1</span>;L&lt;R;)&#123;</span><br><span class="line">        <span class="keyword">int</span> M=(L+R)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(po&lt;=M)&#123;</span><br><span class="line">            <span class="comment">//向左边递归，计算右边的答案</span></span><br><span class="line">            UpdMin(ret,SegQueryRightInner(seg[idx(M+<span class="number">1</span>,R)],x,y));</span><br><span class="line">            R=M;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//向右边递归……</span></span><br><span class="line">            UpdMin(ret,SegQueryLeftInner(seg[idx(L,M)],x,y));</span><br><span class="line">            L=M+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">SegUpdateInner</span><span class="params">(SEGMENT &amp;rt,<span class="keyword">int</span> y,ll val[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> L=<span class="number">0</span>,R=rt.ytot<span class="number">-1</span>;L&lt;=R;)&#123;</span><br><span class="line">        ll *cur=rt.ifo+(idx(L,R)&lt;&lt;<span class="number">2</span>);</span><br><span class="line">        UpdMin(cur[<span class="number">0</span>],val[<span class="number">0</span>]);</span><br><span class="line">        UpdMin(cur[<span class="number">1</span>],val[<span class="number">1</span>]);</span><br><span class="line">        UpdMin(cur[<span class="number">2</span>],val[<span class="number">2</span>]);</span><br><span class="line">        UpdMin(cur[<span class="number">3</span>],val[<span class="number">3</span>]);</span><br><span class="line">        <span class="keyword">if</span>(L==R) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">int</span> M=(L+R)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(y&lt;=rt.yque[M]) R=M;</span><br><span class="line">        <span class="keyword">else</span> L=M+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">SegUpdateOuter</span><span class="params">(ci po)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=uni[po].first,y=uni[po].second;</span><br><span class="line">    ll v=dp[po],val[<span class="number">5</span>]=&#123;v-x-y,v-x+y,v+x-y,v+x+y&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> L=<span class="number">0</span>,R=nuni<span class="number">-1</span>;L&lt;=R;)&#123;</span><br><span class="line">        SegUpdateInner(seg[idx(L,R)],y,val);</span><br><span class="line">        <span class="keyword">if</span>(L==R) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">int</span> M=(L+R)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(po&lt;=M) R=M;</span><br><span class="line">        <span class="keyword">else</span> L=M+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ABS</span><span class="params">(ci x)</span></span>&#123;<span class="keyword">return</span> x&lt;<span class="number">0</span>? -x:x;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;seq[i].first,&amp;seq[i].second);</span><br><span class="line">        uni[i]=seq[i];</span><br><span class="line">        dp[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(uni,uni+n);</span><br><span class="line">    nuni=unique(uni,uni+n)-uni;</span><br><span class="line">    MEMORY::Reset(); <span class="comment">//内存池</span></span><br><span class="line">    SegInitOuter(<span class="number">0</span>,nuni<span class="number">-1</span>); <span class="comment">//线段树外层（归并树）</span></span><br><span class="line">    ll ans=<span class="number">0</span>,sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> las=lower_bound(uni,uni+nuni,seq[<span class="number">0</span>])-uni;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">        ll dis=ABS(seq[i].first-seq[i<span class="number">-1</span>].first)+ABS(seq[i].second-seq[i<span class="number">-1</span>].second);</span><br><span class="line">        <span class="keyword">int</span> pos=lower_bound(uni,uni+nuni,seq[i])-uni;</span><br><span class="line">        ll best=SegQueryOuter(pos)-dis;</span><br><span class="line">        <span class="keyword">if</span>(dp[las]&gt;best)&#123;</span><br><span class="line">            UpdMin(ans,dp[las]=best);</span><br><span class="line">            SegUpdateOuter(las);</span><br><span class="line">        &#125;</span><br><span class="line">        sum+=dis;</span><br><span class="line">        las=pos;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans+sum);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cas;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;cas);</span><br><span class="line">    <span class="keyword">while</span>(cas--) Solve();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &到这一秒\\
+&我用心倾听着你唱出的思念\\
+&你用心摹画着我不熟悉的世界\\
+&能否再找回那最初的心愿\\
+&这一刻\\
+&请万物都倒回无关爱恨的岁月\\
+&不管你我相遇离别\\
+&就算一瞬间也能凝合永远\ ”\\
+——&\text{《零和Zero-Sum(Part:星愿)》By 星尘}
+\end{split}</script><p>> Linked <a href="https://www.bilibili.com/video/BV1N54y1U73o?t=17" target="_blank" rel="noopener">零和Zero-Sum</a>-Bilibili</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://luckyglass.github.io/2020/20Aug25thArt1/" title="OI - Play osu! on Your Tablet(HDU)">https://luckyglass.github.io/2020/20Aug25thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/OI%E9%A2%98%E8%A7%A3/" rel="tag"><i class="fa fa-tag"></i> OI题解</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Aug23rdArt1/" rel="prev" title="OI - 制作菜品(NOI 2020)">
+      <i class="fa fa-chevron-left"></i> OI - 制作菜品(NOI 2020)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text"># 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线段树-非旋TREAP"><span class="nav-text">- 线段树+非旋TREAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并树-线段树"><span class="nav-text">- 归并树+线段树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线段树-TREAP"><span class="nav-text">- 线段树+TREAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并树-线段树-1"><span class="nav-text">- 归并树+线段树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">玻璃易碎，但打碎玻璃的人也将被玻璃划伤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">200</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">123</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共334.8k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
