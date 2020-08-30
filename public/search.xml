@@ -14,6 +14,79 @@
 ]]></content>
   </entry>
   <entry>
+    <title>OI - HOT Hotels 加强版(洛谷)</title>
+    <url>/2020/20Aug30thArt2/</url>
+    <content><![CDATA[<blockquote>
+<p>经常口胡长链剖分 $O(n)$，现在算是见识了</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> Linked <a href="https://www.luogu.com.cn/problem/P5904" target="_blank" rel="noopener">洛谷 P5904</a></p>
+<details class="fold">
+    <summary>点击展开/折叠 题面</summary>
+    <p>给出一棵有 $n$ （$1\le n\le10^5$）个点的树，求有多少组无序点对 $(i,j,k)$ 满足 $i,j,k$ 两两之间的距离都相等。</p>
+</details>
+
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>三个点 $(x,y,z)$ 两两之间的距离一定可以表示成下面这种形式：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\text{dist}(x,y)=\text{dist}(x,\text{lca}(x,y))+\text{dist}(y,\text{lca}(x,y))\\
+\text{dist}(y,z)=\text{dist}(y,\text{lca}(x,y))+\text{dist}(\text{lca}(x,y),z)\\
+\text{dist}(z,x)=\text{dist}(x,\text{lca}(x,y))+\text{dist}(\text{lca}(x,y),z)
+\end{cases}</script><p>即下面这种情况：</p>
+<p><img src="/2020/20Aug30thArt2/png1.png" alt="png1"></p>
+<p>然后因为两两距离相等，可以推得：</p>
+<blockquote>
+<p>令 $\text{dist}(x,lca)=\text{dist}(y,lca)=i$ 则有</p>
+<script type="math/tex; mode=display">\text{dist}(x,y)=2i\\\text{dist}(y,z)=\text{dist}(z,x)=i+\text{dist}(lca,z)</script><p>于是 $\text{dist}(lca,z)=i$。</p>
+</blockquote>
+<p>所以我们可以DP维护两个值：</p>
+<ul>
+<li>$f_{u,i}$：$u$ 子树内与 $u$ 距离为 $i$ 的点数；</li>
+<li>$g_{u,i}$：$u$ 子树内的点对 $(v,w)$ 的数量，满足：<ul>
+<li>$\text{dist}(lca,v)=\text{dist}(lca,w)$；</li>
+<li>$\text{dist}(lca,u)=\text{dist}(lca,v)-i$。（这样设计方便计算——可以直接把 $g_{u,i}$ 和 $f_{u,i}$ 配对得到答案）</li>
+</ul>
+</li>
+</ul>
+<p>于是树形DP过程中，可以在合并子树时计算答案。设 $u$ 要合并子树 $v$，则</p>
+<script type="math/tex; mode=display">
+ans'=ans+\sum f_{u,i}g_{v,i}+f_{v,i}g_{u,i}\\
+f'_{u,i}=f _{u,i}+f _{v,i-1}\\
+g'_{u,i}=g _{u,i}+f _{u,i}f _{v,i-1}</script><p>接下来考虑优化，发现 $f,g$ 第二维的取值范围均是 $[0,dep_u)$（这里的深度定义是<strong>该子树最深的节点的相对深度</strong>），于是可以长链剖分优化。</p>
+<p>根据长链剖分的原理，每个点恰好属于一条长链，且每条长链只会在链顶作为“轻儿子”暴力合并的时候会有链长的复杂度，链长和是 $n$，则复杂度 $O(n)$。</p>
+<p>然后就是一些小技巧，比如分配内存池，用指针比较快乐，只是注意分配的 siz（设 $v$ 是 $u$ 的重儿子）：</p>
+<ol>
+<li>对于 $f_u$，$f_{u,i+1}:=f_{v,i},f_{u,0}=1$，则可以直接把 $f_v$ 的初始指针指向 $f_u+1$，一条长链只需要链长的空间；</li>
+<li>对于 $g_u$，$g_{u,i}:=g_{v,i+1}$，因此需要把 $g_{v}$ 的初始指针指向 $g_{u}-1$，这样所需空间是<strong>链长两倍</strong>的。</li>
+</ol>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+(c^<span class="string">'0'</span>),c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ci const int &amp;</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> alloc(x) (f[x]=fcnt,fcnt+=dep[x],g[x]=(gcnt+=dep[x]),gcnt+=dep[x])</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GRAPH</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> head[N],to[N&lt;&lt;<span class="number">1</span>],nxt[N&lt;&lt;<span class="number">1</span>],ncnt;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(ci u,ci v)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> p=++ncnt,q=++ncnt;</span><br><span class="line">		to[p]=v,nxt[p]=head[u],head[u]=p;</span><br><span class="line">		to[q]=u,nxt[q]=head[v],head[v]=q;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">int</span> <span class="keyword">operator</span> [](ci u)&#123;<span class="keyword">return</span> head[u];&#125;</span><br><span class="line">&#125;Gr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> dep[N],wgt[N];</span><br><span class="line">ll aryf[N],aryg[N&lt;&lt;<span class="number">1</span>],*f[N],*g[N],*fcnt,*gcnt;</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS1</span><span class="params">(ci u,ci fa)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> it=Gr[u];it;it=Gr.nxt[it])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=Gr.to[it];</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		DFS1(v,u);</span><br><span class="line">		<span class="keyword">if</span>(dep[v]&gt;dep[u]) dep[u]=dep[v],wgt[u]=v;</span><br><span class="line">	&#125;</span><br><span class="line">	dep[u]++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS2</span><span class="params">(ci u,ci fa)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(wgt[u])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=wgt[u];</span><br><span class="line">		f[v]=f[u]+<span class="number">1</span>,g[v]=g[u]<span class="number">-1</span>;</span><br><span class="line">		DFS2(v,u);</span><br><span class="line">	&#125;</span><br><span class="line">	f[u][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	ans+=g[u][<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> it=Gr[u];it;it=Gr.nxt[it])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=Gr.to[it];</span><br><span class="line">		<span class="keyword">if</span>(v==fa || v==wgt[u]) <span class="keyword">continue</span>;</span><br><span class="line">		alloc(v);</span><br><span class="line">		DFS2(v,u);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;dep[v];i++)&#123;</span><br><span class="line">			ans+=g[u][i+<span class="number">1</span>]*f[v][i];</span><br><span class="line">			<span class="keyword">if</span>(i) ans+=g[v][i]*f[u][i<span class="number">-1</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;dep[v];i++)&#123;</span><br><span class="line">			g[u][i+<span class="number">1</span>]+=f[u][i+<span class="number">1</span>]*f[v][i];</span><br><span class="line">			<span class="keyword">if</span>(i) g[u][i<span class="number">-1</span>]+=g[v][i];</span><br><span class="line">			f[u][i+<span class="number">1</span>]+=f[v][i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	n=Read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++) Gr.AddEdge(Read(),Read());</span><br><span class="line">	DFS1(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">	fcnt=aryf,gcnt=aryg;</span><br><span class="line">	alloc(<span class="number">1</span>);</span><br><span class="line">	DFS2(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &你—\ 给了我\ 开始和最终\ 放纵的自由与宽容\\
+&感谢你借我一半悲伤\ 一半喜悦\ 拼凑\\
+&这一秒完整的我\\
+&我让我自己梦一场美梦\\
+&光与影为彼此停留\\
+&我永远为你祈祷此刻\\
+&一粒尘埃中的相拥\\
+&恨着—\ 爱着—\ 共存着—\ ”\\
+——&\text{《零和Zero-Sum》By 星尘}
+\end{split}</script><p>> Linked <a href="https://www.bilibili.com/video/BV1N54y1U73o" target="_blank" rel="noopener">零和Zero-Sum</a></p>
+]]></content>
+      <categories>
+        <category>OI题解</category>
+      </categories>
+      <tags>
+        <tag>-洛谷-</tag>
+        <tag>动态规划-树形DP</tag>
+        <tag>图论-长链剖分</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OI - math(Local)</title>
     <url>/2020/20Aug30thArt1/</url>
     <content><![CDATA[<blockquote>
@@ -348,8 +421,8 @@ f_{i,j}\overset{+d(i,j)}\to f_{i+1,i}</script><p>这样是 $O(n^2)$ 的 DP，状
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数据结构-线段树</tag>
+        <tag>动态规划</tag>
         <tag>-HDU-</tag>
         <tag>数据结构-TREAP</tag>
         <tag>数据结构-归并树</tag>
@@ -494,8 +567,8 @@ f_{u,d}=\prod_{v}(f_{v,d}+f_{v,dep_v})</script><p>又要求 $u$ 满足作为 $pr
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数据结构-线段树</tag>
+        <tag>动态规划</tag>
         <tag>算法效率-矩阵加速</tag>
       </tags>
   </entry>
@@ -1983,8 +2056,8 @@ M_{i,j}=\begin{cases}\sum\limits_{e\in E_i}(1+w_ex)&i=j\\-\sum\limits_{e\in E_i\
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学-组合数</tag>
+        <tag>动态规划</tag>
         <tag>-AtCoder-</tag>
         <tag>图论-prufer数列</tag>
       </tags>
@@ -3180,8 +3253,8 @@ f_i&=\sum_{j=i}^D(-1)^{j-i}C_{j}^ig_j\\
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数据结构-线段树</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -3773,8 +3846,8 @@ f_{1,i}=h_i-\sum_{j=i+1}^mC_j^if_{1,j}</script><hr>
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>-洛谷-</tag>
         <tag>数学-容斥</tag>
+        <tag>-洛谷-</tag>
         <tag>动态规划-树形DP</tag>
       </tags>
   </entry>
@@ -4626,8 +4699,8 @@ b_i=\begin{cases}
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学-组合数</tag>
+        <tag>动态规划</tag>
         <tag>-Topcoder-</tag>
       </tags>
   </entry>
@@ -4771,8 +4844,8 @@ p=\sum_{i=1}^mP_i^{e_i}</script><p>$P_i$ 为第 $i$ 个质数。给定 $m$ 以�
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
         <tag>算法效率-二分查找</tag>
         <tag>贪心</tag>
         <tag>数学-组合计数</tag>
@@ -5454,9 +5527,9 @@ f_4=\frac12f_0+f_3\\
         <category>OI题解</category>
       </categories>
       <tags>
+        <tag>数据结构-线段树</tag>
         <tag>数学-期望</tag>
         <tag>动态规划</tag>
-        <tag>数据结构-线段树</tag>
         <tag>-Codeforces-</tag>
         <tag>数学-高斯消元</tag>
       </tags>
@@ -6526,9 +6599,9 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
       <tags>
         <tag>动态规划</tag>
         <tag>模拟</tag>
-        <tag>图论-树</tag>
         <tag>贪心</tag>
         <tag>数学-容斥</tag>
+        <tag>图论-树</tag>
         <tag>数学-组合计数</tag>
       </tags>
   </entry>
@@ -6789,8 +6862,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
       <tags>
         <tag>图论-最短路</tag>
         <tag>动态规划-状压DP</tag>
-        <tag>-Codeforces-</tag>
         <tag>图论-生成树</tag>
+        <tag>-Codeforces-</tag>
       </tags>
   </entry>
   <entry>
@@ -7256,8 +7329,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
       </categories>
       <tags>
         <tag>算法效率-哈希</tag>
-        <tag>动态规划-换根DP</tag>
         <tag>-HDU-</tag>
+        <tag>动态规划-换根DP</tag>
       </tags>
   </entry>
   <entry>
@@ -7341,8 +7414,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划-换根DP</tag>
         <tag>-HDU-</tag>
+        <tag>动态规划-换根DP</tag>
         <tag>数学-博弈论</tag>
       </tags>
   </entry>
@@ -7556,8 +7629,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学-期望</tag>
         <tag>数学-组合数</tag>
+        <tag>数学-期望</tag>
         <tag>-AtCoder-</tag>
       </tags>
   </entry>
@@ -7601,8 +7674,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -7700,9 +7773,9 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>算法效率-倍增</tag>
         <tag>数据结构-可持久化</tag>
         <tag>数据结构-线段树</tag>
+        <tag>算法效率-倍增</tag>
         <tag>图论-树</tag>
         <tag>搜索</tag>
         <tag>-BZOJ-</tag>
@@ -7793,8 +7866,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学-组合数</tag>
+        <tag>动态规划</tag>
         <tag>贪心</tag>
         <tag>-AtCoder-</tag>
       </tags>
@@ -10019,9 +10092,9 @@ A\equiv n\pmod m</script><p>由于可以知道在 $[k,k(m-1)]$ 中与 $n$ 模 $m
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
-        <tag>数学</tag>
         <tag>数学-组合数</tag>
+        <tag>数学</tag>
+        <tag>动态规划</tag>
         <tag>数学-容斥</tag>
       </tags>
   </entry>
@@ -10133,12 +10206,12 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>图论-二分图</tag>
+        <tag>数学</tag>
         <tag>数据结构-线段树</tag>
-        <tag>动态规划-状压DP</tag>
-        <tag>算法效率-扫描线</tag>
         <tag>贪心</tag>
+        <tag>算法效率-扫描线</tag>
+        <tag>动态规划-状压DP</tag>
       </tags>
   </entry>
   <entry>
@@ -10616,10 +10689,10 @@ x^m\equiv x\pmod {p_c}\\
         <category>前行</category>
       </categories>
       <tags>
+        <tag>图论-二分图</tag>
+        <tag>数学</tag>
         <tag>数学-期望</tag>
         <tag>动态规划</tag>
-        <tag>数学</tag>
-        <tag>图论-二分图</tag>
         <tag>算法效率-倍增</tag>
         <tag>数据结构-并查集</tag>
       </tags>
@@ -10820,11 +10893,11 @@ f\Big[i+1\Big]\Big[j+T[i+1]-k-t\Big]\text{+=}f\Big[i\Big]\Big[j\Big]*C_{T[i+1]-1
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>图论-二分图</tag>
         <tag>搜索-IDA*</tag>
+        <tag>图论-二分图</tag>
         <tag>图论-最短路</tag>
         <tag>数学-组合数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -11192,9 +11265,9 @@ x_N+x_1=2y_N&&(N)
         <category>前行</category>
       </categories>
       <tags>
+        <tag>数学-组合数</tag>
         <tag>数学</tag>
         <tag>算法效率-倍增</tag>
-        <tag>数学-组合数</tag>
         <tag>模拟</tag>
         <tag>图论-树</tag>
         <tag>算法效率-离线</tag>
@@ -11445,8 +11518,8 @@ A_i^4-kA_i&\equiv A_j^4-kA_j
       <tags>
         <tag>数学</tag>
         <tag>模拟</tag>
-        <tag>动态规划-状压DP</tag>
         <tag>贪心</tag>
+        <tag>动态规划-状压DP</tag>
       </tags>
   </entry>
   <entry>
@@ -11691,8 +11764,8 @@ p&\leq q
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>数学-组合数</tag>
+        <tag>数学</tag>
         <tag>-POJ-</tag>
       </tags>
   </entry>
@@ -11755,9 +11828,9 @@ p&\leq q
         <category>OI题解</category>
       </categories>
       <tags>
+        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
         <tag>图论-树</tag>
-        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -12493,8 +12566,8 @@ x\equiv r_i\pmod{m_i}
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数据结构-线段树</tag>
+        <tag>动态规划</tag>
         <tag>算法效率</tag>
         <tag>搜索</tag>
         <tag>-BZOJ-</tag>
@@ -12632,8 +12705,8 @@ dp[i+1][j]=min\{dp[i+1][j],dp[i][j]\}</script><p>而且最后女儿不一定要�
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
         <tag>模拟</tag>
         <tag>贪心</tag>
         <tag>-Codeforces-</tag>
@@ -12997,8 +13070,8 @@ dp[T\cup \{i\}][i]=\min(dp[T][j],val[i][j])\ |\ i\not\in T,j\in T</script><p>不
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
         <tag>贪心</tag>
         <tag>-Codeforces-</tag>
         <tag>数学-博弈论</tag>
@@ -13069,8 +13142,8 @@ dp[T\cup \{i\}][i]=\min(dp[T][j],val[i][j])\ |\ i\not\in T,j\in T</script><p>不
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
         <tag>-Codeforces-</tag>
         <tag>数据结构-树状数组</tag>
       </tags>
