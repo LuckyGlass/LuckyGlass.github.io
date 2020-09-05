@@ -89,20 +89,22 @@ p.headline{
     var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
   </script>
 
-  <meta name="description" content="和上一篇 FFT 一样，其实还是复习笔记。">
+  <meta name="description" content="不知道为什么以前会学自闭……">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习笔记 - NTT(快速数论变换)">
-<meta property="og:url" content="https://luckyglass.github.io/2019/19Oct3rdArt2/">
+<meta property="og:title" content="学习笔记 - 杜教筛">
+<meta property="og:url" content="https://luckyglass.github.io/2020/20Sep5thArt1/">
 <meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
-<meta property="og:description" content="和上一篇 FFT 一样，其实还是复习笔记。">
+<meta property="og:description" content="不知道为什么以前会学自闭……">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-10-03T11:42:46.000Z">
-<meta property="article:modified_time" content="2020-03-05T15:36:41.954Z">
+<meta property="article:published_time" content="2020-09-05T03:34:16.000Z">
+<meta property="article:modified_time" content="2020-09-05T04:58:10.259Z">
 <meta property="article:author" content="Lucky_Glass">
-<meta property="article:tag" content="数学-多项式">
+<meta property="article:tag" content="-洛谷-">
+<meta property="article:tag" content="数学-筛法">
+<meta property="article:tag" content="数学-数论分块">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://luckyglass.github.io/2019/19Oct3rdArt2/">
+<link rel="canonical" href="https://luckyglass.github.io/2020/20Sep5thArt1/">
 
 
 <script id="page-configurations">
@@ -114,7 +116,7 @@ p.headline{
   };
 </script>
 
-  <title>学习笔记 - NTT(快速数论变换) | Lucky_Glass's Blog</title>
+  <title>学习笔记 - 杜教筛 | Lucky_Glass's Blog</title>
   
 
 
@@ -266,7 +268,7 @@ p.headline{
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://luckyglass.github.io/2019/19Oct3rdArt2/">
+    <link itemprop="mainEntityOfPage" href="https://luckyglass.github.io/2020/20Sep5thArt1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -279,7 +281,7 @@ p.headline{
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          学习笔记 - NTT(快速数论变换)
+          学习笔记 - 杜教筛
         </h1>
 
         <div class="post-meta">
@@ -288,16 +290,10 @@ p.headline{
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-10-03 19:42:46" itemprop="dateCreated datePublished" datetime="2019-10-03T19:42:46+08:00">2019-10-03</time>
+              <time title="创建时间：2020-09-05 11:34:16 / 修改时间：12:58:10" itemprop="dateCreated datePublished" datetime="2020-09-05T11:34:16+08:00">2020-09-05</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-05 23:36:41" itemprop="dateModified" datetime="2020-03-05T23:36:41+08:00">2020-03-05</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -324,8 +320,8 @@ p.headline{
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/19Oct3rdArt2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/19Oct3rdArt2/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/20Sep5thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Sep5thArt1/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -341,227 +337,81 @@ p.headline{
 
       
         <blockquote>
-<p>和上一篇 FFT 一样，其实还是复习笔记。</p>
+<p>不知道为什么以前会学自闭……</p>
 </blockquote>
 <a id="more"></a>
 <hr>
-<h2 id="Part0-参考资料"><a href="#Part0-参考资料" class="headerlink" title="Part0. 参考资料"></a>Part0. 参考资料</h2><p>Tiw_Air_OAO 的 <a href="https://www.cnblogs.com/Tiw-Air-OAO/p/10162034.html" target="_blank" rel="noopener">多项式乘法总结</a></p>
-<p>Hint. 因为我<a href="/2019/19Oct3rdArt1/">上一篇博客</a>写了 FFT，关于 FFT 的东西就不再赘述……</p>
+<h2 id="引入"><a href="#引入" class="headerlink" title="# 引入"></a># 引入</h2><p>线性筛可以 $O(n)$ 筛出积性函数的值，从而得到前 $n$ 项积性函数的前缀和。</p>
+<p>但是在一些数论题目中（比如莫比乌斯反演）要求解 $n$ 更大的积性函数前缀和。我们仍然采用筛法，但需要复杂度<strong>低于线性</strong>的、专门筛积性函数前缀和的筛法——杜教筛。</p>
 <hr>
-<h2 id="Part1-From-FFT-to-NTT"><a href="#Part1-From-FFT-to-NTT" class="headerlink" title="Part1. From FFT to NTT"></a>Part1. From FFT to NTT</h2><blockquote>
-<p>FFT虽然跑得快，但是因为是浮点数运算，终究还是有 精度、常数 等问题。 - Tiw_Air_OAO</p>
-</blockquote>
-<p>而且处理模数还比较麻烦……</p>
-<p>于是就引入了 NTT —— 在模的意义下（多项式的系数对某数取模）将多项式和点值表达之间等价转化。分析 FFT 必须用到 double，会卡精度的原因，发现主要是 <strong>单位复根</strong> 在大多数情况下是一个涉及浮点数的复数。</p>
-<p>NTT 即考虑在模的意义下，用别的东西来替换掉单位复根……</p>
+<h2 id="前置"><a href="#前置" class="headerlink" title="# 前置"></a># 前置</h2><ul>
+<li>莫比乌斯函数 &amp; 欧拉函数</li>
+<li>狄利克雷卷积</li>
+</ul>
 <hr>
-<h2 id="Part2-原根"><a href="#Part2-原根" class="headerlink" title="Part2. 原根"></a>Part2. 原根</h2><p>对于素数 $p$，定义它的原根为 $G^0,G^1,G^2,…,G^{p-2}$ 使得这 $p-1$ 个数<strong>互不相同</strong>（其中 $G$ 是整数）。</p>
-<p>再根据原根定义出：对于一个 $n-1$ 次多项式（也就是 $n$ 项的多项式）， $g_n^k=(G^{\frac {p-1}n})^k\bmod p$（$k=0\text ~(n-1)$）。其中需要保证 $\frac{p-1}n$ 是一个整数 ——<br>只要学过 FFT，应该会知道一定要先把多项式的项数改为一个 $2$ 的幂才能 FFT ——<br>NTT 也一样，所以 $n$ 很有可能是一个比较大的 $2$ 的幂，要使得 $\frac {p-1}n$ 是整数，那么 $p-1$ 就需要包含很多个因子 $2$，但是这样的 $p$ 并不多。<strong>这就造成了 NTT 的实际应用非常受限</strong>……</p>
-<p>那么我们能否用 $g_n^k$ 来替换掉单位复根？这需要检验它在模意义下是否具有单位复根在 FFT 中的全部性质……</p>
-<h3 id="Part2-1-与单位复根的相似性"><a href="#Part2-1-与单位复根的相似性" class="headerlink" title="Part2/1. 与单位复根的相似性"></a>Part2/1. 与单位复根的相似性</h3><p>在 FFT 中，我们总共用到了单位复根的这些性质：</p>
-<ol>
-<li>$n$ 个单位复根互不相同；</li>
-<li>$\omega_n^k=\omega_{2n}^{2k}$；</li>
-<li>$\omega_n^{k}=-\omega_n^{k+n/2}$；</li>
-<li>$\omega_n^a\times\omega_n^b=\omega_n^{a+b}$。</li>
-</ol>
-<p>于是再来检验一下 $g_n^k$ 的性质：</p>
-<ol>
-<li><p>根据原根的定义，$g_n^k$ 也互不相同；</p>
-</li>
-<li><p>$g_{2n}^{2k}=(G^{\frac{p-1}{2n}})^{2k}=(G^{\frac{p-1}{n}})^k=g_n^k$；</p>
-</li>
-<li><p>$g_n^{k+n/2}=(G^{\frac{p-1}n})^{k+n/2}=(G^{\frac{p-1}n})^k\cdot(G^{\frac{p-1}2})=g_n^k\cdot G^{\frac{p-1}2}$；</p>
-<p>因为 $(G^{\frac{p-1}2})^2=G^{p-1}=1$ （费马小定理）</p>
-<p>然后又根据原根的定义 $G^{\frac{p-1}2}\not=G^{p-1}$；</p>
-<p>所以得到 $G^{\frac{p-1}2}=-1$；</p>
-<p>所以 $g_n^{k+n/2}=-g_n^k$；</p>
-</li>
-<li><p>$g_n^a\times g_n^b=(G^{\frac{p-1}n})^a\times(G^{\frac{p-1}n})^b=(G^{\frac{p-1}n})^{a+b}=g_n^{a+b}$；</p>
-</li>
-</ol>
-<p>开心的发现它具有单位复根的所有性质~</p>
-<h3 id="Part2-2-常见的NTT模数及其原根"><a href="#Part2-2-常见的NTT模数及其原根" class="headerlink" title="Part2/2. 常见的NTT模数及其原根"></a>Part2/2. 常见的NTT模数及其原根</h3><p><strong>最为常见的</strong> $998244353$ （建议背住），<strong>原根是</strong> $3$；但是并不一定出现这个质数就是 NTT……</p>
-<blockquote>
-<p>Copy 自 “not_exist” 的博客 [CSDN</p>
-</blockquote>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>质数</th>
-<th>原根</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>3</td>
-<td>2</td>
-</tr>
-<tr>
-<td>5</td>
-<td>2</td>
-</tr>
-<tr>
-<td>17</td>
-<td>3</td>
-</tr>
-<tr>
-<td>97</td>
-<td>5</td>
-</tr>
-<tr>
-<td>193</td>
-<td>5</td>
-</tr>
-<tr>
-<td>257</td>
-<td>3</td>
-</tr>
-<tr>
-<td>7681</td>
-<td>17</td>
-</tr>
-<tr>
-<td>12289</td>
-<td>11</td>
-</tr>
-<tr>
-<td>40961</td>
-<td>3</td>
-</tr>
-<tr>
-<td>65537</td>
-<td>3</td>
-</tr>
-<tr>
-<td>786433</td>
-<td>10</td>
-</tr>
-<tr>
-<td>5767169</td>
-<td>3</td>
-</tr>
-<tr>
-<td>7340033</td>
-<td>3</td>
-</tr>
-<tr>
-<td>23068673</td>
-<td>3</td>
-</tr>
-<tr>
-<td>104857601</td>
-<td>3</td>
-</tr>
-<tr>
-<td>167772161</td>
-<td>3</td>
-</tr>
-<tr>
-<td>469762049</td>
-<td>3</td>
-</tr>
-<tr>
-<td>998244353</td>
-<td>3</td>
-</tr>
-<tr>
-<td>1004535809</td>
-<td>3</td>
-</tr>
-<tr>
-<td>2013265921</td>
-<td>31</td>
-</tr>
-<tr>
-<td>2281701377</td>
-<td>3</td>
-</tr>
-<tr>
-<td>3221225473</td>
-<td>5</td>
-</tr>
-<tr>
-<td>75161927681</td>
-<td>3</td>
-</tr>
-<tr>
-<td>77309411329</td>
-<td>7</td>
-</tr>
-<tr>
-<td>206158430209</td>
-<td>22</td>
-</tr>
-<tr>
-<td>2061584302081</td>
-<td>7</td>
-</tr>
-<tr>
-<td>2748779069441</td>
-<td>3</td>
-</tr>
-<tr>
-<td>6597069766657</td>
-<td>5</td>
-</tr>
-<tr>
-<td>39582418599937</td>
-<td>5</td>
-</tr>
-<tr>
-<td>79164837199873</td>
-<td>5</td>
-</tr>
-<tr>
-<td>263882790666241</td>
-<td>7</td>
-</tr>
-<tr>
-<td>1231453023109120</td>
-<td>3</td>
-</tr>
-<tr>
-<td>1337006139375610</td>
-<td>3</td>
-</tr>
-<tr>
-<td>3799912185593850</td>
-<td>5</td>
-</tr>
-<tr>
-<td>4222124650659840</td>
-<td>19</td>
-</tr>
-<tr>
-<td>7881299347898360</td>
-<td>6</td>
-</tr>
-<tr>
-<td>31525197391593400</td>
-<td>3</td>
-</tr>
-<tr>
-<td>180143985094819000</td>
-<td>6</td>
-</tr>
-<tr>
-<td>1945555039024050000</td>
-<td>5</td>
-</tr>
-<tr>
-<td>4179340454199820000</td>
-<td>3</td>
-</tr>
-</tbody>
-</table>
+<h2 id="杜教筛"><a href="#杜教筛" class="headerlink" title="# 杜教筛"></a># 杜教筛</h2><p>实际上，对于任意数论函数 $f(x)$，设其前缀和为 $S(x)$，有</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^n(f\ast g)(i)=\sum_{i=1}^ng(i)S\left(\left\lfloor\frac ni\right\rfloor\right)</script><div class="block">
+    <p class="headline">证明</p>
+    <p>直接推式子：</p>
+    <p>$$
+\begin{aligned}
+\sum_{i=1}^n(f\ast g)(i)&=\sum_{i=1}^n\sum_{d\mid i}g(d)f\left(\frac id\right)\\
+&=\sum_{d=1}^ng(d)\sum_{d\mid i}f\left(\frac id\right)\\
+&=\sum_{d=1}^ng(d)\sum_{k=1}^{\left\lfloor\frac nd\right\rfloor}f(k)\\
+&=\sum_{d=1}^ng(d)S\left(\left\lfloor\frac nd\right\rfloor\right)\\&&\square
+\end{aligned}
+$$</p>
 </div>
+
+<p>对上述结论变形，提取出等式右侧的 $i=1$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\sum_{i=1}^n(f\ast g)(i)&=\sum_{i=2}^ng(i)S\left(\left\lfloor\frac ni\right\rfloor\right)+g(1)S(n)\\
+g(1)S(n)&=\sum_{i=1}^n(f\ast g)(i)-\sum_{i=2}^ng(i)S\left(\left\lfloor\frac ni\right\rfloor\right)
+\end{aligned}</script><p>这就是杜教筛的主要式子，第一个求和式可以数论分块，而第二个求和式结合该函数性质求解。</p>
+<p>这就要求对所求的 $f(x)$ 找到合适的函数 $g(x)$。</p>
 <hr>
-<h2 id="Part3-源代码"><a href="#Part3-源代码" class="headerlink" title="Part3. 源代码"></a>Part3. 源代码</h2><p>打包成了一个 <code>namespace</code>……</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> NTT&#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line">	<span class="keyword">const</span> ll MOD=<span class="number">998244353</span>;</span><br><span class="line">	<span class="function">ll <span class="title">QPow</span><span class="params">(ll Va,ll Vb)</span></span>&#123; <span class="comment">//一般的快速幂</span></span><br><span class="line">		ll Rr=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(Vb)&#123;</span><br><span class="line">			<span class="keyword">if</span>(Vb&amp;<span class="number">1</span>) Rr=Rr*Va%MOD;</span><br><span class="line">			Va=Va*Va%MOD;</span><br><span class="line">			Vb&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> Rr;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Change</span><span class="params">(<span class="keyword">int</span> *Cc,<span class="keyword">int</span> len,<span class="keyword">int</span> tmp)</span></span>&#123; <span class="comment">//NTT</span></span><br><span class="line">		<span class="keyword">int</span> logl=(<span class="keyword">int</span>)round(log2(len));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">			<span class="keyword">int</span> Revi=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;logl;j++) Revi|=(((i&gt;&gt;j)&amp;<span class="number">1</span>)&lt;&lt;(logl<span class="number">-1</span>-j));</span><br><span class="line">			<span class="keyword">if</span>(Revi&lt;i) swap(Cc[i],Cc[Revi]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">2</span>;s&lt;=len;s&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="keyword">int</span> t=s/<span class="number">2</span>;</span><br><span class="line">			ll Vper= tmp==<span class="number">1</span>? QPow(<span class="number">3</span>,(MOD<span class="number">-1</span>)/s) : QPow(<span class="number">3</span>,(MOD<span class="number">-1</span>)-(MOD<span class="number">-1</span>)/s);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i+=s)&#123;</span><br><span class="line">				ll Vr=<span class="number">1</span>;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;t;j++,Vr=Vr*Vper%MOD)&#123;</span><br><span class="line">					ll Fe=Cc[i+j],Fo=Cc[i+j+t];</span><br><span class="line">					Cc[i+j]=(Fe+Fo*Vr)%MOD;</span><br><span class="line">					Cc[i+j+t]=((Fe-Fo*Vr)%MOD+MOD)%MOD;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		ll Einv=QPow(len,MOD<span class="number">-2</span>);</span><br><span class="line">		<span class="keyword">if</span>(tmp==<span class="number">-1</span>)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)</span><br><span class="line">				Cc[i]=Cc[i]*Einv%MOD;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">QPow</span><span class="params">(<span class="keyword">int</span> *Ca,ll Vb,<span class="keyword">int</span> len,<span class="keyword">int</span> *Cr)</span></span>&#123; <span class="comment">//多项式的快速幂</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++) Cr[i]=<span class="number">0</span>;</span><br><span class="line">		Cr[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		Change(Ca,len,<span class="number">1</span>);Change(Cr,len,<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">while</span>(Vb)&#123;</span><br><span class="line">			<span class="keyword">if</span>(Vb&amp;<span class="number">1</span>)</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)</span><br><span class="line">					Cr[i]=<span class="number">1l</span>l*Cr[i]*Ca[i]%MOD;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)</span><br><span class="line">				Ca[i]=<span class="number">1l</span>l*Ca[i]*Ca[i]%MOD;</span><br><span class="line">			Vb&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Change(Cr,len,<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="mu-x-前缀和"><a href="#mu-x-前缀和" class="headerlink" title="# $\mu(x)$ 前缀和"></a># $\mu(x)$ 前缀和</h2><p>选取 $g=\mathbf1$（常函数），则有 $\mu\ast\mathbf1=\varepsilon$。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbf{1}(1)S(n)&=\sum_{i=1}^n\varepsilon(i)-\sum_{i=2}^n\mathbf1(i)S\left(\left\lfloor\frac ni\right\rfloor\right)\\
+S(n)&=1-\sum_{i=2}^nS\left(\left\lfloor\frac ni\right\rfloor\right)
+\end{aligned}</script><p>复杂度不会证……直接算的复杂度是 $O(n^{\frac34})$，但是下标极大，记忆化要<code>map</code>/<code>unordered_map</code>，常数极大；一般会预处理 $n$ 较小（$\le n^{\frac23}$，但是实际上我的做法是“能够线性筛筛出来的就筛”）的前缀和，直接线性筛，然后复杂度就会降到 $O(n^{\frac23})$，常数一般。</p>
 <hr>
-<h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><p>Email: lucky_glass@foxmail.com，欢迎提问~</p>
+<h2 id="varphi-x-前缀和"><a href="#varphi-x-前缀和" class="headerlink" title="# $\varphi(x)$ 前缀和"></a># $\varphi(x)$ 前缀和</h2><p>用到 $\varphi$ 的性质：$\varphi\ast\mathbf1=\text{id}$（$\text{id}(x)=x$）。</p>
+<p>仍然取 $g=\mathbf1$，则有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbf1(1)S(n)&=\sum_{i=1}^n\text{id}(i)-\sum_{i=2}^n\mathbf1(i)S\left(\left\lfloor\frac ni\right\rfloor\right)\\
+S(n)&=\frac{n(n+1)}2-\sum_{i=2}^nS\left(\left\lfloor\frac ni\right\rfloor\right)
+\end{aligned}</script><p>跟筛 $\mu(x)$ 的前缀和差不多，也要预处理前面较小的 $n$ 的前缀和。</p>
+<p>但是一般不用杜教筛筛 $\varphi(x)$，因为可以直接莫比乌斯反演。</p>
+<details class="fold">
+    <summary>点击展开/折叠 莫比乌斯反演$\varphi(x)$前缀和</summary>
+    <p>$$\sum_{i=1}^n\varphi(i)=\sum_{i=1}^n\sum_{j=1}^i[\gcd(i,j)=1]$$</p>
+    <p>即求 $i,j\in[1,n]$ 且 $i,j$ 互质的无序数对 $(i,j)$ 数量。转化一下，改为求有序数对 $(i,j)$ 的数量，即求：</p>
+    <p>$$
+    \begin{aligned}
+    &\sum_{i=1}^n\sum_{j=1}^n[\gcd(i,j)=1]\\
+    =&\sum_{d=1}^n\mu(d)\left\lfloor\frac nd\right\rfloor^2
+    \end{aligned}
+    $$</p>
+    <p>需要杜教筛算 $\mu$ 的前缀和，以及数论分块。</p>
+</details>
+
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><p>> Linked <a href="https://www.luogu.com.cn/problem/P4213" target="_blank" rel="noopener">例题 洛谷 P4213</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+(c^<span class="string">'0'</span>),c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">2e6</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"><span class="keyword">int</span> prm[N/<span class="number">10</span>],smu[N],nprm;</span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>,ll&gt; memphi,memmu;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">KeyMu</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123; <span class="comment">//杜教筛-莫比乌斯函数</span></span><br><span class="line">	<span class="keyword">if</span>(n&lt;N) <span class="keyword">return</span> smu[n];</span><br><span class="line">	<span class="keyword">if</span>(memmu.count(n)) <span class="keyword">return</span> memmu[n];</span><br><span class="line">	memmu[n]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> j=(n/(n/i));</span><br><span class="line">		memmu[n]-=KeyMu(n/i)*(j-i+<span class="number">1</span>);</span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> memmu[n];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">KeyPhi</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123; <span class="comment">//杜教筛-欧拉函数</span></span><br><span class="line">	<span class="keyword">if</span>(n&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(memphi.count(n)) <span class="keyword">return</span> memphi[n];</span><br><span class="line">	memphi[n]=n*(n+<span class="number">1l</span>l)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> j=(n/(n/i));</span><br><span class="line">		memphi[n]-=KeyPhi(n/i);</span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> memphi[n];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">FliPhi</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123; <span class="comment">//莫比乌斯反演-欧拉函数</span></span><br><span class="line">	ll ret=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> j=(n/(n/i));</span><br><span class="line">		ret+=(KeyMu(j)-KeyMu(i<span class="number">-1</span>))*(n/i)*(n/i);</span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ((ret<span class="number">-1</span>)&gt;&gt;<span class="number">1</span>)+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	smu[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[i]) smu[prm[++nprm]=i]=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=nprm &amp;&amp; <span class="number">1l</span>l*prm[j]*i&lt;N;j++)&#123;</span><br><span class="line">			vis[prm[j]*i]=<span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">if</span>(i%prm[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">			smu[prm[j]*i]=-smu[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;N;i++) smu[i]+=smu[i<span class="number">-1</span>];</span><br><span class="line">	<span class="keyword">int</span> cas=Read();</span><br><span class="line">	<span class="keyword">while</span>(cas--)&#123;</span><br><span class="line">		<span class="keyword">int</span> n=Read();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld %lld\n"</span>,FliPhi(n),KeyMu(n));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &像旅行的风\ 将时间带走\\
+&我的心中那沉闷到底为谁拥有\\
+&向着天空\ 伸出了手\\
+&我多么希望再一次对你说\ ”\\
+——&\text{《404 Not Found》By 赤羽}
+\end{split}</script><p>> Linked <a href="https://www.bilibili.com/video/BV1vE411R7iD?t=217" target="_blank" rel="noopener">404 Not Found</a>-Bilibili</p>
 
     </div>
 
@@ -577,7 +427,7 @@ p.headline{
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://luckyglass.github.io/2019/19Oct3rdArt2/" title="学习笔记 - NTT(快速数论变换)">https://luckyglass.github.io/2019/19Oct3rdArt2/</a>
+    <a href="https://luckyglass.github.io/2020/20Sep5thArt1/" title="学习笔记 - 杜教筛">https://luckyglass.github.io/2020/20Sep5thArt1/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -589,7 +439,9 @@ p.headline{
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E5%AD%A6-%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 数学-多项式</a>
+              <a href="/tags/%E6%B4%9B%E8%B0%B7/" rel="tag"><i class="fa fa-tag"></i> -洛谷-</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E7%AD%9B%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 数学-筛法</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E6%95%B0%E8%AE%BA%E5%88%86%E5%9D%97/" rel="tag"><i class="fa fa-tag"></i> 数学-数论分块</a>
           </div>
 
         
@@ -598,13 +450,10 @@ p.headline{
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/19Oct3rdArt1/" rel="prev" title="学习笔记 - FFT(快速傅里叶变换)">
-      <i class="fa fa-chevron-left"></i> 学习笔记 - FFT(快速傅里叶变换)
+    <a href="/2020/20Sep4thArt1/" rel="prev" title="OI - YY的GCD(洛谷)">
+      <i class="fa fa-chevron-left"></i> OI - YY的GCD(洛谷)
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/19Oct4thArt1/" rel="next" title="OI - k-Maximum Subsequence Sum(Codeforces)">
-      OI - k-Maximum Subsequence Sum(Codeforces) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -665,7 +514,7 @@ p.headline{
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part0-参考资料"><span class="nav-text">Part0. 参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part1-From-FFT-to-NTT"><span class="nav-text">Part1. From FFT to NTT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part2-原根"><span class="nav-text">Part2. 原根</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part2-1-与单位复根的相似性"><span class="nav-text">Part2&#x2F;1. 与单位复根的相似性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part2-2-常见的NTT模数及其原根"><span class="nav-text">Part2&#x2F;2. 常见的NTT模数及其原根</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part3-源代码"><span class="nav-text">Part3. 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-End"><span class="nav-text">The End</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引入"><span class="nav-text"># 引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前置"><span class="nav-text"># 前置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#杜教筛"><span class="nav-text"># 杜教筛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mu-x-前缀和"><span class="nav-text"># $\mu(x)$ 前缀和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#varphi-x-前缀和"><span class="nav-text"># $\varphi(x)$ 前缀和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
