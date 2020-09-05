@@ -14,6 +14,56 @@
 ]]></content>
   </entry>
   <entry>
+    <title>OI - 「SDOI2014」数表(洛谷)</title>
+    <url>/2020/20Sep5thArt2/</url>
+    <content><![CDATA[<blockquote>
+<p>当数(论)与数(据结构)搞在一起的时候</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> Linked <a href="https://www.luogu.com.cn/problem/P3312" target="_blank" rel="noopener">洛谷 P3312</a></p>
+<details class="fold">
+    <summary>点击展开/折叠 (简化)题面</summary>
+    <p>给定 $N,M,a$，求</p>
+    <p>$$\sum_{i=1}^N\sum_{j=1}^N[\sigma(\gcd(i,j))\le a]\sigma(\gcd(i,j))$$</p>
+    <p>多组询问，每次给定 $N,M,a$。</p>
+</details>
+
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>反演题总是逃不开推式子的，还是套路枚举 $\gcd$（不妨假设 $n\le m$）：</p>
+<script type="math/tex; mode=display">
+\sum_{d=1}^n\sum_{i=1}^n\sum_{j=1}^m[\gcd(i,j)=d][\sigma(d)\le a]\sigma(d)</script><p>然后反演</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\sum_{d=1}^n[\sigma(d)\le a]\sigma(d)\sum_{d\mid t}\mu\left(\frac td\right)\left\lfloor\frac nt\right\rfloor\left\lfloor\frac mt\right\rfloor\\
+=&\sum_{t=1}^n\left\lfloor\frac nt\right\rfloor\left\lfloor\frac mt\right\rfloor\sum_{d\mid t}\mu\left(\frac td\right)[\sigma(d)\le a]\sigma(d)
+\end{aligned}</script><p>本来如果没有 $a$ 的限制（$a\to\infty$），就可以直接 $O(N\sqrt N)$ 预处理 $G(t)=\sum_{d\mid t}\mu\left(\frac td\right)\sigma(d)$ 即可；但是加上限制后有一些 $\sigma(d)$ 不能对 $G(T)$ 产生贡献了，于是考虑动态维护 $G(T)$。</p>
+<p>离线按 $a$ 从小到大处理询问，当 $a$ 增大时，就会有一些 $\sigma(d)$ 能够产生贡献了，枚举这些 $d$，$d$ 能对其倍数 $T$ 的 $G(T)$ 产生贡献。直接枚举 $T$，因为 $d$ 恰好会有 $1\sim N$ 的取值，则枚举 $T$ 的均摊复杂度是 $O(N\log N)$。</p>
+<p>考虑到数论分块时要用到 $G(T)$ 的区间和，则单点修改区间求和可以用常数相对较小的树状数组。</p>
+<p>这样每次询问要数论分块加上树状数组，复杂度 $O(Q\log N\sqrt N)$，而总共 $N$ 次修改贡献，均摊后每次 $O(\log^2 N)$，则修改复杂度 $O(N\log^2 N)$，总复杂度 $O(Q\log N\sqrt N+N\log^2 N)$。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> Q=<span class="number">2e4</span>+<span class="number">10</span>,N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> MOD=(<span class="keyword">unsigned</span>)<span class="number">2147483648</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ci const int &amp;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((x)&amp;((-x)))</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"><span class="keyword">int</span> cas,nprm,qry[Q][<span class="number">3</span>],qid[Q],prm[N];</span><br><span class="line"><span class="keyword">unsigned</span> tre[N],mu[N],ans[Q];</span><br><span class="line">pair&lt;<span class="keyword">unsigned</span>,<span class="keyword">int</span>&gt; sig[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+(c^<span class="string">'0'</span>),c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> qry[a][<span class="number">2</span>]&lt;qry[b][<span class="number">2</span>];&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span><span class="params">(<span class="keyword">int</span> pos,ci key)</span></span>&#123;<span class="keyword">while</span>(pos&lt;N) tre[pos]+=key,pos+=lowbit(pos);&#125;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">Query</span><span class="params">(<span class="keyword">int</span> pos)</span></span>&#123;<span class="keyword">unsigned</span> ret=<span class="number">0</span>;<span class="keyword">while</span>(pos) ret+=tre[pos],pos-=lowbit(pos);<span class="keyword">return</span> ret;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;N;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j*j&lt;=i;j++)</span><br><span class="line">			<span class="keyword">if</span>(i%j==<span class="number">0</span>)&#123;</span><br><span class="line">				sig[i].first+=(<span class="keyword">unsigned</span>)j;</span><br><span class="line">				<span class="keyword">if</span>(j*j!=i) sig[i].first+=(<span class="keyword">unsigned</span>)i/j;</span><br><span class="line">			&#125;</span><br><span class="line">		sig[i].second=i;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(sig+<span class="number">1</span>,sig+N);</span><br><span class="line">	mu[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[i]) mu[prm[++nprm]=i]--;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=nprm &amp;&amp; prm[j]*i&lt;N;j++)&#123;</span><br><span class="line">			vis[prm[j]*i]=<span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">if</span>(i%prm[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">			mu[prm[j]*i]=-mu[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Init();</span><br><span class="line">	cas=Read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cas;i++)&#123;</span><br><span class="line">		qry[i][<span class="number">0</span>]=Read(),qry[i][<span class="number">1</span>]=Read(),qry[i][<span class="number">2</span>]=Read();</span><br><span class="line">		qid[i]=i;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(qid+<span class="number">1</span>,qid+<span class="number">1</span>+cas,cmp);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> I=<span class="number">1</span>,pos=<span class="number">1</span>;I&lt;=cas;I++)&#123;</span><br><span class="line">		<span class="keyword">int</span> i=qid[I],A=qry[i][<span class="number">2</span>];</span><br><span class="line">		<span class="keyword">while</span>(pos&lt;N &amp;&amp; sig[pos].first&lt;=(<span class="keyword">unsigned</span>)A)&#123;</span><br><span class="line">			<span class="keyword">int</span> num=sig[pos].second;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=num;j&lt;N;j+=num)</span><br><span class="line">				Update(j,mu[j/num]*sig[pos].first);</span><br><span class="line">			pos++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">unsigned</span> n=(<span class="keyword">unsigned</span>)qry[i][<span class="number">0</span>],m=(<span class="keyword">unsigned</span>)qry[i][<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span>(n&gt;m) swap(n,m);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">unsigned</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">unsigned</span> k=min(n/(n/j),m/(m/j));</span><br><span class="line">			ans[i]+=(n/j)*(m/j)*(Query(k)-Query(j<span class="number">-1</span>));</span><br><span class="line">			j=k;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cas;i++) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans[i]%MOD);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &我的心\ 情绪开关\ 在你的眼眸流转\\
+&等待着\ 你的潮汐\ 回溯这片海岸\\
+&繁星与伴\ 正升焰时的我\\
+&却不想成为\ 你沧海一粟的人世山川\ ”\\
+——&\text{《404 Not Found》By 赤羽}
+\end{split}</script><p>> Linked <a href="https://www.bilibili.com/video/BV1vE411R7iD?t=217" target="_blank" rel="noopener">404 Not Found</a>-Bilibili</p>
+]]></content>
+      <categories>
+        <category>OI题解</category>
+      </categories>
+      <tags>
+        <tag>-洛谷-</tag>
+        <tag>数据结构-树状数组</tag>
+        <tag>数学-莫比乌斯反演</tag>
+        <tag>数学-数论分块</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>学习笔记 - 杜教筛</title>
     <url>/2020/20Sep5thArt1/</url>
     <content><![CDATA[<blockquote>
@@ -2272,8 +2322,8 @@ M_{i,j}=\begin{cases}\sum\limits_{e\in E_i}(1+w_ex)&i=j\\-\sum\limits_{e\in E_i\
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学-组合数</tag>
         <tag>动态规划</tag>
+        <tag>数学-组合数</tag>
         <tag>-AtCoder-</tag>
         <tag>图论-prufer数列</tag>
       </tags>
@@ -4062,8 +4112,8 @@ f_{1,i}=h_i-\sum_{j=i+1}^mC_j^if_{1,j}</script><hr>
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学-容斥</tag>
         <tag>-洛谷-</tag>
+        <tag>数学-容斥</tag>
         <tag>动态规划-树形DP</tag>
       </tags>
   </entry>
@@ -4915,8 +4965,8 @@ b_i=\begin{cases}
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学-组合数</tag>
         <tag>动态规划</tag>
+        <tag>数学-组合数</tag>
         <tag>-Topcoder-</tag>
       </tags>
   </entry>
@@ -5060,9 +5110,9 @@ p=\sum_{i=1}^mP_i^{e_i}</script><p>$P_i$ 为第 $i$ 个质数。给定 $m$ 以�
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
         <tag>算法效率-二分查找</tag>
+        <tag>数学</tag>
         <tag>贪心</tag>
         <tag>数学-组合计数</tag>
       </tags>
@@ -5744,8 +5794,8 @@ f_4=\frac12f_0+f_3\\
       </categories>
       <tags>
         <tag>数据结构-线段树</tag>
-        <tag>数学-期望</tag>
         <tag>动态规划</tag>
+        <tag>数学-期望</tag>
         <tag>-Codeforces-</tag>
         <tag>数学-高斯消元</tag>
       </tags>
@@ -6813,8 +6863,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>模拟</tag>
+        <tag>动态规划</tag>
         <tag>贪心</tag>
         <tag>图论-树</tag>
         <tag>数学-容斥</tag>
@@ -7330,8 +7380,8 @@ dis(u,v)=\min_{c,c_v\in[0,7]}\{f(u,c)+1+f(v,c)\}=\min_{c,c_v\in[0,7]}\{f(u,c)+1+
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>算法效率-倍增</tag>
         <tag>算法效率-二分查找</tag>
+        <tag>算法效率-倍增</tag>
         <tag>贪心</tag>
         <tag>-牛客-</tag>
         <tag>图论-树链剖分</tag>
@@ -7845,8 +7895,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学-组合数</tag>
         <tag>数学-期望</tag>
+        <tag>数学-组合数</tag>
         <tag>-AtCoder-</tag>
       </tags>
   </entry>
@@ -7890,8 +7940,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -8082,8 +8132,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学-组合数</tag>
         <tag>动态规划</tag>
+        <tag>数学-组合数</tag>
         <tag>贪心</tag>
         <tag>-AtCoder-</tag>
       </tags>
@@ -9601,8 +9651,8 @@ D\times V\times \begin{bmatrix}a_0\\a_1\\a_2\\\vdots\\a_{n-1}\end{bmatrix}
       </categories>
       <tags>
         <tag>-POJ-</tag>
-        <tag>数学-大数分解</tag>
         <tag>数学-素性测试</tag>
+        <tag>数学-大数分解</tag>
         <tag>数学-EXGCD</tag>
       </tags>
   </entry>
@@ -10308,9 +10358,9 @@ A\equiv n\pmod m</script><p>由于可以知道在 $[k,k(m-1)]$ 中与 $n$ 模 $m
         <category>前行</category>
       </categories>
       <tags>
+        <tag>动态规划</tag>
         <tag>数学-组合数</tag>
         <tag>数学</tag>
-        <tag>动态规划</tag>
         <tag>数学-容斥</tag>
       </tags>
   </entry>
@@ -10611,8 +10661,8 @@ f(\lambda_1)=A(\lambda_1+\frac BA\lambda_2)^2+\frac{AC-B^2}A\cdot \lambda_2^2</s
         <category>前行</category>
       </categories>
       <tags>
-        <tag>图论-最短路</tag>
         <tag>模拟</tag>
+        <tag>图论-最短路</tag>
         <tag>动态规划-区间DP</tag>
       </tags>
   </entry>
@@ -10801,8 +10851,8 @@ g(i,j)=\sum_{t=1}^kg(i-t,j)\cdot b_t</script><p>然后就可以构造矩阵了�
       </categories>
       <tags>
         <tag>数据结构-线段树</tag>
-        <tag>数学</tag>
         <tag>模拟</tag>
+        <tag>数学</tag>
         <tag>算法效率-分块</tag>
       </tags>
   </entry>
@@ -10905,10 +10955,10 @@ x^m\equiv x\pmod {p_c}\\
         <category>前行</category>
       </categories>
       <tags>
+        <tag>动态规划</tag>
+        <tag>数学-期望</tag>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
-        <tag>数学-期望</tag>
-        <tag>动态规划</tag>
         <tag>算法效率-倍增</tag>
         <tag>数据结构-并查集</tag>
       </tags>
@@ -11005,9 +11055,9 @@ x^m\equiv x\pmod {p_c}\\
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学-期望</tag>
-        <tag>动态规划</tag>
         <tag>模拟</tag>
+        <tag>动态规划</tag>
+        <tag>数学-期望</tag>
         <tag>算法效率-矩阵加速</tag>
         <tag>算法效率-二分查找</tag>
         <tag>分治</tag>
@@ -11481,10 +11531,10 @@ x_N+x_1=2y_N&&(N)
         <category>前行</category>
       </categories>
       <tags>
+        <tag>模拟</tag>
         <tag>数学-组合数</tag>
         <tag>数学</tag>
         <tag>算法效率-倍增</tag>
-        <tag>模拟</tag>
         <tag>图论-树</tag>
         <tag>算法效率-离线</tag>
       </tags>
@@ -11732,8 +11782,8 @@ A_i^4-kA_i&\equiv A_j^4-kA_j
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>模拟</tag>
+        <tag>数学</tag>
         <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
       </tags>
@@ -12921,9 +12971,9 @@ dp[i+1][j]=min\{dp[i+1][j],dp[i][j]\}</script><p>而且最后女儿不一定要�
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>动态规划</tag>
         <tag>模拟</tag>
+        <tag>动态规划</tag>
+        <tag>数学</tag>
         <tag>贪心</tag>
         <tag>-Codeforces-</tag>
       </tags>
@@ -13286,8 +13336,8 @@ dp[T\cup \{i\}][i]=\min(dp[T][j],val[i][j])\ |\ i\not\in T,j\in T</script><p>不
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
+        <tag>数学</tag>
         <tag>贪心</tag>
         <tag>-Codeforces-</tag>
         <tag>数学-博弈论</tag>
@@ -13358,8 +13408,8 @@ dp[T\cup \{i\}][i]=\min(dp[T][j],val[i][j])\ |\ i\not\in T,j\in T</script><p>不
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
+        <tag>数学</tag>
         <tag>-Codeforces-</tag>
         <tag>数据结构-树状数组</tag>
       </tags>

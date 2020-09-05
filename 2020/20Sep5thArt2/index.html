@@ -89,22 +89,23 @@ p.headline{
     var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
   </script>
 
-  <meta name="description" content="感觉很熟悉，但是看到算法的时候又感觉比较陌生 可能是之前没学好 QwQ">
+  <meta name="description" content="当数(论)与数(据结构)搞在一起的时候">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习笔记 - Johnson 不等式">
-<meta property="og:url" content="https://luckyglass.github.io/2020/20Apr18thArt1/">
+<meta property="og:title" content="OI - 「SDOI2014」数表(洛谷)">
+<meta property="og:url" content="https://luckyglass.github.io/2020/20Sep5thArt2/">
 <meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
-<meta property="og:description" content="感觉很熟悉，但是看到算法的时候又感觉比较陌生 可能是之前没学好 QwQ">
+<meta property="og:description" content="当数(论)与数(据结构)搞在一起的时候">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://luckyglass.github.io/2020/20Apr18thArt1/png1.png">
-<meta property="article:published_time" content="2020-04-18T07:50:28.000Z">
-<meta property="article:modified_time" content="2020-04-18T08:55:15.594Z">
+<meta property="article:published_time" content="2020-09-05T05:52:20.000Z">
+<meta property="article:modified_time" content="2020-09-05T06:22:46.202Z">
 <meta property="article:author" content="Lucky_Glass">
-<meta property="article:tag" content="贪心-流水调度">
+<meta property="article:tag" content="-洛谷-">
+<meta property="article:tag" content="数据结构-树状数组">
+<meta property="article:tag" content="数学-莫比乌斯反演">
+<meta property="article:tag" content="数学-数论分块">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://luckyglass.github.io/2020/20Apr18thArt1/png1.png">
 
-<link rel="canonical" href="https://luckyglass.github.io/2020/20Apr18thArt1/">
+<link rel="canonical" href="https://luckyglass.github.io/2020/20Sep5thArt2/">
 
 
 <script id="page-configurations">
@@ -116,7 +117,7 @@ p.headline{
   };
 </script>
 
-  <title>学习笔记 - Johnson 不等式 | Lucky_Glass's Blog</title>
+  <title>OI - 「SDOI2014」数表(洛谷) | Lucky_Glass's Blog</title>
   
 
 
@@ -268,7 +269,7 @@ p.headline{
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://luckyglass.github.io/2020/20Apr18thArt1/">
+    <link itemprop="mainEntityOfPage" href="https://luckyglass.github.io/2020/20Sep5thArt2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -281,7 +282,7 @@ p.headline{
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          学习笔记 - Johnson 不等式
+          OI - 「SDOI2014」数表(洛谷)
         </h1>
 
         <div class="post-meta">
@@ -292,7 +293,7 @@ p.headline{
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-04-18 15:50:28 / 修改时间：16:55:15" itemprop="dateCreated datePublished" datetime="2020-04-18T15:50:28+08:00">2020-04-18</time>
+              <time title="创建时间：2020-09-05 13:52:20 / 修改时间：14:22:46" itemprop="dateCreated datePublished" datetime="2020-09-05T13:52:20+08:00">2020-09-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,7 +301,7 @@ p.headline{
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
                 </span>
             </span>
 
@@ -320,8 +321,8 @@ p.headline{
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/20Apr18thArt1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Apr18thArt1/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/20Sep5thArt2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Sep5thArt2/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -337,79 +338,42 @@ p.headline{
 
       
         <blockquote>
-<p>感觉很熟悉，但是看到算法的时候又感觉比较陌生</p>
-<p>可能是之前没学好 QwQ</p>
+<p>当数(论)与数(据结构)搞在一起的时候</p>
 </blockquote>
 <a id="more"></a>
 <hr>
-<h2 id="流水调度问题"><a href="#流水调度问题" class="headerlink" title="# 流水调度问题"></a># 流水调度问题</h2><p>有 $n$ 件物品、两台机器 $A,B$。第 $i$ 件物品需要先在 $A$ 上加工 $a_i$ 个单位时间，再在 $B$ 上加工 $b_i$ 个单位时间。机器每次只能处理一件物品。</p>
-<p>可以调整 $n$ 件物品的加工顺序，求最小时间。</p>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>> Linked <a href="https://www.luogu.com.cn/problem/P3312" target="_blank" rel="noopener">洛谷 P3312</a></p>
+<details class="fold">
+    <summary>点击展开/折叠 (简化)题面</summary>
+    <p>给定 $N,M,a$，求</p>
+    <p>$$\sum_{i=1}^N\sum_{j=1}^N[\sigma(\gcd(i,j))\le a]\sigma(\gcd(i,j))$$</p>
+    <p>多组询问，每次给定 $N,M,a$。</p>
+</details>
+
 <hr>
-<h2 id="算法理论"><a href="#算法理论" class="headerlink" title="# 算法理论"></a># 算法理论</h2><p>不难发现，最优的方案一定会使 $A,B$ 的“空闲”时间尽可能少。显然 $A$ 一定可以让它一直工作（直到所有物品在 $A$ 都加工完），于是只考虑 $B$ 的花费时间。</p>
-<p>我们可以通过若干次交换相邻两件物品的操作顺序来得到最优操作顺序（<strong>交换法</strong>）。不妨设当前两个相邻的物品为 $\{a_1,b_1\},\{a_2,b_2\}$。</p>
-<p>我们可以把 $\{a_1,b_1\}$ 排在前面的所有情况全都排出来，对应过来也就有了 $\{a_2,b_2\}$ 排在前面的所有情况：</p>
-<p><img src="/2020/20Apr18thArt1/png1.png" alt="png1"></p>
-<p>设 $\{a_1,b_1\}$ 在 A 上开始处理的时间为 $t_0$，$\{a_1,b_1\}$ 在 B 上开始处理的时间为 $\Delta t$，$\{a_2,b_2\}$ 在 B 上处理完的时间为 $T$。</p>
-<p>可以发现 $T=\max\{a_1+a_2,a_1+b_1,\Delta t+b_1\}+b_2+t_0$。</p>
-<p>那么同理，可以得到若先处理 $\{a_2,b_2\}$，则 $T’=\max\{a_1+a_2,a_2+b_2,\Delta t+b_2\}+b_1+t_0$。</p>
-<p>于是分类讨论——讨论 $a_1,a_2,b_1,b_2$ 中的最小值</p>
-<ol>
-<li><p>$a_1$ 为最小值：</p>
-<p>可得 $a_1+a_2\le a_2+b_2$，于是 $T’=\max\{a_2+b_2,\Delta t+b_2\}+b_1+t_0$；</p>
-<p>再变形，$T’=\max\{a_2+b_1,\Delta t+b_1\}+b_2+t_0$；</p>
-<p>又可得 $a_1+b_1\le a_2+b_1$，$a_1+a_2\le a_2+b_1$；</p>
-<p>所以 $\max\{a_1+a_2,a_2+b_1\}\le a_2+b_1$，则 $T\le T’$。</p>
-<p>因此可以证明 $\{a_1,b_1\}$ 先处理<strong>一定不会更差</strong>。</p>
-</li>
-<li><p>$a_2$ 为最小值：</p>
-<p>根据对称性，把 $a_1$ 最小的推导全部交换一下，可得结论：</p>
-<p>$\{a_2,b_2\}$ 先处理一定不会更差。</p>
-</li>
-<li><p>$b_1$ 为最小值：</p>
-<p>可得 $a_1+b_1\le a_1+a_2$，于是 $T’=\max\{a_1+a_2,\Delta t+b_1\}+b_2+t_0$；</p>
-<p>再变形：$T=\max\{a_1+a_2+b_2,\Delta t+b_1+b_2\}+t_0$；</p>
-<p>把 $T’$ 也变形一下：$T’=\max\{a_1+a_2+b_1,a_2+b_2+b_1,\Delta t+b_1+b_2\}+t_0$；</p>
-<p>因为 $a_1+a_2+b_1\le a_1+a_2+b_2$，$a_2+b_2+b_1\le a_1+a_2+b_2$；</p>
-<p>所以 $T\ge T’$，则 $\{a_2,b_2\}$ 先处理一定不会更差。</p>
-</li>
-<li><p>$b_2$ 为最小值：</p>
-<p>同理，根据对称性，$\{a_1,b_1\}$ 先处理一定不会更差。</p>
-</li>
-</ol>
-<hr>
-<h2 id="设计贪心"><a href="#设计贪心" class="headerlink" title="# 设计贪心"></a># 设计贪心</h2><p>从相邻两个考虑到整体——</p>
-<ol>
-<li>假如某个 $a_i$ 是 $a_1,a_2,\dots,a_n,b_1,b_2,\dots,b_n$ 的最小值，则 $\{a_i,b_i\}$ 根据之前的分析，可以一直往前挪，即应该第一个处理；</li>
-<li>假如某个 $b_i$ 是 $a_1,a_2,\dots,a_n,b_1,b_2,\dots,b_n$ 的最小值，则 $\{a_i,b_i\}$ 根据之前的分析，一直往后挪，即应该最后一个处理；</li>
-</ol>
-<p>因此，我们把所有 $a_1,a_2,\dots,a_n,b_1,b_2,\dots,b_n$ 作为 $S$，每次取出 $S$ 的最小值，若最小值是 $a_i$，则把 $\{a_i,b_i\}$ 放在前面；若是 $b_i$，则把 $\{a_i,b_i\}$ 放在后面。然后在 $S$ 中删掉 $a_i,b_i$。</p>
-<p>一直处理到结束。</p>
-<p>伪代码如下：</p>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>反演题总是逃不开推式子的，还是套路枚举 $\gcd$（不妨假设 $n\le m$）：</p>
 <script type="math/tex; mode=display">
-\begin{array}{ll}
-1& S\leftarrow \{a_1,a_2,\dots,a_n,b_1,b_2,\dots,b_n\}\\
-2& P\leftarrow \varnothing\\ 
-3& L\leftarrow 1,R\leftarrow n\\
-4& \mathbf{while}\ S\neq \varnothing\\
-5& \qquad\mathbf{if}\ \min\{S\}\in\{a_i\}\\
-6& \qquad\mathbf{then}\ P_L\leftarrow \{a_i,b_i\},L\leftarrow L+1\\
-7& \qquad\mathbf{if} \min\{S\}\in\{b_i\}\\
-8& \qquad\mathbf{then}\ P_R\leftarrow\{a_i,b_i\},R\leftarrow R-1\\
-9& \qquad S\leftarrow S-\{a_i\}-\{b_i\}
-\end{array}</script><hr>
+\sum_{d=1}^n\sum_{i=1}^n\sum_{j=1}^m[\gcd(i,j)=d][\sigma(d)\le a]\sigma(d)</script><p>然后反演</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\sum_{d=1}^n[\sigma(d)\le a]\sigma(d)\sum_{d\mid t}\mu\left(\frac td\right)\left\lfloor\frac nt\right\rfloor\left\lfloor\frac mt\right\rfloor\\
+=&\sum_{t=1}^n\left\lfloor\frac nt\right\rfloor\left\lfloor\frac mt\right\rfloor\sum_{d\mid t}\mu\left(\frac td\right)[\sigma(d)\le a]\sigma(d)
+\end{aligned}</script><p>本来如果没有 $a$ 的限制（$a\to\infty$），就可以直接 $O(N\sqrt N)$ 预处理 $G(t)=\sum_{d\mid t}\mu\left(\frac td\right)\sigma(d)$ 即可；但是加上限制后有一些 $\sigma(d)$ 不能对 $G(T)$ 产生贡献了，于是考虑动态维护 $G(T)$。</p>
+<p>离线按 $a$ 从小到大处理询问，当 $a$ 增大时，就会有一些 $\sigma(d)$ 能够产生贡献了，枚举这些 $d$，$d$ 能对其倍数 $T$ 的 $G(T)$ 产生贡献。直接枚举 $T$，因为 $d$ 恰好会有 $1\sim N$ 的取值，则枚举 $T$ 的均摊复杂度是 $O(N\log N)$。</p>
+<p>考虑到数论分块时要用到 $G(T)$ 的区间和，则单点修改区间求和可以用常数相对较小的树状数组。</p>
+<p>这样每次询问要数论分块加上树状数组，复杂度 $O(Q\log N\sqrt N)$，而总共 $N$ 次修改贡献，均摊后每次 $O(\log^2 N)$，则修改复杂度 $O(N\log^2 N)$，总复杂度 $O(Q\log N\sqrt N+N\log^2 N)$。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> Q=<span class="number">2e4</span>+<span class="number">10</span>,N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> MOD=(<span class="keyword">unsigned</span>)<span class="number">2147483648</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ci const int &amp;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((x)&amp;((-x)))</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"><span class="keyword">int</span> cas,nprm,qry[Q][<span class="number">3</span>],qid[Q],prm[N];</span><br><span class="line"><span class="keyword">unsigned</span> tre[N],mu[N],ans[Q];</span><br><span class="line">pair&lt;<span class="keyword">unsigned</span>,<span class="keyword">int</span>&gt; sig[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> r=<span class="number">0</span>,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+(c^<span class="string">'0'</span>),c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> qry[a][<span class="number">2</span>]&lt;qry[b][<span class="number">2</span>];&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span><span class="params">(<span class="keyword">int</span> pos,ci key)</span></span>&#123;<span class="keyword">while</span>(pos&lt;N) tre[pos]+=key,pos+=lowbit(pos);&#125;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">Query</span><span class="params">(<span class="keyword">int</span> pos)</span></span>&#123;<span class="keyword">unsigned</span> ret=<span class="number">0</span>;<span class="keyword">while</span>(pos) ret+=tre[pos],pos-=lowbit(pos);<span class="keyword">return</span> ret;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;N;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j*j&lt;=i;j++)</span><br><span class="line">			<span class="keyword">if</span>(i%j==<span class="number">0</span>)&#123;</span><br><span class="line">				sig[i].first+=(<span class="keyword">unsigned</span>)j;</span><br><span class="line">				<span class="keyword">if</span>(j*j!=i) sig[i].first+=(<span class="keyword">unsigned</span>)i/j;</span><br><span class="line">			&#125;</span><br><span class="line">		sig[i].second=i;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(sig+<span class="number">1</span>,sig+N);</span><br><span class="line">	mu[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[i]) mu[prm[++nprm]=i]--;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=nprm &amp;&amp; prm[j]*i&lt;N;j++)&#123;</span><br><span class="line">			vis[prm[j]*i]=<span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">if</span>(i%prm[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">			mu[prm[j]*i]=-mu[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Init();</span><br><span class="line">	cas=Read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cas;i++)&#123;</span><br><span class="line">		qry[i][<span class="number">0</span>]=Read(),qry[i][<span class="number">1</span>]=Read(),qry[i][<span class="number">2</span>]=Read();</span><br><span class="line">		qid[i]=i;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(qid+<span class="number">1</span>,qid+<span class="number">1</span>+cas,cmp);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> I=<span class="number">1</span>,pos=<span class="number">1</span>;I&lt;=cas;I++)&#123;</span><br><span class="line">		<span class="keyword">int</span> i=qid[I],A=qry[i][<span class="number">2</span>];</span><br><span class="line">		<span class="keyword">while</span>(pos&lt;N &amp;&amp; sig[pos].first&lt;=(<span class="keyword">unsigned</span>)A)&#123;</span><br><span class="line">			<span class="keyword">int</span> num=sig[pos].second;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=num;j&lt;N;j+=num)</span><br><span class="line">				Update(j,mu[j/num]*sig[pos].first);</span><br><span class="line">			pos++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">unsigned</span> n=(<span class="keyword">unsigned</span>)qry[i][<span class="number">0</span>],m=(<span class="keyword">unsigned</span>)qry[i][<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span>(n&gt;m) swap(n,m);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">unsigned</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">unsigned</span> k=min(n/(n/j),m/(m/j));</span><br><span class="line">			ans[i]+=(n/j)*(m/j)*(Query(k)-Query(j<span class="number">-1</span>));</span><br><span class="line">			j=k;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cas;i++) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans[i]%MOD);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
 <h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
 \begin{split}
-&“\ 这一路上\ 韶华画你我模样\\
-&\ \ \ 披上戎装\ 不过为天下兴亡\\
-&\ \ \ 与子同袍\ 气吞河山见锋芒\\
-&\ \ \ 家国熙攘\ 待我浴血逐沙场\\
-&\\
-&\ \ \ 这一路上\ 岁月陪伴我成长\\
-&\ \ \ 握住月光\ 你是我心之所向\\
-&\ \ \ 势如破竹\ 浩荡间直上万丈\\
-&\ \ \ 哪怕逆风\ 也能够踏云乘浪\ ”\\
-&——《少年有为》\text{By 双笙(等)}
-\end{split}</script>
+“\ &我的心\ 情绪开关\ 在你的眼眸流转\\
+&等待着\ 你的潮汐\ 回溯这片海岸\\
+&繁星与伴\ 正升焰时的我\\
+&却不想成为\ 你沧海一粟的人世山川\ ”\\
+——&\text{《404 Not Found》By 赤羽}
+\end{split}</script><p>> Linked <a href="https://www.bilibili.com/video/BV1vE411R7iD?t=217" target="_blank" rel="noopener">404 Not Found</a>-Bilibili</p>
+
     </div>
 
     
@@ -424,7 +388,7 @@ p.headline{
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://luckyglass.github.io/2020/20Apr18thArt1/" title="学习笔记 - Johnson 不等式">https://luckyglass.github.io/2020/20Apr18thArt1/</a>
+    <a href="https://luckyglass.github.io/2020/20Sep5thArt2/" title="OI - 「SDOI2014」数表(洛谷)">https://luckyglass.github.io/2020/20Sep5thArt2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -436,7 +400,10 @@ p.headline{
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E8%B4%AA%E5%BF%83-%E6%B5%81%E6%B0%B4%E8%B0%83%E5%BA%A6/" rel="tag"><i class="fa fa-tag"></i> 贪心-流水调度</a>
+              <a href="/tags/%E6%B4%9B%E8%B0%B7/" rel="tag"><i class="fa fa-tag"></i> -洛谷-</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构-树状数组</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/" rel="tag"><i class="fa fa-tag"></i> 数学-莫比乌斯反演</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E6%95%B0%E8%AE%BA%E5%88%86%E5%9D%97/" rel="tag"><i class="fa fa-tag"></i> 数学-数论分块</a>
           </div>
 
         
@@ -445,13 +412,10 @@ p.headline{
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/20Apr17thArt1/" rel="prev" title="学习笔记 - 拟阵">
-      <i class="fa fa-chevron-left"></i> 学习笔记 - 拟阵
+    <a href="/2020/20Sep5thArt1/" rel="prev" title="学习笔记 - 杜教筛">
+      <i class="fa fa-chevron-left"></i> 学习笔记 - 杜教筛
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/20Apr23rdArt1/" rel="next" title="前行 - 2020常规赛XI">
-      前行 - 2020常规赛XI <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -512,7 +476,7 @@ p.headline{
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#流水调度问题"><span class="nav-text"># 流水调度问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法理论"><span class="nav-text"># 算法理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计贪心"><span class="nav-text"># 设计贪心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text"># 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
