@@ -29,8 +29,8 @@
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
         <tag>贪心</tag>
       </tags>
   </entry>
@@ -1113,8 +1113,8 @@ f_{i,j}\overset{+d(i,j)}\to f_{i+1,i}</script><p>这样是 $O(n^2)$ 的 DP，状
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数据结构-线段树</tag>
+        <tag>动态规划</tag>
         <tag>-HDU-</tag>
         <tag>数据结构-TREAP</tag>
         <tag>数据结构-归并树</tag>
@@ -1259,9 +1259,9 @@ f_{u,d}=\prod_{v}(f_{v,d}+f_{v,dep_v})</script><p>又要求 $u$ 满足作为 $pr
         <category>前行</category>
       </categories>
       <tags>
+        <tag>数据结构-线段树</tag>
         <tag>动态规划</tag>
         <tag>算法效率-矩阵加速</tag>
-        <tag>数据结构-线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -2748,8 +2748,8 @@ M_{i,j}=\begin{cases}\sum\limits_{e\in E_i}(1+w_ex)&i=j\\-\sum\limits_{e\in E_i\
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学-组合数</tag>
+        <tag>动态规划</tag>
         <tag>-AtCoder-</tag>
         <tag>图论-prufer数列</tag>
       </tags>
@@ -3945,8 +3945,8 @@ f_i&=\sum_{j=i}^D(-1)^{j-i}C_{j}^ig_j\\
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数据结构-线段树</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -4538,8 +4538,8 @@ f_{1,i}=h_i-\sum_{j=i+1}^mC_j^if_{1,j}</script><hr>
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学-容斥</tag>
         <tag>-洛谷-</tag>
+        <tag>数学-容斥</tag>
         <tag>动态规划-树形DP</tag>
       </tags>
   </entry>
@@ -4596,8 +4596,8 @@ f_{1,i}=h_i-\sum_{j=i+1}^mC_j^if_{1,j}</script><hr>
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>数据结构-线段树</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -5391,8 +5391,8 @@ b_i=\begin{cases}
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学-组合数</tag>
+        <tag>动态规划</tag>
         <tag>-Topcoder-</tag>
       </tags>
   </entry>
@@ -5536,9 +5536,9 @@ p=\sum_{i=1}^mP_i^{e_i}</script><p>$P_i$ 为第 $i$ 个质数。给定 $m$ 以�
         <category>前行</category>
       </categories>
       <tags>
+        <tag>数学</tag>
         <tag>动态规划</tag>
         <tag>算法效率-二分查找</tag>
-        <tag>数学</tag>
         <tag>贪心</tag>
         <tag>数学-组合计数</tag>
       </tags>
@@ -6219,9 +6219,9 @@ f_4=\frac12f_0+f_3\\
         <category>OI题解</category>
       </categories>
       <tags>
+        <tag>数据结构-线段树</tag>
         <tag>动态规划</tag>
         <tag>数学-期望</tag>
-        <tag>数据结构-线段树</tag>
         <tag>-Codeforces-</tag>
         <tag>数学-高斯消元</tag>
       </tags>
@@ -7291,8 +7291,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
       <tags>
         <tag>模拟</tag>
         <tag>动态规划</tag>
-        <tag>贪心</tag>
         <tag>图论-树</tag>
+        <tag>贪心</tag>
         <tag>数学-容斥</tag>
         <tag>数学-组合计数</tag>
       </tags>
@@ -8321,8 +8321,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学-期望</tag>
         <tag>数学-组合数</tag>
+        <tag>数学-期望</tag>
         <tag>-AtCoder-</tag>
       </tags>
   </entry>
@@ -8366,8 +8366,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -8558,8 +8558,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学-组合数</tag>
+        <tag>动态规划</tag>
         <tag>贪心</tag>
         <tag>-AtCoder-</tag>
       </tags>
@@ -8730,8 +8730,8 @@ ans=\sum_{i=0}^{n-1}\left[(a')^n(b')^i+(a')^i(b')^n\right]C_{n+i-1}^i\times\frac
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>数据结构-线段树</tag>
+        <tag>数学</tag>
         <tag>贪心</tag>
         <tag>算法效率-STL</tag>
         <tag>数据结构-链表</tag>
@@ -9410,8 +9410,8 @@ M_{1,n}=\begin{bmatrix}\sum_{i=1}b_i\times f_i\\\sum_{i=1}b_i\times f_{i-1}\end{
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>算法效率-矩阵加速</tag>
         <tag>数据结构-线段树</tag>
+        <tag>算法效率-矩阵加速</tag>
         <tag>算法效率-莫队</tag>
         <tag>-Codeforces-</tag>
       </tags>
@@ -10784,9 +10784,9 @@ A\equiv n\pmod m</script><p>由于可以知道在 $[k,k(m-1)]$ 中与 $n$ 模 $m
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学-组合数</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
         <tag>数学-容斥</tag>
       </tags>
   </entry>
@@ -10898,12 +10898,12 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
         <category>前行</category>
       </categories>
       <tags>
+        <tag>数据结构-线段树</tag>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
-        <tag>数据结构-线段树</tag>
-        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
         <tag>算法效率-扫描线</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -11087,8 +11087,8 @@ f(\lambda_1)=A(\lambda_1+\frac BA\lambda_2)^2+\frac{AC-B^2}A\cdot \lambda_2^2</s
         <category>前行</category>
       </categories>
       <tags>
-        <tag>模拟</tag>
         <tag>图论-最短路</tag>
+        <tag>模拟</tag>
         <tag>动态规划-区间DP</tag>
       </tags>
   </entry>
@@ -11276,9 +11276,9 @@ g(i,j)=\sum_{t=1}^kg(i-t,j)\cdot b_t</script><p>然后就可以构造矩阵了�
         <category>前行</category>
       </categories>
       <tags>
-        <tag>模拟</tag>
-        <tag>数学</tag>
         <tag>数据结构-线段树</tag>
+        <tag>数学</tag>
+        <tag>模拟</tag>
         <tag>算法效率-分块</tag>
       </tags>
   </entry>
@@ -11381,10 +11381,10 @@ x^m\equiv x\pmod {p_c}\\
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
-        <tag>数学-期望</tag>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
+        <tag>数学-期望</tag>
         <tag>算法效率-倍增</tag>
         <tag>数据结构-并查集</tag>
       </tags>
@@ -11957,9 +11957,9 @@ x_N+x_1=2y_N&&(N)
         <category>前行</category>
       </categories>
       <tags>
-        <tag>模拟</tag>
         <tag>数学-组合数</tag>
         <tag>数学</tag>
+        <tag>模拟</tag>
         <tag>算法效率-倍增</tag>
         <tag>图论-树</tag>
         <tag>算法效率-离线</tag>
@@ -12208,10 +12208,10 @@ A_i^4-kA_i&\equiv A_j^4-kA_j
         <category>前行</category>
       </categories>
       <tags>
-        <tag>模拟</tag>
         <tag>数学</tag>
-        <tag>贪心</tag>
+        <tag>模拟</tag>
         <tag>动态规划-状压DP</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -12520,9 +12520,9 @@ p&\leq q
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
         <tag>图论-树</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -13258,8 +13258,8 @@ x\equiv r_i\pmod{m_i}
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数据结构-线段树</tag>
+        <tag>动态规划</tag>
         <tag>算法效率</tag>
         <tag>搜索</tag>
         <tag>-BZOJ-</tag>
@@ -13397,9 +13397,9 @@ dp[i+1][j]=min\{dp[i+1][j],dp[i][j]\}</script><p>而且最后女儿不一定要�
         <category>前行</category>
       </categories>
       <tags>
+        <tag>数学</tag>
         <tag>模拟</tag>
         <tag>动态规划</tag>
-        <tag>数学</tag>
         <tag>贪心</tag>
         <tag>-Codeforces-</tag>
       </tags>
@@ -13762,8 +13762,8 @@ dp[T\cup \{i\}][i]=\min(dp[T][j],val[i][j])\ |\ i\not\in T,j\in T</script><p>不
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
         <tag>贪心</tag>
         <tag>-Codeforces-</tag>
         <tag>数学-博弈论</tag>
@@ -13834,8 +13834,8 @@ dp[T\cup \{i\}][i]=\min(dp[T][j],val[i][j])\ |\ i\not\in T,j\in T</script><p>不
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
         <tag>-Codeforces-</tag>
         <tag>数据结构-树状数组</tag>
       </tags>
@@ -14291,7 +14291,7 @@ fdp[anc][k-1][1][b]-dp[anc][1]+fdp[u][k-1][a][1]
 <p>如果矩形B的右边与矩形A相交，那么分割就会像这样：<br><img src="https://img-blog.csdnimg.cn/20181125122721885.png" alt="在这里插入图片描述"></p>
 </blockquote>
 <p>OK~切下来的矩形都会“漂浮”上去，对这些矩形统计涂色后各颜色块的变化数量就可以了~</p>
-<h4 id="D-Olya-and-magical-square"><a href="#D-Olya-and-magical-square" class="headerlink" title="D-Olya and magical square"></a>D-Olya and magical square</h4><p>另外写了一篇<a href="http://luckyglass.github.io/2019/01/05/%E7%AB%9E%E8%B5%9B%E9%A2%98%E8%A7%A3-CF-1080D-Olya-and-magical-square/">博客</a>$QwQ$</p>
+<h4 id="D-Olya-and-magical-square"><a href="#D-Olya-and-magical-square" class="headerlink" title="D-Olya and magical square"></a>D-Olya and magical square</h4><p>另外写了一篇<a href="http://luckyglass.github.io/2019/01/05/%E7%AB%9E%E8%B5%9B%E9%A2%98%E8%A7%A3-CF-1080D-Olya-and-magical-square/" target="_blank" rel="noopener">博客</a>$QwQ$</p>
 <hr>
 <h2 id="『源代码』"><a href="#『源代码』" class="headerlink" title="『源代码』"></a>『源代码』</h2><h4 id="A-Petya-and-Origami-1"><a href="#A-Petya-and-Origami-1" class="headerlink" title="A-Petya and Origami"></a>A-Petya and Origami</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n,k;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k);</span><br><span class="line">	<span class="keyword">double</span> A=n*<span class="number">2</span>,B=n*<span class="number">5</span>,C=n*<span class="number">8</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,(<span class="keyword">long</span> <span class="keyword">long</span>)<span class="built_in">ceil</span>(A/k)+(<span class="keyword">long</span> <span class="keyword">long</span>)<span class="built_in">ceil</span>(B/k)+(<span class="keyword">long</span> <span class="keyword">long</span>)<span class="built_in">ceil</span>(C/k));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="B-Margarite-and-the-best-present-1"><a href="#B-Margarite-and-the-best-present-1" class="headerlink" title="B-Margarite and the best present"></a>B-Margarite and the best present</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> l,r;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;l,&amp;r);</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> fl,fr,gl,gr;</span><br><span class="line">		<span class="keyword">if</span>(l%<span class="number">2</span>) fl=l,gl=l+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> gl=l,fl=l+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(r%<span class="number">2</span>) fr=r,gr=r<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">else</span> gr=r,fr=r<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> ans=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(gl&lt;=gr) ans+=(gl+gr)*((gr-gl)/<span class="number">2</span>+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>(fl&lt;=fr) ans-=(fl+fr)*((fr-fl)/<span class="number">2</span>+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -14399,7 +14399,7 @@ fdp[anc][k-1][1][b]-dp[anc][1]+fdp[u][k-1][a][1]
 <p>根据二分出来的k可以求出重叠的炸弹，如果炸弹i与炸弹j重叠，则说明放炸弹i就不能放炸弹j，根据这个连边，2-sat判断合法性即可。</p>
 <h4 id="源代码"><a href="#源代码" class="headerlink" title="[源代码]"></a>[源代码]</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">100</span>,M=<span class="number">40000</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> EPS=<span class="number">1e-5</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">POINT</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> x,y;</span><br><span class="line">&#125;s[N*<span class="number">2</span>+<span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">double</span> <span class="title">Dist2</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1.0</span>*(s[a].x-s[b].x)*(s[a].x-s[b].x)+<span class="number">1.0</span>*(s[a].y-s[b].y)*(s[a].y-s[b].y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EDGE</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to,nxt;</span><br><span class="line">&#125;edg1[M+<span class="number">5</span>],edg2[M+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> hed1[N*<span class="number">2</span>+<span class="number">5</span>],hed2[N*<span class="number">2</span>+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> cnt1,cnt2;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123; <span class="comment">//连边，正反图都要连</span></span><br><span class="line">	edg1[cnt1].to=v;</span><br><span class="line">	edg1[cnt1].nxt=hed1[u];</span><br><span class="line">	hed1[u]=cnt1++;</span><br><span class="line">	edg2[cnt2].to=u;</span><br><span class="line">	edg2[cnt2].nxt=hed2[v];</span><br><span class="line">	hed2[v]=cnt2++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ClearMap</span><span class="params">()</span></span>&#123; <span class="comment">//清空图</span></span><br><span class="line">	<span class="built_in">memset</span>(hed1,<span class="number">-1</span>,<span class="keyword">sizeof</span> hed1);</span><br><span class="line">	<span class="built_in">memset</span>(hed2,<span class="number">-1</span>,<span class="keyword">sizeof</span> hed2);</span><br><span class="line">	cnt1=cnt2=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Pop[N*<span class="number">2</span>+<span class="number">5</span>],blk[N*<span class="number">2</span>+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[N*<span class="number">2</span>+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> blkcnt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS1</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123; <span class="comment">//求出每个点退出DFS的顺序</span></span><br><span class="line">	vis[u]=<span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=hed1[u];i!=<span class="number">-1</span>;i=edg1[i].nxt)</span><br><span class="line">		<span class="keyword">if</span>(!vis[edg1[i].to])</span><br><span class="line">			DFS1(edg1[i].to);</span><br><span class="line">	Pop[++Pop[<span class="number">0</span>]]=u;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS2</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123; <span class="comment">//求强连通分量</span></span><br><span class="line">	vis[u]=<span class="literal">true</span>;blk[u]=blkcnt; <span class="comment">//blk[i]表示i所属的联通块编号</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=hed2[u];i!=<span class="number">-1</span>;i=edg2[i].nxt)</span><br><span class="line">		<span class="keyword">if</span>(!vis[edg2[i].to])</span><br><span class="line">			DFS2(edg2[i].to);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Check</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Pop[<span class="number">0</span>]=blkcnt=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="literal">false</span>,<span class="keyword">sizeof</span> vis);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>*n;i++)</span><br><span class="line">		<span class="keyword">if</span>(!vis[i])</span><br><span class="line">			DFS1(i);</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="literal">false</span>,<span class="keyword">sizeof</span> vis);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=Pop[<span class="number">0</span>];i&gt;=<span class="number">1</span>;i--) <span class="comment">//按照退出顺序</span></span><br><span class="line">		<span class="keyword">if</span>(!vis[Pop[i]])&#123;</span><br><span class="line">			blkcnt++;</span><br><span class="line">			DFS2(Pop[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="keyword">if</span>(blk[i*<span class="number">2</span>]==blk[i*<span class="number">2</span>+<span class="number">1</span>]) <span class="comment">//如果不合法</span></span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n))&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=i*<span class="number">2</span>;j&lt;=i*<span class="number">2</span>+<span class="number">1</span>;j++)</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;s[j].x,&amp;s[j].y);</span><br><span class="line">		<span class="keyword">double</span> lef=<span class="number">0</span>,rig=<span class="number">40000.0</span>;</span><br><span class="line">		<span class="keyword">while</span>(rig-lef&gt;=EPS)&#123;</span><br><span class="line">			<span class="keyword">double</span> mid=(lef+rig)/<span class="number">2</span>;</span><br><span class="line">			ClearMap();</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n*<span class="number">2</span>;i++) <span class="comment">//O(n^2)连边 :)</span></span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=i%<span class="number">2</span>? i+<span class="number">1</span>:i+<span class="number">2</span>;j&lt;<span class="number">2</span>*n;j++)</span><br><span class="line">					<span class="keyword">if</span>(Dist2(i,j)&lt;<span class="number">4</span>*mid*mid)</span><br><span class="line">						AddEdge(i,j^<span class="number">1</span>),</span><br><span class="line">						AddEdge(j,i^<span class="number">1</span>);</span><br><span class="line">			<span class="keyword">if</span>(Check()) lef=mid;</span><br><span class="line">			<span class="keyword">else</span> rig=mid;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,rig);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><del>(坑还没填完，下一个弄懂再写 TAT)</del><br><em>更新-$2018/11/17$；终于把后面一道题弄懂了</em> </p>
-<h3 id="另外一个例子……POJ-3207-Ikki’s-Story-IV-Panda’s-Trick"><a href="#另外一个例子……POJ-3207-Ikki’s-Story-IV-Panda’s-Trick" class="headerlink" title="另外一个例子……POJ 3207 Ikki’s Story IV - Panda’s Trick"></a>另外一个例子……POJ 3207 Ikki’s Story IV - Panda’s Trick</h3><p>想法比较丰富……另外写一个<a href="https://luckyglass.github.io/2019/01/05/%E7%AB%9E%E8%B5%9B%E9%A2%98%E8%A7%A3-Ikki-s-Story-IV-Panda-s-Trick/">blog</a>……</p>
+<h3 id="另外一个例子……POJ-3207-Ikki’s-Story-IV-Panda’s-Trick"><a href="#另外一个例子……POJ-3207-Ikki’s-Story-IV-Panda’s-Trick" class="headerlink" title="另外一个例子……POJ 3207 Ikki’s Story IV - Panda’s Trick"></a>另外一个例子……POJ 3207 Ikki’s Story IV - Panda’s Trick</h3><p>想法比较丰富……另外写一个<a href="https://luckyglass.github.io/2019/01/05/%E7%AB%9E%E8%B5%9B%E9%A2%98%E8%A7%A3-Ikki-s-Story-IV-Panda-s-Trick/" target="_blank" rel="noopener">blog</a>……</p>
 <hr>
 <h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><p>Email: lucky_glass@foxmail.com ，欢迎提问~</p>
 ]]></content>

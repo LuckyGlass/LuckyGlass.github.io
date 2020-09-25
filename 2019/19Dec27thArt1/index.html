@@ -86,30 +86,30 @@ p.headline{
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"luckyglass.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
   </script>
 
   <meta name="description" content="以前做斜率不单调的斜率DP（或者说凸包优化），因为不知道CDQ分治怎么弄，然后就学了一下 Splay 的做法…… 思想挺简单，但是写起来就…… :&lt; 写完Splay过后又尝试用非旋Treap写，结果一直Wa几天都没调出来 QwQ 幸亏还有李超线段树~">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习笔记 - 暂别平衡树：李超线段树">
-<meta property="og:url" content="https://luckyglass.github.io/2019/19Dec27thArt1/">
+<meta property="og:url" content="https://4rds5h.coding-pages.com/2019/19Dec27thArt1/">
 <meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
 <meta property="og:description" content="以前做斜率不单调的斜率DP（或者说凸包优化），因为不知道CDQ分治怎么弄，然后就学了一下 Splay 的做法…… 思想挺简单，但是写起来就…… :&lt; 写完Splay过后又尝试用非旋Treap写，结果一直Wa几天都没调出来 QwQ 幸亏还有李超线段树~">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://luckyglass.github.io/2019/19Dec27thArt1/jpg1.jpg">
-<meta property="og:image" content="https://luckyglass.github.io/2019/19Dec27thArt1/jpg2.jpg">
-<meta property="og:image" content="https://luckyglass.github.io/2019/19Dec27thArt1/jpg3.jpg">
-<meta property="og:image" content="https://luckyglass.github.io/2019/19Dec27thArt1/jpg4.jpg">
-<meta property="og:image" content="https://luckyglass.github.io/2019/19Dec27thArt1/jpg5.jpg">
+<meta property="og:image" content="https://4rds5h.coding-pages.com/2019/19Dec27thArt1/jpg1.jpg">
+<meta property="og:image" content="https://4rds5h.coding-pages.com/2019/19Dec27thArt1/jpg2.jpg">
+<meta property="og:image" content="https://4rds5h.coding-pages.com/2019/19Dec27thArt1/jpg3.jpg">
+<meta property="og:image" content="https://4rds5h.coding-pages.com/2019/19Dec27thArt1/jpg4.jpg">
+<meta property="og:image" content="https://4rds5h.coding-pages.com/2019/19Dec27thArt1/jpg5.jpg">
 <meta property="article:published_time" content="2019-12-27T09:33:46.000Z">
 <meta property="article:modified_time" content="2019-12-28T15:29:23.714Z">
 <meta property="article:author" content="Lucky_Glass">
 <meta property="article:tag" content="数据结构-线段树">
 <meta property="article:tag" content="动态规划-凸包优化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://luckyglass.github.io/2019/19Dec27thArt1/jpg1.jpg">
+<meta name="twitter:image" content="https://4rds5h.coding-pages.com/2019/19Dec27thArt1/jpg1.jpg">
 
-<link rel="canonical" href="https://luckyglass.github.io/2019/19Dec27thArt1/">
+<link rel="canonical" href="https://4rds5h.coding-pages.com/2019/19Dec27thArt1/">
 
 
 <script id="page-configurations">
@@ -273,7 +273,7 @@ p.headline{
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://luckyglass.github.io/2019/19Dec27thArt1/">
+    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2019/19Dec27thArt1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -440,7 +440,7 @@ p.headline{
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://luckyglass.github.io/2019/19Dec27thArt1/" title="学习笔记 - 暂别平衡树：李超线段树">https://luckyglass.github.io/2019/19Dec27thArt1/</a>
+    <a href="https://4rds5h.coding-pages.com/2019/19Dec27thArt1/" title="学习笔记 - 暂别平衡树：李超线段树">https://4rds5h.coding-pages.com/2019/19Dec27thArt1/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
