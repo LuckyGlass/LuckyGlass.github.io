@@ -98,13 +98,16 @@ p.headline{
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://4rds5h.coding-pages.com/2020/20Oct22ndArt1/png1.png">
 <meta property="article:published_time" content="2020-10-22T15:18:50.000Z">
-<meta property="article:modified_time" content="2020-10-29T15:50:01.270Z">
+<meta property="article:modified_time" content="2020-11-02T05:15:47.252Z">
 <meta property="article:author" content="Lucky_Glass">
 <meta property="article:tag" content="数学-组合数">
 <meta property="article:tag" content="数学">
-<meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="数学-期望">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="数据结构-并查集">
+<meta property="article:tag" content="贪心">
 <meta property="article:tag" content="图论-树">
+<meta property="article:tag" content="动态规划-树形DP">
 <meta property="article:tag" content="数学-生成函数">
 <meta property="article:tag" content="数学-FWT">
 <meta name="twitter:card" content="summary">
@@ -304,7 +307,7 @@ p.headline{
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-29 23:50:01" itemprop="dateModified" datetime="2020-10-29T23:50:01+08:00">2020-10-29</time>
+                <time title="修改时间：2020-11-02 13:15:47" itemprop="dateModified" datetime="2020-11-02T13:15:47+08:00">2020-11-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -439,7 +442,8 @@ C(w)&=\sum_{i\in S}a_i,X(w)=\sum_{i\in S}b_i\\
 P(w)&=X(w)!\prod_{i\in S}\left(\frac {a_i}{C(w)}\right)^{w_i}\frac{1}{w_i!}=\frac{X(w)!}{C^{X(w)}(w)}\prod_{i\in S}\frac{a_i^{w_i}}{w_i!}
 \end{aligned}</script><p>设计DP：$f_{C,X}$ 表示 $C(w)=C,X(w)=X$ 的 $\prod_{i\in S}\frac{a_i^{w_i}}{w_i!}$ 带上容斥系数的和。转移决策 $i=0\sim n-1$ 是否加入已有的状态里（$i$ 是否加入集合 $S$），以及加入多少次（$w_i$），类似于一个背包。复杂度 $O((\sum b_i)^2\sum a_i)$ 。</p>
 <hr>
-<h2 id="T5-Manju-Game"><a href="#T5-Manju-Game" class="headerlink" title="# T5 - Manju Game"></a># T5 - Manju Game</h2><details class="fold"><summary>点击展开/折叠题面</summary><p>有 $n$ 个数字（$n\le3\times 10^5$），A,B进行博弈。A 是先手，A,B轮流进行下面的操作：</p><ul><li>如果当前是第一次选择数字，或对手上一次选择的数字的相邻两个数字都被选择了，则任意选择一个没有被选择的数字。</li><li>否则任意选择与对手上一次选择的数字相邻的、没有被选择的数字。</li></ul><p>A,B都想要最大化自己选的数字之和，求最优策略下，A,B最后的数字和各自是多少。</p></details>
+<h2 id="T5-Manju-Game"><a href="#T5-Manju-Game" class="headerlink" title="# T5 - Manju Game"></a># T5 - Manju Game</h2><p>> Linked <a href="https://atcoder.jp/contests/agc026/tasks/agc026_f" target="_blank" rel="noopener">AtCoder AGC026-F</a></p>
+<details class="fold"><summary>点击展开/折叠题面</summary><p>有 $n$ 个数字（$n\le3\times 10^5$），A,B进行博弈。A 是先手，A,B轮流进行下面的操作：</p><ul><li>如果当前是第一次选择数字，或对手上一次选择的数字的相邻两个数字都被选择了，则任意选择一个没有被选择的数字。</li><li>否则任意选择与对手上一次选择的数字相邻的、没有被选择的数字。</li></ul><p>A,B都想要最大化自己选的数字之和，求最优策略下，A,B最后的数字和各自是多少。</p></details>
 
 <p>我们发现操作大致可以理解为：“先手”随便取一个位置，“后手”决定一个方向，然后先后手轮流取，直到不能取（这样称作一个<em>回合</em>）。显然这样操作，每个回合后，可以取的数字是一个连续的区间。</p>
 <p>那么先手在一个回合中的第一次操作可以分为两类：</p>
@@ -468,7 +472,31 @@ P(w)&=X(w)!\prod_{i\in S}\left(\frac {a_i}{C(w)}\right)^{w_i}\frac{1}{w_i!}=\fra
 <p>反之，如果不能这样“首尾相接”，后手就一定可以将剩余区间引导到一个不能被划分成若干合法区间的方向，则不满足条件。</p>
 <p>于是做一个简单的 dp，设 $f_i$ 表示前 $i$ 个位置能否被划分为合法区间，可以优化到 $O(1)$ 转移。因此 DP 复杂度 $O(n)$，总复杂度 $O(n\log n)$。</p>
 <hr>
-<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4>
+<h2 id="T6-Donation"><a href="#T6-Donation" class="headerlink" title="# T6 - Donation"></a># T6 - Donation</h2><p>> Linked <a href="https://atcoder.jp/contests/arc098/tasks/arc098_d" target="_blank" rel="noopener">AtCoder ARC098-F</a></p>
+<details class="fold"><summary>点击展开/折叠题面</summary><p>$n$ 个点，有 $m$ 条无向边使它们构成一个连通图（$1\le n,m\le10^5$）。每个点有两个参数 $A_i,B_i$，表示你从另一个点到达该点时（或者你从该点出发时）至少要有 $A_i$ 元钱，你在该点时，可以选择给该点贡献 $B_i$ 元钱，但是结束时，你必须给每个点恰好贡献一次。你可以随便选择一个点开始，求你开始时最少需要带多少钱。</p></details>
+
+<p>有个比较显然的性质是在最优策略下，一定是<strong>在最后一次到达这个点时进行贡献</strong>。如果不是，我们可以把贡献改到最后一次到达该点时进行贡献，显然仍然满足要求。</p>
+<p>然后有一个重要的转化——“到达点 $u$ 时至少有 $a_u$ 元钱” 等价于 “离开点 $u$ 时至少有 $a_u-b_u$ 元钱”，即考虑最后一次到达该点，首先必须有 $a_u$ 元钱，然后贡献 $b_u$ 元钱后离开，之后就不再到达点 $u$。</p>
+<p>令 $c_u=a_u-b_u$，则贪心地想，先去 $c_u$ 大的点进行贡献，之后就不经过 $u$ 了。</p>
+<p>于是先取出 $c_u$ 最大的 $u$，把这个点删去<strong>得到若干个连通块</strong>，设为 $G_1,G_2,\dots,G_k$；则根据之前的结论，我们要先把 $G_{1\sim i-1},G_{i+1\sim k}$ 全部贡献完，然后贡献 $u$，再走到 $G_i$ 里面就不返回 $u$ 了。</p>
+<p>可以看出上述递归处理问题的方式形成了一个树形结构——当前的 $c_u$ 最大点 $u$ 作为当前连通块的“根”，把连通块分成若干连通分量，而连通分量里的 $c_v$ 最大点 $v$ 又作为连通分量的“根”，$(u,v)$ 表现为父子关系。这样的树形结构中，父亲的 $c$ 大于等于儿子。</p>
+<p>于是考虑树形DP——$f_u$ 表示把子树 $u$ 所代表的连通块全部贡献完最少需要带多少钱。设 $tot(u)$ 表示 $u$ 子树内的 $b$ 之和。则：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&f_u:=tot(u)+c_u\\
+&f_u:=\min_v\{f_u,tot_u-tot_v+\max\{f_v,c_u\}\}
+\end{align}</script><p>(4) 即表示把子树 $u$ 贡献完后又返回 $u$，除去需要贡献的 $tot(u)$ 元钱，离开 $u$ 时至少还有 $c_u$ 元。因为 $u$ 是当前连通块的 $c$ 最大点，只要贡献后剩的钱足够 $c_u$，也一定满足其他点的限制。</p>
+<p>(5) 即表示先进入其他连通分量完成贡献，再贡献 $u$，最后进入连通分量 $G_v$ 贡献。在其他连通分量和 $u$ 中总共贡献 $tot(u)-tot(v)$，离开 $u$ 进入 $G_v$ 时，至少要有 $c_u$ 元，在 $G_v$ 最少需要带 $f_v$ 元，所以是 $\max\{f_v,c_u\}$。</p>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &我看不到你内心真实的想法\\
+&也不奢望感同身受成为依靠臂膀\\
+&也许我们注视着同样的地方\\
+&聚着光\ 被照亮\ ”\\
+——&\text{《你别忘》By 泠鸢yousa}
+\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=1489958235&amp;userid=303853271" target="_blank" rel="noopener">你别忘</a>-网易云</p>
+
     </div>
 
     
@@ -497,9 +525,12 @@ P(w)&=X(w)!\prod_{i\in S}\left(\frac {a_i}{C(w)}\right)^{w_i}\frac{1}{w_i!}=\fra
           <div class="post-tags">
               <a href="/tags/%E6%95%B0%E5%AD%A6-%E7%BB%84%E5%90%88%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 数学-组合数</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
-              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6-%E6%9C%9F%E6%9C%9B/" rel="tag"><i class="fa fa-tag"></i> 数学-期望</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 数据结构-并查集</a>
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"><i class="fa fa-tag"></i> 贪心</a>
               <a href="/tags/%E5%9B%BE%E8%AE%BA-%E6%A0%91/" rel="tag"><i class="fa fa-tag"></i> 图论-树</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%A0%91%E5%BD%A2DP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-树形DP</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6-%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 数学-生成函数</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6-FWT/" rel="tag"><i class="fa fa-tag"></i> 数学-FWT</a>
           </div>
@@ -577,7 +608,7 @@ P(w)&=X(w)!\prod_{i\in S}\left(\frac {a_i}{C(w)}\right)^{w_i}\frac{1}{w_i!}=\fra
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#小引"><span class="nav-text"># 小引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T1-Distance-Sums-Atcoder"><span class="nav-text"># T1 - Distance Sums (Atcoder)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T2-RNG-and-XOR"><span class="nav-text"># T2 - RNG and XOR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T3-Stop-Otherwise…"><span class="nav-text"># T3 - Stop. Otherwise…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T4-Gachapon"><span class="nav-text"># T4 - Gachapon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T5-Manju-Game"><span class="nav-text"># T5 - Manju Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#小引"><span class="nav-text"># 小引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T1-Distance-Sums-Atcoder"><span class="nav-text"># T1 - Distance Sums (Atcoder)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T2-RNG-and-XOR"><span class="nav-text"># T2 - RNG and XOR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T3-Stop-Otherwise…"><span class="nav-text"># T3 - Stop. Otherwise…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T4-Gachapon"><span class="nav-text"># T4 - Gachapon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T5-Manju-Game"><span class="nav-text"># T5 - Manju Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T6-Donation"><span class="nav-text"># T6 - Donation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -657,7 +688,7 @@ P(w)&=X(w)!\prod_{i\in S}\left(\frac {a_i}{C(w)}\right)^{w_i}\frac{1}{w_i!}=\fra
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共362k字</span>
+  <span class="post-count">博客全站共362.7k字</span>
 </div>
 
         
