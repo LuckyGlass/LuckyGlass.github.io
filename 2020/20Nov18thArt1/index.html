@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="code-5ShoHSHaJq" />
+<meta name="baidu-site-verification" content="code-SaEpttARVo" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+details.fold{
+	background-color:#EEEEEE;
+	border-radius:.3rem;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+details.fold summary{
+	background-color:#555555;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold p{
+	padding-left:10px;
+	padding-right:10px;
+}
+summary.fold{
+	background-color:#555555;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+p.fold{
+	padding-left:10px;
+	padding-right:10px;
+}
+p.block{
+	background-color:#EEEEEE;
+	border-radius:.3rem;
+	padding-left:5px;
+	padding-right:5px;
+	padding-bottom:5px;
+}
+div.block{
+	background-color: #EEEEEE;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+}
+div.block p{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+}
+p.headline{
+	font-weight: bold;
+	background-color: #808080;
+	color: white;
+	border-top-left-radius: .3rem;
+	border-top-right-radius: .3rem;
+	margin-bottom: 0px;
+}
+</style>
+<script>
+	var test=window.location.href;
+	var res=test.toLowerCase().indexOf("4rds5h");
+	if(res!=-1){
+		var go=test.replace("4rds5h.coding-pages.com","coding-pages-bucket-51839-7854799-5081-374285-1303700546.cos-website.ap-hongkong.myqcloud.com");
+		window.location.replace(go);
+	}
+	res=test.toLowerCase().indexOf("github");
+	if(res!=-1){
+		var go=test.replace("luckyglass.github.io","coding-pages-bucket-51839-7854799-5081-374285-1303700546.cos-website.ap-hongkong.myqcloud.com");
+		window.location.replace(go);
+	}
+</script>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="好得没话说的题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI - Borrow(HDU)">
+<meta property="og:url" content="https://4rds5h.coding-pages.com/2020/20Nov18thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="好得没话说的题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-18T11:12:25.000Z">
+<meta property="article:modified_time" content="2020-11-18T12:11:31.098Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="数学-组合数">
+<meta property="article:tag" content="数学-期望">
+<meta property="article:tag" content="-HDU-">
+<meta property="article:tag" content="动态规划-期望DP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://4rds5h.coding-pages.com/2020/20Nov18thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>OI - Borrow(HDU) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2020/20Nov18thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="玻璃易碎，但打碎玻璃的人也将被玻璃划伤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI - Borrow(HDU)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-18 19:12:25 / 修改时间：20:11:31" itemprop="dateCreated datePublished" datetime="2020-11-18T19:12:25+08:00">2020-11-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/20Nov18thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/20Nov18thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>好得没话说的题</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><details class="fold">
+    <summary>点击展开/折叠 题面</summary>
+    <p>三个人玩游戏，一开始每个人分别有 $x,y,z$ 枚硬币。每轮游戏，有最多硬币的人（如果有两个人的硬币数量最多，则随机选取一人）把自己的一枚硬币随机地给另外两个人之一。游戏一直进行到三个人有一样多的硬币。</p>
+    <p>给定 $x,y,z$，求游戏期望进行多少轮，或期望值为 $+\infty$ 输出 $-1$。</p>
+</details>
+
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>记 $n=x+y+z$，不难想到一个状态数为 $n^2$ 的 DP；为了方便下面分析正解，这里采取一个（在之后的正解中）更为优美的 DP 定义：$f(a,b)$ 表示，当最大值与另外两个值<strong>之差</strong>分别为 $a,b$ 时，期望进行多少轮结束。</p>
+<blockquote>
+<p>为了方便描述，令 $a=x-y,b=x-z$，即 $x$ 为最大值。</p>
+</blockquote>
+<p>终止状态 $f(0,0)=0$，不可达状态为 $3\not\mid a+b$ 的 $f(a,b)$。</p>
+<p>然后考虑转移，需要注意的是转移硬币后最大值改变的情况：</p>
+<ul>
+<li>若 $a,b\ge 2$，则 $x$ 无论分给哪一个，$x$ 也一定还是最大值，则有 $f(a,b)=\frac{f(a-1,b-2)+f(a-2,b-1)}2+1$；</li>
+<li><p>若 $a=1,b\ge 2$（$b=1,a\ge 2$ 同理）：</p>
+<p>如果 $x$ 分给 $z$，则 $x-1=y\ge z+1$，最大值不变：$f(0,b-2)$；</p>
+<p>如果分给 $y$，则 $y+1=x,x-1=y$，其实并没有变化：$f(1,b)$；</p>
+<p>则有 $f(1,b)=\frac{f(0,b-2)+f(1,b)}2+1$；</p>
+</li>
+<li><p>若 $a=0,b\ge 2$：</p>
+<p>如果 $x$ 分给 $y$，则最大值变为 $y+1$，新的状态为 $f(2,b+1)$；</p>
+<p>如果 $x$ 分给 $z$，则最大值变为 $y$，新的状态为 $f(1,b-1)$；</p>
+<p>则有 $f(0,b)=\frac{f(2,b+1)+f(1,b-1)}2+1$；</p>
+</li>
+</ul>
+<p>对于 $f(0,b)$ 的转移式，把 $f(2,b+1)$ 的转移式代入可得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+f(0,b)&=\tfrac12\Big(\tfrac12f(1,b-1)+\tfrac12f(0,b)+1\Big)+\tfrac12f(1,b-1)+1\\
+&=\tfrac34f(1,b-1)+\tfrac14f(0,b)+\tfrac32\\
+\Leftrightarrow f(0,b)&=f(1,b-1)+2
+\end{aligned}</script><p>这样我们消元得到了一个无环的 DP，可以在时间复杂度 $O(n^2)$ 内求解。</p>
+<p>进一步分析，DP的转移只有在 $a&lt;2$ 或 $b&lt;2$ 时是需要消元来解环的，其他时候（$a,b\ge 2$）的转移形式都是“日字形”，从 $(a,b)$ 转到 $(a-1,b-2)/(a-2,b-1)$。</p>
+<p>那么可以先 $O(n)$ 预处理出 $f(0/1,b)$，然后直接计算每个 $f(0/1,b)$ 对 $f(x,y)$ 的贡献——</p>
+<ul>
+<li>$f(1,b)$ 对 $f(x,y)$ 的贡献就是 $T(L+f(1,b))\times2^L$，其中 $T$ 是从 $(x,y)$ 走日字形走到 $(1,b)$ 的路径条数，路径长度为 $L$。</li>
+<li>$f(0,b)$ 的贡献仍然是 $T(L+f(1,b))\times2^L$，但是注意 $T$ 包含的路径不能经过 $f(1,b+2)$，不然会和 $f(1,b+2)$ 的贡献算重。</li>
+</ul>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD=<span class="number">998244353</span>,N=<span class="number">1e6</span>+<span class="number">10</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ci const int &amp;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Sub</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> <span class="keyword">int</span>(<span class="number">1l</span>l*a*b%MOD);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> b? Mul(Pow(Mul(a,a),b&gt;&gt;<span class="number">1</span>),(b&amp;<span class="number">1</span>)? a:<span class="number">1</span>):<span class="number">1</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INV2=Pow(<span class="number">2</span>,MOD<span class="number">-2</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[N][<span class="number">2</span>],fac[N&lt;&lt;<span class="number">1</span>],ifac[N&lt;&lt;<span class="number">1</span>],ivpow[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitDP</span><span class="params">()</span></span>&#123;</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">2</span>;x&lt;N;x++)&#123;</span><br><span class="line">		<span class="keyword">if</span>((x+<span class="number">1</span>)%<span class="number">3</span>==<span class="number">0</span>) f[x][<span class="number">1</span>]=Add(f[x<span class="number">-2</span>][<span class="number">0</span>],<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">if</span>(x%<span class="number">3</span>==<span class="number">0</span>) f[x][<span class="number">0</span>]=Add(f[x<span class="number">-1</span>][<span class="number">1</span>],<span class="number">2</span>);</span><br><span class="line"><span class="comment">//		if(x&lt;=10) printf("%d : %d\n",x,f[x][0]);</span></span><br><span class="line">	&#125;</span><br><span class="line">	fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;(N&lt;&lt;<span class="number">1</span>);i++) fac[i]=Mul(fac[i<span class="number">-1</span>],i);</span><br><span class="line">	ifac[(N&lt;&lt;<span class="number">1</span>)<span class="number">-1</span>]=Pow(fac[(N&lt;&lt;<span class="number">1</span>)<span class="number">-1</span>],MOD<span class="number">-2</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=(N&lt;&lt;<span class="number">1</span>)<span class="number">-2</span>;i&gt;=<span class="number">0</span>;i--) ifac[i]=Mul(ifac[i+<span class="number">1</span>],i+<span class="number">1</span>);</span><br><span class="line">	ivpow[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;(N&lt;&lt;<span class="number">1</span>);i++) ivpow[i]=Mul(ivpow[i<span class="number">-1</span>],INV2);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Sort</span><span class="params">(<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y,<span class="keyword">int</span> &amp;z)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;y) swap(x,y);</span><br><span class="line">	<span class="keyword">if</span>(x&lt;z) swap(x,z);</span><br><span class="line">	<span class="keyword">if</span>(y&lt;z) swap(y,z);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Comb</span><span class="params">(<span class="keyword">int</span> b,<span class="keyword">int</span> a)</span></span>&#123;<span class="keyword">return</span> a&gt;b? <span class="number">0</span>:Mul(fac[b],Mul(ifac[a],ifac[b-a]));&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">DP</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret=<span class="number">0</span>;</span><br><span class="line">	<span class="comment">//(x,y) -&gt; (1,i)</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=y;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> dx=x<span class="number">-1</span>,dy=y-i;</span><br><span class="line">		<span class="keyword">if</span>((dx+dy)%<span class="number">3</span>) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">int</span> p=(<span class="number">2</span>*dx-dy)/<span class="number">3</span>,q=(<span class="number">2</span>*dy-dx)/<span class="number">3</span>;</span><br><span class="line">		<span class="keyword">if</span>(p&lt;<span class="number">0</span> || q&lt;<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		assert(p+q&lt;(N&lt;&lt;<span class="number">1</span>));</span><br><span class="line">		ret=Add(ret,Mul(Mul(ivpow[p+q],Comb(p+q,p)),p+q+f[i][<span class="number">1</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//(x,y) -&gt; (0,i)</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=y;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> dx=x<span class="number">-0</span>,dy=y-i;</span><br><span class="line">		<span class="keyword">if</span>((dx+dy)%<span class="number">3</span>) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">int</span> p=(<span class="number">2</span>*dx-dy)/<span class="number">3</span>,q=(<span class="number">2</span>*dy-dx)/<span class="number">3</span>;</span><br><span class="line">		<span class="keyword">if</span>(p&lt;<span class="number">0</span> || q&lt;<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		assert(p+q&lt;(N&lt;&lt;<span class="number">1</span>));</span><br><span class="line">		ret=Add(ret,Mul(Mul(ivpow[p+q],Comb(p+q,p)),p+q+f[i][<span class="number">0</span>]));</span><br><span class="line">		ret=Sub(ret,Mul(Mul(ivpow[p+q],Comb(p+q<span class="number">-1</span>,p)),p+q+f[i][<span class="number">0</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">"game.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"game.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">	InitDP();</span><br><span class="line">	<span class="keyword">int</span> cas;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;cas);</span><br><span class="line">	<span class="keyword">while</span>(cas--)&#123;</span><br><span class="line">		<span class="keyword">int</span> a,b,c;<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;c);</span><br><span class="line">		<span class="keyword">int</span> n=a+b+c;</span><br><span class="line">		<span class="keyword">if</span>(n%<span class="number">3</span>)&#123;<span class="built_in">printf</span>(<span class="string">"-1\n"</span>);<span class="keyword">continue</span>;&#125;</span><br><span class="line">		Sort(a,b,c);</span><br><span class="line">		<span class="keyword">int</span> x=a-b,y=a-c;</span><br><span class="line">		<span class="keyword">if</span>(x&lt;y) swap(x,y);</span><br><span class="line">		<span class="keyword">if</span>(y&lt;<span class="number">2</span>)&#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,f[x][y]);<span class="keyword">continue</span>;&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,Add(DP(x,y),DP(y,x)));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h3 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h3><script type="math/tex; mode=display">
+\begin{split}
+“\ &曾用谎言开辟生路\\
+&曾用谎言陷死局不复\\
+&却也被后来人用谎言去救赎\\
+&便是我心中赤途\\
+&曾看过谁人性都交付\\
+&曾听到谁心底恸哭\\
+&还有曙光并不后悔踏上这赤途\ ”\\
+——&\text{《赤途》By litterzy/洛天依/乐正绫}
+\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=1389040747&amp;userid=303853271" target="_blank" rel="noopener">赤途</a>-网易云</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://4rds5h.coding-pages.com/2020/20Nov18thArt1/" title="OI - Borrow(HDU)">https://4rds5h.coding-pages.com/2020/20Nov18thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E7%BB%84%E5%90%88%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 数学-组合数</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E6%9C%9F%E6%9C%9B/" rel="tag"><i class="fa fa-tag"></i> 数学-期望</a>
+              <a href="/tags/HDU/" rel="tag"><i class="fa fa-tag"></i> -HDU-</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%9C%9F%E6%9C%9BDP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-期望DP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/20Nov17thArt2/" rel="prev" title="OI - 巴士走读(LOJ)">
+      <i class="fa fa-chevron-left"></i> OI - 巴士走读(LOJ)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text"># 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">玻璃易碎，但打碎玻璃的人也将被玻璃划伤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">130</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共371.7k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -14,6 +14,78 @@
 ]]></content>
   </entry>
   <entry>
+    <title>OI - Borrow(HDU)</title>
+    <url>/2020/20Nov18thArt1/</url>
+    <content><![CDATA[<blockquote>
+<p>好得没话说的题</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><details class="fold">
+    <summary>点击展开/折叠 题面</summary>
+    <p>三个人玩游戏，一开始每个人分别有 $x,y,z$ 枚硬币。每轮游戏，有最多硬币的人（如果有两个人的硬币数量最多，则随机选取一人）把自己的一枚硬币随机地给另外两个人之一。游戏一直进行到三个人有一样多的硬币。</p>
+    <p>给定 $x,y,z$，求游戏期望进行多少轮，或期望值为 $+\infty$ 输出 $-1$。</p>
+</details>
+
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>记 $n=x+y+z$，不难想到一个状态数为 $n^2$ 的 DP；为了方便下面分析正解，这里采取一个（在之后的正解中）更为优美的 DP 定义：$f(a,b)$ 表示，当最大值与另外两个值<strong>之差</strong>分别为 $a,b$ 时，期望进行多少轮结束。</p>
+<blockquote>
+<p>为了方便描述，令 $a=x-y,b=x-z$，即 $x$ 为最大值。</p>
+</blockquote>
+<p>终止状态 $f(0,0)=0$，不可达状态为 $3\not\mid a+b$ 的 $f(a,b)$。</p>
+<p>然后考虑转移，需要注意的是转移硬币后最大值改变的情况：</p>
+<ul>
+<li>若 $a,b\ge 2$，则 $x$ 无论分给哪一个，$x$ 也一定还是最大值，则有 $f(a,b)=\frac{f(a-1,b-2)+f(a-2,b-1)}2+1$；</li>
+<li><p>若 $a=1,b\ge 2$（$b=1,a\ge 2$ 同理）：</p>
+<p>如果 $x$ 分给 $z$，则 $x-1=y\ge z+1$，最大值不变：$f(0,b-2)$；</p>
+<p>如果分给 $y$，则 $y+1=x,x-1=y$，其实并没有变化：$f(1,b)$；</p>
+<p>则有 $f(1,b)=\frac{f(0,b-2)+f(1,b)}2+1$；</p>
+</li>
+<li><p>若 $a=0,b\ge 2$：</p>
+<p>如果 $x$ 分给 $y$，则最大值变为 $y+1$，新的状态为 $f(2,b+1)$；</p>
+<p>如果 $x$ 分给 $z$，则最大值变为 $y$，新的状态为 $f(1,b-1)$；</p>
+<p>则有 $f(0,b)=\frac{f(2,b+1)+f(1,b-1)}2+1$；</p>
+</li>
+</ul>
+<p>对于 $f(0,b)$ 的转移式，把 $f(2,b+1)$ 的转移式代入可得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+f(0,b)&=\tfrac12\Big(\tfrac12f(1,b-1)+\tfrac12f(0,b)+1\Big)+\tfrac12f(1,b-1)+1\\
+&=\tfrac34f(1,b-1)+\tfrac14f(0,b)+\tfrac32\\
+\Leftrightarrow f(0,b)&=f(1,b-1)+2
+\end{aligned}</script><p>这样我们消元得到了一个无环的 DP，可以在时间复杂度 $O(n^2)$ 内求解。</p>
+<p>进一步分析，DP的转移只有在 $a&lt;2$ 或 $b&lt;2$ 时是需要消元来解环的，其他时候（$a,b\ge 2$）的转移形式都是“日字形”，从 $(a,b)$ 转到 $(a-1,b-2)/(a-2,b-1)$。</p>
+<p>那么可以先 $O(n)$ 预处理出 $f(0/1,b)$，然后直接计算每个 $f(0/1,b)$ 对 $f(x,y)$ 的贡献——</p>
+<ul>
+<li>$f(1,b)$ 对 $f(x,y)$ 的贡献就是 $T(L+f(1,b))\times2^L$，其中 $T$ 是从 $(x,y)$ 走日字形走到 $(1,b)$ 的路径条数，路径长度为 $L$。</li>
+<li>$f(0,b)$ 的贡献仍然是 $T(L+f(1,b))\times2^L$，但是注意 $T$ 包含的路径不能经过 $f(1,b+2)$，不然会和 $f(1,b+2)$ 的贡献算重。</li>
+</ul>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD=<span class="number">998244353</span>,N=<span class="number">1e6</span>+<span class="number">10</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ci const int &amp;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Sub</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> <span class="keyword">int</span>(<span class="number">1l</span>l*a*b%MOD);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> b? Mul(Pow(Mul(a,a),b&gt;&gt;<span class="number">1</span>),(b&amp;<span class="number">1</span>)? a:<span class="number">1</span>):<span class="number">1</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INV2=Pow(<span class="number">2</span>,MOD<span class="number">-2</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[N][<span class="number">2</span>],fac[N&lt;&lt;<span class="number">1</span>],ifac[N&lt;&lt;<span class="number">1</span>],ivpow[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitDP</span><span class="params">()</span></span>&#123;</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">2</span>;x&lt;N;x++)&#123;</span><br><span class="line">		<span class="keyword">if</span>((x+<span class="number">1</span>)%<span class="number">3</span>==<span class="number">0</span>) f[x][<span class="number">1</span>]=Add(f[x<span class="number">-2</span>][<span class="number">0</span>],<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">if</span>(x%<span class="number">3</span>==<span class="number">0</span>) f[x][<span class="number">0</span>]=Add(f[x<span class="number">-1</span>][<span class="number">1</span>],<span class="number">2</span>);</span><br><span class="line"><span class="comment">//		if(x&lt;=10) printf("%d : %d\n",x,f[x][0]);</span></span><br><span class="line">	&#125;</span><br><span class="line">	fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;(N&lt;&lt;<span class="number">1</span>);i++) fac[i]=Mul(fac[i<span class="number">-1</span>],i);</span><br><span class="line">	ifac[(N&lt;&lt;<span class="number">1</span>)<span class="number">-1</span>]=Pow(fac[(N&lt;&lt;<span class="number">1</span>)<span class="number">-1</span>],MOD<span class="number">-2</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=(N&lt;&lt;<span class="number">1</span>)<span class="number">-2</span>;i&gt;=<span class="number">0</span>;i--) ifac[i]=Mul(ifac[i+<span class="number">1</span>],i+<span class="number">1</span>);</span><br><span class="line">	ivpow[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;(N&lt;&lt;<span class="number">1</span>);i++) ivpow[i]=Mul(ivpow[i<span class="number">-1</span>],INV2);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Sort</span><span class="params">(<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y,<span class="keyword">int</span> &amp;z)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;y) swap(x,y);</span><br><span class="line">	<span class="keyword">if</span>(x&lt;z) swap(x,z);</span><br><span class="line">	<span class="keyword">if</span>(y&lt;z) swap(y,z);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Comb</span><span class="params">(<span class="keyword">int</span> b,<span class="keyword">int</span> a)</span></span>&#123;<span class="keyword">return</span> a&gt;b? <span class="number">0</span>:Mul(fac[b],Mul(ifac[a],ifac[b-a]));&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">DP</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret=<span class="number">0</span>;</span><br><span class="line">	<span class="comment">//(x,y) -&gt; (1,i)</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=y;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> dx=x<span class="number">-1</span>,dy=y-i;</span><br><span class="line">		<span class="keyword">if</span>((dx+dy)%<span class="number">3</span>) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">int</span> p=(<span class="number">2</span>*dx-dy)/<span class="number">3</span>,q=(<span class="number">2</span>*dy-dx)/<span class="number">3</span>;</span><br><span class="line">		<span class="keyword">if</span>(p&lt;<span class="number">0</span> || q&lt;<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		assert(p+q&lt;(N&lt;&lt;<span class="number">1</span>));</span><br><span class="line">		ret=Add(ret,Mul(Mul(ivpow[p+q],Comb(p+q,p)),p+q+f[i][<span class="number">1</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//(x,y) -&gt; (0,i)</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=y;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> dx=x<span class="number">-0</span>,dy=y-i;</span><br><span class="line">		<span class="keyword">if</span>((dx+dy)%<span class="number">3</span>) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">int</span> p=(<span class="number">2</span>*dx-dy)/<span class="number">3</span>,q=(<span class="number">2</span>*dy-dx)/<span class="number">3</span>;</span><br><span class="line">		<span class="keyword">if</span>(p&lt;<span class="number">0</span> || q&lt;<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		assert(p+q&lt;(N&lt;&lt;<span class="number">1</span>));</span><br><span class="line">		ret=Add(ret,Mul(Mul(ivpow[p+q],Comb(p+q,p)),p+q+f[i][<span class="number">0</span>]));</span><br><span class="line">		ret=Sub(ret,Mul(Mul(ivpow[p+q],Comb(p+q<span class="number">-1</span>,p)),p+q+f[i][<span class="number">0</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">"game.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"game.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">	InitDP();</span><br><span class="line">	<span class="keyword">int</span> cas;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;cas);</span><br><span class="line">	<span class="keyword">while</span>(cas--)&#123;</span><br><span class="line">		<span class="keyword">int</span> a,b,c;<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;c);</span><br><span class="line">		<span class="keyword">int</span> n=a+b+c;</span><br><span class="line">		<span class="keyword">if</span>(n%<span class="number">3</span>)&#123;<span class="built_in">printf</span>(<span class="string">"-1\n"</span>);<span class="keyword">continue</span>;&#125;</span><br><span class="line">		Sort(a,b,c);</span><br><span class="line">		<span class="keyword">int</span> x=a-b,y=a-c;</span><br><span class="line">		<span class="keyword">if</span>(x&lt;y) swap(x,y);</span><br><span class="line">		<span class="keyword">if</span>(y&lt;<span class="number">2</span>)&#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,f[x][y]);<span class="keyword">continue</span>;&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,Add(DP(x,y),DP(y,x)));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h3 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h3><script type="math/tex; mode=display">
+\begin{split}
+“\ &曾用谎言开辟生路\\
+&曾用谎言陷死局不复\\
+&却也被后来人用谎言去救赎\\
+&便是我心中赤途\\
+&曾看过谁人性都交付\\
+&曾听到谁心底恸哭\\
+&还有曙光并不后悔踏上这赤途\ ”\\
+——&\text{《赤途》By litterzy/洛天依/乐正绫}
+\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=1389040747&amp;userid=303853271" target="_blank" rel="noopener">赤途</a>-网易云</p>
+]]></content>
+      <categories>
+        <category>OI题解</category>
+      </categories>
+      <tags>
+        <tag>数学-组合数</tag>
+        <tag>数学-期望</tag>
+        <tag>-HDU-</tag>
+        <tag>动态规划-期望DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OI - 巴士走读(LOJ)</title>
     <url>/2020/20Nov17thArt2/</url>
     <content><![CDATA[<blockquote>
@@ -149,8 +221,8 @@ G(t-1)-\binom{t-2}{k-1}\binom{n-t}{m-k-1}&\mid\ t>k
       <tags>
         <tag>数学-组合数</tag>
         <tag>数学</tag>
-        <tag>贪心</tag>
         <tag>图论-树</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -190,8 +262,8 @@ d=\sum_{j=1}^{\lfloor\frac S2\rfloor}3\times(f_{n,i}-2\times g_{n,i})</script><p
       </categories>
       <tags>
         <tag>数学-组合数</tag>
-        <tag>数学-容斥</tag>
         <tag>-AtCoder-</tag>
+        <tag>数学-容斥</tag>
         <tag>动态规划-背包问题</tag>
       </tags>
   </entry>
@@ -580,8 +652,8 @@ f(S,T)\to f(S,\varnothing)</script><p>注意第三个转移，因为子序列的
         <tag>动态规划</tag>
         <tag>数学-期望</tag>
         <tag>数据结构-并查集</tag>
-        <tag>贪心</tag>
         <tag>图论-树</tag>
+        <tag>贪心</tag>
         <tag>动态规划-树形DP</tag>
         <tag>数学-生成函数</tag>
         <tag>数学-FWT</tag>
@@ -5332,8 +5404,8 @@ f_{1,i}=h_i-\sum_{j=i+1}^mC_j^if_{1,j}</script><hr>
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>数学-容斥</tag>
         <tag>-洛谷-</tag>
+        <tag>数学-容斥</tag>
         <tag>动态规划-树形DP</tag>
       </tags>
   </entry>
@@ -8085,8 +8157,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
       <tags>
         <tag>模拟</tag>
         <tag>动态规划</tag>
-        <tag>贪心</tag>
         <tag>图论-树</tag>
+        <tag>贪心</tag>
         <tag>数学-容斥</tag>
         <tag>数学-组合计数</tag>
       </tags>
@@ -8815,8 +8887,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
       </categories>
       <tags>
         <tag>算法效率-哈希</tag>
-        <tag>-HDU-</tag>
         <tag>动态规划-换根DP</tag>
+        <tag>-HDU-</tag>
       </tags>
   </entry>
   <entry>
@@ -8900,8 +8972,8 @@ f_u=\frac{\prod_{v}f_v}{\prod_{i=1}^{t}(sam_i)!}\times (cntch_u)!</script><h3 id
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>-HDU-</tag>
         <tag>动态规划-换根DP</tag>
+        <tag>-HDU-</tag>
         <tag>数学-博弈论</tag>
       </tags>
   </entry>
@@ -10871,8 +10943,8 @@ D\times V\times \begin{bmatrix}a_0\\a_1\\a_2\\\vdots\\a_{n-1}\end{bmatrix}
       </categories>
       <tags>
         <tag>-POJ-</tag>
-        <tag>数学-素性测试</tag>
         <tag>数学-大数分解</tag>
+        <tag>数学-素性测试</tag>
         <tag>数学-EXGCD</tag>
       </tags>
   </entry>
@@ -11695,8 +11767,8 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
         <tag>数据结构-线段树</tag>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
-        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
+        <tag>贪心</tag>
         <tag>算法效率-扫描线</tag>
       </tags>
   </entry>
@@ -13004,8 +13076,8 @@ A_i^4-kA_i&\equiv A_j^4-kA_j
       <tags>
         <tag>数学</tag>
         <tag>模拟</tag>
-        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -13314,9 +13386,9 @@ p&\leq q
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>动态规划-状压DP</tag>
         <tag>图论-树</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
