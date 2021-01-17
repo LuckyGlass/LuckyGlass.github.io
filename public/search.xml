@@ -14,6 +14,177 @@
 ]]></content>
   </entry>
   <entry>
+    <title>学习笔记 - 单位根反演</title>
+    <url>/2021/21Jun17thArt1/</url>
+    <content><![CDATA[<blockquote>
+<p>听课的时候有一道题要单位根反演；<br>看起来是个轻量级的算法（说起来像真的一样），然后就来学一下</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="引理"><a href="#引理" class="headerlink" title="# 引理"></a># 引理</h2><div class="block">
+定义 $\omega_n$ 表示 $n$ 次单位复根，即 $\omega_n^n=1$，对于任意正整数 $k$，有
+$$n\cdot[n\mid k]=\sum_{i=0}^{n-1}\omega_n^{ik}$$
+</div>
+
+<p>证明只需用到单位复根的性质。</p>
+<p>如果 $n\mid k$，则 $\omega_n^{ik}=1$，</p>
+<script type="math/tex; mode=display">\sum_{i=0}^{n-1}\omega_n^{ik}=n</script><p>此时等比数列的<strong>公比不为</strong> $\mathbf1$（$n\mid k$ 的时候公比为 $1$，所以不能用等比数列求和），直接用等比数列求和得到</p>
+<script type="math/tex; mode=display">\sum_{i=0}^{n-1}\omega_n^{ik}=\frac{1-\omega_n^{nk}}{1-\omega_n^k}</script><p>又因为 $\omega_n^{nk}=(\omega_n^n)^k=1$，所以</p>
+<script type="math/tex; mode=display">\sum_{i=0}^{n-1}\omega_n^{ik}=0</script><hr>
+<h2 id="直接推导"><a href="#直接推导" class="headerlink" title="# 直接推导"></a># 直接推导</h2><p>求 $n$ 次多项式 $f(x)$ 的所有 $x^{ik}$ 项的系数之和（$k\le n$）。形式化的，求</p>
+<script type="math/tex; mode=display">R=\sum_{i=0}^{\lfloor\tfrac ni\rfloor}[x^{ik}]f(x)</script><p>对式子化简：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+R&=\sum_{i=0}^{n-1}[k\mid i][x^i]f(x)\\
+&=\sum_{i=0}^{n-1}\frac 1k\Big(\sum_{j=0}^{k-1}\omega_k^{ij}\Big)[x^i]f(x)\\
+&=\sum_{i=0}^{n-1}\frac1k\sum_{j=0}^{k-1}\omega_{k}^{ij}\cdot[x^i]f(x)\\
+&=\frac1k\sum_{j=0}^{k-1}\sum_{i=0}^{n-1}[x^i]f(x)\cdot(\omega_k^j)^i\\
+&=\frac1k\sum_{j=0}^{k-1}f(\omega_k^j)
+\end{aligned}</script><p>就把 $k$ 个单位复根代入式子计算。当然一般来说式子的次数非常高，但是如果式子有比较快速的计算一次的方法，单位根反演就比较有用了。</p>
+<h2 id="DFT推导"><a href="#DFT推导" class="headerlink" title="# DFT推导"></a># DFT推导</h2><p>另外，还可以用 DFT 理解单位根反演，设 $a_i$ 为 $[x^i]f(x)$：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+\omega_k^{0\times 0}&\omega_k^{0\times 1}&\cdots&\omega_k^{0\times (n-1)}\\
+\omega_k^{1\times0}&\omega_k^{1\times1}&\cdots&\omega_k^{1\times (n-1)}\\
+\vdots&\vdots&\ddots&\vdots\\
+\omega_k^{(k-1)\times0}&\omega_k^{(k-1)\times1}&\cdots&\omega_k^{(k-1)\times (n-1)}
+\end{bmatrix}
+\times
+\begin{bmatrix}
+a_0\\a_1\\\vdots\\a_{n-1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+f(\omega_k^{0})\\f(\omega_k^{1})\\\vdots\\f(\omega_k^{k-1})
+\end{bmatrix}</script><p>因为单位根 $k$ 次一循环，所以可以找到下图所示的规律：<br><img src="/2021/21Jun17thArt1/png1.png" alt="png1"></p>
+<p>于是可以将矩阵“压缩”成 $k\times k$ 的：<br><img src="/2021/21Jun17thArt1/png2.png" alt="png2"></p>
+<p>设 $b_t=\sum a_{ik+t}$，则压缩后的式子就是</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+\omega_k^{0\times 0}&\omega_k^{0\times 1}&\cdots&\omega_k^{0\times (k-1)}\\
+\omega_k^{1\times0}&\omega_k^{1\times1}&\cdots&\omega_k^{1\times (k-1)}\\
+\vdots&\vdots&\ddots&\vdots\\
+\omega_k^{(k-1)\times0}&\omega_k^{(k-1)\times1}&\cdots&\omega_k^{(k-1)\times (k-1)}
+\end{bmatrix}
+\times
+\begin{bmatrix}
+b_0\\b_1\\\vdots\\b_{k-1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+f(\omega_k^{0})\\f(\omega_k^{1})\\\vdots\\f(\omega_k^{k-1})
+\end{bmatrix}</script><p>不难发现上式就相当于是对 $b_i$ 的矩阵求了一个 DFT，那么我们只需要 IDFT 就可以得到 $b_i$ 了。</p>
+<script type="math/tex; mode=display">
+b_i=\frac1k\sum_{t=0}^{k-1}\omega_k^{-it}f(\omega_k^t)</script><p>而直接推导求出的 $\sum a_{ik}$ 的公式则是 IDFT 的一个特例。</p>
+<hr>
+<h2 id="例题-生成树计数加强版-LOJ"><a href="#例题-生成树计数加强版-LOJ" class="headerlink" title="# 例题 - 生成树计数加强版(LOJ)"></a># 例题 - 生成树计数加强版(LOJ)</h2><blockquote>
+<p>一道不这么板子题的例题</p>
+</blockquote>
+<p>看到不进位加法，而且还是三进制的……只能想到一种做法，拆位。那么只用考虑边权只有 $[0,2]$ 的情况。</p>
+<p>对于生成树计数，我们有一个很熟悉的算法叫做矩阵树定理。矩阵树定理最基础的应用就是求生成树的总方案数，但是还有一个比较常用的技巧：把矩阵 $M$ 中的整数换成其他类型——多项式。</p>
+<p>如果存在边 $(u,v)$ 的权值为 $w$，则：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">M[u][u]+=x^w,M[v][v]+=x^w;</span><br><span class="line">M[u][v]-=x^w,M[v][u]-=x^w;</span><br></pre></td></tr></table></figure>
+<p>最后做完矩阵树定理，我们会得到一个次数很高的多项式 $F(x)$。$F(x)$ 第 $i$ 位的系数 $f_i$ 表示生成树的边权之和为 $i$ 的方案数，而我们要求的答案是</p>
+<script type="math/tex; mode=display">
+0\times\sum_{i}f_{3i}+1\times\sum_{i}f_{3i+1}+2\times\sum_{i}f_{3i+2}</script><p>那么只需要分别求出 $F(x)$ 的模 $3$ 余 $0,1,2$ 的项的系数即可，直接套用单位根反演——做三次行列式，算出 $F(\omega_k^0),F(\omega_k^1),F(\omega_k^2)$，然后再 IDFT 就可以了。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD=<span class="number">1e9</span>+<span class="number">7</span>,VARA=<span class="number">500000003</span>,VARB=<span class="number">541031193</span>,N=<span class="number">105</span>,M=N*N;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> cint const int &amp;</span></span><br><span class="line"><span class="comment">//(a+bi)^3=1 (mod MOD)</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Rint</span><span class="params">(<span class="keyword">int</span> &amp;r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> b=<span class="number">1</span>,c=getchar();r=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) b=c==<span class="string">'-'</span>? <span class="number">-1</span>:b,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+(c^<span class="string">'0'</span>),c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r*=b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(cint a,cint b)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*a*b%MOD;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(cint a,cint b)</span></span>&#123;<span class="keyword">return</span> b? Mul(Pow(Mul(a,a),b&gt;&gt;<span class="number">1</span>),(b&amp;<span class="number">1</span>)? a:<span class="number">1</span>):<span class="number">1</span>;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(cint a,cint b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Sub</span><span class="params">(cint a,cint b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> square(a) Mul(a,a)</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INV3=Pow(<span class="number">3</span>,MOD<span class="number">-2</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NCOMPLEX</span>&#123;</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> cnc const NCOMPLEX &amp;</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> oper(typ) inline friend typ operator</span></span><br><span class="line">	<span class="keyword">int</span> a,b;</span><br><span class="line">	NCOMPLEX()&#123;&#125;</span><br><span class="line">	NCOMPLEX(cint A,cint B):a(A),b(B)&#123;&#125;</span><br><span class="line">	oper(NCOMPLEX) *(cnc A,cnc B)&#123;<span class="keyword">return</span> NCOMPLEX(Sub(Mul(A.a,B.a),Mul(A.b,B.b)),Add(Mul(A.a,B.b),Mul(B.a,A.b)));&#125;</span><br><span class="line">	oper(NCOMPLEX) *(cnc A,cint B)&#123;<span class="keyword">return</span> NCOMPLEX(Mul(A.a,B),Mul(A.b,B));&#125;</span><br><span class="line">	oper(NCOMPLEX) +(cnc A,cnc B)&#123;<span class="keyword">return</span> NCOMPLEX(Add(A.a,B.a),Add(A.b,B.b));&#125;</span><br><span class="line">	oper(NCOMPLEX) -(cnc A,cnc B)&#123;<span class="keyword">return</span> NCOMPLEX(Sub(A.a,B.a),Sub(A.b,B.b));&#125;</span><br><span class="line">	oper(NCOMPLEX) -(cnc A)&#123;<span class="keyword">return</span> NCOMPLEX(Sub(<span class="number">0</span>,A.a),Sub(<span class="number">0</span>,A.b));&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">void</span> <span class="keyword">operator</span> +=(cnc A)&#123;(*<span class="keyword">this</span>)=(*<span class="keyword">this</span>)+A;&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">void</span> <span class="keyword">operator</span> -=(cnc A)&#123;(*<span class="keyword">this</span>)=(*<span class="keyword">this</span>)-A;&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">void</span> <span class="keyword">operator</span> *=(cnc A)&#123;(*<span class="keyword">this</span>)=(*<span class="keyword">this</span>)*A;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">friend</span> NCOMPLEX <span class="title">inv</span><span class="params">(cnc A)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> NCOMPLEX(A.a,Sub(<span class="number">0</span>,A.b))</span><br><span class="line">			  *Pow(Add(square(A.a),square(A.b)),MOD<span class="number">-2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">undef</span> cnc</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">undef</span> oper</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> NCOMPLEX con[<span class="number">3</span>]=&#123;NCOMPLEX(<span class="number">1</span>,<span class="number">0</span>),NCOMPLEX(VARA,VARB),NCOMPLEX(VARA,VARB)*NCOMPLEX(VARA,VARB)&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> edg[M][<span class="number">3</span>];</span><br><span class="line">NCOMPLEX mat[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function">NCOMPLEX <span class="title">Det</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="function">NCOMPLEX <span class="title">ans</span><span class="params">(<span class="number">1</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;n;j++)</span><br><span class="line">			<span class="keyword">if</span>(mat[j][i].a || mat[j][i].b)&#123;</span><br><span class="line">				<span class="keyword">if</span>(i==j) <span class="keyword">break</span>;</span><br><span class="line">				swap(mat[i],mat[j]),ans=-ans;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		ans=ans*mat[i][i];</span><br><span class="line">		NCOMPLEX tmp=inv(mat[i][i]);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;n;j++)&#123;</span><br><span class="line">			NCOMPLEX now=mat[j][i]*tmp;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=i;k&lt;n;k++) mat[j][k]-=now*mat[i][k];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">IDFT</span><span class="params">(NCOMPLEX *p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	NCOMPLEX tmp[<span class="number">3</span>];</span><br><span class="line">	tmp[<span class="number">0</span>]=p[<span class="number">0</span>],tmp[<span class="number">1</span>]=p[<span class="number">1</span>],tmp[<span class="number">2</span>]=p[<span class="number">2</span>];</span><br><span class="line">	p[<span class="number">0</span>]=tmp[<span class="number">0</span>]+tmp[<span class="number">1</span>]+tmp[<span class="number">2</span>];</span><br><span class="line">	p[<span class="number">1</span>]=tmp[<span class="number">0</span>]+tmp[<span class="number">1</span>]*inv(con[<span class="number">1</span>])+tmp[<span class="number">2</span>]*inv(con[<span class="number">2</span>]);</span><br><span class="line">	p[<span class="number">2</span>]=tmp[<span class="number">0</span>]+tmp[<span class="number">1</span>]*inv(con[<span class="number">2</span>])+tmp[<span class="number">2</span>]*inv(con[<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">3</span>;++i) p[i]=p[i]*INV3;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Calc</span><span class="params">()</span></span>&#123;</span><br><span class="line">	NCOMPLEX res[<span class="number">3</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">		<span class="built_in">memset</span>(mat,<span class="number">0</span>,<span class="keyword">sizeof</span> mat);</span><br><span class="line">		NCOMPLEX w[<span class="number">3</span>]=&#123;con[<span class="number">0</span>],con[i],con[i*<span class="number">2</span>%<span class="number">3</span>]&#125;;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">			<span class="keyword">int</span> typ=edg[j][<span class="number">2</span>]%<span class="number">3</span>;</span><br><span class="line">			mat[edg[j][<span class="number">0</span>]][edg[j][<span class="number">0</span>]]+=w[typ];</span><br><span class="line">			mat[edg[j][<span class="number">1</span>]][edg[j][<span class="number">1</span>]]+=w[typ];</span><br><span class="line">			mat[edg[j][<span class="number">0</span>]][edg[j][<span class="number">1</span>]]-=w[typ];</span><br><span class="line">			mat[edg[j][<span class="number">1</span>]][edg[j][<span class="number">0</span>]]-=w[typ];</span><br><span class="line">		&#125;</span><br><span class="line">		res[i]=Det();</span><br><span class="line">	&#125;</span><br><span class="line">	IDFT(res);</span><br><span class="line">	<span class="keyword">return</span> Add(res[<span class="number">1</span>].a,Add(res[<span class="number">2</span>].a,res[<span class="number">2</span>].a));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">"sum.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"sum.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">	Rint(n),Rint(m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">		Rint(edg[i][<span class="number">0</span>]),Rint(edg[i][<span class="number">1</span>]),Rint(edg[i][<span class="number">2</span>]);</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> tim=<span class="number">1</span>;;tim=Mul(tim,<span class="number">3</span>))&#123;</span><br><span class="line">		ans=Add(ans,Mul(tim,Calc()));</span><br><span class="line">		<span class="keyword">bool</span> exi=<span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">			<span class="keyword">if</span>(edg[i][<span class="number">2</span>]/=<span class="number">3</span>)</span><br><span class="line">				exi=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">if</span>(!exi) <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &抬头看着星星在唱歌\\
+&她的呼吸好似对我说\\
+&她说你要慢慢长大\\
+&不只为自己活着\\
+&如果你也听见星星的歌\\
+&不要哭泣不要再受折磨\\
+&若你抬起头\\
+&她就在天空\ ”\\
+——&\text{《星星在唱歌》By 司南}
+\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=1807381939&amp;userid=303853271" target="_blank" rel="noopener">星星在唱歌</a>-网易云</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>图论-矩阵树定理</tag>
+        <tag>-LOJ-</tag>
+        <tag>数学-单位根反演</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OI - Do you like query problems?(AtCoder)</title>
+    <url>/2021/21Jan15thArt1/</url>
+    <content><![CDATA[<blockquote>
+<p>还差很多</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>有一个长度为 $n$ 的数列 $\{a_1,a_2,\dots,a_n\}$ 和一个整数 $b$，初始 $a_i=0,b=0$，$a_i$ 值域为 $[0,m-1]$。进行 $Q$ 次操作，每次操作是下列所有操作中的一种：</p>
+<ul>
+<li><code>A l r v</code>：对 $i\in[l,r]$，$a_i\leftarrow\max\{a_i,v\}$，这种操作一共包含 $m\times \frac{n(n+1)}{2}$ 种；</li>
+<li><code>B l r v</code>：对 $i\in[l,r]$，$a_i\leftarrow\min\{a_i,v\}$，这种操作一共包含 $m\times \frac{n(n+1)}{2}$ 种；</li>
+<li><code>C l r</code>：$b\leftarrow b+\sum_{i=l}^ra_i$，这种操作一共包含 $\frac{n(n+1)}2$ 种。</li>
+</ul>
+<p>求 $Q$ 次操作后 $b$ 的期望（原题是求所有方案的 $b$ 之和，本质一样……）。</p>
+<p>$1\le n,m,Q\le2\times 10^5$</p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>这是一道利用期望线性性分拆贡献的好题:)，具体分拆贡献分为两步：</p>
+<p><strong>(Ⅰ)将</strong> $\mathbf{E(b)}$ <strong>分拆为每一次操作对</strong> $\mathbf b$ <strong>的贡献。</strong></p>
+<p>由题意易知只有 <em>C操作</em> 会对 $b$ 有贡献。若第 $i$ 次操作是 C 操作，设其对 $b$ 的贡献为 $ans_i$。一共有 $(2m+1)\binom n2$ 种操作，而 C 操作有 $\binom n2$ 种，于是某一次操作是 C 操作的概率是 $\frac 1{2m+1}$。然后可以写出下面的式子：</p>
+<script type="math/tex; mode=display">
+E(b)=\sum_{j=1}^Q\frac1{2m+1}E(ans_j)</script><p>考虑怎么计算 $E(ans_j)$。</p>
+<p><strong><em>Tab.</em></strong> 记 $a_{i,j}$ 表示数字 $a_i$ 在 $j$ 次操作后的值。</p>
+<p><strong>（Ⅱ）将</strong> $\mathbf{E(ans_j)}$ <strong>分拆为每个</strong> $\mathbf{E(a_{i,j})}$ <strong>的贡献。</strong></p>
+<p>某次操作区间包含 $a_i$ 的概率为 $\frac{i(n-i+1)}{\binom n2}$，则</p>
+<script type="math/tex; mode=display">
+E(ans_j)=\sum_{i=1}^n\frac{i(n-i+1)}{\binom n2}E(a_{i,j})</script><p>而对于 $E(a_{i,j})$，要利用到将离散期望用概率表达的技巧：</p>
+<script type="math/tex; mode=display">
+E(a_{i,j})=\sum_{k=0}^{m-1}P(a_{i,j}>k)</script><p>为了方便计算上式的概率，我们定义一次操作对 $a_i$ <strong><em>有效</em></strong>，当且仅当：</p>
+<ul>
+<li>是 A/B 操作；</li>
+<li>操作区间包含 $i$；</li>
+<li>如果是 A(max) 操作，则要求 $v\ge a_i$；如果是 B(min) 操作，则要求 $v&lt; a_i$。</li>
+</ul>
+<p>那么可以推得某一次操作对 $a_i$ 有效的概率为 $H_i=\frac{i(n-i+1)}{\binom n2}\cdot\frac{2m}{2m+1}\cdot\frac{a_i+(m-a_i-1)}{m}$，发现概率与 $a_i$ 无关。</p>
+<p>那么什么时候会有 $a_{i,j}&gt;k$？当且仅当<strong>最后一次有效操作</strong>的 $v$ 有 $v&gt;k$。所以 $P(a_{i,j}&gt;k)$ 可以这样计算：</p>
+<ul>
+<li>在前 $(j-1)$ 次操作中（第 $j$ 次是 C 操作，一定无效）存在有效操作：$[1-(1-H_i)^{j-1}]$（即从所有方案中减去 $j-1$ 次操作都无效的方案）；</li>
+<li>最后一次有效操作 $v&gt;k$：$\frac{m-k-1}m$。</li>
+</ul>
+<p>所以 $P(a_{i,j}&gt;k)=\frac{m-k-1}m[1-(1-H_i)^{j-1}]$</p>
+<p>综上</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E(a_{i,j})&=\sum_{k=0}^{m-1}\tfrac{m-k-1}m\cdot[1-(1-H_i)^{j-1}]\\
+&=[1-(1-H_i)^{j-1}]\cdot\tfrac{m-1}2\\
+E(ans_j)&=\sum_{i=1}^n\tfrac{i(n-i+1)}{\tbinom n2}\cdot[1-(1-H_i)^{j-1}]\cdot\tfrac{m-1}2
+\end{aligned}</script><p>最后</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E(b)&=\sum_{j=1}^Q\sum_{i=1}^n\tfrac{i(n-i+1)}{\tbinom n2}\cdot[1-(1-H_i)^{j-1}]\cdot\tfrac{m-1}2\\
+&=\frac{m-1}2\cdot\sum_{i=1}^n\tfrac{i(n-i+1)}{\tbinom n2}\sum_{j=1}^Q\cdot[1-(1-H_i)^{j-1}]
+\end{aligned}</script><p>后面对 $1-(1-H_i)^{j-1}$ 的式子求和就用等比数列，可以做到 $O(\log Q)$，于是总复杂度 $O(n\log Q)$。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD=<span class="number">998244353</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ci const int &amp;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Add</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Sub</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Mul</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l*a*b%MOD;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(ci a,ci b)</span></span>&#123;<span class="keyword">return</span> b? Mul(Pow(Mul(a,a),b&gt;&gt;<span class="number">1</span>),(b&amp;<span class="number">1</span>)? a:<span class="number">1</span>):<span class="number">1</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,Q;</span><br><span class="line"></span><br><span class="line"><span class="comment">//p^0+p^1+...+p^(t-1)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">loca</span><span class="params">(<span class="keyword">int</span> varp,<span class="keyword">int</span> vart)</span></span>&#123;<span class="keyword">return</span> Mul(Sub(Pow(varp,vart),<span class="number">1</span>),Pow(Sub(varp,<span class="number">1</span>),MOD<span class="number">-2</span>));&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;Q);</span><br><span class="line">    <span class="keyword">int</span> var1=Pow(Mul(n,n+<span class="number">1</span>),MOD<span class="number">-2</span>),var2=Pow(<span class="number">2</span>*m+<span class="number">1</span>,MOD<span class="number">-2</span>),var3=Mul(Sub(m,<span class="number">1</span>),Pow(<span class="number">2</span>,MOD<span class="number">-2</span>)),ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> varq=Mul(Mul(i,n-i+<span class="number">1</span>),Mul(var1,var2)),varp=Mul(Mul(Mul(m,i),n-i+<span class="number">1</span>),Mul(var1,var2));</span><br><span class="line">        varp=Mul(varp,<span class="number">2</span>),varq=Mul(varq,<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">int</span> sum=Sub(Q,loca(Sub(<span class="number">1</span>,varp),Q));</span><br><span class="line">        ans=Add(ans,Mul(sum,Mul(var3,varq)));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> all=Pow(Mul(Mul(n,n+<span class="number">1</span>),Mul(Pow(<span class="number">2</span>,MOD<span class="number">-2</span>),<span class="number">2</span>*m+<span class="number">1</span>)),Q);</span><br><span class="line">    <span class="comment">// printf("? %d\n",all);</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,Mul(ans,all));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
+\begin{split}
+“\ &未料想在你手中\ 最过珍惜的三尺青锋\\
+&会在某一日\ 为某一个人\\
+&纵起破长空\ 做了一世真英雄\ ”\\
+——&\text{《何日重到苏澜桥》By 泠鸢yousa}
+\end{split}</script><blockquote>
+<p>Linked <a href="https://www.bilibili.com/video/BV1ZW411T71x" target="_blank" rel="noopener">何日重到苏澜桥</a>-Bilibili</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>OI题解</category>
+      </categories>
+      <tags>
+        <tag>数学-期望</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OI - Landmarks(Codeforces)</title>
     <url>/2021/21Jan11thArt1/</url>
     <content><![CDATA[<blockquote>
@@ -1162,8 +1333,8 @@ d=\sum_{j=1}^{\lfloor\frac S2\rfloor}3\times(f_{n,i}-2\times g_{n,i})</script><p
       </categories>
       <tags>
         <tag>数学-组合数</tag>
-        <tag>-AtCoder-</tag>
         <tag>数学-容斥</tag>
+        <tag>-AtCoder-</tag>
         <tag>动态规划-背包问题</tag>
       </tags>
   </entry>
@@ -1549,8 +1720,8 @@ f(S,T)\to f(S,\varnothing)</script><p>注意第三个转移，因为子序列的
       <tags>
         <tag>数学-组合数</tag>
         <tag>数学</tag>
-        <tag>数学-期望</tag>
         <tag>动态规划</tag>
+        <tag>数学-期望</tag>
         <tag>数据结构-并查集</tag>
         <tag>图论-树</tag>
         <tag>贪心</tag>
@@ -7986,8 +8157,8 @@ f_4=\frac12f_0+f_3\\
       </categories>
       <tags>
         <tag>数据结构-线段树</tag>
-        <tag>数学-期望</tag>
         <tag>动态规划</tag>
+        <tag>数学-期望</tag>
         <tag>-Codeforces-</tag>
         <tag>数学-高斯消元</tag>
       </tags>
@@ -9055,8 +9226,8 @@ f(i,b)+w(b,j+1)\le f(i,c)+w(c,j+1)</script><p>也就是说 <code>f[i][j+1]</code
         <category>前行</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>模拟</tag>
+        <tag>动态规划</tag>
         <tag>图论-树</tag>
         <tag>贪心</tag>
         <tag>数学-容斥</tag>
@@ -9572,8 +9743,8 @@ dis(u,v)=\min_{c,c_v\in[0,7]}\{f(u,c)+1+f(v,c)\}=\min_{c,c_v\in[0,7]}\{f(u,c)+1+
         <category>OI题解</category>
       </categories>
       <tags>
-        <tag>算法效率-倍增</tag>
         <tag>算法效率-二分查找</tag>
+        <tag>算法效率-倍增</tag>
         <tag>贪心</tag>
         <tag>-牛客-</tag>
         <tag>图论-树链剖分</tag>
@@ -12668,8 +12839,8 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
         <tag>图论-二分图</tag>
         <tag>数学</tag>
         <tag>动态规划-状压DP</tag>
-        <tag>算法效率-扫描线</tag>
         <tag>贪心</tag>
+        <tag>算法效率-扫描线</tag>
       </tags>
   </entry>
   <entry>
@@ -13149,8 +13320,8 @@ x^m\equiv x\pmod {p_c}\\
       <tags>
         <tag>图论-二分图</tag>
         <tag>数学</tag>
-        <tag>数学-期望</tag>
         <tag>动态规划</tag>
+        <tag>数学-期望</tag>
         <tag>算法效率-倍增</tag>
         <tag>数据结构-并查集</tag>
       </tags>
@@ -13247,9 +13418,9 @@ x^m\equiv x\pmod {p_c}\\
         <category>前行</category>
       </categories>
       <tags>
-        <tag>数学-期望</tag>
-        <tag>动态规划</tag>
         <tag>模拟</tag>
+        <tag>动态规划</tag>
+        <tag>数学-期望</tag>
         <tag>算法效率-矩阵加速</tag>
         <tag>算法效率-二分查找</tag>
         <tag>分治</tag>
@@ -13725,8 +13896,8 @@ x_N+x_1=2y_N&&(N)
       <tags>
         <tag>数学-组合数</tag>
         <tag>数学</tag>
-        <tag>算法效率-倍增</tag>
         <tag>模拟</tag>
+        <tag>算法效率-倍增</tag>
         <tag>图论-树</tag>
         <tag>算法效率-离线</tag>
       </tags>
@@ -15164,8 +15335,8 @@ dp[i+1][j]=min\{dp[i+1][j],dp[i][j]\}</script><p>而且最后女儿不一定要�
       </categories>
       <tags>
         <tag>数学</tag>
-        <tag>动态规划</tag>
         <tag>模拟</tag>
+        <tag>动态规划</tag>
         <tag>贪心</tag>
         <tag>-Codeforces-</tag>
       </tags>
