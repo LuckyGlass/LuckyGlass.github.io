@@ -23,15 +23,17 @@
 <html>
 <head>
 <style type="text/css">
+/*折叠块*/
 details.fold{
-	background-color:#eeeeee;
+	background-color:#eeeeeec4;
 	border-radius:.3rem;
 	margin-bottom: 5px;
     margin-left: 20px;
     margin-right: 20px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
 }
 details.fold summary{
-	background-color:#555555;
+	background-color:#555555be;
 	border-radius:.3rem;
 	height:10;
 	padding-left:5px;
@@ -43,52 +45,59 @@ details.fold p{
 	padding-left:10px;
 	padding-right:10px;
 }
-summary.fold{
-	background-color:#555555;
-	border-radius:.3rem;
-	height:10;
-	padding-left:5px;
-	padding-right:5px;
-	font-weight:bold;
-	color:white;
+details.fold p.lastline{
+	padding-bottom: 6px;
 }
-p.fold{
-	padding-left:10px;
-	padding-right:10px;
-}
-p.block{
-	background-color:#eeeeee;
-	border-radius:.3rem;
-	padding-left:5px;
-	padding-right:5px;
-	padding-bottom:5px;
-}
+/*强调块*/
 div.block{
-    background-color: #f1f1f1;
-    border-radius: .3rem;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+	background-color: #ffffffbf;
+	border-radius: .3rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
 }
 div.block p{
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 0px;
 }
-p.headline{
+div.block p.headline{
 	font-weight: bold;
-	background-color: #808080;
+	background-color: #808080be;
 	color: white;
 	border-top-left-radius: .3rem;
 	border-top-right-radius: .3rem;
 	margin-bottom: 0px;
+}
+div.block p.lastline{
+	padding-bottom: 6px;
+}
+/*代码折叠块*/
+details.code{
+	background-color:#e1dfddaf;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.code summary{
+	color: #494646;
+	font-weight: bold;
+	height: auto;
+	padding: 3px;
 }
 img.myfont{
 	background-color: rgba(255, 255, 255, 0.726);
 	border-radius: .3rem;
 	padding: 3px;
 	width: 300px;
+	text-align: center;
+}
+/*页尾歌词*/div.tail-lyrics p.lyrics {
+	font-family: 楷体;
 	text-align: center;
 }
 </style>
@@ -475,7 +484,7 @@ img.myfont{
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">251</span>
+          <span class="site-state-item-count">255</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -487,7 +496,7 @@ img.myfont{
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">143</span>
+        <span class="site-state-item-count">145</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -540,7 +549,7 @@ img.myfont{
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共403.9k字</span>
+  <span class="post-count">博客全站共412.4k字</span>
 </div>
 
         

@@ -23,15 +23,17 @@
 <html>
 <head>
 <style type="text/css">
+/*折叠块*/
 details.fold{
-	background-color:#eeeeee;
+	background-color:#eeeeeec4;
 	border-radius:.3rem;
 	margin-bottom: 5px;
     margin-left: 20px;
     margin-right: 20px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
 }
 details.fold summary{
-	background-color:#555555;
+	background-color:#555555be;
 	border-radius:.3rem;
 	height:10;
 	padding-left:5px;
@@ -43,52 +45,59 @@ details.fold p{
 	padding-left:10px;
 	padding-right:10px;
 }
-summary.fold{
-	background-color:#555555;
-	border-radius:.3rem;
-	height:10;
-	padding-left:5px;
-	padding-right:5px;
-	font-weight:bold;
-	color:white;
+details.fold p.lastline{
+	padding-bottom: 6px;
 }
-p.fold{
-	padding-left:10px;
-	padding-right:10px;
-}
-p.block{
-	background-color:#eeeeee;
-	border-radius:.3rem;
-	padding-left:5px;
-	padding-right:5px;
-	padding-bottom:5px;
-}
+/*强调块*/
 div.block{
-    background-color: #f1f1f1;
-    border-radius: .3rem;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+	background-color: #ffffffbf;
+	border-radius: .3rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
 }
 div.block p{
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 0px;
 }
-p.headline{
+div.block p.headline{
 	font-weight: bold;
-	background-color: #808080;
+	background-color: #808080be;
 	color: white;
 	border-top-left-radius: .3rem;
 	border-top-right-radius: .3rem;
 	margin-bottom: 0px;
+}
+div.block p.lastline{
+	padding-bottom: 6px;
+}
+/*代码折叠块*/
+details.code{
+	background-color:#e1dfddaf;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.code summary{
+	color: #494646;
+	font-weight: bold;
+	height: auto;
+	padding: 3px;
 }
 img.myfont{
 	background-color: rgba(255, 255, 255, 0.726);
 	border-radius: .3rem;
 	padding: 3px;
 	width: 300px;
+	text-align: center;
+}
+/*页尾歌词*/div.tail-lyrics p.lyrics {
+	font-family: 楷体;
 	text-align: center;
 }
 </style>
@@ -306,6 +315,66 @@ img.myfont{
 
       <div class="post-meta">
         <time itemprop="dateCreated"
+              datetime="2020-09-16T22:54:29+08:00"
+              content="2020-09-16">
+          09-16
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/20Sep16thArtArt1/" itemprop="url">
+            <span itemprop="name">OI - 加权约数和（51nod）</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-09-15T13:46:00+08:00"
+              content="2020-09-15">
+          09-15
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/20Sep15thArt1/" itemprop="url">
+            <span itemprop="name">OI - Three Sequences（Codeforces）</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-09-14T21:27:33+08:00"
+              content="2020-09-14">
+          09-14
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/20Sep14thArt2/" itemprop="url">
+            <span itemprop="name">OI - Boboniu and Jianghu（Codeforces）</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
               datetime="2020-09-10T23:34:42+08:00"
               content="2020-09-10">
           09-10
@@ -441,66 +510,6 @@ img.myfont{
     </header>
   </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-27T20:44:11+08:00"
-              content="2020-08-27">
-          08-27
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/20Aug27thArt1/" itemprop="url">
-            <span itemprop="name">OI - 魔法阵(洛谷团队赛)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-25T08:57:34+08:00"
-              content="2020-08-25">
-          08-25
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/20Aug25thArt1/" itemprop="url">
-            <span itemprop="name">OI - Play osu! on Your Tablet(HDU)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-23T19:42:15+08:00"
-              content="2020-08-23">
-          08-23
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/20Aug23rdArt1/" itemprop="url">
-            <span itemprop="name">OI - 制作菜品(NOI 2020)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
     </div>
   </div>
   
@@ -509,7 +518,7 @@ img.myfont{
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/categories/OI%E9%A2%98%E8%A7%A3/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/categories/OI%E9%A2%98%E8%A7%A3/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/OI%E9%A2%98%E8%A7%A3/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/categories/OI%E9%A2%98%E8%A7%A3/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/categories/OI%E9%A2%98%E8%A7%A3/page/14/">14</a><a class="extend next" rel="next" href="/categories/OI%E9%A2%98%E8%A7%A3/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/categories/OI%E9%A2%98%E8%A7%A3/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/categories/OI%E9%A2%98%E8%A7%A3/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/OI%E9%A2%98%E8%A7%A3/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/categories/OI%E9%A2%98%E8%A7%A3/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/categories/OI%E9%A2%98%E8%A7%A3/page/15/">15</a><a class="extend next" rel="next" href="/categories/OI%E9%A2%98%E8%A7%A3/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -576,7 +585,7 @@ img.myfont{
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">251</span>
+          <span class="site-state-item-count">255</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -588,7 +597,7 @@ img.myfont{
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">143</span>
+        <span class="site-state-item-count">145</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -641,7 +650,7 @@ img.myfont{
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共403.9k字</span>
+  <span class="post-count">博客全站共412.4k字</span>
 </div>
 
         

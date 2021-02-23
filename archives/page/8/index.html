@@ -23,15 +23,17 @@
 <html>
 <head>
 <style type="text/css">
+/*折叠块*/
 details.fold{
-	background-color:#eeeeee;
+	background-color:#eeeeeec4;
 	border-radius:.3rem;
 	margin-bottom: 5px;
     margin-left: 20px;
     margin-right: 20px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
 }
 details.fold summary{
-	background-color:#555555;
+	background-color:#555555be;
 	border-radius:.3rem;
 	height:10;
 	padding-left:5px;
@@ -43,52 +45,59 @@ details.fold p{
 	padding-left:10px;
 	padding-right:10px;
 }
-summary.fold{
-	background-color:#555555;
-	border-radius:.3rem;
-	height:10;
-	padding-left:5px;
-	padding-right:5px;
-	font-weight:bold;
-	color:white;
+details.fold p.lastline{
+	padding-bottom: 6px;
 }
-p.fold{
-	padding-left:10px;
-	padding-right:10px;
-}
-p.block{
-	background-color:#eeeeee;
-	border-radius:.3rem;
-	padding-left:5px;
-	padding-right:5px;
-	padding-bottom:5px;
-}
+/*强调块*/
 div.block{
-    background-color: #f1f1f1;
-    border-radius: .3rem;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+	background-color: #ffffffbf;
+	border-radius: .3rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
 }
 div.block p{
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 0px;
 }
-p.headline{
+div.block p.headline{
 	font-weight: bold;
-	background-color: #808080;
+	background-color: #808080be;
 	color: white;
 	border-top-left-radius: .3rem;
 	border-top-right-radius: .3rem;
 	margin-bottom: 0px;
+}
+div.block p.lastline{
+	padding-bottom: 6px;
+}
+/*代码折叠块*/
+details.code{
+	background-color:#e1dfddaf;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.code summary{
+	color: #494646;
+	font-weight: bold;
+	height: auto;
+	padding: 3px;
 }
 img.myfont{
 	background-color: rgba(255, 255, 255, 0.726);
 	border-radius: .3rem;
 	padding: 3px;
 	width: 300px;
+	text-align: center;
+}
+/*页尾歌词*/div.tail-lyrics p.lyrics {
+	font-family: 楷体;
 	text-align: center;
 }
 </style>
@@ -292,13 +301,93 @@ img.myfont{
     <div class="posts-collapse">
       <div class="collection-title">
         
-        <span class="collection-header">太棒了! 目前共计 251 篇日志。 继续努力。</span>
+        <span class="collection-header">太棒了! 目前共计 255 篇日志。 继续努力。</span>
       </div>
 
       
     <div class="collection-year">
       <h1 class="collection-header">2020</h1>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-08-01T10:39:50+08:00"
+              content="2020-08-01">
+          08-01
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/20Aug1stArt1/" itemprop="url">
+            <span itemprop="name">OI - Go Running(HDU)</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-07-31T21:07:20+08:00"
+              content="2020-07-31">
+          07-31
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/20Jul31stArt2/" itemprop="url">
+            <span itemprop="name">OI - Sandy and Nuts(Codeforces)</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-07-31T16:02:21+08:00"
+              content="2020-07-31">
+          07-31
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/20Jul31stArt1/" itemprop="url">
+            <span itemprop="name">OI - 大括号树(洛谷)</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-07-30T18:51:56+08:00"
+              content="2020-07-30">
+          07-30
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/20Jul30thArt2/" itemprop="url">
+            <span itemprop="name">OI - 树上染色(洛谷)</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -420,86 +509,6 @@ img.myfont{
     </header>
   </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-22T22:18:23+08:00"
-              content="2020-07-22">
-          07-22
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/20Jul22ndArt1/" itemprop="url">
-            <span itemprop="name">OI - 旅行（数据加强版）(洛谷)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-20T19:11:34+08:00"
-              content="2020-07-20">
-          07-20
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/20Jul20thArt2/" itemprop="url">
-            <span itemprop="name">OI - 货币系统(LOJ)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-20T15:47:48+08:00"
-              content="2020-07-20">
-          07-20
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/20Jul20thArt1/" itemprop="url">
-            <span itemprop="name">OI - 积木大赛(LOJ)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-11T16:13:28+08:00"
-              content="2020-07-11">
-          07-11
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/20Jul11thArt2/" itemprop="url">
-            <span itemprop="name">OI - 作业题「十二省联考2020」</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
 
     </div>
   </div>
@@ -576,7 +585,7 @@ img.myfont{
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">251</span>
+          <span class="site-state-item-count">255</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -588,7 +597,7 @@ img.myfont{
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">143</span>
+        <span class="site-state-item-count">145</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -641,7 +650,7 @@ img.myfont{
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共403.9k字</span>
+  <span class="post-count">博客全站共412.4k字</span>
 </div>
 
         

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="code-5ShoHSHaJq" />
+<meta name="baidu-site-verification" content="code-SaEpttARVo" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+/*折叠块*/
+details.fold{
+	background-color:#eeeeeec4;
+	border-radius:.3rem;
+	margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.fold summary{
+	background-color:#555555be;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold p{
+	padding-left:10px;
+	padding-right:10px;
+}
+details.fold p.lastline{
+	padding-bottom: 6px;
+}
+/*强调块*/
+div.block{
+	background-color: #ffffffbf;
+	border-radius: .3rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+div.block p{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+}
+div.block p.headline{
+	font-weight: bold;
+	background-color: #808080be;
+	color: white;
+	border-top-left-radius: .3rem;
+	border-top-right-radius: .3rem;
+	margin-bottom: 0px;
+}
+div.block p.lastline{
+	padding-bottom: 6px;
+}
+/*代码折叠块*/
+details.code{
+	background-color:#e1dfddaf;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.code summary{
+	color: #494646;
+	font-weight: bold;
+	height: auto;
+	padding: 3px;
+}
+img.myfont{
+	background-color: rgba(255, 255, 255, 0.726);
+	border-radius: .3rem;
+	padding: 3px;
+	width: 300px;
+	text-align: center;
+}
+/*页尾歌词*/div.tail-lyrics p.lyrics {
+	font-family: 楷体;
+	text-align: center;
+}
+</style>
+<script>
+/*
+	var test=window.location.href;
+	var res=test.toLowerCase().indexOf("4rds5h");
+	if(res!=-1){
+		var go=test.replace("4rds5h.coding-pages.com","coding-pages-bucket-51839-7854799-5081-374285-1303700546.cos-website.ap-hongkong.myqcloud.com");
+		window.location.replace(go);
+	}
+	res=test.toLowerCase().indexOf("github");
+	if(res!=-1){
+		var go=test.replace("luckyglass.github.io","coding-pages-bucket-51839-7854799-5081-374285-1303700546.cos-website.ap-hongkong.myqcloud.com");
+		window.location.replace(go);
+	}
+*/
+</script>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="ARC花式掉分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「SOL」Social Distance(AtCoder)">
+<meta property="og:url" content="https://4rds5h.coding-pages.com/2021/21Feb23rdArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="ARC花式掉分">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-23T11:12:51.000Z">
+<meta property="article:modified_time" content="2021-02-23T12:31:07.520Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="-AtCoder-">
+<meta property="article:tag" content="数学-多项式">
+<meta property="article:tag" content="动态规划-期望DP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://4rds5h.coding-pages.com/2021/21Feb23rdArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>「SOL」Social Distance(AtCoder) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2021/21Feb23rdArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="玻璃易碎，但打碎玻璃的人也将被玻璃划伤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「SOL」Social Distance(AtCoder)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-23 19:12:51 / 修改时间：20:31:07" itemprop="dateCreated datePublished" datetime="2021-02-23T19:12:51+08:00">2021-02-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/21Feb23rdArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/21Feb23rdArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>ARC花式掉分</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>数轴上从左到右给出 $n+1$ 个不重叠的点 $x_0,x_1,\cdots,x_n$；另有 $n$ 个动点 $y_0,y_1,\cdots,y_{n-1}$，其中 $\forall i,y_i\in(x_i,x_{i+1})$。</p>
+<p>若每个 $y_i$ 落在其取值范围内的每个位置概率相等，求「动点两两之间的最小距离」的期望，对 $998244353$ 取模。</p>
+<p>数据规模 $1\le n\le20$。</p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>看到求最小距离可能会先想到 <em>min-max 反演</em> 转化成最大距离（虽然我连这个都没有想到），但是这个想法是不可行的。</p>
+<details class="fold">
+<summary>点击展开/折叠 此题「min-max反演」的误区</summary>
+<p>由题意，设 $n$ 个动点的点集为 $\mathbb{P}$，相当于求
+$$
+E\Big(\min_{i,j\in \mathbb{P}}\{|x_i-x_j|\}\Big)
+$$
+</p>
+<p>似乎由 min-max 反演，结合期望线性性可得下式：</p>
+<p>
+$$
+\sum_{\mathbb{S}\subset\mathbb{P}}(-1)^{|\mathbb{P}|-|\mathbb{S}|}E\Big(\max_{i,j\in\mathbb{S}}\{x_i-x_j\}\Big)
+$$
+</p>
+<p>进而一个点集的最远点距只与左右两个点有关，于是可以快速地计算。但是看一眼 $n$ 的范围，感觉哪里不对……但是哪里不对？</p>
+<p>再观察一下 min-max 反演的式子：</p>
+<p>
+$$
+\min_{x\in \mathbb{S}}\{x\}=\sum_{\mathbb{T}\subset\mathbb{S}}(-1)^{|\mathbb{S}|-|\mathbb{T}|}\max_{x\in\mathbb{T}}\{x\}
+$$
+</p>
+<p class="lastline">其实上述做法的误区在于「集合」，这里求 min 的集合并不是点集 $\mathbb{P}$，而是点对集 $\{(i,j)\mid i,j\in\mathbb{P}\}$。于是枚举的子集也应该是点对集的子集，而枚举点对集的子集并不能简化问题。</p>
+</details>
+
+<p>转化成<strong>相邻两点</strong>的最小距离。设相邻两点的最小距离为 $t$，则下式成立：</p>
+<script type="math/tex; mode=display">
+E(t)=\int_0^{+\infty}P(t\ge i)\rm{d}i</script><details class="fold">
+<summary>点击折叠/展开「关于上式」</summary>
+<p>可以从离散随机变量的期望计算式不严谨地证明上式，若离散随机变量 $X$ 满足其取值只可能是正数，则</p>
+<p>
+$$
+E(X)=\sum_{i=1}iP(X=i)
+$$
+</p>
+<p>则必有 $E(x)=\sum_{i=1}P(x\ge i)$。从代数角度容易证明，而直观也比较好理解——$P(x=i)$ 对期望的贡献系数为 $i$，将系数 $i$ 均摊到 $1\sim i$ 上，每个位置分摊 $1$ 的系数。</p>
+<p>而若是连续随机变量（取值一定非负），我们仍有</p>
+<p>
+$$
+E(X)=\int_{0}^{+\infty}iP(X=i)\rm{d}i
+$$
+</p>
+<p class="lastline">依然考虑把 $P(X=i)$ 的系数 $i$ 均摊，那么既然是连续的，就要把系数分摊到区间 $(1,i)$ 上，每 $\rm di$ 分摊 $\rm di$ 的系数，得到结论。</p>
+</details>
+
+<p>先不考虑别的，假如给定最小距离 $d$，应该如何求解 $P(t\ge d)$？</p>
+<p>根据题意，有下式：</p>
+<script type="math/tex; mode=display">
+y_{i+1}-y_i\ge t\Leftrightarrow y_{i+1}-(i+1)t\ge y_i-it</script><p>那么设 $y’_i=y_i-it$，则有 $y’_{i+1}\ge y_i’$，$y_i’\in\big(x_i-it,x_{i+1}-it\big)$。</p>
+<p><strong><em>这一步转化非常重要。</em></strong></p>
+<p>但是由于变量是连续的，我们不可能直接决策每个变量的具体的值，而是<strong>决定每个变量落在哪个范围内</strong>。</p>
+<p>$n$ 对形如 $x_i-it,x_{i+1}-it$ 的点将 $y’_i$ 可能存在的区间划分成 $2n-1$ 段。我们把这 $2n-1$ 个段依次编号为 $0\sim 2n-2$，可以预先求得 $y_i’$ 可能落在的<strong>段的编号范围</strong>，记为 $[l_i,r_i]$。</p>
+<p>然后我们就可以设计一个 DP —— $f(i,j,k)$ 表示 $y_i’$ 落在第 $j$ 段内，此时第 $j$ 段中已有 $k$ 个变量。</p>
+<p>那么 $y_i’$ 要么和 $y_{i-1}’$ 落在同一个段内，要么落在之后的段内。</p>
+<p>考虑由 $f(i-1,j,k)$ 转移到下一个值：</p>
+<ul>
+<li>若 $y_i’$ 与 $y_{i-1}’$ 落在同一个段：则先前落在段 $j$ 内的点把第 $j$ 段划分成 $k+1$ 小段，而 $y_i’$ 只能落在最后一小段，因此概率除以 $k+1$，再乘上 $y_i’$ 落在第 $j$ 段的概率 $P(i,j)$，则<script type="math/tex; mode=display">
+f(i,j,k+1):=f(i,j,k+1)+\frac{f(i-1,j,k)P(i,j)}{k+1}</script></li>
+<li>若 $y_i’$ 落在之后的段中<script type="math/tex; mode=display">
+f(i,j',1):=f(i,j',1)+f(i-1,j,k)P(i,j)</script></li>
+</ul>
+<p>令段 $j$ 的长度为 $L_j$，$y’_i$ 可能的取值范围长度为 $D_i$；那么 $P(i,j)=\frac{L_j}{D_i}$。我们发现 $D_i$ 是一个常值，而 $L_j$ 是关于 $t$ 的一个<strong>一次多项式</strong>。</p>
+<p>第二种转移可以前缀和优化，于是可以在 $O(n^3R)$ 的复杂度内完成整个DP，$R$ 是单次转移的复杂度。</p>
+<p>于是可以推得 $f(n-1,j,k)$ 是关于 $t$ 的 $n$ 次多项式。单词转移要么是对多项式乘以一个常数，要么是一个一次多项式与另一个多项式相乘，那么单次转移复杂度 $R=n$。</p>
+<p>所以 DP 的复杂度为 $O(n^4)$。</p>
+<p>再看看怎么求答案，不可能直接枚举 $t$，那么一定也是 $t$ 的一个取值范围一起计算答案。由于我们可以 DP 求得 $f(n,j,k)$ 关于 $t$ 的多项式，如果知道 $t$ 的对应范围，就可以通过定积分求解期望。</p>
+<p>不难注意到，只要 $2n$ 个点 $x_i-it,x_{i+1}-it$ 的大小顺序不变，则最后得到的 $f(n-1,j,k)$ 关于 $t$ 的表达式就不会变。</p>
+<p>所以对每一种点的顺序，都要计算一次 DP。</p>
+<p>最后一个问题，一共有多少种点的顺序？答案是 $O(n^2)$。注意到点的平移速度不同，但对于同一个点，其平移速度是常数，所以最初靠后的点 $A$ 平移超过最初靠前的一个点 $B$ 后（$A$ 的平移速度大于 $B$），$A$ 就一直在 $B$ 前面。只会发生 $O(n^2)$ 次点的相对位置变化。</p>
+<hr>
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h3><details class="code">
+<summary>点击展开/折叠代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M=<span class="number">1e6</span>+<span class="number">10</span>,N=<span class="number">42</span>,MOD=<span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> EPS=<span class="number">1e-7</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> con(type) const type &amp;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(con(<span class="keyword">int</span>)a,con(<span class="keyword">int</span>)b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD?a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">sub</span><span class="params">(con(<span class="keyword">int</span>)a,con(<span class="keyword">int</span>)b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>?a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mul</span><span class="params">(con(<span class="keyword">int</span>)a,con(<span class="keyword">int</span>)b)</span></span>&#123;<span class="keyword">return</span> <span class="keyword">int</span>(<span class="number">1l</span>l*a*b%MOD);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ina_pow</span><span class="params">(con(<span class="keyword">int</span>)a,con(<span class="keyword">int</span>)b)</span></span>&#123;<span class="keyword">return</span> b?mul(ina_pow(mul(a,a),b&gt;&gt;<span class="number">1</span>),(b&amp;<span class="number">1</span>)?a:<span class="number">1</span>):<span class="number">1</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> invi[M],posx[N];</span><br><span class="line"><span class="keyword">double</span> segl[N],segr[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Poly</span>&#123;</span></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ary;</span><br><span class="line">	Poly()&#123;&#125;</span><br><span class="line">	Poly(con(<span class="keyword">int</span>)x0)&#123;ary.push_back(x0);&#125;</span><br><span class="line">	Poly(con(<span class="keyword">int</span>)x0,con(<span class="keyword">int</span>)x1)&#123;ary.push_back(x0),ary.push_back(x1);&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">degr</span><span class="params">()</span><span class="keyword">const</span></span>&#123;<span class="keyword">return</span> (<span class="keyword">int</span>)ary.size();&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">extend</span><span class="params">(con(<span class="keyword">int</span>)len)</span></span>&#123;ary.resize(len);&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">int</span>&amp; <span class="keyword">operator</span> [](con(<span class="keyword">int</span>)i)&#123;<span class="keyword">return</span> ary[i];&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">int</span> <span class="keyword">operator</span> [](con(<span class="keyword">int</span>)i)<span class="keyword">const</span>&#123;<span class="keyword">return</span> ary[i];&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">calc</span><span class="params">(con(<span class="keyword">int</span>)x)</span><span class="keyword">const</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> ret=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> nowx=<span class="number">1</span>,i=<span class="number">0</span>,ii=degr();i&lt;ii;i++,nowx=mul(nowx,x))</span><br><span class="line">			ret=add(ret,mul(ary[i],nowx));</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">calcInt</span><span class="params">(con(<span class="keyword">int</span>)le,con(<span class="keyword">int</span>)ri)</span><span class="keyword">const</span></span>&#123;<span class="keyword">return</span> sub(calc(ri),calc(le));&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(con(Poly)b)<span class="keyword">const</span>&#123;<span class="keyword">return</span> degr()&lt;b.degr();&#125;</span><br><span class="line">	<span class="keyword">friend</span> Poly <span class="keyword">operator</span> +(con(Poly)a,con(Poly)b)&#123;</span><br><span class="line">		Poly c;c.extend(max(a.degr(),b.degr()));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,ii=a.degr();i&lt;ii;i++) c[i]=add(c[i],a[i]);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,ii=b.degr();i&lt;ii;i++) c[i]=add(c[i],b[i]);</span><br><span class="line">		<span class="keyword">return</span> c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">friend</span> Poly <span class="keyword">operator</span> -(con(Poly)a,con(Poly)b)&#123;</span><br><span class="line">		Poly c;c.extend(max(a.degr(),b.degr()));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,ii=a.degr();i&lt;ii;i++) c[i]=add(c[i],a[i]);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,ii=b.degr();i&lt;ii;i++) c[i]=sub(c[i],b[i]);</span><br><span class="line">		<span class="keyword">return</span> c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">friend</span> Poly <span class="keyword">operator</span> *(con(Poly)a,con(Poly)b)&#123;</span><br><span class="line">		Poly c;</span><br><span class="line">		c.extend(a.degr()+b.degr()<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,ii=a.degr();i&lt;ii;i++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>,kk=b.degr();k&lt;kk;k++)</span><br><span class="line">				c[i+k]=add(c[i+k],mul(a[i],b[k]));</span><br><span class="line">		<span class="keyword">return</span> c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">Poly <span class="title">getInt</span><span class="params">()</span><span class="keyword">const</span></span>&#123;</span><br><span class="line">		Poly c;c.extend(degr()+<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,ii=c.degr();i&lt;ii;i++)</span><br><span class="line">			c[i]=mul(ary[i<span class="number">-1</span>],invi[i]);</span><br><span class="line">		<span class="keyword">return</span> c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">debug</span><span class="params">()</span><span class="keyword">const</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,ii=degr();i&lt;ii;i++) <span class="built_in">printf</span>(<span class="string">"%d "</span>,ary[i]);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;f[<span class="number">2</span>][N&lt;&lt;<span class="number">1</span>][N],fans;</span><br><span class="line"></span><br><span class="line">pii vpos[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt; pair&lt;<span class="keyword">double</span>,Poly&gt; &gt; vdiv;</span><br><span class="line"><span class="built_in">vector</span>&lt; pair&lt;<span class="keyword">double</span>,<span class="keyword">int</span>&gt; &gt; tim_lis;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ina_abs</span><span class="params">(con(<span class="keyword">int</span>)x)</span></span>&#123;<span class="keyword">return</span> x&lt;<span class="number">0</span>?-x:x;&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">ina_abs</span><span class="params">(con(<span class="keyword">double</span>)x)</span></span>&#123;<span class="keyword">return</span> x&lt;<span class="number">0</span>?-x:x;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sgn</span><span class="params">(con(<span class="keyword">double</span>)x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(ina_abs(x)&lt;EPS) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> x&lt;<span class="number">0</span>?<span class="number">-1</span>:<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	invi[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;M;i++) invi[i]=mul(invi[i<span class="number">-1</span>],i);</span><br><span class="line">	invi[M<span class="number">-1</span>]=ina_pow(invi[M<span class="number">-1</span>],MOD<span class="number">-2</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=M<span class="number">-2</span>;i;i--)&#123;</span><br><span class="line">		<span class="keyword">int</span> nxt=mul(invi[i+<span class="number">1</span>],i+<span class="number">1</span>);</span><br><span class="line">		invi[i+<span class="number">1</span>]=mul(invi[i+<span class="number">1</span>],invi[i]);</span><br><span class="line">		invi[i]=nxt;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//put i in [vdiv_j,vdiv_j+1]</span></span><br><span class="line"><span class="function">Poly <span class="title">getPossi</span><span class="params">(con(<span class="keyword">int</span>)i,con(<span class="keyword">int</span>)j)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(sgn(vdiv[j+<span class="number">1</span>].first-vdiv[j].first)&lt;=<span class="number">0</span> || sgn(vdiv[j+<span class="number">1</span>].first-segl[i])&lt;=<span class="number">0</span> || sgn(segr[i]-vdiv[j].first)&lt;=<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> Poly(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> (vdiv[j+<span class="number">1</span>].second-vdiv[j].second)*Poly(invi[posx[i+<span class="number">1</span>]-posx[i]]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// freopen("input.in","r",stdin);</span></span><br><span class="line">	init();</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;posx[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		vpos[i&lt;&lt;<span class="number">1</span>]=make_pair(-i,posx[i]);</span><br><span class="line">		vpos[i&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]=make_pair(-i,posx[i+<span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	tim_lis.push_back(make_pair(<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line">	tim_lis.push_back(make_pair(<span class="number">1e6</span>,<span class="number">1000000</span>));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,icap=n&lt;&lt;<span class="number">1</span>;i&lt;icap;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;icap;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(sgn(vpos[i].first-vpos[j].first)==<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">double</span> tim=(<span class="keyword">double</span>)(vpos[j].second-vpos[i].second)/(vpos[i].first-vpos[j].first);</span><br><span class="line">			<span class="keyword">if</span>(sgn(tim)&lt;=<span class="number">0</span> || sgn(tim<span class="number">-1e6</span>)&gt;=<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">int</span> vmod=mul(ina_abs(vpos[j].second-vpos[i].second),invi[ina_abs(vpos[i].first-vpos[j].first)]);</span><br><span class="line">			tim_lis.push_back(make_pair(tim,vmod));</span><br><span class="line">		&#125;</span><br><span class="line">	sort(tim_lis.begin(),tim_lis.end());</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> t=<span class="number">1</span>,tt=(<span class="keyword">int</span>)tim_lis.size();t&lt;tt;t++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(sgn(tim_lis[t].first-tim_lis[t<span class="number">-1</span>].first)&lt;=<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		vdiv.clear();</span><br><span class="line">		<span class="keyword">double</span> mi=(tim_lis[t].first+tim_lis[t<span class="number">-1</span>].first)/<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">			segl[i]=posx[i]-i*mi;</span><br><span class="line">			segr[i]=posx[i+<span class="number">1</span>]-i*mi;</span><br><span class="line">			vdiv.push_back(make_pair(segl[i],Poly(posx[i],sub(<span class="number">0</span>,i))));</span><br><span class="line">			vdiv.push_back(make_pair(segr[i],Poly(posx[i+<span class="number">1</span>],sub(<span class="number">0</span>,i))));</span><br><span class="line">		&#125;</span><br><span class="line">		sort(vdiv.begin(),vdiv.end());</span><br><span class="line">		<span class="keyword">int</span> now=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">2</span>*n;j++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=n;k++)</span><br><span class="line">				f[now][j][k].ary.clear();</span><br><span class="line">		f[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>]=Poly(<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">2</span>*n;j++)</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=n;k++)</span><br><span class="line">					f[now^<span class="number">1</span>][j][k].ary.clear();</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>,hj=(<span class="keyword">int</span>)vdiv.size()<span class="number">-1</span>;j&lt;hj;j++)</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;n;k++)&#123;</span><br><span class="line">					<span class="keyword">if</span>(!f[now][j][k].degr()) <span class="keyword">continue</span>;</span><br><span class="line">					f[now^<span class="number">1</span>][j][k+<span class="number">1</span>]=f[now^<span class="number">1</span>][j][k+<span class="number">1</span>]+f[now][j][k]*getPossi(i,j)*Poly(invi[k+<span class="number">1</span>]);</span><br><span class="line">					f[now][j+<span class="number">1</span>][<span class="number">0</span>]=f[now][j+<span class="number">1</span>][<span class="number">0</span>]+f[now][j][k];</span><br><span class="line">				&#125;</span><br><span class="line">			now^=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// printf("done");</span></span><br><span class="line">		fans.ary.clear();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">2</span>*n;j++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=n;k++)</span><br><span class="line">				fans=fans+f[now][j][k];</span><br><span class="line">		ans=add(ans,fans.getInt().calcInt(tim_lis[t<span class="number">-1</span>].second,tim_lis[t].second));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><div class="tail-lyrics">
+<p class="lyrics">结伴而行 这末路并不孤寂<br>
+就算放肆 也总有港湾栖息<br>
+义无反顾 将身后交于你<br>
+纵然为敌 也不愿生死别离</p>
+</div>
+
+<p>——《陷落之序》By 著小生zoki</p>
+<p>> Link <a href="https://www.bilibili.com/video/BV1VE41157rR?t=148" target="_blank" rel="noopener">陷落之序</a>-Bilibili</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://4rds5h.coding-pages.com/2021/21Feb23rdArt1/" title="「SOL」Social Distance(AtCoder)">https://4rds5h.coding-pages.com/2021/21Feb23rdArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/AtCoder/" rel="tag"><i class="fa fa-tag"></i> -AtCoder-</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 数学-多项式</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%9C%9F%E6%9C%9BDP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-期望DP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/21Feb22ndArt2/" rel="prev" title="「SOL」屠龙勇士(LOJ)">
+      <i class="fa fa-chevron-left"></i> 「SOL」屠龙勇士(LOJ)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text"># 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">玻璃易碎，但打碎玻璃的人也将被玻璃划伤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">255</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">145</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共412.4k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

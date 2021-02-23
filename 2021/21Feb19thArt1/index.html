@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="code-5ShoHSHaJq" />
+<meta name="baidu-site-verification" content="code-SaEpttARVo" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+/*折叠块*/
+details.fold{
+	background-color:#eeeeeec4;
+	border-radius:.3rem;
+	margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.fold summary{
+	background-color:#555555be;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold p{
+	padding-left:10px;
+	padding-right:10px;
+}
+details.fold p.lastline{
+	padding-bottom: 6px;
+}
+/*强调块*/
+div.block{
+	background-color: #ffffffbf;
+	border-radius: .3rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+div.block p{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+}
+div.block p.headline{
+	font-weight: bold;
+	background-color: #808080be;
+	color: white;
+	border-top-left-radius: .3rem;
+	border-top-right-radius: .3rem;
+	margin-bottom: 0px;
+}
+div.block p.lastline{
+	padding-bottom: 6px;
+}
+/*代码折叠块*/
+details.code{
+	background-color:#e1dfddaf;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.code summary{
+	color: #494646;
+	font-weight: bold;
+	height: auto;
+	padding: 3px;
+}
+img.myfont{
+	background-color: rgba(255, 255, 255, 0.726);
+	border-radius: .3rem;
+	padding: 3px;
+	width: 300px;
+	text-align: center;
+}
+/*页尾歌词*/div.tail-lyrics p.lyrics {
+	font-family: 楷体;
+	text-align: center;
+}
+</style>
+<script>
+/*
+	var test=window.location.href;
+	var res=test.toLowerCase().indexOf("4rds5h");
+	if(res!=-1){
+		var go=test.replace("4rds5h.coding-pages.com","coding-pages-bucket-51839-7854799-5081-374285-1303700546.cos-website.ap-hongkong.myqcloud.com");
+		window.location.replace(go);
+	}
+	res=test.toLowerCase().indexOf("github");
+	if(res!=-1){
+		var go=test.replace("luckyglass.github.io","coding-pages-bucket-51839-7854799-5081-374285-1303700546.cos-website.ap-hongkong.myqcloud.com");
+		window.location.replace(go);
+	}
+*/
+</script>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="好像又很久没写博客了总结成一个小札还是香啊 awa把 @tly 的博客学了一遍然后翻译成自己看得懂的备忘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NOTE - 进阶多项式小札">
+<meta property="og:url" content="https://4rds5h.coding-pages.com/2021/21Feb19thArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="好像又很久没写博客了总结成一个小札还是香啊 awa把 @tly 的博客学了一遍然后翻译成自己看得懂的备忘">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-19T15:04:12.000Z">
+<meta property="article:modified_time" content="2021-02-22T11:16:22.412Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://4rds5h.coding-pages.com/2021/21Feb19thArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>NOTE - 进阶多项式小札 | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2021/21Feb19thArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="玻璃易碎，但打碎玻璃的人也将被玻璃划伤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NOTE - 进阶多项式小札
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-19 23:04:12" itemprop="dateCreated datePublished" datetime="2021-02-19T23:04:12+08:00">2021-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-22 19:16:22" itemprop="dateModified" datetime="2021-02-22T19:16:22+08:00">2021-02-22</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/21Feb19thArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/21Feb19thArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>好像又很久没写博客了<br>总结成一个小札还是香啊 awa<br>把 @tly 的博客学了一遍<del>然后翻译成自己看得懂的</del>备忘</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="基础多项式版子"><a href="#基础多项式版子" class="headerlink" title="# 基础多项式版子"></a># 基础多项式版子</h2><p>你可能会在下面看到 <code>BASIC_POLY</code> 这么一个命名空间，代码如下。</p>
+<details class="code">
+<summary>点击展开/折叠代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> con(type) const type &amp;</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1</span>&lt;&lt;<span class="number">20</span>,MOD=<span class="number">998244353</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(con(<span class="keyword">int</span>)a,con(<span class="keyword">int</span>)b)</span></span>&#123;<span class="keyword">return</span> a+b&gt;=MOD? a+b-MOD:a+b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">sub</span><span class="params">(con(<span class="keyword">int</span>)a,con(<span class="keyword">int</span>)b)</span></span>&#123;<span class="keyword">return</span> a-b&lt;<span class="number">0</span>? a-b+MOD:a-b;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mul</span><span class="params">(con(<span class="keyword">int</span>)a,con(<span class="keyword">int</span>)b)</span></span>&#123;<span class="keyword">return</span> <span class="keyword">int</span>(<span class="number">1l</span>l*a*b%MOD);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ina_pow</span><span class="params">(con(<span class="keyword">int</span>)a,con(<span class="keyword">int</span>)b)</span></span>&#123;<span class="keyword">return</span> b?mul(ina_pow(mul(a,a),b&gt;&gt;<span class="number">1</span>),(b&amp;<span class="number">1</span>)?a:<span class="number">1</span>):<span class="number">1</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> BASIC_POLY&#123;</span><br><span class="line">	<span class="keyword">int</span> w[N+<span class="number">10</span>],eta_lg[N+<span class="number">10</span>],rev[N+<span class="number">10</span>];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">		w[<span class="number">0</span>]=eta_lg[<span class="number">1</span>]=<span class="number">0</span>;w[<span class="number">1</span>]=ina_pow(<span class="number">3</span>,(MOD<span class="number">-1</span>)&gt;&gt;<span class="number">20</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;N;i++)&#123;</span><br><span class="line">			w[i]=mul(w[i<span class="number">-1</span>],w[<span class="number">1</span>]);</span><br><span class="line">			eta_lg[i]=eta_lg[(i+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ntt</span><span class="params">(<span class="keyword">int</span> *ary,con(<span class="keyword">int</span>)n,con(<span class="keyword">int</span>)typ)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">			rev[i]=rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>|((i&amp;<span class="number">1</span>)*(n&gt;&gt;<span class="number">1</span>));</span><br><span class="line">			<span class="keyword">if</span>(rev[i]&lt;i) swap(ary[i],ary[rev[i]]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,ii=<span class="number">2</span>;i&lt;n;i&lt;&lt;=<span class="number">1</span>,ii&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="keyword">int</span> u=N/ii;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j+=ii)&#123;</span><br><span class="line">				<span class="keyword">int</span> *a=ary+j,*b=ary+j+i,*p=w,q=*b;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;i;k++,a++,b++,p+=u,q=mul(*b,*p))</span><br><span class="line">					*b=sub(*a,q),*a=add(*a,q);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(typ==<span class="number">-1</span>)&#123;</span><br><span class="line">			reverse(ary+<span class="number">1</span>,ary+n);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,ivn=MOD-(MOD<span class="number">-1</span>)/n;i&lt;n;i++)</span><br><span class="line">				ary[i]=mul(ary[i],ivn);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">modelize</span><span class="params">(con(<span class="keyword">int</span>)l)</span></span>&#123;<span class="keyword">return</span> <span class="number">1</span>&lt;&lt;eta_lg[l];&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">polyInv</span><span class="params">(<span class="keyword">int</span> *a,<span class="keyword">int</span> *b,con(<span class="keyword">int</span>)n)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">1</span>)&#123;b[<span class="number">0</span>]=ina_pow(a[<span class="number">0</span>],MOD<span class="number">-2</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">		<span class="keyword">int</span> m=(n+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>,l=modelize(<span class="number">2</span>*(m<span class="number">-1</span>)+(n<span class="number">-1</span>)+<span class="number">1</span>);</span><br><span class="line">		polyInv(a,b,m);</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> tmp1[N+<span class="number">10</span>],tmp2[N+<span class="number">10</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) tmp1[i]=a[i];fill(tmp1+n,tmp1+l,<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++) tmp2[i]=b[i];fill(tmp2+m,tmp2+l,<span class="number">0</span>);</span><br><span class="line">		ntt(tmp1,l,<span class="number">1</span>),ntt(tmp2,l,<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;l;i++) tmp1[i]=mul(tmp2[i],sub(<span class="number">2</span>,mul(tmp1[i],tmp2[i])));</span><br><span class="line">		ntt(tmp1,l,<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) b[i]=tmp1[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">polyDet</span><span class="params">(<span class="keyword">int</span> *a,<span class="keyword">int</span> *b,con(<span class="keyword">int</span>)n)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++) b[i<span class="number">-1</span>]=mul(a[i],i);</span><br><span class="line">		b[n<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<hr>
+<h2 id="多项式多点求值"><a href="#多项式多点求值" class="headerlink" title="# 多项式多点求值"></a># 多项式多点求值</h2><h3 id="问题1"><a href="#问题1" class="headerlink" title="- 问题1"></a>- 问题1</h3><p>给定一个最高次项为 $n-1$ 的多项式 $f(x)$，求 $f(a_0),f(a_1)\cdots f(a_{m-1})$。</p>
+<h3 id="新的解法"><a href="#新的解法" class="headerlink" title="- 新的解法"></a>- 新的解法</h3><blockquote>
+<p>之前的做法要用到多项式取模这种大常数计算，而且代码还很复杂……</p>
+</blockquote>
+<p>先定义一种所谓的“<strong>差卷积</strong>”，记作</p>
+<script type="math/tex; mode=display">
+f\otimes g=\sum_{i=0}\sum_{j=0}^if_ig_jx^{i-j}</script><p>我们可以构造出 $g(x)=\frac{1}{1-ax}$ 使得 $h=f\otimes g$ 满足 $[x^0]h(x)=f(a)$。</p>
+<details class="fold">
+<summary>点击展开/折叠证明</summary>
+<p>把 $g(x)$ 的闭形式展开，则 $(f\otimes g)$ 相当于</p>
+$$(f_0+f_1x+f_2x^2+\cdots)\otimes(1+ax+a^2x^2+\cdots)$$
+<p class="lastline">观察其常数项，一定是 $f_ix^i\otimes a^ix^i$，也就是 $\sum a^if_i$。</p>
+</details>
+
+<p>这样我们可以把一个点的求值问题转化成<strong>卷积问题</strong>。那怎么扩展到多点求值呢？</p>
+<p>关于差卷积，我们还需要一个性质——</p>
+<script type="math/tex; mode=display">
+(f\otimes g)\otimes h=f\otimes(g\cdot h)</script><p>根据定义很容易理解，即 $f_ig_jh_kx^{i-j-k}=f_ix^i(g_jh_k)x^{-(j+k)}$。</p>
+<p>有了这个性质，就可以考虑用线段树的方式分治。我们希望能在线段树的第 $i$ 个叶子处得到 $<a href="f\otimes\frac{1}{1-a_ix}">x^0</a>$。那么线段树上区间 $[l,r]$ 就维护</p>
+<script type="math/tex; mode=display">S_{l,r}=f\otimes\Big(\prod_{i=l}^r\frac{1}{1-a_ix}\Big)</script><p>要从 $[l,r]$ 递推到子区间 $[l,m]$，我们需要计算：</p>
+<script type="math/tex; mode=display">S_{l,m}=S_{l,r}\otimes\Big(\prod_{i=m+1}^r{1-a_ix}\Big)</script><p>代入即可证明。于是我们还需要对线段树的每个节点 $[l,r]$ 先预处理出</p>
+<script type="math/tex; mode=display">T_{l,r}=\prod_{i=l}^r1-a_ix</script><p>$T_{l,r}$ 的次数和节点的大小是一致的，因为线段树上每一层节点大小减半，可以直接 $O(n\log n)$ 预处理。</p>
+<p>似乎现在就可以解决多点求值了？但还剩了一个非常棘手的问题——$S_{l,r}$ 是一个形式幂级数，我们应该保留多少项才能<strong>计算出叶子处的常数项</strong>？</p>
+<p>实际上我们只需要保留 $S_{l,r}$ 的前 $r-l+1$ 项，归纳证明如下：</p>
+<ol>
+<li>归纳边界：叶子处只需要保留常数项；</li>
+<li>考虑 $[l,r]$ 的子节点 $[l,m]$，$S_{l,m}$ 需要保留前 $m-l+1$ 项（最高项为 $m-l$ 次），而 $S_{l,m}$ 的计算方法是：<script type="math/tex; mode=display">
+S_{l,m}=S_{l,r}\otimes T_{m+1,r}</script>注意到 $T_{m+1,r}$ 最高项是 $r-m-1$ 次的，根据差卷积的计算方式，$S_{l,r}$ 的最高项应为 $r-l$ 次，即只需要保留前 $r-l+1$ 项。</li>
+</ol>
+<p>这样的话复杂度就有保证了，每层项数减半，仍然可以 $O(n\log n)$ 解决。</p>
+<h3 id="源代码1"><a href="#源代码1" class="headerlink" title="- 源代码1"></a>- 源代码1</h3><details class="code">
+<summary>点击展开/折叠代码</summary>
+<p>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//BASIC_POLY 中主要是NTT这些东西</span></span><br><span class="line"><span class="keyword">namespace</span> UPPER_POLY&#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vint;</span><br><span class="line">	<span class="comment">//普通卷积</span></span><br><span class="line">	<span class="function">vint <span class="title">polyMul</span><span class="params">(con(vint)a,con(vint)b)</span></span>&#123;</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> tmp1[N+<span class="number">10</span>],tmp2[N+<span class="number">10</span>];</span><br><span class="line">		<span class="keyword">int</span> na=(<span class="keyword">int</span>)a.size(),nb=(<span class="keyword">int</span>)b.size(),nc=na+nb<span class="number">-1</span>;</span><br><span class="line">		<span class="function">vint <span class="title">c</span><span class="params">(nc)</span></span>;</span><br><span class="line">		<span class="keyword">int</span> l=BASIC_POLY::modelize(nc);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;na;i++) tmp1[i]=a[i];fill(tmp1+na,tmp1+l,<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nb;i++) tmp2[i]=b[i];fill(tmp2+nb,tmp2+l,<span class="number">0</span>);</span><br><span class="line">		BASIC_POLY::ntt(tmp1,l,<span class="number">1</span>),BASIC_POLY::ntt(tmp2,l,<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;l;i++) tmp1[i]=mul(tmp1[i],tmp2[i]);</span><br><span class="line">		BASIC_POLY::ntt(tmp1,l,<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nc;i++) c[i]=tmp1[i];</span><br><span class="line">		<span class="keyword">return</span> c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//差卷积，卷积结果保留前 nc项</span></span><br><span class="line">	<span class="function">vint <span class="title">polySubMul</span><span class="params">(con(vint)a,con(vint)b,con(<span class="keyword">int</span>)nc)</span></span>&#123;</span><br><span class="line">		vint c=a;reverse(c.begin(),c.end());</span><br><span class="line">		c=polyMul(c,b);</span><br><span class="line">		c.resize(a.size()),reverse(c.begin(),c.end());</span><br><span class="line">		c.resize(nc);</span><br><span class="line">		<span class="keyword">return</span> c;</span><br><span class="line">	&#125;</span><br><span class="line">	vint seg[N];</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> idx(l,r) (((l)+(r))|((l)!=(r)))</span></span><br><span class="line">	<span class="comment">//预处理出 T[l,r]</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> *a,con(<span class="keyword">int</span>)le,con(<span class="keyword">int</span>)ri)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(le==ri)&#123;</span><br><span class="line">			seg[idx(le,ri)].clear();</span><br><span class="line">			seg[idx(le,ri)].push_back(<span class="number">1</span>);</span><br><span class="line">			seg[idx(le,ri)].push_back(sub(<span class="number">0</span>,a[le]));</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		build(a,le,mi),build(a,mi+<span class="number">1</span>,ri);</span><br><span class="line">		seg[idx(le,ri)]=polyMul(seg[idx(le,mi)],seg[idx(mi+<span class="number">1</span>,ri)]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//p即 S[l,r]</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> *res,con(<span class="keyword">int</span>)le,con(<span class="keyword">int</span>)ri,con(vint)p)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(le==ri)&#123;res[le]=p[<span class="number">0</span>];<span class="keyword">return</span>;&#125;</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		solve(res,le,mi,polySubMul(p,seg[idx(mi+<span class="number">1</span>,ri)],mi-le+<span class="number">1</span>));</span><br><span class="line">		solve(res,mi+<span class="number">1</span>,ri,polySubMul(p,seg[idx(le,mi)],ri-mi));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">multiVal</span><span class="params">(<span class="keyword">int</span> *f,con(<span class="keyword">int</span>)n,<span class="keyword">int</span> *pos,con(<span class="keyword">int</span>)m,<span class="keyword">int</span> *r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> tmp1[N+<span class="number">10</span>],tmp2[N+<span class="number">10</span>];</span><br><span class="line">		build(pos,<span class="number">0</span>,m<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">int</span> rt=idx(<span class="number">0</span>,m<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,ii=min(n,(<span class="keyword">int</span>)seg[rt].size());i&lt;ii;i++)</span><br><span class="line">			tmp1[i]=seg[rt][i];</span><br><span class="line">		BASIC_POLY::polyInv(tmp1,tmp2,n);</span><br><span class="line">		<span class="comment">//T[0,n-1] 求个逆再和 f差卷积得到 S[0,n-1]</span></span><br><span class="line">		vint v1(n),v2(n);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) v1[i]=f[i],v2[i]=tmp2[i];</span><br><span class="line">		solve(r,<span class="number">0</span>,m<span class="number">-1</span>,polySubMul(v1,v2,m));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</p>
+</details>
+
+<hr>
+<h2 id="多项式快速插值"><a href="#多项式快速插值" class="headerlink" title="# 多项式快速插值"></a># 多项式快速插值</h2><h3 id="问题2"><a href="#问题2" class="headerlink" title="- 问题2"></a>- 问题2</h3><p>给定 $n$ 组 $(x_i,y_i)$，$n-1$ 次多项式 $f(x)$ 满足 $\forall i,f(x_i)=y_i$，求 $f(x)$。</p>
+<h3 id="拉格朗日插值"><a href="#拉格朗日插值" class="headerlink" title="- 拉格朗日插值"></a>- 拉格朗日插值</h3><p>由若干个 $n-1$ 次多项式叠加得到 $f(x)$。具体构造如下：</p>
+<script type="math/tex; mode=display">
+g_i(x)=y_i\prod_{j\neq i}\frac{x-x_j}{x_i-x_j}</script><p>这样构造的目的是 $g_i(x_j)$ 当且仅当 $i=j$ 时 $g_i(x_j)\neq0$，于是可以将 $g_0(x),g_1(x)\cdots g_{n-1}(x)$ 直接相加得到 $f(x)$。 </p>
+<h3 id="快速插值"><a href="#快速插值" class="headerlink" title="- 快速插值"></a>- 快速插值</h3><p>考虑对拉格朗日插值进行优化（优化计算方式以加速）。观察 $f(x)$ 的表达式：</p>
+<script type="math/tex; mode=display">
+f(x)=\sum_{i=0}^{n-1}y_i\prod_{j\neq i}\frac{x-x_j}{x_i-x_j}=\sum_{i=0}^{n-1}y_i\frac{\prod(x-x_j)}{\prod(x_i-x_j)}</script><p>先看看怎么计算分式的分母部分，该部分对于固定的 $i$ 来说是一个常数，记为 $k_i$。</p>
+<script type="math/tex; mode=display">
+k_i=\prod_{j\neq i}(x_i-x_j)</script><p>根据极限的相关知识，不难证明下面这个式子是成立的：</p>
+<script type="math/tex; mode=display">
+k_i=\lim_{x\to x_i}\frac{\prod\limits_{j=0}^{n-1}(x_i-x_j)}{x-x_i}</script><p>便于书写，记 $g(x)=\prod\limits_{i=0}^{n-1}(x-x_i)$。分式上下都趋近于 $0$，符合洛必达法则的适用条件——由此可得 $k_i=g’(x_i)$<br>。</p>
+<p>可以先用类似线段树的分治（本质是启发式合并）在 $O(n\log n)$ 的复杂度内算出 $g(x)$，然后 $O(n)$ 多项式求导得到 $g’(x)$，再<strong>多点求值</strong>就可以得到 $k_i$ 了。</p>
+<p>再看 $f(x)$，我们现在可以把它写成</p>
+<script type="math/tex; mode=display">
+f(x)=\sum_{i=0}^{n-1}\frac{y_i}{k_i}\prod_{j\neq i}(x-x_j)</script><p>则需要解决后面这个式子。这其实可以用到多点求值的旧方法中的一个技巧——仍然是分治：</p>
+<div class="block">
+<p class="headline">分治</p>
+<p>记 $h_{l,r}(x)$：</p>
+<p>$$h_{l,r}(x)=\sum_{i=l}^r\frac{y_i}{k_i}\prod_{j\in[l,r]}^{j\neq i}(x-x_j)$$</p>
+<p>仍然用类似线段树的方法分治，考虑如何从 $h_{l,m}(x)$ 和 $h_{m+1,r}(x)$ 合并到 $h_{l,r}(x)$。</p>
+<p>
+$$
+\begin{aligned}
+S_{l,r}&=\prod_{i=l}^r(x-x_i)\\
+h_{l,r}(x)&=h_{l,m}S_{m+1,r}+S_{l,m}h_{m+1,r}
+\end{aligned}
+$$
+</p>
+<p class="lastline">这样就可以 $O(n\log n)$ 求出答案。</p>
+</div>
+
+<p>总的复杂度就是 $O(n^2+n\log n)$</p>
+<h3 id="源代码2"><a href="#源代码2" class="headerlink" title="- 源代码2"></a>- 源代码2</h3><details class="code">
+<summary>点击展开/折叠代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> UPPER_POLY&#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vint;</span><br><span class="line">	<span class="function">vint <span class="title">polyAdd</span><span class="params">(con(vint)a,con(vint)b)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> na,nb;</span><br><span class="line">		<span class="function">vint <span class="title">c</span><span class="params">(max(na=(<span class="keyword">int</span>)a.size(),nb=(<span class="keyword">int</span>)b.size()))</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;na;i++) c[i]=a[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nb;i++) c[i]=add(c[i],b[i]);</span><br><span class="line">		<span class="keyword">return</span> c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">vint <span class="title">polyMul</span><span class="params">(con(vint)a,con(vint)b)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> na=(<span class="keyword">int</span>)a.size(),nb=(<span class="keyword">int</span>)b.size(),nc=na+nb<span class="number">-1</span>,l=BASIC_POLY::modelize(nc);</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> tmp1[N+<span class="number">10</span>],tmp2[N+<span class="number">10</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;na;i++) tmp1[i]=a[i];fill(tmp1+na,tmp1+l,<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nb;i++) tmp2[i]=b[i];fill(tmp2+nb,tmp2+l,<span class="number">0</span>);</span><br><span class="line">		BASIC_POLY::ntt(tmp1,l,<span class="number">1</span>),BASIC_POLY::ntt(tmp2,l,<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;l;i++) tmp1[i]=mul(tmp1[i],tmp2[i]);</span><br><span class="line">		BASIC_POLY::ntt(tmp1,l,<span class="number">-1</span>);</span><br><span class="line">		<span class="function">vint <span class="title">c</span><span class="params">(nc)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nc;i++) c[i]=tmp1[i];</span><br><span class="line">		<span class="keyword">return</span> c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">vint <span class="title">polySubMul</span><span class="params">(con(vint)a,con(vint)b,con(<span class="keyword">int</span>)nc)</span></span>&#123;</span><br><span class="line">		vint c=a;</span><br><span class="line">		reverse(c.begin(),c.end());</span><br><span class="line">		c=polyMul(c,b);</span><br><span class="line">		c.resize(a.size());</span><br><span class="line">		reverse(c.begin(),c.end());</span><br><span class="line">		c.resize(nc);</span><br><span class="line">		<span class="keyword">return</span> c;</span><br><span class="line">	&#125;</span><br><span class="line">	vint seg[N+<span class="number">10</span>];</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> idx(l,r) (((l)+(r))|((l)!=(r)))</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> *a,con(<span class="keyword">int</span>)le,con(<span class="keyword">int</span>)ri)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(le==ri)&#123;</span><br><span class="line">			<span class="keyword">int</span> u=idx(le,ri);</span><br><span class="line">			seg[u].clear();</span><br><span class="line">			seg[u].push_back(<span class="number">1</span>),seg[u].push_back(sub(<span class="number">0</span>,a[le]));</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		build(a,le,mi),build(a,mi+<span class="number">1</span>,ri);</span><br><span class="line">		seg[idx(le,ri)]=polyMul(seg[idx(le,mi)],seg[idx(mi+<span class="number">1</span>,ri)]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">solve1</span><span class="params">(<span class="keyword">int</span> *res,con(<span class="keyword">int</span>)le,con(<span class="keyword">int</span>)ri,con(vint)p)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(le==ri)&#123;res[le]=p[<span class="number">0</span>];<span class="keyword">return</span>;&#125;</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		solve1(res,le,mi,polySubMul(p,seg[idx(mi+<span class="number">1</span>,ri)],mi-le+<span class="number">1</span>));</span><br><span class="line">		solve1(res,mi+<span class="number">1</span>,ri,polySubMul(p,seg[idx(le,mi)],ri-mi));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">multiVal</span><span class="params">(<span class="keyword">int</span> *f,con(<span class="keyword">int</span>)n,<span class="keyword">int</span> *pos,con(<span class="keyword">int</span>)m,<span class="keyword">int</span> *res)</span></span>&#123;</span><br><span class="line">		build(pos,<span class="number">0</span>,m<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> tmp1[N+<span class="number">10</span>],tmp2[N+<span class="number">10</span>];</span><br><span class="line">		<span class="keyword">int</span> rt=idx(<span class="number">0</span>,m<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,ii=(<span class="keyword">int</span>)seg[rt].size();i&lt;n;i++)</span><br><span class="line">			tmp1[i]=i&lt;ii?seg[rt][i]:<span class="number">0</span>;</span><br><span class="line">		BASIC_POLY::polyInv(tmp1,tmp2,n);</span><br><span class="line">		vint p1(n),p2(n);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) p1[i]=f[i],p2[i]=tmp2[i];</span><br><span class="line">		solve1(res,<span class="number">0</span>,m<span class="number">-1</span>,polySubMul(p1,p2,m));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build2</span><span class="params">(<span class="keyword">int</span> *a,con(<span class="keyword">int</span>)le,con(<span class="keyword">int</span>)ri)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(le==ri)&#123;</span><br><span class="line">			seg[idx(le,ri)].clear();</span><br><span class="line">			seg[idx(le,ri)].push_back(sub(<span class="number">0</span>,a[le])),seg[idx(le,ri)].push_back(<span class="number">1</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		build2(a,le,mi),build2(a,mi+<span class="number">1</span>,ri);</span><br><span class="line">		seg[idx(le,ri)]=polyMul(seg[idx(le,mi)],seg[idx(mi+<span class="number">1</span>,ri)]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">vint <span class="title">solve2</span><span class="params">(<span class="keyword">int</span> *y,con(<span class="keyword">int</span>)le,con(<span class="keyword">int</span>)ri)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(le==ri) <span class="keyword">return</span> vint(<span class="number">1</span>,y[le]);</span><br><span class="line">		<span class="keyword">int</span> mi=(le+ri)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> polyAdd(polyMul(solve2(y,le,mi),seg[idx(mi+<span class="number">1</span>,ri)]),polyMul(seg[idx(le,mi)],solve2(y,mi+<span class="number">1</span>,ri)));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">vint <span class="title">multiPoly</span><span class="params">(<span class="keyword">int</span> *pos,<span class="keyword">int</span> *val,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">		<span class="keyword">static</span> <span class="keyword">int</span> tmp1[N+<span class="number">10</span>],tmp2[N+<span class="number">10</span>];</span><br><span class="line">		build2(pos,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,rt=idx(<span class="number">0</span>,n<span class="number">-1</span>);i&lt;=n;i++) tmp1[i]=seg[rt][i];</span><br><span class="line">		BASIC_POLY::polyDet(tmp1,tmp1,n+<span class="number">1</span>);</span><br><span class="line">		multiVal(tmp1,n,pos,n,tmp2);</span><br><span class="line">		build2(pos,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">		<span class="comment">//getinv</span></span><br><span class="line">		tmp1[<span class="number">0</span>]=tmp2[<span class="number">0</span>];<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++) tmp1[i]=mul(tmp1[i<span class="number">-1</span>],tmp2[i]);</span><br><span class="line">		tmp1[n<span class="number">-1</span>]=ina_pow(tmp1[n<span class="number">-1</span>],MOD<span class="number">-2</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-2</span>;~i;i--)&#123;</span><br><span class="line">			<span class="keyword">int</span> tmp1i=mul(tmp1[i+<span class="number">1</span>],tmp2[i+<span class="number">1</span>]);</span><br><span class="line">			tmp1[i+<span class="number">1</span>]=mul(tmp1[i+<span class="number">1</span>],tmp1[i]);</span><br><span class="line">			tmp1[i]=tmp1i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) tmp1[i]=mul(tmp1[i],val[i]);</span><br><span class="line">		<span class="keyword">return</span> solve2(tmp1,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thank-for-reading"><a href="#Thank-for-reading" class="headerlink" title="Thank for reading!"></a>Thank for reading!</h4><p style="text-align:center;font-family:楷体">若陪伴是我所有<br>那痕迹 藏匿了整个宇宙</p>
+
+<p>——《听风捕梦》By (×28)双笙/封茗囧菌/司南</p>
+<p>> Link <a href="https://music.163.com/#/song?id=1819221726" target="_blank" rel="noopener">听风捕梦</a>-网易云</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://4rds5h.coding-pages.com/2021/21Feb19thArt1/" title="NOTE - 进阶多项式小札">https://4rds5h.coding-pages.com/2021/21Feb19thArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/21Feb8thArt3/" rel="prev" title="OI - Bridge Across Islands(POJ)">
+      <i class="fa fa-chevron-left"></i> OI - Bridge Across Islands(POJ)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/21Feb22ndArt1/" rel="next" title="「SOL」礼物(BZOJ)">
+      「SOL」礼物(BZOJ) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础多项式版子"><span class="nav-text"># 基础多项式版子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多项式多点求值"><span class="nav-text"># 多项式多点求值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1"><span class="nav-text">- 问题1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新的解法"><span class="nav-text">- 新的解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码1"><span class="nav-text">- 源代码1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多项式快速插值"><span class="nav-text"># 多项式快速插值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题2"><span class="nav-text">- 问题2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日插值"><span class="nav-text">- 拉格朗日插值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速插值"><span class="nav-text">- 快速插值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码2"><span class="nav-text">- 源代码2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thank-for-reading"><span class="nav-text">Thank for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">玻璃易碎，但打碎玻璃的人也将被玻璃划伤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">255</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">145</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共412.4k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
