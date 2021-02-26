@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="code-5ShoHSHaJq" />
+<meta name="baidu-site-verification" content="code-SaEpttARVo" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+/*折叠块*/
+details.fold{
+	background-color:#eeeeeec4;
+	border-radius:.3rem;
+	margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.fold summary{
+	background-color:#555555be;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold p{
+	padding-left:10px;
+	padding-right:10px;
+}
+details.fold p.lastline{
+	padding-bottom: 6px;
+}
+/*强调块*/
+div.block{
+	background-color: #ffffffbf;
+	border-radius: .3rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+div.block p{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+}
+div.block p.headline{
+	font-weight: bold;
+	background-color: #808080be;
+	color: white;
+	border-top-left-radius: .3rem;
+	border-top-right-radius: .3rem;
+	margin-bottom: 0px;
+}
+div.block p.lastline{
+	padding-bottom: 6px;
+}
+/*代码折叠块*/
+details.code{
+	background-color:#e1dfddaf;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.code summary{
+	color: #494646;
+	font-weight: bold;
+	height: auto;
+	padding: 3px;
+}
+img.myfont{
+	background-color: rgba(255, 255, 255, 0.726);
+	border-radius: .3rem;
+	padding: 3px;
+	width: 300px;
+	text-align: center;
+}
+/*页尾歌词*/div.tail-lyrics p.lyrics {
+	font-family: 楷体;
+	text-align: center;
+}
+a.labelfont{
+	color:white;
+	background-color:#272727;
+	border-radius:.3rem;
+	display:inline-block;
+	font-weight:700;
+	height:5;
+	text-decoration:none;
+	font-family:楷体;
+	padding: 0.01px 5px;
+	margin: 1mm 1mm 1mm 1mm;
+}
+a.labelfont#oj{
+	background-color:#272727 !important;
+	font-family:courier !important;
+}
+a.labelfont#dp{
+	background-color:#3C3C3C !important;
+}
+a.labelfont#graph{
+	background-color:#4F4F4F !important;
+}
+a.labelfont#string{
+	background-color:#5B5B5B !important;
+}
+a.labelfont#search{
+	background-color:#6C6C6C !important;
+}
+a.labelfont#math{
+	background-color:#7B7B7B !important;
+}
+a.labelfont#data-structure{
+	background-color:#8E8E8E !important;
+}
+a.labelfont#speed{
+	background-color:#9D9D9D !important;
+}
+a.labelfont#greedy{
+	background-color:#ADADAD !important;
+}
+a.labelfont#other{
+	background-color:#BEBEBE !important;
+}
+</style>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="博客赶工……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「SOL」小A与两位神仙(洛谷)">
+<meta property="og:url" content="https://4rds5h.coding-pages.com/2021/21Feb23rdArt2/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="博客赶工……">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-23T13:31:37.000Z">
+<meta property="article:modified_time" content="2021-02-23T15:59:19.018Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="-洛谷-">
+<meta property="article:tag" content="数学-素性测试">
+<meta property="article:tag" content="数学-大数分解">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://4rds5h.coding-pages.com/2021/21Feb23rdArt2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>「SOL」小A与两位神仙(洛谷) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2021/21Feb23rdArt2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="玻璃易碎，但打碎玻璃的人也将被玻璃划伤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「SOL」小A与两位神仙(洛谷)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-23 21:31:37 / 修改时间：23:59:19" itemprop="dateCreated datePublished" datetime="2021-02-23T21:31:37+08:00">2021-02-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/21Feb23rdArt2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/21Feb23rdArt2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>博客赶工……</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>给定正整数 $P$，保证 $P$ 为某个素数的幂。给定多组正整数 $x,y$，保证 $(x,P)=0,(y,P)=0$，求是否存在正整数 $a$，使得 $x^a\equiv y\pmod P$。</p>
+<p>数据规模：$P\le10^{18}$，询问组数不超过 $2\times10^4$。</p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>先随便什么方法把 $P$ 给分解成 $p^k$，可以得到 $\varphi(P)=p^{k-1}(p-1)$，同时可以说明 $P$ 一定有原根，记为 $g$。</p>
+<p>于是任何与 $P$ 互质的数都可以表示成原根的幂，若 $g^b=a$，则记 ${\rm ind} a=b$。</p>
+<p>根据欧拉定理，可以知道原方程等价于</p>
+<script type="math/tex; mode=display">
+a\cdot{\rm ind}\ x\equiv{\rm{ind}}\ y\pmod{\varphi(P)}</script><p>不妨看看 $\rm{ind} x$ 有什么性质。对所有 $x$ 在模 $P$ 意义下的幂定义集合</p>
+<script type="math/tex; mode=display">
+\mathbb{S}=\{x^i\bmod P\mid i\in\mathbb{N}\}</script><p>可以知道 $x^i=g^{i\cdot{\rm ind} x}$，即 ${\rm ind} {x^i}=i\cdot{\rm ind} x$，并且 $i$ 可以取任意自然数。又因为 $x^{\varphi(P)}\equiv 1$，于是可以得到</p>
+<script type="math/tex; mode=display">
+|\mathbb{S}|=\frac{\varphi(P)}{({\rm ind}\ x,\varphi(P))}</script><p>而 $|\mathbb{S}|$ 就是 $x$ 模 $P$ 意义下的阶 ${\rm ord} x$，于是阶一定是 $\varphi(P)$ 的因数。</p>
+<p>因为 $y\equiv x^a$，所以 ${\rm ind} y=a\cdot{\rm ind} x$，那么：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+{\rm ord}\ x=\frac{\varphi(P)}{({\rm ind}\ x,\varphi(P))}\\
+{\rm ord}\ y=\frac{\varphi(P)}{(a\cdot{\rm ind}\ x,\varphi(P))}
+\end{array}</script><p>于是「存在 $a$ 使得 $x^a\equiv y$」等价于「${\rm ord} y\mid{\rm ord} x$」。</p>
+<p>最后一个问题就是，怎么求阶？根据上面的推导以及阶的定义，阶一定是 $\varphi(P)$ 的因数，而且 $\forall {\rm ord} x\mid a,x^a\equiv 1$。</p>
+<p>所以可以用<strong>试除法</strong>，设 ${\rm ord} x$ 的初值 $x_0$ 为 $\varphi(P)$，将其试除一个 $\varphi(P)$ 的质因子 $p_0$，若 $p_0\mid x_0$ 且 $x^{\frac{x_0}{p_0}}\equiv 1$，则 $x_0:=\frac{x_0}{p_0}$。</p>
+<p>至于怎么找到 $\varphi(P)$ 的质因子，由于数很大，可以使用 Pollard_rho。</p>
+<hr>
+<blockquote>
+<p>复习笔记</p>
+</blockquote>
+<h2 id="Miller-rabin-素性测试"><a href="#Miller-rabin-素性测试" class="headerlink" title="# Miller_rabin 素性测试"></a># Miller_rabin 素性测试</h2><p>检测原理基于「费马定理的逆定理」以及「二次探测」。</p>
+<div class="block">
+<p class="headline">费马定理的逆定理</p>
+<p class="lastline">若 $a^{p-1}\equiv1\pmod p$，则 $p$ 可能是素数；若不成立，则 $p$ 一定不是素数。</p>
+</div>
+<div class="block">
+<p class="headline">二次探测</p>
+<p>若 $x^2\equiv 1\pmod p$ 的解有且仅有 $x\equiv\pm1$，则 $p$ 可能是素数，否则一定不是素数。</p>
+</div>
+
+<p>可以看出基于这两个原理，Miller_rabin 只是一个随机算法，但是它的正确性在 OI 的数据规模内已经够用了~</p>
+<p>如何实现 Miller_rabin？首先试除几个（前10个）小质数，排除掉许多合数，加快算法效率。</p>
+<p>因为已经试除过 $2$，此时的 $p$ 一定是奇数，可以拆解为 $p=2^mq$ 的形式，然后进行二次探测。</p>
+<p>随机一个数 $a$，或者 $a$ 直接取小质数，通过如下过程实现二次探测：</p>
+<ul>
+<li>首先检验 $a^q$ 是否为 $\pm1$，若是，则 $a^q$ 本身就是 $x^2\equiv1$ 的解，满足二次探测；</li>
+<li>然后依次检验 $a^{2q},a^{4q},\dots,a^{2^mq}$；</li>
+<li>若检验到 $a^{2^iq}$ 时，$a^{2^iq}$ 第一次等于 $1$，此时 $a^{2^{i-1}q}\neq\pm1$，但是 $a^{2^{i-1}q}$ 是 $x^2\equiv1$ 的解，不满足二次探测；</li>
+<li>若检验到 $2^{2^iq}$ 时，$a^{2^iq}$ 第一次等于 $-1$，那么 $a^{2^iq}$ 是 $x^2\equiv 1$ 的解，满足二次探测；</li>
+<li>若检验结束后还没有找到 $x^2\equiv 1$ 的解，即 $a^{2^iq}\neq\pm1$，不满足费马小定理的逆定理。</li>
+</ul>
+<p>具体可以参照「# 源代码」中的 <code>miller_rabin</code> 函数。</p>
+<hr>
+<h2 id="Pollard-rho-因数分解"><a href="#Pollard-rho-因数分解" class="headerlink" title="# Pollard_rho 因数分解"></a># Pollard_rho 因数分解</h2><p>用于找到一个非 $1$ 正整数 $P$ 的大于 $1$ 小于 $P$ 的因子，可以辅助分解质因数。</p>
+<p>Pollard_rho 也为一个随机算法，进行一次 Pollard_rho 有可能无法找出这样的因子。</p>
+<p>Pollard_rho 的概率保证主要有以下两点：</p>
+<ul>
+<li>随机 $a,b$ 计算 $|a-b|$，而不是直接随机一个数 $a$（生日悖论，但是我也不是很懂这个）；</li>
+<li>并不直接判断 $|a-b|$ 是 $P$ 的因数，而是判断 $|a-b|$ 是否与 $P$ 互质，若不互质，则它们的最大公约数就是 $P$ 的一个大于 $1$ 的因子，这样符合条件的 $|a-b|$ 就更多了。</li>
+</ul>
+<p>所以实现时，我们采用伪随机数的方式——令伪随机函数 $f(x)=x^2+b$，$b\in[1,P)$。</p>
+<p>先随机两个变量 $x_1=x_2$，然后每次以不同的倍数对 $x_1,x_2$ 进行伪随机化，例如 $x_1:=f(x_1),x_2:=f(f(x_2))$。</p>
+<p>可以发现这样 $x_1,x_2$ 在模 $P$ 意义下一定会产生循环，并且在循环内可能找不到 $|x_1-x_2|$ 与 $P$ 不互质。这就是 Pollard_rho 是随机算法的原因。</p>
+<p>产生循环时 $x_1=x_2$，此时 $(|x_1-x_2|,P)=P$，自动退出循环。</p>
+<p>另外，当然不能对一个质数进行 Pollard_rho 算法，因此先用 Miller_rabin 把 $P$ 是质数的情况判掉。</p>
+<p>具体可以参照「# 源代码」中的 <code>pollard_rho</code> 函数。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><details class="code">
+<summary>点击展开/折叠代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;<span class="title">inline</span> <span class="title">T</span> <span class="title">rin</span>(<span class="title">T</span> &amp;<span class="title">r</span>)&#123;</span></span><br><span class="line">	<span class="keyword">int</span> b=<span class="number">1</span>,c=getchar();r=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) b=c==<span class="string">'-'</span>?<span class="number">-1</span>:b,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+(c^<span class="string">'0'</span>),c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r*=b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> llong;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> con(type) const type &amp;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> PRIME&#123;</span><br><span class="line">	<span class="function">llong <span class="title">ina_gcd</span><span class="params">(con(llong)a,con(llong)b)</span></span>&#123;<span class="keyword">return</span> b?ina_gcd(b,a%b):a;&#125;</span><br><span class="line">	<span class="function">llong <span class="title">ina_abs</span><span class="params">(con(llong)a)</span></span>&#123;<span class="keyword">return</span> a&lt;<span class="number">0</span>?-a:a;&#125;</span><br><span class="line">	<span class="function">llong <span class="title">mul</span><span class="params">(con(llong)a,con(llong)b,con(llong)mod)</span></span>&#123;<span class="keyword">return</span> llong((__int128)a*b%mod);&#125;</span><br><span class="line">	<span class="function">llong <span class="title">ina_pow</span><span class="params">(llong a,llong b,con(llong)mod)</span></span>&#123;</span><br><span class="line">		llong r=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(b)&#123;</span><br><span class="line">			<span class="keyword">if</span>(b&amp;<span class="number">1</span>) r=mul(r,a,mod);</span><br><span class="line">			a=mul(a,a,mod),b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> r;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">miller_rabin</span><span class="params">(con(llong)x,con(llong)a,llong b)</span></span>&#123;</span><br><span class="line">		llong tmp=ina_pow(a,b,x);</span><br><span class="line">		<span class="keyword">if</span>(tmp==x<span class="number">-1</span> || tmp==<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">while</span>(b!=x<span class="number">-1</span>)&#123;</span><br><span class="line">			tmp=mul(tmp,tmp,x),b&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(tmp==x<span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">if</span>(tmp==<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> PRM[]=&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">17</span>,<span class="number">19</span>,<span class="number">61</span>,<span class="number">24251</span>&#125;;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">primeTest</span><span class="params">(con(llong)x)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">			<span class="keyword">if</span>(x%PRM[i]==<span class="number">0</span>)</span><br><span class="line">				<span class="keyword">return</span> x==PRM[i];</span><br><span class="line">		llong tmp=x<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">while</span>(!(tmp&amp;<span class="number">1</span>)) tmp&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">			<span class="keyword">if</span>(!miller_rabin(x,PRM[i],tmp))</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">llong <span class="title">pollard_rho</span><span class="params">(con(llong)x)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">			<span class="keyword">if</span>(x%PRM[i]==<span class="number">0</span>)</span><br><span class="line">				<span class="keyword">return</span> PRM[i];</span><br><span class="line">		llong x1=rand()%(x<span class="number">-2</span>)+<span class="number">2</span>,x2=x1,tmp=rand()%(x<span class="number">-1</span>)+<span class="number">1</span>,d=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(d==<span class="number">1</span>)&#123;</span><br><span class="line">			x1=(mul(x1,x1,x)+tmp)%x;</span><br><span class="line">			x2=(mul(x2,x2,x)+tmp)%x;</span><br><span class="line">			x2=(mul(x2,x2,x)+tmp)%x;</span><br><span class="line">			d=ina_gcd(ina_abs(x1-x2),x);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> d;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">divideNum</span><span class="params">(con(llong)x,llong *&amp;res)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(x==<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">if</span>(primeTest(x))&#123;</span><br><span class="line">			*res=x,res++;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		llong dv=pollard_rho(x);</span><br><span class="line">		divideNum(dv,res),divideNum(x/dv,res);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">llong m,phim,dv_phim[<span class="number">100</span>],ena_m[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">int</span> ncas,ndv_phim,nena_m;</span><br><span class="line"></span><br><span class="line"><span class="function">llong <span class="title">eta_pow</span><span class="params">(con(llong)x,con(<span class="keyword">int</span>)k)</span></span>&#123;</span><br><span class="line">	llong ret=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++)&#123;</span><br><span class="line">		__int128 tmp=(__int128)x*ret;</span><br><span class="line">		<span class="keyword">if</span>(tmp&gt;m) <span class="keyword">return</span> m+<span class="number">1</span>;</span><br><span class="line">		ret=(llong)tmp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">llong <span class="title">kthRoot</span><span class="params">(con(<span class="keyword">int</span>)k)</span></span>&#123;</span><br><span class="line">	llong tmp=<span class="built_in">pow</span>(m,<span class="number">1.0</span>/k)+<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">while</span>(eta_pow(tmp,k)&gt;m) tmp--;</span><br><span class="line">	<span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">llong <span class="title">divideM</span><span class="params">()</span></span>&#123;</span><br><span class="line">	llong tmp;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">60</span>;i;i--)</span><br><span class="line">		<span class="keyword">if</span>(tmp=kthRoot(i))&#123;</span><br><span class="line">			<span class="keyword">if</span>(eta_pow(tmp,i)==m)</span><br><span class="line">				<span class="keyword">return</span> tmp;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> m;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	llong pm=divideM();</span><br><span class="line">	phim=pm<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(llong it=pm;it&lt;m;it*=pm)</span><br><span class="line">		phim*=pm;</span><br><span class="line">	llong *tmp=dv_phim;</span><br><span class="line">	PRIME::divideNum(phim,tmp);</span><br><span class="line">	ndv_phim=<span class="keyword">int</span>(tmp-dv_phim);</span><br><span class="line">	sort(dv_phim,tmp);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ndv_phim;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> j=i;</span><br><span class="line">		<span class="keyword">while</span>(j+<span class="number">1</span>&lt;ndv_phim &amp;&amp; dv_phim[j+<span class="number">1</span>]==dv_phim[i]) j++;</span><br><span class="line">		ena_m[++nena_m]=dv_phim[i];</span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">llong <span class="title">ord</span><span class="params">(con(llong)x)</span></span>&#123;</span><br><span class="line">	llong ret=phim;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=nena_m;i++)</span><br><span class="line">		<span class="keyword">while</span>(ret%ena_m[i]==<span class="number">0</span> &amp;&amp; PRIME::ina_pow(x,ret/ena_m[i],m)==<span class="number">1</span>)</span><br><span class="line">			ret/=ena_m[i];</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// freopen("input.in","r",stdin);</span></span><br><span class="line">	rin(m),rin(ncas);</span><br><span class="line">	init();</span><br><span class="line">	<span class="keyword">while</span>(ncas--)&#123;</span><br><span class="line">		llong x,y;rin(x),rin(y);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,ord(x)%ord(y)? <span class="string">"No"</span>:<span class="string">"Yes"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><div class="tail-lyrics">
+<p class="lyrics">去听从内心的旨意 去步步为营<br>绝望中爆发无限潜力 为弱肉强食</p>
+<p>——《陷落之序》By 著小生zoki</p>
+<p>> Link <a href="https://www.bilibili.com/video/BV1VE41157rR?t=148" target="_blank" rel="noopener">陷落之序</a>-Bilibili</p>
+</div>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://4rds5h.coding-pages.com/2021/21Feb23rdArt2/" title="「SOL」小A与两位神仙(洛谷)">https://4rds5h.coding-pages.com/2021/21Feb23rdArt2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%B4%9B%E8%B0%B7/" rel="tag"><i class="fa fa-tag"></i> -洛谷-</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E7%B4%A0%E6%80%A7%E6%B5%8B%E8%AF%95/" rel="tag"><i class="fa fa-tag"></i> 数学-素性测试</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6-%E5%A4%A7%E6%95%B0%E5%88%86%E8%A7%A3/" rel="tag"><i class="fa fa-tag"></i> 数学-大数分解</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/21Feb23rdArt1/" rel="prev" title="「SOL」Social Distance(AtCoder)">
+      <i class="fa fa-chevron-left"></i> 「SOL」Social Distance(AtCoder)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/21Feb24thArt1/" rel="next" title="「SOL」Bad Cryptography(Codeforces)">
+      「SOL」Bad Cryptography(Codeforces) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text"># 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Miller-rabin-素性测试"><span class="nav-text"># Miller_rabin 素性测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pollard-rho-因数分解"><span class="nav-text"># Pollard_rho 因数分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">玻璃易碎，但打碎玻璃的人也将被玻璃划伤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">260</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">148</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共420.4k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -100,22 +100,50 @@ img.myfont{
 	font-family: 楷体;
 	text-align: center;
 }
+a.labelfont{
+	color:white;
+	background-color:#272727;
+	border-radius:.3rem;
+	display:inline-block;
+	font-weight:700;
+	height:5;
+	text-decoration:none;
+	font-family:楷体;
+	padding: 0.01px 5px;
+	margin: 1mm 1mm 1mm 1mm;
+}
+a.labelfont#oj{
+	background-color:#272727 !important;
+	font-family:courier !important;
+}
+a.labelfont#dp{
+	background-color:#3C3C3C !important;
+}
+a.labelfont#graph{
+	background-color:#4F4F4F !important;
+}
+a.labelfont#string{
+	background-color:#5B5B5B !important;
+}
+a.labelfont#search{
+	background-color:#6C6C6C !important;
+}
+a.labelfont#math{
+	background-color:#7B7B7B !important;
+}
+a.labelfont#data-structure{
+	background-color:#8E8E8E !important;
+}
+a.labelfont#speed{
+	background-color:#9D9D9D !important;
+}
+a.labelfont#greedy{
+	background-color:#ADADAD !important;
+}
+a.labelfont#other{
+	background-color:#BEBEBE !important;
+}
 </style>
-<script>
-/*
-	var test=window.location.href;
-	var res=test.toLowerCase().indexOf("4rds5h");
-	if(res!=-1){
-		var go=test.replace("4rds5h.coding-pages.com","coding-pages-bucket-51839-7854799-5081-374285-1303700546.cos-website.ap-hongkong.myqcloud.com");
-		window.location.replace(go);
-	}
-	res=test.toLowerCase().indexOf("github");
-	if(res!=-1){
-		var go=test.replace("luckyglass.github.io","coding-pages-bucket-51839-7854799-5081-374285-1303700546.cos-website.ap-hongkong.myqcloud.com");
-		window.location.replace(go);
-	}
-*/
-</script>
 <link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
 </head>
 </html>
@@ -140,8 +168,8 @@ img.myfont{
 <meta property="article:tag" content="图论-二分图">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="贪心">
-<meta property="article:tag" content="算法效率-扫描线">
 <meta property="article:tag" content="动态规划-状压DP">
+<meta property="article:tag" content="算法效率-扫描线">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://4rds5h.coding-pages.com/2019/19Aug16thArt8/png1.png">
 
@@ -514,8 +542,8 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
               <a href="/tags/%E5%9B%BE%E8%AE%BA-%E4%BA%8C%E5%88%86%E5%9B%BE/" rel="tag"><i class="fa fa-tag"></i> 图论-二分图</a>
               <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
               <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"><i class="fa fa-tag"></i> 贪心</a>
-              <a href="/tags/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87-%E6%89%AB%E6%8F%8F%E7%BA%BF/" rel="tag"><i class="fa fa-tag"></i> 算法效率-扫描线</a>
               <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E7%8A%B6%E5%8E%8BDP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-状压DP</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87-%E6%89%AB%E6%8F%8F%E7%BA%BF/" rel="tag"><i class="fa fa-tag"></i> 算法效率-扫描线</a>
           </div>
 
         
@@ -606,7 +634,7 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">255</span>
+          <span class="site-state-item-count">260</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -618,7 +646,7 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">145</span>
+        <span class="site-state-item-count">148</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -671,7 +699,7 @@ ans_{\min}=&\sum_{u,v\in\mathbb B}\min\{cov(u)-cov(u,v),cov(v)-cov(u,v)\}+\sum_{
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共412.4k字</span>
+  <span class="post-count">博客全站共420.4k字</span>
 </div>
 
         
