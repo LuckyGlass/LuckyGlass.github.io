@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="code-5ShoHSHaJq" />
+<meta name="baidu-site-verification" content="code-SaEpttARVo" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+/*折叠块*/
+details.fold{
+	background-color:#eeeeeec4;
+	border-radius:.3rem;
+	margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.fold summary{
+	background-color:#555555be;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold p{
+	padding-left:10px;
+	padding-right:10px;
+}
+details.fold p.lastline{
+	padding-bottom: 6px;
+}
+/*强调块*/
+div.block{
+	background-color: #ffffffbf;
+	border-radius: .3rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+div.block p{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+}
+div.block p.headline{
+	font-weight: bold;
+	background-color: #808080be;
+	color: white;
+	border-top-left-radius: .3rem;
+	border-top-right-radius: .3rem;
+	margin-bottom: 0px;
+}
+div.block p.lastline{
+	padding-bottom: 6px;
+}
+/*代码折叠块*/
+details.code{
+	background-color:#e1dfddaf;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.code summary{
+	color: #494646;
+	font-weight: bold;
+	height: auto;
+	padding: 3px;
+}
+img.myfont{
+	background-color: rgba(255, 255, 255, 0.726);
+	border-radius: .3rem;
+	padding: 3px;
+	width: 300px;
+	text-align: center;
+}
+/*页尾歌词*/div.tail-lyrics p.lyrics {
+	font-family: 楷体;
+	text-align: center;
+}
+a.labelfont{
+	color:white;
+	background-color:#272727;
+	border-radius:.3rem;
+	display:inline-block;
+	font-weight:700;
+	height:5;
+	text-decoration:none;
+	font-family:楷体;
+	padding: 0.01px 5px;
+	margin: 1mm 1mm 1mm 1mm;
+}
+a.labelfont#oj{
+	background-color:#272727 !important;
+	font-family:courier !important;
+}
+a.labelfont#dp{
+	background-color:#3C3C3C !important;
+}
+a.labelfont#graph{
+	background-color:#4F4F4F !important;
+}
+a.labelfont#string{
+	background-color:#5B5B5B !important;
+}
+a.labelfont#search{
+	background-color:#6C6C6C !important;
+}
+a.labelfont#math{
+	background-color:#7B7B7B !important;
+}
+a.labelfont#data-structure{
+	background-color:#8E8E8E !important;
+}
+a.labelfont#speed{
+	background-color:#9D9D9D !important;
+}
+a.labelfont#greedy{
+	background-color:#ADADAD !important;
+}
+a.labelfont#other{
+	background-color:#BEBEBE !important;
+}
+</style>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="看到课程标题是 “DP优化”，以为就是斜率优化、单调性之类的……结果来了些什么奇妙操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「SOL」The Hanged Man(HDU)">
+<meta property="og:url" content="https://4rds5h.coding-pages.com/2021/21Mar3rdArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="看到课程标题是 “DP优化”，以为就是斜率优化、单调性之类的……结果来了些什么奇妙操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-03T13:41:45.000Z">
+<meta property="article:modified_time" content="2021-03-03T15:00:40.196Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="动态规划-状压DP">
+<meta property="article:tag" content="-HDU-">
+<meta property="article:tag" content="动态规划-背包问题">
+<meta property="article:tag" content="图论-点分治">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://4rds5h.coding-pages.com/2021/21Mar3rdArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>「SOL」The Hanged Man(HDU) | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2021/21Mar3rdArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="玻璃易碎，但打碎玻璃的人也将被玻璃划伤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「SOL」The Hanged Man(HDU)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-03 21:41:45 / 修改时间：23:00:40" itemprop="dateCreated datePublished" datetime="2021-03-03T21:41:45+08:00">2021-03-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">OI题解</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/21Mar3rdArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/21Mar3rdArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>看到课程标题是 “DP优化”，以为就是斜率优化、单调性之类的……<br>结果来了些什么奇妙操作</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="题面"><a href="#题面" class="headerlink" title="# 题面"></a># 题面</h2><p>给定一棵 $n$ 个点的树和整数 $m$，每个点有两类权值 $a_i,b_i$。</p>
+<p>对于<strong>每个</strong> $h=1\sim m$，求树上的一个独立集 $S$，使得 $\sum\limits_{i\in S}a_i\le h$，且 $\sum\limits_{i\in S}b_i$ 最大，输出满足上述条件的 $S$ 的数量。</p>
+<p>数据规模：$n\le50,m\le5000,1\le a_i\le m,b_i\le 10^6$。</p>
+<hr>
+<h2 id="解析"><a href="#解析" class="headerlink" title="# 解析"></a># 解析</h2><p>题面就描述了一个背包问题，另外有独立集的限制。</p>
+<p>如果在原树上直接背包，需要背包合并（由于物品大小并非 $1$，虽然两个点只会在 LCA 处产生贡献，但是合并的复杂度仍然是 $\mathcal{O}(m^2)$ 的），复杂度只能是 $\mathcal{O}(nm^2)$，无法再优化。</p>
+<p>话不多说，我们直接来看看怎么用神仙操作来做这道题。</p>
+<p>首先我们建出原树的<strong>点分树</strong>，点分树有两个（重要的）性质，其中一条我们非常熟悉：</p>
+<ul>
+<li>树高是 $\mathcal{O}(\log n)$。</li>
+</ul>
+<p>另外一条非常显然但是不常用（至少我没见过哪道题用）：</p>
+<ul>
+<li>原树上与 $u$ 相邻的点在点分树上只可能是 $\mathbf{u}$ <strong>的祖先</strong> 和 $u$ 的后继。</li>
+</ul>
+<p>怎么利用这两点来解题？我们考虑按照点分树的 <strong>DFS 序</strong> 依次决策每个节点是否在独立集中。</p>
+<p>这样的话，当我们决策 $u$ 时，就不需要考虑 $u$ 的后继是否选入独立集，而只需要考虑 $\mathbf{u}$ <strong>的祖先</strong> 有哪些被选入了独立集中 —— $u$ 的祖先不多，只有 $\mathcal{O}(\log n)$ 个，于是可以<strong>状压</strong>：$f_{u,s,i}$ 表示的状态为「已经决策了 $u$，从根到 $u$ 的链上被选入独立集的点是 $s$（压缩状态），且当前背包中装了总重为 $i$ 的物品」，需要维护对应的物品价值最大值以及方案数。</p>
+<p>那么 $s$ 的范围是 $\mathcal{O}(2^{\log n})=\mathcal{O}(n)$ 的，$f_{u,s,i}$ 的状态数是 $\mathcal{O}(n^2m)$ 的。由于是 0-1 背包，可以 $\mathcal{O}(1)$ 转移，总的复杂度也是 $\mathcal{O}(n^2m)$ 的。</p>
+<p>下面关于一些细节简单说一下：</p>
+<ul>
+<li>知道了祖先的选定状态 $s$，如何判断 $u$ 是否能加入当前的独立集中？为了保持复杂度必须 $\mathcal{O}(1)$ 判断：<ul>
+<li>维护压缩状态 <code>lnk[u]</code> 表示当前点分树的祖先中，哪些是原树上与 $u$ 相连的节点。</li>
+<li>判断只需要判断 <code>lnk[u]</code> 和 $s$ 是否有交；</li>
+<li>维护只需要在 DFS 进入点 $u$ 时枚举原树上与 $u$ 相邻的点 $v$，更新 <code>lnk[v]</code>，DFS 退出点 $u$ 时在 <code>lnk</code> 中撤销 $u$ 的信息即可。</li>
+</ul>
+</li>
+<li>$f_{u,s,i}$ 中压缩状态 $s$ 的维护：记 $u$ 在 DFS 序上的前驱为 $v$，我们需要从 $f_v$ 转移到 $f_u$。<ul>
+<li>只需要深度小于 $dep_u$ 的祖先；</li>
+<li>就需要把 $f_{v,s,i}$ 的 $s$ 中深度大于等于 $dep_u$ 的部分删去；</li>
+<li>具体的，在 DFS 退出点 $u$ 时，对每个 $s\ge 2^{dep_u}$，将 $f_{u,s,i}$ 贡献到 $f_{u,s-2^{dep_u},i}$；</li>
+<li>这样的效果就是递归到当前层时，有用的 $s$ 的位数不超过 $dep_v-1$。</li>
+</ul>
+</li>
+</ul>
+<p>大概是一个不错的处理独立集的方法……</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">rin</span><span class="params">(<span class="keyword">int</span> &amp;r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> b=<span class="number">1</span>,c=getchar();r=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) b=c==<span class="string">'-'</span>?<span class="number">-1</span>:b,c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+(c^<span class="string">'0'</span>),c=getchar();</span><br><span class="line">    <span class="keyword">return</span> r*=b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">55</span>,M=<span class="number">5005</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> con(type) const type &amp;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Data</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> key;<span class="keyword">long</span> <span class="keyword">long</span> cnt;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">maxc</span><span class="params">(Data &amp;a,con(Data)b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(a.key&lt;b.key) a=b;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a.key==b.key) a.cnt+=b.cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    Data <span class="keyword">operator</span> +(con(<span class="keyword">int</span>)d)<span class="keyword">const</span>&#123;<span class="keyword">return</span> (Data)&#123;key+d,cnt&#125;;&#125;</span><br><span class="line">&#125;f[<span class="number">2</span>][<span class="number">64</span>][M];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Graph</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> head[N],to[N&lt;&lt;<span class="number">1</span>],nxt[N&lt;&lt;<span class="number">1</span>],ncnt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(con(<span class="keyword">int</span>)sz)</span></span>&#123;<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=sz;i++)head[i]=<span class="number">0</span>;ncnt=<span class="number">0</span>;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)v,con(<span class="keyword">bool</span>)typ=<span class="literal">true</span>)</span></span>&#123;</span><br><span class="line">        ncnt++;</span><br><span class="line">        to[ncnt]=v,nxt[ncnt]=head[u],head[u]=ncnt;</span><br><span class="line">        <span class="keyword">if</span>(typ) ncnt++,to[ncnt]=u,nxt[ncnt]=head[v],head[v]=ncnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">inline</span> <span class="keyword">int</span> <span class="keyword">operator</span> [](con(<span class="keyword">int</span>)u)&#123;<span class="keyword">return</span> head[u];&#125;</span><br><span class="line">&#125;gr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ncas,n,m,r_wei,r_root,r_tot,bagsiz,ndfn;</span><br><span class="line"><span class="keyword">int</span> ara[N],arb[N],nxtto[N];</span><br><span class="line"><span class="keyword">bool</span> ban[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">toggleSize</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)fa)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sizu=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it=gr[u];it;it=gr.nxt[it])</span><br><span class="line">        <span class="keyword">if</span>(gr.to[it]!=fa &amp;&amp; !ban[gr.to[it]])</span><br><span class="line">            sizu+=toggleSize(gr.to[it],u);</span><br><span class="line">    <span class="keyword">return</span> sizu;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findCenter</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)fa)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sizu=<span class="number">1</span>,mxv=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it=gr[u];it;it=gr.nxt[it])&#123;</span><br><span class="line">        <span class="keyword">int</span> v=gr.to[it],sizv;</span><br><span class="line">        <span class="keyword">if</span>(v==fa || ban[v]) <span class="keyword">continue</span>;</span><br><span class="line">        sizv=findCenter(v,u);</span><br><span class="line">        sizu+=sizv,mxv=max(mxv,sizv);</span><br><span class="line">    &#125;</span><br><span class="line">    mxv=max(mxv,r_tot-sizu);</span><br><span class="line">    <span class="keyword">if</span>(r_wei&gt;mxv) r_wei=mxv,r_root=u;</span><br><span class="line">    <span class="keyword">return</span> sizu;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dacDFS</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)dep)</span></span>&#123;</span><br><span class="line">    <span class="comment">// # Marks</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it=gr[u];it;it=gr.nxt[it]) nxtto[gr.to[it]]|=<span class="number">1</span>&lt;&lt;dep;</span><br><span class="line">    ban[u]=<span class="literal">true</span>;</span><br><span class="line">    <span class="comment">// # DP</span></span><br><span class="line">    <span class="keyword">int</span> I=(++ndfn)&amp;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">0</span>,ss=<span class="number">1</span>&lt;&lt;(dep+<span class="number">1</span>);s&lt;ss;s++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,ii=m;i&lt;=ii;i++)</span><br><span class="line">            f[I][s][i].key=<span class="number">-1</span>,f[I][s][i].cnt=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(dep)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">0</span>,ss=<span class="number">1</span>&lt;&lt;dep;s&lt;ss;s++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=bagsiz;i++)</span><br><span class="line">                f[I][s][i]=f[!I][s][i];</span><br><span class="line">        <span class="keyword">int</span> ii=min(bagsiz,m-ara[u]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">0</span>,ss=<span class="number">1</span>&lt;&lt;dep;s&lt;ss;s++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nxtto[u]&amp;s) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=ii;i++)</span><br><span class="line">                <span class="keyword">if</span>(~f[!I][s][i].key)</span><br><span class="line">                    maxc(f[I][s|(<span class="number">1</span>&lt;&lt;dep)][i+ara[u]],f[!I][s][i]+arb[u]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        f[I][<span class="number">0</span>][<span class="number">0</span>].key=<span class="number">0</span>,f[I][<span class="number">0</span>][<span class="number">0</span>].cnt=<span class="number">1</span>;</span><br><span class="line">        f[I][<span class="number">1</span>][ara[u]].key=arb[u],f[I][<span class="number">1</span>][ara[u]].cnt=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    bagsiz=min(m,bagsiz+ara[u]);</span><br><span class="line">    <span class="comment">// # Transport</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it=gr[u];it;it=gr.nxt[it])&#123;</span><br><span class="line">        <span class="keyword">int</span> v=gr.to[it],sizv;</span><br><span class="line">        <span class="keyword">if</span>(ban[v]) <span class="keyword">continue</span>;</span><br><span class="line">        sizv=toggleSize(v,<span class="number">0</span>);</span><br><span class="line">        r_tot=sizv,r_wei=n+<span class="number">1</span>,findCenter(v,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> rtv=r_root;</span><br><span class="line">        <span class="comment">// printf("%d -&gt; %d\n",u,v);</span></span><br><span class="line">        dacDFS(rtv,dep+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// # Roll-back</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it=gr[u];it;it=gr.nxt[it]) nxtto[gr.to[it]]^=<span class="number">1</span>&lt;&lt;dep;</span><br><span class="line">    ban[u]=<span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// # Toggle-DP</span></span><br><span class="line">    I=ndfn&amp;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>&lt;&lt;dep,ss=<span class="number">1</span>&lt;&lt;(dep+<span class="number">1</span>);s&lt;ss;s++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=bagsiz;i++)</span><br><span class="line">            maxc(f[I][s^(<span class="number">1</span>&lt;&lt;dep)][i],f[I][s][i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    rin(ncas);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> cas=<span class="number">1</span>;cas&lt;=ncas;cas++)&#123;</span><br><span class="line">        rin(n),rin(m);</span><br><span class="line">        <span class="comment">// # Clear</span></span><br><span class="line">        gr.init(n);</span><br><span class="line">        bagsiz=ndfn=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">// # Read &amp; Init-build</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) rin(ara[i]),rin(arb[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,u,v;i&lt;n;i++) gr.addEdge(rin(u),rin(v));</span><br><span class="line">        <span class="comment">// # Calculate</span></span><br><span class="line">        r_tot=n,r_wei=n+<span class="number">1</span>,findCenter(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> rt=r_root;</span><br><span class="line">        dacDFS(rt,<span class="number">0</span>);</span><br><span class="line">        <span class="comment">// # Print</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d:\n"</span>,cas);</span><br><span class="line">        <span class="keyword">int</span> I=ndfn&amp;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++) <span class="built_in">printf</span>(<span class="string">"%lld%c"</span>,f[I][<span class="number">0</span>][i].cnt,i==m?<span class="string">'\n'</span>:<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><div class="tail-lyrics">
+<p class="lyrics">谁留下 烽火连天照夜的勾划<br>又是谁在传说中寻他<br>千年后 挥兵破阵 不过一刹那<br>血雨腥风吻过了伤疤</p>
+<p>——《山河令》By 忘川风华录 / 星尘</p>
+<p>> Link <a href="http://music.163.com/song?id=1303045183&userid=303853271" target="_blank" rel="noopener">山河令</a>-网易云</p>
+</div>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://4rds5h.coding-pages.com/2021/21Mar3rdArt1/" title="「SOL」The Hanged Man(HDU)">https://4rds5h.coding-pages.com/2021/21Mar3rdArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E7%8A%B6%E5%8E%8BDP/" rel="tag"><i class="fa fa-tag"></i> 动态规划-状压DP</a>
+              <a href="/tags/HDU/" rel="tag"><i class="fa fa-tag"></i> -HDU-</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> 动态规划-背包问题</a>
+              <a href="/tags/%E5%9B%BE%E8%AE%BA-%E7%82%B9%E5%88%86%E6%B2%BB/" rel="tag"><i class="fa fa-tag"></i> 图论-点分治</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/21Mar2ndArt1/" rel="prev" title="「SOL」开关(LOJ)">
+      <i class="fa fa-chevron-left"></i> 「SOL」开关(LOJ)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-text"># 题面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-text"># 解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">玻璃易碎，但打碎玻璃的人也将被玻璃划伤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">265</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">150</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共430.5k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
