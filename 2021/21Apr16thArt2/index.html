@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="code-5ShoHSHaJq" />
+<meta name="baidu-site-verification" content="code-SaEpttARVo" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+/*主页文章*/
+.posts-expand .post-block:not(:first-child) {
+	margin-top: 30px !important;
+}
+.use-motion .post-block {
+	margin-top: 0px !important;
+}
+/*折叠块*/
+details.fold{
+	background-color:#eeeeeec4;
+	border-radius:.3rem;
+	margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.fold summary{
+	background-color:#555555be;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold p{
+	padding-left:10px;
+	padding-right:10px;
+}
+details.fold p.lastline{
+	padding-bottom: 6px;
+}
+/*强调块*/
+div.block{
+	background-color: #f2f2f2f0;
+	border-radius: .3rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+div.block p{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+}
+div.block p.headline{
+	font-weight: bold;
+	background-color: #808080be;
+	color: white;
+	border-top-left-radius: .3rem;
+	border-top-right-radius: .3rem;
+	margin-bottom: 0px;
+	text-shadow: 2px 2px 1px #4a464691;
+}
+div.block p.lastline{
+	padding-bottom: 6px;
+}
+/*代码折叠块*/
+details.code{
+	background-color:#e1dfddaf;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.code summary{
+	color: #494646;
+	font-weight: bold;
+	height: auto;
+	padding: 3px;
+}
+img.myfont{
+	background-color: rgba(255, 255, 255, 0.726);
+	border-radius: .3rem;
+	padding: 3px;
+	width: 600px;
+	border-width: 2px !important;
+	border: #f4f0e1;
+}
+/*页尾歌词*/div.tail-lyrics p.lyrics {
+	font-family: 楷体;
+	text-align: center;
+}
+a.labelfont{
+	color:white;
+	background-color:#272727;
+	border-radius:.3rem;
+	display:inline-block;
+	font-weight:700;
+	height:5;
+	text-decoration:none;
+	font-family:楷体;
+	padding: 0.01px 5px;
+	margin: 1mm 1mm 1mm 1mm;
+}
+a.labelfont#oj{
+	background-color:#272727 !important;
+	font-family:courier !important;
+}
+a.labelfont#dp{
+	background-color:#3C3C3C !important;
+}
+a.labelfont#graph{
+	background-color:#4F4F4F !important;
+}
+a.labelfont#string{
+	background-color:#5B5B5B !important;
+}
+a.labelfont#search{
+	background-color:#6C6C6C !important;
+}
+a.labelfont#math{
+	background-color:#7B7B7B !important;
+}
+a.labelfont#data-structure{
+	background-color:#8E8E8E !important;
+}
+a.labelfont#speed{
+	background-color:#9D9D9D !important;
+}
+a.labelfont#greedy{
+	background-color:#ADADAD !important;
+}
+a.labelfont#other{
+	background-color:#BEBEBE !important;
+}
+</style>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="打模拟赛 ⇨ 写主席树TLE了 ⇨ 看正解是可持久化平衡树 ⇨ 原来我还没写过可持久化平衡树 ⇨ 现学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「NOTE」可持久化非旋Treap">
+<meta property="og:url" content="https://4rds5h.coding-pages.com/2021/21Apr16thArt2/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="打模拟赛 ⇨ 写主席树TLE了 ⇨ 看正解是可持久化平衡树 ⇨ 原来我还没写过可持久化平衡树 ⇨ 现学">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://4rds5h.coding-pages.com/2021/21Apr16thArt2/png1.png">
+<meta property="article:published_time" content="2021-04-16T14:12:17.000Z">
+<meta property="article:modified_time" content="2021-04-16T14:19:28.840Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="数据结构-可持久化">
+<meta property="article:tag" content="数据结构-Treap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://4rds5h.coding-pages.com/2021/21Apr16thArt2/png1.png">
+
+<link rel="canonical" href="https://4rds5h.coding-pages.com/2021/21Apr16thArt2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>「NOTE」可持久化非旋Treap | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2021/21Apr16thArt2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="玻璃易碎，但打碎玻璃的人也将被玻璃划伤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「NOTE」可持久化非旋Treap
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-16 22:12:17 / 修改时间：22:19:28" itemprop="dateCreated datePublished" datetime="2021-04-16T22:12:17+08:00">2021-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/21Apr16thArt2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/21Apr16thArt2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>打模拟赛 ⇨ 写主席树TLE了 ⇨ 看正解是可持久化平衡树 ⇨ 原来我还没写过可持久化平衡树 ⇨ 现学</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="平衡树的可持久化"><a href="#平衡树的可持久化" class="headerlink" title="# 平衡树的可持久化"></a># 平衡树的可持久化</h2><p>可持久化就是「不修改原始信息，将新版本的信息新建节点储存」。</p>
+<p>可持久化我们熟悉啥？众所周知的线段树可以可持久化，因为每次修改只会改一条从根到叶子的链，树高是 $\mathcal{O}(\log n)$ 的，所以每次只会增加这么多点数。</p>
+<p>那平衡树似乎也是这么个道理，树高是 $\mathcal{O}(\log n)$ 的，每次也是修改根到叶子的一条链。</p>
+<p>但是有个问题，其实线段树方便可持久化的另一原因是 <strong>它的结构（树形）不会改变</strong>。</p>
+<p>虽然并不是说树形改变就不能可持久化（反正听说 splay 什么也是可以可持久化的），但若是有旋转操作的平衡树，可持久化就相当麻烦。于是我们说的可持久化平衡树，大多数时候就是 <strong>非旋Treap</strong> 的可持久化。</p>
+<hr>
+<h2 id="可持久化非旋Treap"><a href="#可持久化非旋Treap" class="headerlink" title="# 可持久化非旋Treap"></a># 可持久化非旋Treap</h2><p>非旋 Treap 最重要的两个操作当然就是 <em>split</em> 和 <em>merge</em>。其他操作都不会 <strong>直接地改变树形</strong>，因此我们只考虑 <em>split</em> 和 <em>merge</em> 的可持久化，以及与之密切相关的 <em>insert</em> 和 <em>delete</em> 操作。</p>
+<h3 id="split-amp-merge"><a href="#split-amp-merge" class="headerlink" title="- split &amp; merge"></a>- <em>split</em> &amp; <em>merge</em></h3><p>先看 <em>split</em>，这个比较简单，因为不能改变原始信息 —— 也就是不能直接把根 $u$ 给拆开。那么我们就复制一个节点 $u’$，把 $u’$ 拆开即可。伪代码如下：</p>
+<details class="fold">
+<summary>点击展开/折叠伪代码</summary>
+<p class="lastline">
+
+$$
+\begin{array}{ll}
+1&\mathbf{Input.}\text{ 树 }x\text{ 和整数 }key\\
+2&\mathbf{Output.}\ (l,r)\text{ 表示将树 }x\text{ 分成两部分，根分别为 }l,r\text{ 其中 }l\text{ 的}\\
+&\textbf{元素不大于 }key\text{ 而 }r\text{ 的元素}\textbf{严格大于 }key\\
+3&\mathbf{Method.}\\
+4&\mathbf{function}\ \operatorname{split}(x,key)\\
+5&\qquad\mathbf{if}\ x=\mathrm{null}\\
+6&\qquad\qquad\mathbf{return}\ (\mathrm{null,null})\\
+7&\qquad \mathrm{copy}\ y\ \mathrm{from}\ x\\
+8&\qquad\mathbf{if}\ key_y\le key\\
+9&\qquad\qquad(l,r)\gets \operatorname{split}(rson_y,key)\\
+10&\qquad\qquad rson_y\gets l\\
+11&\qquad\qquad l\gets y\\
+12&\qquad\mathbf{else}\\
+13&\qquad\qquad(l,r)\gets \operatorname{split}(lson_y,key)\\
+14&\qquad\qquad lson_y\gets r\\
+15&\qquad\qquad r\gets y\\
+16&\qquad\mathbf{return}\ (l,r)
+\end{array}
+$$
+</p>
+</details>
+
+<p>然后是 <em>merge</em>，其实 <em>merge</em> 本身可持久化也非常简单，只需要把合并得到的节点新建节点就可以了。问题在于 —— 我们真的需要对 <em>merge</em> 新建节点吗？</p>
+<p>在比较常见的平衡树操作中，<em>split</em> 和 <em>merge</em> 往往是成对出现的，一般就是把原树 <em>split</em> 过后进行一些操作再 <em>merge</em> 回来。如果 <em>split</em> 和 <em>merge</em> 都新建节点，那么节点数就会有 $\times2$ 的常数。</p>
+<p>关于这一点，我比较认同这篇博客：<a href="https://www.cnblogs.com/chy-2003/p/11825302.html" target="_blank" rel="noopener">可持久化平衡树详解及实现方法分析</a>。我个人的理解如下：</p>
+<ul>
+<li>由于 <em>merge</em> 和 <em>split</em> 成对出现，那么 <em>merge</em> 时的版本应该和 <em>split</em> 的版本是一样的（都是「当前版本」）；</li>
+<li>如果 <em>merge</em> 时<strong>合并的节点都是当前版本的节点</strong>，那么就不需要新建点。</li>
+</ul>
+<p>我们不妨观察 <em>split</em> 的代码实现。函数返回的是当前这棵树按照键值 $key$ 分成的两棵树的<strong>根节点</strong>，而这些根节点都是我们新建的。</p>
+<p>简称 <em>split</em> 得到的 $\le key$ 的树为「左树」，另一棵为「右树」。</p>
+<p>结合下图可以发现，<strong>左树最右侧的一条链</strong> 和 <strong>右树最左侧的一条链</strong> 都是新建的节点：</p>
+<p><img class="myfont" src="/2021/21Apr16thArt2/png1.png"></p>
+<p>如果 <em>merge</em> 的时候也是合并的这些新建的节点就好了。</p>
+<p>若将相同键值储存在同一个节点上记录 <em>count</em>，这样 <em>split</em> 和 <em>merge</em> 的<strong>方案是唯一的</strong>，所以 <em>merge</em> 的一定也是这些节点。</p>
+<blockquote>
+<p>这里其实有一点不是很理解，就是把相同键值也分开存会有什么问题……如果有读者知道，欢迎在评论区中提出</p>
+</blockquote>
+<h3 id="insert-amp-delete"><a href="#insert-amp-delete" class="headerlink" title="- insert &amp; delete"></a>- <em>insert</em> &amp; <em>delete</em></h3><p>注意到我们把相同键值储存在同一个节点中了，<em>insert</em> 时就不能直接新建节点 $key$，把原树按 $key$ <em>split</em> 开再 <em>merge</em> 回去。</p>
+<p>于是先直接在平衡树上找到 $key$ 这个点（如果有的话），然后将根到这个节点的路径全部新建节点，更新 <em>count</em> 和 <em>size</em>。</p>
+<p>否则就按键值 <em>split</em> 开，新建节点 $key$ 通过 <em>merge</em> 插入在左树和右树中间。新建的节点当然也是「当前版本」的节点，根据上面的论证，<em>merge</em> 不需要新建节点。</p>
+<p><em>delete</em> 同理，先找 $key$ 对应的节点，若存在大于等于两个 $key$，则和 <em>insert</em> 一样，复制一份根到该节点的链更新 <em>count</em> 和 <em>size</em>。否则删除过后这个节点就不见了，将原树 <em>split</em> 两遍就可以把这个节点单独挑出来，剩下的直接 <em>merge</em> 就可以了。</p>
+<hr>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">rin</span><span class="params">(<span class="keyword">int</span> &amp;r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> b=<span class="number">1</span>,c=getchar();r=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) b=c==<span class="string">'-'</span>?<span class="number">-1</span>:b,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) r=(r&lt;&lt;<span class="number">1</span>)+(r&lt;&lt;<span class="number">3</span>)+(c^<span class="string">'0'</span>),c=getchar();</span><br><span class="line">	<span class="keyword">return</span> r*=b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">5e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> con(type) const type &amp;</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt[<span class="number">2</span>],cnt,key,siz,fix;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">int</span>&amp; <span class="keyword">operator</span> [](con(<span class="keyword">int</span>)i)&#123;<span class="keyword">return</span> nxt[i];&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Treap</span>&#123;</span></span><br><span class="line">	Node nod[N*<span class="number">40</span>];</span><br><span class="line">	<span class="keyword">int</span> ncnt,rt[N];</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">copyNode</span><span class="params">(con(<span class="keyword">int</span>)from)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> p=++ncnt;</span><br><span class="line">		nod[p]=nod[from];</span><br><span class="line">		<span class="keyword">return</span> p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">newNode</span><span class="params">(con(<span class="keyword">int</span>)key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> p=++ncnt;</span><br><span class="line">		nod[p][<span class="number">0</span>]=nod[p][<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">		nod[p].cnt=nod[p].siz=<span class="number">1</span>;</span><br><span class="line">		nod[p].key=key;</span><br><span class="line">		nod[p].fix=rand();</span><br><span class="line">		<span class="keyword">return</span> p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">pushUp</span><span class="params">(con(<span class="keyword">int</span>)u)</span></span>&#123;nod[u].siz=nod[nod[u][<span class="number">0</span>]].siz+nod[nod[u][<span class="number">1</span>]].siz+nod[u].cnt;&#125;</span><br><span class="line">	<span class="function">pii <span class="title">splitKey</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)key)</span></span>&#123;</span><br><span class="line">		<span class="function">pii <span class="title">ret</span><span class="params">(<span class="number">0</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(!u) <span class="keyword">return</span> ret;</span><br><span class="line">		<span class="keyword">int</span> nu=copyNode(u);</span><br><span class="line">		<span class="keyword">if</span>(nod[nu].key&lt;=key)&#123;</span><br><span class="line">			ret=splitKey(nod[nu][<span class="number">1</span>],key);</span><br><span class="line">			nod[nu][<span class="number">1</span>]=ret.first,ret.first=nu;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			ret=splitKey(nod[nu][<span class="number">0</span>],key);</span><br><span class="line">			nod[nu][<span class="number">0</span>]=ret.second,ret.second=nu;</span><br><span class="line">		&#125;</span><br><span class="line">		pushUp(nu);</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">ina_merge</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)v)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!u || !v) <span class="keyword">return</span> u|v;</span><br><span class="line">		<span class="keyword">if</span>(nod[u].fix&lt;nod[v].fix)&#123;</span><br><span class="line">			nod[u][<span class="number">1</span>]=ina_merge(nod[u][<span class="number">1</span>],v),pushUp(u);</span><br><span class="line">			<span class="keyword">return</span> u;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			nod[v][<span class="number">0</span>]=ina_merge(u,nod[v][<span class="number">0</span>]),pushUp(v);</span><br><span class="line">			<span class="keyword">return</span> v;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!u) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(nod[u].key==key) <span class="keyword">return</span> nod[u].cnt;</span><br><span class="line">		<span class="keyword">if</span>(key&lt;nod[u].key) <span class="keyword">return</span> getCount(nod[u][<span class="number">0</span>],key);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> getCount(nod[u][<span class="number">1</span>],key);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">directEdit</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)key,con(<span class="keyword">int</span>)typ)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(nod[u].key==key)&#123;</span><br><span class="line">			<span class="keyword">int</span> nu=copyNode(u);</span><br><span class="line">			nod[nu].cnt+=typ,pushUp(nu);</span><br><span class="line">			<span class="keyword">return</span> nu;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(key&lt;nod[u].key)&#123;</span><br><span class="line">			<span class="keyword">int</span> nu=copyNode(u);</span><br><span class="line">			nod[nu][<span class="number">0</span>]=directEdit(nod[nu][<span class="number">0</span>],key,typ);</span><br><span class="line">			pushUp(nu);</span><br><span class="line">			<span class="keyword">return</span> nu;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">int</span> nu=copyNode(u);</span><br><span class="line">			nod[nu][<span class="number">1</span>]=directEdit(nod[nu][<span class="number">1</span>],key,typ);</span><br><span class="line">			pushUp(nu);</span><br><span class="line">			<span class="keyword">return</span> nu;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ina_insert</span><span class="params">(<span class="keyword">int</span> &amp;urt,con(<span class="keyword">int</span>)vrt,con(<span class="keyword">int</span>)key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(getCount(vrt,key))&#123;</span><br><span class="line">			urt=directEdit(vrt,key,<span class="number">1</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		pii tmp=splitKey(vrt,key);</span><br><span class="line">		urt=ina_merge(ina_merge(tmp.first,newNode(key)),tmp.second);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ina_delete</span><span class="params">(<span class="keyword">int</span> &amp;urt,con(<span class="keyword">int</span>)vrt,con(<span class="keyword">int</span>)key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(getCount(vrt,key)&gt;<span class="number">1</span>)&#123;</span><br><span class="line">			urt=directEdit(vrt,key,<span class="number">-1</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		pii tmp1=splitKey(vrt,key),tmp2=splitKey(tmp1.first,key<span class="number">-1</span>);</span><br><span class="line">		urt=ina_merge(tmp2.first,tmp1.second);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// the number of elements strictly smaller than 'key'</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getRank</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!u) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(nod[u].key==key) <span class="keyword">return</span> nod[nod[u][<span class="number">0</span>]].siz;</span><br><span class="line">		<span class="keyword">if</span>(key&lt;nod[u].key) <span class="keyword">return</span> getRank(nod[u][<span class="number">0</span>],key);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> getRank(nod[u][<span class="number">1</span>],key)+nod[nod[u][<span class="number">0</span>]].siz+nod[u].cnt;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getIndex</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)rnk)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(nod[nod[u][<span class="number">0</span>]].siz&gt;=rnk) <span class="keyword">return</span> getIndex(nod[u][<span class="number">0</span>],rnk);</span><br><span class="line">		<span class="keyword">if</span>(nod[nod[u][<span class="number">0</span>]].siz+nod[u].cnt&gt;=rnk) <span class="keyword">return</span> nod[u].key;</span><br><span class="line">		<span class="keyword">return</span> getIndex(nod[u][<span class="number">1</span>],rnk-nod[nod[u][<span class="number">0</span>]].siz-nod[u].cnt);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// the smallest element strictly greater than 'key'</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getNext</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!u) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">if</span>(key&lt;nod[u].key)&#123;</span><br><span class="line">			<span class="keyword">int</span> res=getNext(nod[u][<span class="number">0</span>],key);</span><br><span class="line">			<span class="keyword">if</span>(~res) <span class="keyword">return</span> res;</span><br><span class="line">			<span class="keyword">return</span> nod[u].key;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> getNext(nod[u][<span class="number">1</span>],key);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// the largest element strictly smaller than 'key'</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getPrev</span><span class="params">(con(<span class="keyword">int</span>)u,con(<span class="keyword">int</span>)key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!u) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">if</span>(key&gt;nod[u].key)&#123;</span><br><span class="line">			<span class="keyword">int</span> res=getPrev(nod[u][<span class="number">1</span>],key);</span><br><span class="line">			<span class="keyword">if</span>(~res) <span class="keyword">return</span> res;</span><br><span class="line">			<span class="keyword">return</span> nod[u].key;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> getPrev(nod[u][<span class="number">0</span>],key);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// guard index</span></span><br><span class="line">	Treap()&#123;rt[<span class="number">0</span>]=ina_merge(newNode(<span class="keyword">int</span>(<span class="number">1</span>-(<span class="number">1l</span>l&lt;&lt;<span class="number">31</span>))),newNode(<span class="keyword">int</span>((<span class="number">1l</span>l&lt;&lt;<span class="number">31</span>)<span class="number">-1</span>)));&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">int</span>&amp; <span class="keyword">operator</span> [](con(<span class="keyword">int</span>)i)&#123;<span class="keyword">return</span> rt[i];&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">debug</span><span class="params">(con(<span class="keyword">int</span>)u)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!u) <span class="keyword">return</span>;</span><br><span class="line">		debug(nod[u][<span class="number">0</span>]);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"  index %d * %d\n"</span>,nod[u].key,nod[u].cnt);</span><br><span class="line">		debug(nod[u][<span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;tr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// freopen("input.in","r",stdin);</span></span><br><span class="line">	rin(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,iver,cmd,key;i&lt;=n;i++)&#123;</span><br><span class="line">		rin(iver),rin(cmd),rin(key);</span><br><span class="line">		<span class="keyword">switch</span>(cmd)&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>: tr.ina_insert(tr[i],tr[iver],key);<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>: tr.ina_delete(tr[i],tr[iver],key);<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>: <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,tr.getRank(tr[i]=tr[iver],key));<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>: <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,tr.getIndex(tr[i]=tr[iver],key+<span class="number">1</span>));<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>: <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,tr.getPrev(tr[i]=tr[iver],key));<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">6</span>: <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,tr.getNext(tr[i]=tr[iver],key));<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// printf("version %d\n",i),tr.debug(tr[i]);</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><div class="tail-lyrics">
+<p class="lyrics">楼烦城几场决胜 定襄破 长平封<br>汉关路笑尽英雄<br>辟长空 挽弓 啸入苍穹</p>
+<p>——《山河令》By 星尘 / 忘川风华录</p>
+<p>> Link <a href="https://www.bilibili.com/video/BV1UW41197Wk" target="_blank" rel="noopener">山河令</a>-Bilibili</p>
+</div>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://4rds5h.coding-pages.com/2021/21Apr16thArt2/" title="「NOTE」可持久化非旋Treap">https://4rds5h.coding-pages.com/2021/21Apr16thArt2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 数据结构-可持久化</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-Treap/" rel="tag"><i class="fa fa-tag"></i> 数据结构-Treap</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/21Apr16thArt1/" rel="prev" title="「SOL」事情的相似度(LOJ)">
+      <i class="fa fa-chevron-left"></i> 「SOL」事情的相似度(LOJ)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/21Apr16thArt3/" rel="next" title="「SOL」Spaceship(LOJ/USACO)">
+      「SOL」Spaceship(LOJ/USACO) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#平衡树的可持久化"><span class="nav-text"># 平衡树的可持久化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可持久化非旋Treap"><span class="nav-text"># 可持久化非旋Treap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#split-amp-merge"><span class="nav-text">- split &amp; merge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#insert-amp-delete"><span class="nav-text">- insert &amp; delete</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text"># 源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">玻璃易碎，但打碎玻璃的人也将被玻璃划伤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">153</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共451.1k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

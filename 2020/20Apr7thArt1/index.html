@@ -23,6 +23,13 @@
 <html>
 <head>
 <style type="text/css">
+/*主页文章*/
+.posts-expand .post-block:not(:first-child) {
+	margin-top: 30px !important;
+}
+.use-motion .post-block {
+	margin-top: 0px !important;
+}
 /*折叠块*/
 details.fold{
 	background-color:#eeeeeec4;
@@ -50,7 +57,7 @@ details.fold p.lastline{
 }
 /*强调块*/
 div.block{
-	background-color: #ffffffbf;
+	background-color: #f2f2f2f0;
 	border-radius: .3rem;
 	margin-left: 20px;
 	margin-right: 20px;
@@ -70,6 +77,7 @@ div.block p.headline{
 	border-top-left-radius: .3rem;
 	border-top-right-radius: .3rem;
 	margin-bottom: 0px;
+	text-shadow: 2px 2px 1px #4a464691;
 }
 div.block p.lastline{
 	padding-bottom: 6px;
@@ -93,8 +101,9 @@ img.myfont{
 	background-color: rgba(255, 255, 255, 0.726);
 	border-radius: .3rem;
 	padding: 3px;
-	width: 300px;
-	text-align: center;
+	width: 600px;
+	border-width: 2px !important;
+	border: #f4f0e1;
 }
 /*页尾歌词*/div.tail-lyrics p.lyrics {
 	font-family: 楷体;
@@ -588,7 +597,7 @@ a.labelfont#other{
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">265</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -600,7 +609,7 @@ a.labelfont#other{
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">150</span>
+        <span class="site-state-item-count">153</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -653,7 +662,7 @@ a.labelfont#other{
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共430.5k字</span>
+  <span class="post-count">博客全站共451.1k字</span>
 </div>
 
         
