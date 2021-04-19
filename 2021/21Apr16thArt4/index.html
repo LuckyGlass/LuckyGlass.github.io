@@ -170,7 +170,7 @@ a.labelfont#other{
 <meta property="og:description" content="AGC 还是一如既往地难（尤其是第一题( ╯□╰ )）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-16T14:12:22.000Z">
-<meta property="article:modified_time" content="2021-04-16T14:16:56.809Z">
+<meta property="article:modified_time" content="2021-04-16T15:05:50.225Z">
 <meta property="article:author" content="Lucky_Glass">
 <meta property="article:tag" content="数学-组合数">
 <meta property="article:tag" content="动态规划">
@@ -365,7 +365,7 @@ a.labelfont#other{
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-16 22:12:22 / 修改时间：22:16:56" itemprop="dateCreated datePublished" datetime="2021-04-16T22:12:22+08:00">2021-04-16</time>
+              <time title="创建时间：2021-04-16 22:12:22 / 修改时间：23:05:50" itemprop="dateCreated datePublished" datetime="2021-04-16T22:12:22+08:00">2021-04-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -444,9 +444,9 @@ a.labelfont#other{
   可以理解成这样一个过程：从数轴上的 $\sum a_i$ 位置出发，每一步可以向负方向走 $b_i$ 的距离，不可以经过 $p$ 的倍数的点。
 
   反证，若 $c_1\gt\sum_{i>1}(p-i)c_i+p-1$，即 $c_1\ge p+\sum_{i>1}(p-i)c_i$，移项可得
-  $$
+$$
   \sum_{i=1}ic_i\ge p+\sum_{i>1}pc_i \Rightarrow \small\sum a_i\ge p\Big(1+\sum_{i>1} c_i\Big)
-  $$
+$$
 
   要从数轴上 $\sum a_i$ 回到原点，中间会**跨过** $\lfloor\frac{\sum a_i}{p}\rfloor$ 个 $p$ 的倍数点，根据上面的分析，这样的倍数点有大于等于 $(1+\sum_{i>1}c_i)$ 个，而要跨过这些点，必须要走距离大于 $1$ 的一步，可以理解成「消耗」一个大于 $1$ 的 $a_i$。
 
@@ -464,9 +464,9 @@ a.labelfont#other{
   换句话说，在我们最初的假设中，$x$ 就是 $1$。
 
   那么我们可以观察一下这样构造出来的数列长什么样，大概是：
-  $$
+$$
   \overbrace{1,1,\dots,1}^{p-1},a_{t_1},\overbrace{1,1,\dots,1}^{p-a_{t_1}},a_{t_2},\overbrace{1,1,\dots,1}^{p-a_{t_2}},a_{t_3},\dots
-  $$
+$$
 
   什么时候会不合法呢？就是当所有大于 $1$ 的 $a_i$ 都放完后还剩余了 $1$，那么此时 $1$ 的数量应严格大于 $(p-1)+\sum_{a_i>1}(p-a_i)$，与结论的条件不符。故这样构造一定合法，充分性得证。
   </p>
@@ -475,7 +475,7 @@ a.labelfont#other{
 <p>考虑简单容斥，从所有满足 $p\nmid\sum a_i$ 的 $\{a_i\}$ 中减去不符合上述结论的。</p>
 <p>考虑决策所有大于 $1$ 的 $a_i$ 构成的数列，然后把 $1$ 插入到数列中。可以 DP，记 $f(cnt,sum)$ 表示当前由大于 $1$ 的 $a_i$ 构成的数列长度为 $cnt$，$\mathbf{p-a_i}$ <strong>之和</strong>为 $sum$ 的方案数。</p>
 <script type="math/tex; mode=display">
-f(i,j)=\sum_{k=\max\{2,j\}}^{p-1}f(i-1,j-k)</script><p>那么不符合结论的 $\{a_i\}$ 则为</p>
+f(i,j)=\sum_{k=1}^{\min\{p-1,j\}}f(i-1,j-k)</script><p>那么不符合结论的 $\{a_i\}$ 则为</p>
 <script type="math/tex; mode=display">
 \sum_{cnt}\sum_{sum}[n-cnt\not\equiv sum][n-cnt\ge p+sum]f(cnt,sum)\binom{n}{cnt}(p-1)</script><p>组合数 $\binom{n}{cnt}$ 即插入 $1$ 的方案数，再乘上 $(p-1)$ 是因为我们默认了出现次数最多的是 $1$，实际上 $1\sim p-1$ 都可以。</p>
 <p>注意 DP 的两维状态的取值范围，显然 $cnt$ 只需要 $[0,n]$。而 $sum$ 的取值范围需要分析：注意到 $f(cnt,sum)$ 对答案有贡献需要满足 $n-cnt\ge p+sum$，那么 $sum$ 也不能超过 $n$。</p>
@@ -608,7 +608,7 @@ f(i,j)=\sum_{k=\max\{2,j\}}^{p-1}f(i-1,j-k)</script><p>那么不符合结论的 
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">278</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -620,7 +620,7 @@ f(i,j)=\sum_{k=\max\{2,j\}}^{p-1}f(i-1,j-k)</script><p>那么不符合结论的 
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">153</span>
+        <span class="site-state-item-count">154</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -673,7 +673,7 @@ f(i,j)=\sum_{k=\max\{2,j\}}^{p-1}f(i-1,j-k)</script><p>那么不符合结论的 
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共451.1k字</span>
+  <span class="post-count">博客全站共453.2k字</span>
 </div>
 
         

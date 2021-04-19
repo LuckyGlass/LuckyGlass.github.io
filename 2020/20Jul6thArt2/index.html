@@ -172,8 +172,10 @@ a.labelfont#other{
 <meta property="og:image" content="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/png1.png">
 <meta property="og:image" content="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/png2.png">
 <meta property="og:image" content="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/png3.png">
+<meta property="og:image" content="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/png4.png">
+<meta property="og:image" content="https://4rds5h.coding-pages.com/2020/20Jul6thArt2/svg1.svg">
 <meta property="article:published_time" content="2020-07-06T13:41:15.000Z">
-<meta property="article:modified_time" content="2020-07-09T06:54:41.313Z">
+<meta property="article:modified_time" content="2021-04-17T05:01:20.013Z">
 <meta property="article:author" content="Lucky_Glass">
 <meta property="article:tag" content="图论-支配树">
 <meta name="twitter:card" content="summary">
@@ -373,7 +375,7 @@ a.labelfont#other{
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-09 14:54:41" itemprop="dateModified" datetime="2020-07-09T14:54:41+08:00">2020-07-09</time>
+                <time title="修改时间：2021-04-17 13:01:20" itemprop="dateModified" datetime="2021-04-17T13:01:20+08:00">2021-04-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -426,15 +428,21 @@ a.labelfont#other{
 <h2 id="概念"><a href="#概念" class="headerlink" title="# 概念"></a># 概念</h2><p>支配树是建立在<strong>单源有向图</strong>上的有根树。单源有向图又被称为“流程图”，其特点除了有向，还有存在一个源点使得源点可以到达任意一个点。</p>
 <p>在流程图上定义<strong>支配关系</strong>，设源点为 $r$：如果 $r$ 到 $v$ 的每一条路径都经过了 $u$，则 $u$ 支配 $v$。</p>
 <p>非常显然的，对于 $v$（$v\neq r$） 来说，有两个平凡的支配点 $v,r$，一般来说都不会考虑 $v$ 本身作为 $v$ 的支配点。但是我们知道，往往是其他不平凡的支配点比较重要。</p>
-<p class="block"><u>定义1-最近支配点</u><br>对于一个点 $v$（$v\neq r$），如果 $u$ 是 $v$ 的一个支配点，并且任意一个 $v$ 的支配点都支配 $u$，则称 $u$ 为 $v$ 的最近支配点；记作 $idom(v)=u$。</p>
+<div class="block"><p class="headline">定义1-最近支配点</p><p>
 
-<p class="block"><u>定理1</u><br>对于点 $v$，存在唯一的 $idom(v)$。</p>
+对于一个点 $v$（$v\neq r$），如果 $u$ 是 $v$ 的一个支配点，并且任意一个 $v$ 的支配点都支配 $u$，则称 $u$ 为 $v$ 的最近支配点；记作 $\operatorname{idom}(v)=u$。</p></div>
+
+<div class="block"><p class="headline">定理一</p><p>
+
+对于点 $v$，存在唯一的 $\operatorname{idom}(v)$。</p></div>
 
 <p>首先支配关系具有一定的“传递性”，即如果 $a$ 支配 $b$、$b$ 支配 $c$ 则 $a$ 支配 $c$。则可以证明：</p>
-<p class="block"><u>推论1</u><br>如果 $a$ 支配 $c$、$b$ 支配 $c$，则 $a$ 支配 $b$ 或 $b$ 支配 $a$。否则存在 $r$ 经过 $b$ 到达 $v$ 的路径不经过 $a$，与 $a$ 支配 $c$ 矛盾。</p>
+<div class="block"><p class="headline">推论1</p><p>
 
-<p>那么有且仅有一个 $v$ 的支配点支配 $v$ 的所有支配点，即 $idom(v)$。</p>
-<p>那么将 $idom(v)$ 作为 $v$ 的父亲，可以获得一棵有根树，称为<strong>支配树</strong>。</p>
+如果 $a$ 支配 $c$、$b$ 支配 $c$，则 $a$ 支配 $b$ 或 $b$ 支配 $a$。否则存在 $r$ 经过 $b$ 到达 $v$ 的路径不经过 $a$，与 $a$ 支配 $c$ 矛盾。</p></div>
+
+<p>那么有且仅有一个 $v$ 的支配点支配 $v$ 的所有支配点，即 $\operatorname{idom}(v)$。</p>
+<p>那么将 $\operatorname{idom}(v)$ 作为 $v$ 的父亲，可以获得一棵有根树，称为<strong>支配树</strong>。</p>
 <p>接下来会介绍 Lengauer-Tarjan 算法，在 $O(n\log n)$ 时间复杂度内求出支配树，进而获得支配关系。</p>
 <hr>
 <h2 id="一些记号"><a href="#一些记号" class="headerlink" title="# 一些记号"></a># 一些记号</h2><p>先从流程图的源点出发DFS整张流程图，得到DFS树以及对应的DFS序。DFS树上有 4 种边：树边，前向边，后向边和横插边</p>
@@ -445,83 +453,138 @@ a.labelfont#other{
 <li>$u\leadsto v$，表示存在 $u$ 到 $v$ 的一条路径；</li>
 <li>$u\overset .\to v$ 表示 $u$ 到 $v$ 的一条只经过树边的路径；</li>
 <li>$u\overset+\to v$ 表示 $u\overset.\to v$ 且 $u\neq v$；</li>
-<li>$dfn_u$ 表示 $u$ 的DFS序。</li>
+<li>$dfn_u$ 表示 $u$ 的 DFS 序；</li>
+<li>以下所有「点的大小比较」都是指 DFS 序进行比较。</li>
 </ul>
 <hr>
-<h2 id="理论证明"><a href="#理论证明" class="headerlink" title="# 理论证明"></a># 理论证明</h2><p class="block"><u>引理1（路径引理）</u><br>若 $dfn_u\le dfn_v$ 则 $u$ 到 $v$ 的路径必经过 u,v 的公共祖先。</p>
+<h2 id="理论证明"><a href="#理论证明" class="headerlink" title="# 理论证明"></a># 理论证明</h2><div class="block"><p class="headline">引理一（路径引理）</p><p>
 
-<p>要么 v 是 u 的祖先要么 v 是 u 的更右边的子树中的点。</p>
+若 $dfn_u\le dfn_v$ 则 $u$ 到 $v$ 的路径必经过 $u,v$ 的公共祖先。</p></div>
+
+<p>要么 $v$ 是 $u$ 的后继，要么 $v$ 是 $u$ 的更右边的子树中的点。</p>
 <ul>
-<li>若是第一种情况，v 就是公共祖先，必须经过；</li>
-<li>若是第二种情况，考虑删去 u,v 的 LCA 到 r 的所有点（也就是删去所有公共祖先），此时不可能通过树边从 u 的子树到达 v 的子树，另外前向边、后向边都不跨子树，而横插边只从右边的子树指向左边的子树，于是不存在向右跨越子树的边，于是不可能到达。</li>
+<li>对于第一种情况，$u$ 就是公共祖先，必须经过；</li>
+<li>对于第二种情况，考虑删去 $u,v$ 的 LCA 到 $r$ 的所有点（也就是删去所有公共祖先），此时不可能通过树边从 $u$ 的子树到达 $v$ 的子树；<br>另外前向边、后向边都不跨子树，而横插边只从右边的子树指向左边的子树，于是不存在向右跨越子树的边，不可能到达。</li>
 </ul>
-<p>由于并不好计算 $idom(u)$，所以考虑引入一些定义来<strong>辅助计算</strong>——</p>
-<p class="block"><u>定义2-半支配点</u><br>点 v 满足存在到达 u 的路径且该路径上除去 u,v 两点不存在 dfn 比 u 小的点；满足上述条件的最小的点 v 称为 u 的半支配点，记作 $sdom(u)$。<br>形式化的定义为：
+<p>由于并不好计算 $\operatorname{idom}(u)$，所以考虑引入一些定义来<strong>辅助计算</strong>——</p>
+<div class="block"><p class="headline">定义2-半支配点</p><p>
+
+点 $v$ 满足：存在路径 $P=v\leadsto u$，且 $P$ 上除去 $u,v$ 两点不存在 dfn 比 $u$ 小的点。</p><p>满足上述条件的最小的点 $v$ 称为 $u$ 的半支配点，记作 $\operatorname{sdom}(u)$。</p><p>形式化的定义为：</p>
 $$
-sdom(u)=\min\left\{v|\ \exists v\leadsto u=(v,a_1,a_2,\dots,a_m,u),\forall a_i< u\right\}
+\operatorname{sdom}(u)=\min\left\{v|\ \exists v\leadsto u=(v,a_1,a_2,\dots,a_m,u),a_i< u\right\}
 $$
-</p>
+</div>
 
-<p>注意到 $sdom(u)$ 并不一定是 u 的一个支配点，比如下面：<br><img src="/2020/20Jul6thArt2/png2.png" alt="png2"></p>
-<p>v 是 u 的半支配点但是显然不支配 u。</p>
-<p>但是 $sdom(u)$ 是<strong>有潜力</strong>成为支配点的点，在之后的证明中我们会看到任何一个点的 $idom(u)$ 要么是 $sdom(u)$，要么是另一个点的 $sdom(v)$。</p>
-<p>而且我们发现 $sdom(u)&lt;u$（$u\neq r$），因为 $fa(u)$ 一定是 u 的半支配点的“候选”。</p>
-<p class="block"><u>引理2</u><br>对于任意 $u\neq r$，有 $idom(u)\overset+\to u$ 且 $sdom(u)\overset+\to u$。</p>
+<p>注意到 $\operatorname{sdom}(u)$ 并不一定是 $u$ 的一个支配点，比如下图：</p>
+<p><img src="/2020/20Jul6thArt2/png2.png" alt="png2"></p>
+<p>$v$ 是 $u$ 的半支配点但是显然不支配 $u$。</p>
+<p>但是 $\operatorname{sdom}(u)$ 是<strong>有潜力</strong>成为支配点的点，在之后的证明中我们会看到任何一个点的 $\operatorname{idom}(u)$ 要么是 $\operatorname{sdom}(u)$，要么是另一个点的 $\operatorname{sdom}(v)$。</p>
+<p>而且我们发现 $\operatorname{sdom}(u)\lt u$（$u\neq r$），因为 $fa(u)$ 一定是 $u$ 的半支配点的「候选」。</p>
+<div class="block"><p class="headline">引理二</p><p>
 
-<p>如果 $idom(u)$ 不是 u 的祖先，那么 r 就可以直接经过树边到达 u，就与 $idom(u)$ 支配 u 矛盾。</p>
-<p>如果 $sdom(u)$ 不是 u 的祖先，首先不可能是右边的子树或者 u 的儿子，因为 $sdom(u)&lt;u$，那么只能是左边的子树，根据路径引理，从 dfn 小的点到大的点必然经过公共祖先，而 $u$ 和 $sdom(u)$ 的公共祖先一定比 $u$ 小，违背了 $sdom(u)$ 的定义。</p>
-<p class="block"><u>引理3</u><br>对于任意 $u\neq r$，有 $idom(u)\overset.\to sdom(u)$。</p>
+对于任意 $u\neq r$，有 $\operatorname{idom}(u)\overset+\to u$ 且 $\operatorname{sdom}(u)\overset+\to u$。</p></div>
 
-<p>考虑反证，根据引理2，我们知道相反情况就是 $sdom(u)\overset+\to idom(u)$，因为 $sdom(u)$ 可以不经过比 u 小的点到达 u，即可以不经过 $idom(u)$，则存在 $r\overset.\to sdom(u)\leadsto u$ 不经过 $idom(u)$，矛盾。</p>
-<p class="block"><u>引理4</u><br>对于点 w，任意 $v\overset.\to w$ 满足 $v\overset.\to idom(w)$ 或 $idom(w)\overset.\to idom(v)$。</p>
+<p>如果 $\operatorname{idom}(u)$ 不是 $u$ 的祖先，那么 $r$ 就可以直接经过树边到达 $u$，就与 $\operatorname{idom}(u)$ 支配 $u$ 矛盾。</p>
+<p>如果 $\operatorname{sdom}(u)$ 不是 $u$ 的祖先：</p>
+<ul>
+<li>首先，$\operatorname{sdom}(u)$ 不可能是右边的子树或者 $u$ 的后继，因为 $\operatorname{sdom}(u)&lt;u$，那么只能是左边的子树；</li>
+<li>根据<strong>路径引理</strong>，从 dfn 小的点到大的点必然经过公共祖先，而 $u$ 和 $\operatorname{sdom}(u)$ 的公共祖先一定比 $u$ 小，违背了 $\operatorname{sdom}(u)$ 的定义。</li>
+</ul>
+<div class="block"><p class="headline">引理三</p><p>
 
-<p>由引理2，可以推得 $idom(w),idom(v),w,v$ 是在 r 到 w 的树链上的。</p>
-<p>仍然考虑反证，相反情况只有下面这样：<br><img src="/2020/20Jul6thArt2/png3.png" alt="png3"></p>
-<p>a,b 分别为 $idom(v),idom(w)$，显然有路径 $r\overset.\to a\leadsto v\overset.\to w$ 不经过 b，矛盾。</p>
+对于任意 $u\neq r$，有 $\operatorname{idom}(u)\overset.\to \operatorname{sdom}(u)$。</p></div>
+
+<p>考虑反证。根据引理二，$\operatorname{sdom}(u)$ 和 $\operatorname{idom}(u)$ 都是 $u$ 的祖先。所以如果引理三不成立，则 $\operatorname{sdom}(u)\overset+\to \operatorname{idom}(u)$。</p>
+<p>因为 $\operatorname{sdom}(u)$ 可以不经过比 $u$ 小的点到达 $u$，即可以不经过 $\operatorname{idom}(u)$，则存在 $r\overset.\to \operatorname{sdom}(u)\leadsto u$ 不经过 $\operatorname{idom}(u)$，矛盾。</p>
+<div class="block"><p class="headline">引理四</p><p>
+
+对于点 $w$，任意 $v\overset.\to w$ 满足 $v\overset.\to \operatorname{idom}(w)$ 或 $\operatorname{idom}(w)\overset.\to \operatorname{idom}(v)$。</p></div>
+
+<p>由引理二，可以推得 $\operatorname{idom}(w),\operatorname{idom}(v),w,v$ 是在 $r\overset{.}{\to}w$ 上的。</p>
+<p>仍然考虑反证。此时相反情况只有 $\operatorname{idom(v)}\overset{+}{\to}\operatorname{idom}(w)\overset{.}{\to}v\overset{.}{\to}w$，比如下面这样：</p>
+<p><img src="/2020/20Jul6thArt2/png3.png" alt="png3"></p>
+<p>其中 $A,B$ 分别为 $\operatorname{idom}(v),\operatorname{idom}(w)$，注意到 $\operatorname{idom}(v)\neq\operatorname{idom}(w)$，故必然存在 $\operatorname{idom}(v)\leadsto v$ 不经过 $\operatorname{idom}(w)$。于是存在路径 $r\overset{.}{\to}\operatorname{idom}(v)\leadsto v\overset{.}{\to}w$，不经过 $\operatorname{idom}(w)$，矛盾。</p>
 <blockquote>
 <p>完备的引理是对定理的铺垫~</p>
 </blockquote>
-<p class="block"><u>定理2</u><br>对于 $u\neq r$，若所有满足 $sdom(u)\overset+\to v\overset.\to u$ 的点 v 都满足 $sdom(v)\ge sdom(w)$，则 $idom(w)=sdom(w)$。</p>
+<div class="block"><p class="headline">定理二</p><p>
 
-<p>这个定理就让 $idom(u)$ 和 $sdom(u)$ 有联系了~</p>
-<p>由引理3，我们知道 $idom(u)\overset.\to sdom(u)$，则只需证明 $sdom(u)$ 支配 u。</p>
-<p>反证，若 $sdom(u)$ 不支配 u，则存在 $r\leadsto u$ 不经过 $sdom(u)$，令 x 为该路径上最后一个 $x&lt;sdom(u)$ 的点。则 $x\leadsto u$ 上一定存在点 y 满足 $sdom(u)\overset.\to y\overset+\to u$（y 在 $sdom(u)$ 和 u 之间的链上），否则 x 就会成为 $sdom(u)$，我们取所有满足条件的 y 中最小的。</p>
-<p>若 $y\neq sdom(u)$，由定理2中的条件得 $sdom(y)\ge sdom(u)$，说明 $x\leadsto y$ 的路径上还有一个点 z 满足 $z&lt;y$，那么也有 $z&lt;u$，但是 y 是最小的 $y&lt;u$ 的点，于是矛盾。则 $y=sdom(u)$，因此 $r\leadsto u$ 一定经过 $sdom(u)$，即 $sdom(u)$ 支配 u。</p>
-<p class="block"><u>定理3</u><br>对于 $w\neq r$，若存在 u 满足 $sdom(w)\overset+\to u\overset.\to w$ 使得 $sdom(u)< sdom(w)$，使 u 取所有满足条件的点中 $sdom(u)$ 最小的一个，则 $idom(u)=idom(w)$。</p>
+对于 $u\neq r$，若所有满足 $\operatorname{sdom}(u)\overset+\to v\overset.\to u$ 的点 $v$ 都满足 $\operatorname{sdom}(v)\ge \operatorname{sdom}(u)$，则 $\operatorname{idom}(u)=\operatorname{sdom}(u)$。</p></div>
 
-<p>相当于是对定理2的补充。</p>
-<p>由引理4，要么 $u\overset.\to idom(w)$ 要么 $idom(w)\overset.\to idom(u)$；又由引理3，$idom(w)\overset.\to sdom(w)\overset+\to u$；则只可能是 $idom(w)\overset.\to idom(u)$。也就是说只要证明 $idom(u)$ 支配 $w$ 即可说明 $idom(u)=idom(w)$。</p>
-<p>与定理2类似，如果 $idom(u)=r$，则 $idom(u)$ 一定支配 w；则考虑 $idom(u)\neq r$，任意取一条路径 $r\leadsto w$，令其最后一个小于 $idom(u)$ 的点为 x，则存在 y 使得 $idom(u)\overset.\to y\overset+\to w$，我们取满足条件的最小的一个点作为 y。</p>
-<p>因为 y 是满足条件的最小点，则不存在 v 使得 $idom(u)\overset.\to v\overset+\to y$，即 x 作为 $sdom(y)$ 的“候选”，$sdom(y)\le x$。由于 $x&lt;idom(u)\le sdom(u)$，u 是 所有 $sdom(w)\overset+\to u\overset.\to w$ 的点中 $sdom(u)$ 最小的，所以 y 一定不满足 $sdom(w)\overset+\to y\overset.\to w$，就只能是 $idom(u)\overset.\to y\overset.\to sdom(w)$。</p>
-<p>然后要么 $y=idom(u)$，要么 $y\neq idom(u)$（<del>废话</del>），若 $y\neq idom(u)$，因为 $x\ge sdom(y)$，则存在 $r\overset.\to sdom(y)\leadsto y\overset.\to u$，由于 $sdom(y)$ 的性质，存在 $sdom(y)\leadsto y$ 不经过比 y 小的点 $idom(u)$，则 $r\overset.\to sdom(y)\leadsto y\overset.\to u$ 不经过 $idom(u)$，矛盾。于是 $y=idom(u)$，则任何一条 $r\leadsto w$ 都经过 $idom(u)$，即 $idom(u)$ 支配 w。</p>
-<p>得证，$idom(u)=idom(w)$。</p>
-<p class="block"><u>推论2</u><br>对于 $w\neq r$，令 u 为 $sdom(w)\overset+\to u\overset.\to w$ 中 $sdom(u)$ 最小的，则有：
-$$
-idom(w)=\begin{cases}sdom(w)&sdom(u)\ge sdom(w)\\idom(u)&sdom(u)< sdom(w)\end{cases}
-$$
-</p>
+<p>这个定理就让 $\operatorname{idom}(u)$ 和 $\operatorname{sdom}(u)$ 有联系了~</p>
+<p>由引理三，我们知道 $\operatorname{idom}(u)\overset.\to \operatorname{sdom}(u)$，则只需证明 $\operatorname{sdom}(u)$ 支配 u。考虑反证，假设 $\operatorname{sdom}(u)$ 不支配 u，则存在 $r\leadsto u$ 不经过 $\operatorname{sdom}(u)$。</p>
+<p>记该路径为 $P=r\leadsto u$。令 $x$ 为 $P$ 上最后一个 $x\lt\operatorname{sdom}(u)$ 的点。</p>
+<p>则 $x\leadsto u$ 上一定存在点 $y_0$ 满足 $\operatorname{sdom}(u)\overset.\to y_0\overset+\to u$（$y_0$ 在 $\operatorname{sdom}(u)$ 和 $u$ 之间的链上），否则 $x$ 就会成为 $\operatorname{sdom}(u)$。记所有满足条件的点 $y_0$ 中最小的一个为 $y$。</p>
+<p>若 $y\neq \operatorname{sdom}(u)$，由定理二得：$\operatorname{sdom}(y)\ge \operatorname{sdom}(u)$。</p>
+<p>说明 $P$ 上还有一个点 $z$ 满足 $z\lt y$，否则 $x$ 将成为 $\operatorname{sdom}(y)$。那么有 $z\lt y\lt u$，但是 $y$ 是 $P$ 上最小的 $y\lt u$ 的点，产生矛盾。</p>
+<p>则 $y=\operatorname{sdom}(u)$，因此 $P$ 一定经过 $\operatorname{sdom}(u)$，即 $\operatorname{sdom}(u)$ 支配 $u$。</p>
+<div class="block"><p class="headline">定理三</p><p>
 
-<p>其实就是定理2,3 的综合。</p>
-<p class="block"><u>定理4</u><br>对于 $w\neq r$，有
-$$
-sdom(w)=\min\{\{v|(v,w)\in E\}\cup\{sdom(u)|u>w,\exists(v,w)\in E,u\overset.\to v\}\}
-$$
-</p>
+对于 $w\neq r$，若存在 $u_0$ 满足 $\operatorname{sdom}(w)\overset+\to u_0\overset+\to w$ 使得 $\operatorname{sdom}(u_0)\lt\operatorname{sdom}(w)$；</p><p>
 
-<p>显然集合所描述的条件都满足了 $sdom(w)$ 的条件，只要证明 $sdom(w)$ 一定包含在集合中，分两种情况：</p>
+记 $\operatorname{sdom}(u_0)$ 最小的 $u_0$ 为 $u$，则 $\operatorname{idom}(u)=\operatorname{idom}(w)$。</p></div>
+
+<p>相当于是对定理二的补充。大概是这样一个图：</p>
+<p><img src="/2020/20Jul6thArt2/png4.png" alt="png4"></p>
+<p>考虑 $\operatorname{idom}(u)$ 和 $\operatorname{idom}(w)$ 的位置。</p>
+<ul>
+<li>首先 $\operatorname{idom}(w)\overset{.}{\to}\operatorname{sdom}(w)$ 且 $\operatorname{idom}(u)\overset{.}{\to}\operatorname{sdom}(u)$（引理三）；</li>
+<li>由引理四，因为 $u\overset{.}{\to}w$，且不存在 $u\overset{.}{\to}\operatorname{idom}(w)$，所以只能是 $\operatorname{idom}(w)\overset{.}{\to}\operatorname{idom}(u)$。</li>
+</ul>
+<p>于是整个情形如下图：</p>
+<p><img src="/2020/20Jul6thArt2/svg1.svg" alt="svg1"></p>
+<p>只需要证明 $\operatorname{idom}(u)$ 支配 $w$。考虑证明非平凡情况：$\operatorname{idom}(u)\neq r$。</p>
+<p>任意取一条路径 $P=r\leadsto w$，令 $P$ 中最后一个小于 $\operatorname{idom}(u)$ 的点为 $x$。则存在 $y_0$ 使得 $\operatorname{idom}(u)\overset.\to y_0\overset+\to w$，我们取最小的 $y_0$ 作为 $y$。</p>
+<p>因为 $y$ 是满足条件的最小点，所以不存在 $v$ 使得 $\operatorname{idom}(u)\overset.\to v\overset+\to y$。于是 $x$ 是 $\operatorname{sdom}(y)$ 的「候选」，$\operatorname{sdom}(y)\le x\lt\operatorname{idom}(u)\le\operatorname{sdom}(w)$。</p>
+<p>若 $\operatorname{sdom}(w)\overset{+}{\to}y\overset{+}{\to}w$，则 $y$ 可以作为定理中的 $u_0$，而 $\operatorname{sdom}(y)\le x\lt\operatorname{sdom}(u)$，与 $u$ 是 $\operatorname{sdom}(u_0)$ 最小的 $u_0$ 矛盾。</p>
+<p>因此 $\operatorname{idom}(u)\overset{.}{\to}y\overset{.}{\to}\operatorname{sdom}(w)$。</p>
+<p>此时，如果 $y\neq\operatorname{idom}(u)$，则存在 $r\overset{.}{\to}x\leadsto y\overset{.}{\to}u$ 不经过 $\operatorname{idom}(u)$，矛盾。故 $y=\operatorname{idom}(u)$。</p>
+<p>因此任意路径 $P$ 都经过 $\operatorname{idom}(u)$，即 $\operatorname{idom}(u)$ 支配 $w$。</p>
+<p>得证，$\operatorname{idom}(u)=\operatorname{idom}(w)$。</p>
+<div class="block"><p class="headline">推论2</p><p>
+
+对于 $w\neq r$，令 $u$ 为 $\operatorname{sdom}(w)\overset+\to u\overset.\to w$ 中 $\operatorname{sdom}(u)$ 最小的，则有：</p>
+$$
+\operatorname{idom}(w)=\begin{cases}\operatorname{sdom}(w)&\operatorname{sdom}(u)\ge \operatorname{sdom}(w)\\\operatorname{idom}(u)&\operatorname{sdom}(u)< \operatorname{sdom}(w)\end{cases}
+$$
+</div>
+
+<p>其实就是定理二三的综合。</p>
+<p>最后只剩下如何求 $\operatorname{sdom}(w)$。</p>
+<div class="block"><p class="headline">定理四</p><p>
+
+对于 $w\neq r$，$\operatorname{sdom}(w)$ 只可能是下面两种情况</p><ol><li>
+
+存在边 $v\to w$，$\operatorname{sdom}(w)=v$；</li><li>
+
+点 $u$ 满足 $u\overset{.}{\to}v\to w$，其中 $v\gt w$，$\operatorname{sdom}(w)=\operatorname{sdom}(u)$。</li>
+</ol>
+<p>形式化地：</p>
+
+$$
+\operatorname{sdom}(w)=\min\{\{v|(v,w)\in E\}\cup\{\operatorname{sdom}(u)|u>w,\exists(v,w)\in E,u\overset.\to v\}\}
+$$
+</div>
+
+<p>显然两种情况都满足了 $\operatorname{sdom}(w)$ 的定义，只要证明 $\operatorname{sdom}(w)$ 一定符合两种情况之一：</p>
 <ol>
-<li>$sdom(w)\leadsto w$ 只有一条边，对应第一个集合；</li>
-<li>$sdom(w)\leadsto w$ 大于一条边，对应第二个集合，令第二个集合中最小值为 k，则一定有 $sdom(w)\le k$。<br><br>令 x 是 $sdom(w)\leadsto w$ 中 w 的前一个点，再令 y 是该路径上除去端点 $sdom(w),w$ 外  $y\overset.\to x$ 的最小点（可能取到 x），又因为 y 取最小点，所以 $sdom(w)\leadsto y$ 不经过比 y 小的点，即 $sdom(w)$ 是 $sdom(y)$ 的候选。同时我们发现 y 满足第二个集合的条件，则 $sdom(w)$ 是该集合候选，则 $k\le sdom(w)$，也就是说 $k=sdom(w)$。</li>
+<li>$\operatorname{sdom}(w)\leadsto w$ 只有一条边，对应第一个种情况；</li>
+<li><p>$\operatorname{sdom}(w)\leadsto w$ 大于一条边，对应第二种情况，记第二种情况中 $\operatorname{sdom}(u)$ 的最小值为 $k$；则 $\operatorname{sdom}(w)\le k$。</p>
+<p>记 $P=\operatorname{sdom}(w)\leadsto w$ 上 $\operatorname{sdom}(w)$ 以外的最小的点为 $y$。那么 $\operatorname{sdom}(w)\leadsto y$ 上除去 $\operatorname{sdom}(w), y$ 的所有点都大于 $y$，也即 $\operatorname{sdom}(w)$ 是 $\operatorname{sdom}(y)$ 的「候选」。</p>
+<p>根据描述，$y$ 符合第二种情况中 $u$ 的定义，则 $k\le\operatorname{sdom}(y)$。</p>
+<p>而 $\operatorname{sdom}(y)\le\operatorname{sdom}(w)$，所以 $k\le\operatorname{sdom}(w)$。</p>
+<p>综上 $\operatorname{sdom}(w)=k$。</p>
+</li>
 </ol>
 <p>得证。</p>
 <hr>
-<h2 id="Lengauer-Tarjan"><a href="#Lengauer-Tarjan" class="headerlink" title="# Lengauer-Tarjan"></a># Lengauer-Tarjan</h2><p>有了上述定理作为基础，Lengauer-Tarjan算法就被设计出来，以 $O(n\log n)$ 的复杂度计算 $idom(u),sdom(u)$。</p>
+<h2 id="Lengauer-Tarjan"><a href="#Lengauer-Tarjan" class="headerlink" title="# Lengauer-Tarjan"></a># Lengauer-Tarjan</h2><p>有了上述定理作为基础，Lengauer-Tarjan算法就被设计出来，以 $O(n\log n)$ 的复杂度计算 $\operatorname{idom}(u),\operatorname{sdom}(u)$。</p>
 <p>算法流程大概如下：</p>
 <ol>
-<li>先DFS一遍，求一个DFS树，然后初始化 $sdom(u)=u$（为了方便……）；</li>
-<li>根据定理4，<strong>按dfn从大到小</strong>枚举 w，计算 $sdom(w)$（在每次计算前，&gt;w 的 $sdom()$ 已经计算好了）：<br><br>枚举<strong>连向</strong> w 的点 u，计算 u 沿着 $fa(u)$ 往上爬到第一个dfn小于 w 的点，这条路径上最小的 $sdom()$。<br><br>当然我们不会直接枚举 $fa(u)$ 向上跳，需要用<strong>带权并查集</strong>维护有根树结构——每次计算完 $sdom(w)$，就把 w 在并查集中连向 $fa(w)$，并查集用<strong>路径压缩</strong>，压缩时更新路径上最小的 $sdom(u)$ 对应的 $u$（详见代码）。</li>
-<li>当我们计算完 $sdom(w)$ 时，在并查集上 w 的子树上所有点一定都连向了 $fa(w)$，因此可以枚举 $sdom(u)$ 为 $fa(w)$ 的点 u，根据推论2，用带权并查集求出 u 到 $sdom(u)$ 的路径上最小的 $sdom(v)$ 对应的 v，若 $sdom(v)&lt;sdom(u)$，则给 $idom(u)$ 打上“v 的标记标记”，表示 $idom(u)=idom(v)$，否则直接 $idom(u)=sdom(u)$。</li>
-<li>最后再扫一遍 $idom(u)$，把有标记 $v$ 的 $idom(u)$ 的值赋值为 $idom(v)$。</li>
+<li>先DFS一遍，求一个DFS树，然后初始化 $\operatorname{sdom}(u)=u$（为了方便……）；</li>
+<li>根据定理四，<strong>按dfn从大到小</strong>枚举 $w$，计算 $\operatorname{sdom}(w)$（在每次计算前，$\gt w$ 的 $\operatorname{sdom}()$ 已经计算好了）：<br><br>枚举<strong>连向</strong> $w$ 的点 $u$，计算 $u$ 沿着 $fa(u)$ 往上爬到第一个dfn小于 $w$ 的点，这条路径上最小的 $\operatorname{sdom}()$。<br><br>当然我们不会直接枚举 $fa(u)$ 向上跳，需要用<strong>带权并查集</strong>维护有根树结构——每次计算完 $\operatorname{sdom}(w)$，就把 $w$ 在并查集中连向 $fa(w)$，并查集用<strong>路径压缩</strong>，压缩时更新路径上最小的 $\operatorname{sdom}(u)$ 对应的 $u$（详见代码）。</li>
+<li>当我们计算完 $\operatorname{sdom}(w)$ 时，在并查集上 $w$ 的子树上所有点一定都连向了 $fa(w)$，因此可以枚举 $\operatorname{sdom}(u)$ 为 $fa(w)$ 的点 $u$，根据推论2，用带权并查集求出 $u$ 到 $\operatorname{sdom}(u)$ 的路径上最小的 $\operatorname{sdom}(v)$ 对应的 $v$，若 $\operatorname{sdom}(v)&lt;\operatorname{sdom}(u)$，则给 $\operatorname{idom}(u)$ 打上“$v$ 的标记”，表示 $\operatorname{idom}(u)=\operatorname{idom}(v)$，否则直接 $\operatorname{idom}(u)=\operatorname{sdom}(u)$。</li>
+<li>最后再扫一遍 $\operatorname{idom}(u)$，把有标记 $v$ 的 $\operatorname{idom}(u)$ 的值赋值为 $\operatorname{idom}(v)$。</li>
 </ol>
 <blockquote>
 <p>Hint. 因为我们时常要取一个点的dfn做大小比较，写代码的时候注意变量到底代表的是dfn还是一个点本身。</p>
@@ -530,16 +593,19 @@ $$
 <h2 id="源代码"><a href="#源代码" class="headerlink" title="# 源代码"></a># 源代码</h2><p>> <a href="https://www.luogu.com.cn/problem/P5180" target="_blank" rel="noopener">洛谷 P5180</a></p>
 <p>对应题目P5180【模板】支配树<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Lucky_Glass*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">2e5</span>+<span class="number">10</span>,M=<span class="number">3e5</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LISTBLOCK</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> head[N],to[M],nxt[M],ncnt;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Push</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;ncnt++;to[ncnt]=v,nxt[ncnt]=head[u],head[u]=ncnt;&#125;</span><br><span class="line">	<span class="keyword">int</span> <span class="keyword">operator</span> [](<span class="keyword">const</span> <span class="keyword">int</span> &amp;u)&#123;<span class="keyword">return</span> head[u];&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(<span class="keyword">int</span> siz)</span></span>&#123;<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=siz;i++) head[i]=<span class="number">0</span>;ncnt=<span class="number">0</span>;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Clear</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;head[id]=<span class="number">0</span>;&#125;</span><br><span class="line">&#125;In,Out,Bucket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,ndfn;</span><br><span class="line"><span class="keyword">int</span> idfn[N],dfn[N],pre[N];</span><br><span class="line"><span class="keyword">int</span> idom[N],sdom[N];</span><br><span class="line"><span class="keyword">int</span> ans[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CalcAns</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	ans[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> it=Out[u];it;it=Out.nxt[it])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=Out.to[it];</span><br><span class="line">		CalcAns(v);</span><br><span class="line">		ans[u]+=ans[v];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DSU</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> fa[N],val[N];</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(u==fa[u]) <span class="keyword">return</span> u;</span><br><span class="line">		<span class="keyword">int</span> res=Find(fa[u]);</span><br><span class="line">		<span class="keyword">if</span>(sdom[val[fa[u]]]&lt;sdom[val[u]]) val[u]=val[fa[u]];</span><br><span class="line">		<span class="keyword">return</span> fa[u]=res;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Eval</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;Find(u);<span class="keyword">return</span> val[u];&#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">Link</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">		u=Find(u),v=Find(v);</span><br><span class="line">		<span class="keyword">if</span>(u==v) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		fa[u]=v;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(<span class="keyword">int</span> siz)</span></span>&#123;<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=siz;i++)fa[i]=i,val[i]=i;&#125;</span><br><span class="line">&#125;Ds;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Ri</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> a=<span class="number">0</span>,c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span> || <span class="string">'9'</span>&lt;c) c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(<span class="string">'0'</span>&lt;=c &amp;&amp; c&lt;=<span class="string">'9'</span>) a=(a&lt;&lt;<span class="number">1</span>)+(a&lt;&lt;<span class="number">3</span>)+c-<span class="string">'0'</span>,c=getchar();</span><br><span class="line">	<span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	idfn[sdom[u]=dfn[u]=++ndfn]=u;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> it=Out[u];it;it=Out.nxt[it])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=Out.to[it];</span><br><span class="line">		<span class="keyword">if</span>(dfn[v]) <span class="keyword">continue</span>;</span><br><span class="line">		pre[v]=u,DFS(v);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	n=Ri(),m=Ri();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> u=Ri(),v=Ri();</span><br><span class="line">		In.Push(v,u),Out.Push(u,v);</span><br><span class="line">	&#125;</span><br><span class="line">	DFS(<span class="number">1</span>);</span><br><span class="line">	Ds.Init(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=ndfn;i&gt;=<span class="number">2</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">int</span> u=idfn[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> it=In[u],v=In.to[it];it;it=In.nxt[it],v=In.to[it])</span><br><span class="line">			<span class="keyword">if</span>(dfn[v])</span><br><span class="line">				sdom[u]=min(sdom[u],sdom[Ds.Eval(v)]);</span><br><span class="line">		Bucket.Push(idfn[sdom[u]],u);</span><br><span class="line">		<span class="comment">// printf("! %d %d\n",u,idfn[sdom[u]]);</span></span><br><span class="line">		Ds.Link(u,pre[u]);</span><br><span class="line">		<span class="keyword">int</span> pu=pre[u];</span><br><span class="line">		<span class="comment">// printf("? %d\n",pu);</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> it=Bucket[pu];it;it=Bucket.nxt[it])&#123;</span><br><span class="line">			<span class="keyword">int</span> iv=Bucket.to[it],iu=Ds.Eval(iv);</span><br><span class="line">			idom[iv]=sdom[iu]==sdom[iv]? pu:iu;</span><br><span class="line">		&#125;</span><br><span class="line">		Bucket.Clear(pu);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>,u=idfn[i];i&lt;=ndfn;i++,u=idfn[i])</span><br><span class="line">	 	idom[u]=idfn[sdom[u]]==idom[u]? idom[u]:idom[idom[u]];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>,u=idfn[i];i&lt;=ndfn;i++,u=idfn[i])</span><br><span class="line">		sdom[u]=idfn[sdom[u]];</span><br><span class="line">	Out.Init(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++) Out.Push(idom[i],i);</span><br><span class="line">	CalcAns(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d%c"</span>,ans[i],i==n?<span class="string">'\n'</span>:<span class="string">' '</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
-<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><script type="math/tex; mode=display">
-\begin{split}
-“\ &只要极致\ 谁比我放肆\\
-&展开双翅\ 去奔跑 像个孩子\\
-&写下你的名字\ 在风中化成诗\\
-&再说一次\ 不在乎方式\\
-&哪怕重新开始\ 那也要坚持\\
-&别去拔你的刺\ 那是你最美丽的旗帜\ ”\\
-——&\text{《奔赴》By 司南}
-\end{split}</script><p>> Linked <a href="http://music.163.com/song?id=1446251992&amp;userid=303853271" target="_blank" rel="noopener">奔赴-网易云</a></p>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><div class="tail-lyrics">
+<p class="lyrics">
+只要极致 谁比我放肆<br>
+展开双翅 去奔跑 像个孩子<br>
+写下你的名字 在风中化成诗<br>
+再说一次 不在乎方式<br>
+哪怕重新开始 那也要坚持<br>
+别去拔你的刺 那是你最美丽的旗帜
+</p>
+<p>——《奔赴》By 司南</p>
+</div>
+
+<p>> Linked <a href="http://music.163.com/song?id=1446251992&amp;userid=303853271" target="_blank" rel="noopener">奔赴-网易云</a></p>
 
     </div>
 
@@ -658,7 +724,7 @@ $$
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">278</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -670,7 +736,7 @@ $$
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">153</span>
+        <span class="site-state-item-count">154</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -723,7 +789,7 @@ $$
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共451.1k字</span>
+  <span class="post-count">博客全站共453.2k字</span>
 </div>
 
         
