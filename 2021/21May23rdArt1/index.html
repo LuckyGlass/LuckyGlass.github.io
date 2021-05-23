@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="code-5ShoHSHaJq" />
+<meta name="baidu-site-verification" content="code-SaEpttARVo" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+/*主页文章*/
+.posts-expand .post-block:not(:first-child) {
+	margin-top: 30px !important;
+}
+.use-motion .post-block {
+	margin-top: 0px !important;
+}
+/*折叠块*/
+details.fold{
+	background-color:#eeeeeec4;
+	border-radius:.3rem;
+	margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.fold summary{
+	background-color:#555555be;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold p{
+	padding-left:10px;
+	padding-right:10px;
+}
+details.fold p.lastline{
+	padding-bottom: 6px;
+}
+/*强调块*/
+div.block{
+	background-color: #f2f2f2f0;
+	border-radius: .3rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+div.block p{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+}
+div.block p.headline{
+	font-weight: bold;
+	background-color: #808080be;
+	color: white;
+	border-top-left-radius: .3rem;
+	border-top-right-radius: .3rem;
+	margin-bottom: 0px;
+	text-shadow: 2px 2px 1px #4a464691;
+}
+div.block p.lastline{
+	padding-bottom: 6px;
+}
+/*代码折叠块*/
+details.code{
+	background-color:#e1dfddaf;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.code summary{
+	color: #494646;
+	font-weight: bold;
+	height: auto;
+	padding: 3px;
+}
+img.myfont{
+	background-color: rgba(255, 255, 255, 0.726);
+	border-radius: .3rem;
+	padding: 3px;
+	width: 600px;
+	border-width: 2px !important;
+	border: #f4f0e1;
+}
+/*页尾歌词*/div.tail-lyrics p.lyrics {
+	font-family: 楷体;
+	text-align: center;
+}
+a.labelfont{
+	color:white;
+	background-color:#272727;
+	border-radius:.3rem;
+	display:inline-block;
+	font-weight:700;
+	height:5;
+	text-decoration:none;
+	font-family:楷体;
+	padding: 0.01px 5px;
+	margin: 1mm 1mm 1mm 1mm;
+}
+a.labelfont#oj{
+	background-color:#272727 !important;
+	font-family:courier !important;
+}
+a.labelfont#dp{
+	background-color:#3C3C3C !important;
+}
+a.labelfont#graph{
+	background-color:#4F4F4F !important;
+}
+a.labelfont#string{
+	background-color:#5B5B5B !important;
+}
+a.labelfont#search{
+	background-color:#6C6C6C !important;
+}
+a.labelfont#math{
+	background-color:#7B7B7B !important;
+}
+a.labelfont#data-structure{
+	background-color:#8E8E8E !important;
+}
+a.labelfont#speed{
+	background-color:#9D9D9D !important;
+}
+a.labelfont#greedy{
+	background-color:#ADADAD !important;
+}
+a.labelfont#other{
+	background-color:#BEBEBE !important;
+}
+</style>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="另外有一个纯吐槽游记版本的欢迎各路神仙来吐槽一个菜鸡的考场思路">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「DAIRY」PKUSC2021 小结">
+<meta property="og:url" content="https://4rds5h.coding-pages.com/2021/21May23rdArt1/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="另外有一个纯吐槽游记版本的欢迎各路神仙来吐槽一个菜鸡的考场思路">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://4rds5h.coding-pages.com/2021/21May23rdArt1/png1.png">
+<meta property="article:published_time" content="2021-05-23T15:39:12.000Z">
+<meta property="article:modified_time" content="2021-05-23T15:45:32.794Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://4rds5h.coding-pages.com/2021/21May23rdArt1/png1.png">
+
+<link rel="canonical" href="https://4rds5h.coding-pages.com/2021/21May23rdArt1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>「DAIRY」PKUSC2021 小结 | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2021/21May23rdArt1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="玻璃易碎，但打碎玻璃的人也将被玻璃划伤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「DAIRY」PKUSC2021 小结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-23 23:39:12 / 修改时间：23:45:32" itemprop="dateCreated datePublished" datetime="2021-05-23T23:39:12+08:00">2021-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E8%A1%8C/" itemprop="url" rel="index"><span itemprop="name">前行</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/21May23rdArt1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/21May23rdArt1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>另外有一个<a href="/2021/21May16thArt1/">纯<del>吐槽</del>游记版本</a>的<br>欢迎各路神仙来吐槽一个菜鸡的考场思路</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="Day1-考场小结"><a href="#Day1-考场小结" class="headerlink" title="# Day1 考场小结"></a># Day1 考场小结</h2><p>总体而言，T1 完全就是送分，做得也挺快的；T2 大概是本场最难的题；然后 T3 靠码量和细节最后加上一些小优化，成功地成为了压轴题，虽然正解确实恶心，但是看起来前两个部分分应该可做（但是我没有写出来第二个部分分）。</p>
+<h3 id="Day1-T1"><a href="#Day1-T1" class="headerlink" title="- Day1 T1"></a>- Day1 T1</h3><details class="fold">
+<summary>点击展开/折叠 题意</summary>
+<p>给定 $n\times n$ 的矩阵 $A$，定义 $f(A)=B$，其中 $b_{i,j}=\sum_{k=1}^na_{i,k}+a_{k,j}$。求</p>
+$$
+\underbrace{f(f(\cdots f}_{t\text{ 个 }f}(A)))
+$$
+<p>计算在模 $m$ 意义下进行。</p>
+<p class="lastline">$n\le 5000$（记不住了，反正就是要求 $\mathcal O(n^2)$），$t\le10^9$。</p>
+</details>
+
+<p>一看 $t$ 这么大，不是结论就是要矩阵加速。</p>
+<p>先观察一次变换 $f(A)=B$，$b_{ij}$ 是第 $i$ 行的和 $R_i$ 和第 $j$ 列的和 $C_j$ 之和。于是我们只需要求解 $R_{1\sim n},C_{1\sim n}$ 这样 $\mathcal O(n)$ 个变量就可以求得 $B$ 矩阵了。</p>
+<p>初步判断为矩阵加速，然后考虑 $A$ 进行变换得到的 $B$ 的第 $i$ 行之和 $R_i’$ 和第 $j$ 列之和 $C’_j$ 的式子，记 $S$ 为 $A$ 中所有元素的和：</p>
+<script type="math/tex; mode=display">
+R_i'=\sum_{j=1}^nR_i+C_j=S+nR_i</script><p>$C_j$ 也是差不多的式子，这提示我们考虑 $S$ 的变化，记 $S’$ 为 $B$ 中所有元素的和：</p>
+<script type="math/tex; mode=display">
+S'=\sum_{i=1}^n\sum_{j=1}^n(R_i+C_j)=\sum_{i=1}^nnR_i+S=2nS</script><p>所以可以矩阵加速：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}R_i'\\S'\end{bmatrix}=\begin{bmatrix}n&1\\0&2n\end{bmatrix}\times\begin{bmatrix}R_i\\S\end{bmatrix}</script><p>注意到对于 $R_i,C_j$，中间的转移矩阵 $T$ 都是一模一样的，可以直接算出 $T^t$，算 $R_i,C_j$ 只需进行一次矩阵乘法。复杂度 $\mathcal O(n^2+\log t)$。</p>
+<p>总共用了 30min 做这道题，做得应该还算顺利。</p>
+<h3 id="Day1-T2"><a href="#Day1-T2" class="headerlink" title="- Day1 T2"></a>- Day1 T2</h3><details class="fold">
+<summary>点击展开/折叠 题意</summary>
+<p>给定序列 $\{a_n\}$，$q$ 次操作，类型如下</p>
+<ol>
+<li>给定 $l,r$，从小到大枚举 $i$ 从 $l$ 到 $r-1$，修改 $a_i$ 为 $\max\{a_i,a_{i+1}\}$；</li>
+<li>给定 $l,r$，贪心地求 $[l,r]$ 中严格上升子序列的元素之和（即如果当前元素严格大于当前上升子序列的末尾，就把它加入上升子序列）。</li>
+</ol>
+<p>下面列一些我记得住的部分分：</p>
+<ul>
+<li>$n,q\le3\times10^3$；</li>
+<li>对每个 1 操作，$l=1, r=n$；</li>
+<li>$n,q\le3\times10^5$。</li>
+</ul>
+</details>
+
+
+<p>$\mathcal O(nq)$ 的大模拟就不说了。</p>
+<p>然后对正解没什么思路，就想 $l=1,r=n$ 的部分分，即每次修改都包括全局。</p>
+<p>观察可得，元素 $a_i$ 被操作若干次后会变成其后方第一个比它大的值。将这样的变化关系建出一棵带边权的树——</p>
+<ul>
+<li>$a_i$ 向其后方第一个严格大于它的元素连边；</li>
+<li>边的权值为两个元素之间的距离；</li>
+<li>若 $a_i$ 后方没有比它大的数，就连向一个虚拟节点，边权 $+\infty$。</li>
+</ul>
+<p>这棵树可以看作以虚拟节点为根。<br>这棵树的最大作用是快速计算 $a_i$ 现在会变成哪个数。记当前进行了 $t$ 次全局操作，$a_i$ 会变为「从 $a_i$ 向上爬 $t$ 的<strong>距离</strong>，能够到达的深度最浅的元素」。倍增即可 $\mathcal O(\log n)$ 计算。</p>
+<p>当时想到这里，思路就有点卡顿。主要的问题是「答案是树上从 $a_l$ 一直向上跳，不超过 $r$ 的树链上的所有元素之和；而进行一次修改后，树的形态会变化，有一些元素直接“消失”了」，这样就很难维护。</p>
+<p>后来发现没有必要动态维护每次修改过后的树——原始序列的树具有比较优美的性质。</p>
+<div class="block">
+<p class="headline">「结论」</p>
+<p>记 $f(u,s)$ 是 $u$ 向上爬 $s$ 的距离，能到达的深度最浅的点；记 $t$ 是当前全局修改的次数。</p>
+<p>对于一次询问 $(l,r)$，求出 $l$ 沿树边向后跳且不超过 $r$，最远能跳到的点 $p$。则答案为 $f(l,t)$ 到 $f(p,t)$ 这条树链上的元素之和。</p>
+</div>
+
+<p>链尾为 $f(p,t)$ 非常好理解，就是原来的链尾向后 $t$ 的距离，关键是 $f(l,t)$。考虑原本答案是 $l$ 到 $p$ 这样一条上升子序列，经过 $t$ 次变化后，<strong>只会有</strong> $\mathbf{l}$ <strong>到</strong> $\mathbf{f(l,t)}$ <strong>之前的元素</strong> 会从答案中消失。</p>
+<p>其实考场上没想这么多，感觉很有道理，写了过了样例就交，反正 PKUSC 能看到结果。</p>
+<h3 id="Day1-T3"><a href="#Day1-T3" class="headerlink" title="- Day1 T3"></a>- Day1 T3</h3><blockquote>
+<p>感谢出题人教我打德州扑克，请问考试的时候能和旁边的同学打一把模拟一下吗？</p>
+</blockquote>
+<details class="fold">
+<summary>点击展开/折叠 题面</summary>
+<p>德州扑克共有 $13$ 种牌值 <code>2~9, T, J, Q, K, A</code>，以及 $4$ 种花色 <code>0~3</code>。</p>
+<p>牌值的大小排序为 <code>2 < 3 < ... < 9 < T < J < Q < K < A</code>。</p>
+<p>一个牌组由 $5$ 张牌构成，按下述规则分类：</p>
+<ol>
+<li>同花顺：$5$ 张牌的花色相同，且是「顺子」（见下）；</li>
+<li>四条：存在 $4$ 张牌值相同的牌；</li>
+<li>葫芦：存在 $3$ 张牌值相同的牌，剩下的两张牌的牌值也相同；</li>
+<li>同花：$5$ 张牌的花色相同；</li>
+<li>顺子：$5$ 张牌的牌值连续，特殊地，认为 <code>A, 2, 3, 4, 5</code> 是顺子；</li>
+<li>三条：存在三张牌值相同的牌，且剩下两张牌牌值与其他牌都不同；</li>
+<li>两对：存在两对牌值相同的牌，且不满足之前其他类型；</li>
+<li>对子：存在一对牌值相同的牌，且不满足之前其他类型；</li>
+<li>高牌：不满足上述所有类型的牌组。</li>
+</ol>
+<p>两套牌组 $A,B$ 的比较方式如下：</p>
+<ul>
+<li>若 $A,B$ 类型不同，则类型编号较小的牌组更大；</li>
+<li>若 $A,B$ 都是同花顺或顺子，取其顺子的开头元素，按照 <code>A < 2 < 3 < ... < 9 < T < J < Q < K</code> 的方式比较大小；</li>
+<li>若 $A,B$ 同为非同花顺和顺子的其他类型，分别将 $A,B$ 中的牌安装 `(出现次数, 牌值)` 从大到小排序，然后按照牌值比较字典序大小。</li>
+</ul>
+<p>一个场面由 $7$ 张牌组成。从一个场面中任取 $5$ 张牌构成牌组，其中最大的一个牌组可以“代表”这个场面。</p>
+<p>A, B 两人进行简化版的德州扑克，先将牌随机打乱，初始池中有 $2w$ 枚筹码，A,B 两人各持有 $m$ 枚筹码。游戏共 $4$ 轮：</p>
+<ol>
+<li>A, B 从牌堆中各取 $2$ 张牌并公开，两人进行决策（决策定义见下），若 B 不弃权，进入下一轮；</li>
+<li>从牌堆中取出 $3$ 张牌公开，两人进行决策，若 B 不弃权，进入下一轮；</li>
+<li>从牌堆中取出 $1$ 张牌公开，两人进行决策，若 B 不弃权，进入下一轮；</li>
+<li>从牌堆中取出 $1$ 张牌公开；A,B 各自的场面由第一轮中自己抽到的 $2$ 张牌、以及之后公开的 $5$ 张牌构成，场面较大的一人获得池中所有筹码，若场面等大，则两人平分筹码池。</li>
+</ol>
+<p>“两人决策”指「A 从自己持有的筹码中拿 $i$ 个放入筹码池（$i$ 不超过当前持有筹码数），B 选择“继续”或“弃权”：若“继续”，则 B 也放入 $i$ 个筹码；若“弃权”，则 B 不需要放入筹码，游戏直接结束，A 获得池中全部筹码。」</p>
+<p>A,B 都绝对聪明，且希望最大化游戏结束时自己的筹码期望数量。</p>
+<p>此时 A,B 已经进行到第 $t$ 轮，即前 $t-1$ 轮 B 没有弃权，且你知道前 $t$ 轮已公开的牌以及 A,B 在第一轮中抽到的牌。以最简分数形式输出 A 在结束时的筹码期望数量。</p>
+<p>部分分：$t=3$；$t=2$；$t=1$。</p>
+</details>
+
+<p>建议把「牌组」写一个结构体，实现两个牌组的比较，时间复杂度是<strong>一个较大的常数</strong>。<br>对于一个场面，只有 $\binom 75=21$ 种牌组，直接暴搜找到最大的一个牌组即可。</p>
+<p>当 $t=3$，我们只需要判断 B 是否会弃权。不妨假设不会，则枚举第四轮公开的牌，每张未出现的牌概率相等，直接计算出 A, B 各自期望筹码数 $a,b$。如果 B 弃权，则 B 的筹码数为 $m$，如果 $b\lt m$，则 B 会弃权，答案为 $m+2w$，否则答案为 $a$。</p>
+<p>当 $t=2$，需要决策两次。不过只需要判断第二轮 B 是否弃权后就转化为 $t=3$ 的问题。仍然假设 B 不弃权，枚举下一张牌是什么，然后转化为 $t=3$ 的问题用上述方法计算，从而得到 A, B 各自期望筹码数 $a,b$。同样比较 $b$ 和 $m$ 的大小判断是否弃权。</p>
+<p>有一点卡，之前 TLE 了几发，后来发现 A,B 各自的场面只有最后两张牌是不确定的，只有 $52\times52$ 种场面，可以把它们对应的最大牌组记忆化下来。这样就跑得飞快，飞快地 Wa 了 QwQ</p>
+<p>调到最后都不知道怎么回事。</p>
+<h3 id="Day1-再总结"><a href="#Day1-再总结" class="headerlink" title="- Day1 再总结"></a>- Day1 再总结</h3><p>T1 这种该切的题切得比较快，是比较好的。</p>
+<p>T2 看了题解，的确在能力范围之内，但是不一定能够在考场上想出来，所以拿一个较高的部分分也足够了。</p>
+<p>T3 比较遗憾，全场花时间最多的一道题，如果能过掉第二个部分分就可以多 41 分（说不定可以免面试了？），还是代码实现细节的问题。</p>
+<hr>
+<h2 id="Day2-考场小结"><a href="#Day2-考场小结" class="headerlink" title="# Day2 考场小结"></a># Day2 考场小结</h2><p>应该还是比 Day1 要难一些吧，不过倒是挺谢谢出题人留了一道签到题。T1 把该送的分都送了，T2 就开始人类智慧，T3 看到实数集就完全不会，尝试暴力推 $n=3$ 的积分不知道哪里推错了。</p>
+<h3 id="Day2-T1"><a href="#Day2-T1" class="headerlink" title="- Day2 T1"></a>- Day2 T1</h3><details class="fold">
+<summary>点击展开/折叠 题面</summary>
+<p>给定一棵 $n$ 个点的树，两类问题：</p>
+<ol>
+<li>求所有点对 $(u,v)$（$u\lt v$）的距离和；</li>
+<li>断掉一条边后连接一条边，得到树 $T'$，求所有断边连边的方案得到的 $T'$ 做第一个问题的答案之和。</li>
+</ol>
+<p>输出对质数取模。</p>
+<p class="lastline">数据规模：$n\le10^5$。</p>
+</details>
+考虑经典的「计算边的贡献」的方法。
+
+第一问直接算，第二问考虑枚举断哪条边。断开后记两个连通块为 $A,B$，新连接的边一定在 $A,B$ 之间，新边的贡献为 $|A|\times|B|$。考虑连接一条边过后，对其他某一条原本就有的边 $e$ 的贡献的影响。
+
+不妨设“原本就有的边 $e$”在 $A$ 中，记该边把 $A$ 分成 $A_1,A_2$ 两部分。若新边连接 $A_1,B$，共有 $|A_1|\times|B|$ 种连法，$e$ 的贡献为 $|A_2|\times\big(|A_1|+|B|\big)$，总的贡献为 $|A_1|\times|A_2|\times|B|\times(|A_1|+|B|)$；若新边连接 $A_2,B$ 是同样的道理，总的贡献为 $|A_1|\times|A_2|\times|B|\times\big(|A_2|+|B|\big)$。
+$$
+\begin{aligned}
+&|A_1|\times|A_2|\times|B|\times(|A_1|+|B|)+|A_1|\times|A_2|\times|B|\times\big(|A_2|+|B|\big)\\
+=&|A_1|\times|A_2|\times|B|\times\big(|A_1|+|A_2|+2|B|\big)\\
+=&|B|\times\big(|A|+2|B|\big)\times|A_1|\times\big(|A|-|A_1|\big)
+\end{aligned}
+$$
+记枚举的断开的边为 $(u,v)$，$u\in A,v\in B$，那么 $|A|,|B|$ 都是常数。把 $u$ 提为 $A$ 子树的根，不妨设 $A_1$ 是一棵子树，于是我们只需要维护「子树大小之和」以及「子树大小的平方的和」，这个换根DP可以解决。
+
+复杂度 $\mathcal O(n)$。
+
+式子推起来行云流水，半个小时做出来，感觉和 Day1 差不多。
+
+### - Day2 T2
+
+<details class="fold">
+<summary>点击展开/折叠 题面</summary>
+<p>食堂在搞活动，对于金额为 $a$ 的菜品，可怜可以用 $b$（$b\le a$）张代金券，且可怜不能预支代金券，支付 $a-b$ 的现金并获得 $\lfloor\frac{a-b}{c}\rfloor$ 张代金券，其中 $c$ 为常数。</p>
+<p>可怜有计划<strong>依次</strong>吃 $a_1,a_2,\cdots,a_n$ 金额的菜品，还有 $q$ 次修改，每次令 $a_x=y$。对于初始状态和每次修改后，求可怜吃完这些菜至少需要支付的金额。</p>
+<p>我记得的部分分：</p>
+<ul>
+<li>$n,q\le50, a_i\le100$；</li>
+<li>$n,q\le10^3$；</li>
+<li>$c=1$；</li>
+<li>$c=2$；</li>
+<li>对于全部数据，$n,q\le10^5$，$c\le10^9$，在任意时刻都有 $a_i\le10^{12}$。</li>
+</ul>
+</details>
+
+<p>显然，这是一道贪心题。但是贪心题的算法很容易假，我们不如先写一个 $\mathcal O(qna_i^2)$ 的 DP，即已经吃了 $i$ 份菜（$i\le n$），持有 $j$ 张代金券（$j\le na_i$）的最小花费。转移直接枚举使用的代金券数目（$\mathcal O(a_i)$）。</p>
+<p>首先，菜品的总价格是一定的，相当于我们要最大化使用的代金券数量。</p>
+<p>先不考虑最后代金券用不完的情况，我们希望尽可能多得代金券。不难发现对价格为 $a$ 的菜品，使用不超过 $a-\lfloor\tfrac ac\rfloor$ 的代金券，获得的代金券数目不变。因此在不超过 $a-\lfloor\tfrac ac\rfloor$ 时，我们会尽可能多用代金券。</p>
+<p>但是如果我们得到的代金券太多了，以至于最后还会剩很多，那也非常浪费，说明我们应该在之前多用一些代金券。之后能够使用的代金券最大数量即为剩下的菜品的 $a_i$ 之和。</p>
+<p>（<strong>下面这个贪心不知道哪里错了，不要当成正解了</strong>）</p>
+<p>我的策略是「当第一次发现按照“最大化获得代金券数量”的策略支付，当前拥有的代金券会用不完时，就在“保证之后的菜品能够完全用支付券支付”的前提下，在当前菜品尽可能多用」。</p>
+<p>这样可以 $\mathcal O(nq)$ 解决问题。但是我不知道哪里错了，而且一时没有更好的思路，于是就把剩下的时间拿去刚 T3 了。</p>
+<h3 id="Day2-T3"><a href="#Day2-T3" class="headerlink" title="- Day2 T3"></a>- Day2 T3</h3><details class="fold">
+<summary>点击展开/折叠 题面</summary>
+<p>在 $[0,m]$ 的数轴上随机点 $n$ 个实数点，求不存在包含超过 $2$ 个点的长度为 $k$ 的区间的概率。答案对 $998244353$ 取模。</p>
+<p>我记得的部分分：</p>
+<ul>
+<li>$n\le3$；</li>
+<li>$n\le10$；</li>
+<li>对于全部数据，$n\le50$，$1\le k\le m\le150$。</li>
+</ul>
+</details>
+
+<p>看到实数范围直接放弃思考，只想了 $n=3$ 怎么做。</p>
+<p>设前两个点的坐标分别为 $i,j$（不妨设 $i\lt j$），考虑第三个点能放的区间的长度：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+m&i+k\lt j\\
+\max\{0,j-k\}+\max\{0,m-i-k\}&i+k\ge j
+\end{cases}</script><p>然后分类讨论 $2k$ 和 $m$ 的大小，可以用平面直角坐标系清晰地表示分类的准则：</p>
+<p><img src="/2021/21May23rdArt1/png1.png" alt="png1"></p>
+<p>应该可以直接积分，但是大概是我积分不太熟练，不知道哪里推错了。</p>
+<h3 id="Day2-再总结"><a href="#Day2-再总结" class="headerlink" title="- Day2 再总结"></a>- Day2 再总结</h3><p>两天的 T1 都非常顺利，开了个好头。</p>
+<p>T2  先写暴力 DP 是正确的，但是之后在难度判断上有失误，说不定再改改能把贪心改对。</p>
+<p>T3 用的时间太久了，而且没有把握。积分之类的还是运用得太少了，推导费时且容易出错。推了一页草稿纸没推出来的时候就应该回去再想想 T2 了。</p>
+<hr>
+<h2 id="后记"><a href="#后记" class="headerlink" title="# 后记"></a># 后记</h2><p>好家伙，怎么一写就写了这么长……一个晚自习就差不多过去了。</p>
+<p>说起来两天都能（相比起其他人）迅速地切掉 T1 还是挺开心的，大概我更熟悉比较简单的题吧。但是毕竟题目难度是有梯度的，去年 NOI Day2 对我而言好像也没有签到题，对于难题的处理还是有些后劲不足。</p>
+<p>Day3 去面试，感觉和面试官聊得挺开心的（结营仪式上发现两位面试官一个是校长，一个是院副主任，瑟瑟发抖）。大概也确实给面试官留下了比较深刻的印象吧，最后还是如愿以偿，拿到了所谓的一等约。（说起来 PKUSC 的评级太隐晦了 awa，什么优异优秀良好，拿到证书的时候一脸懵）</p>
+<hr>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://4rds5h.coding-pages.com/2021/21May23rdArt1/" title="「DAIRY」PKUSC2021 小结">https://4rds5h.coding-pages.com/2021/21May23rdArt1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/21May16thArt1/" rel="prev" title="「DAIRY」PKU-SC2021 游记">
+      <i class="fa fa-chevron-left"></i> 「DAIRY」PKU-SC2021 游记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/21May23rdArt2/" rel="next" title="「SOL」NOI2016 Day1 解题报告">
+      「SOL」NOI2016 Day1 解题报告 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Day1-考场小结"><span class="nav-text"># Day1 考场小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1-T1"><span class="nav-text">- Day1 T1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1-T2"><span class="nav-text">- Day1 T2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1-T3"><span class="nav-text">- Day1 T3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1-再总结"><span class="nav-text">- Day1 再总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day2-考场小结"><span class="nav-text"># Day2 考场小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day2-T1"><span class="nav-text">- Day2 T1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day2-T3"><span class="nav-text">- Day2 T3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day2-再总结"><span class="nav-text">- Day2 再总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-text"># 后记</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">玻璃易碎，但打碎玻璃的人也将被玻璃划伤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">287</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">158</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共472.1k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

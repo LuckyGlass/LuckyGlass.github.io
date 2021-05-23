@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="baidu-site-verification" content="code-5ShoHSHaJq" />
+<meta name="baidu-site-verification" content="code-SaEpttARVo" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bloglogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bloglogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="UQ9WBXJMwb">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-radar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<html>
+<head>
+<style type="text/css">
+/*主页文章*/
+.posts-expand .post-block:not(:first-child) {
+	margin-top: 30px !important;
+}
+.use-motion .post-block {
+	margin-top: 0px !important;
+}
+/*折叠块*/
+details.fold{
+	background-color:#eeeeeec4;
+	border-radius:.3rem;
+	margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.fold summary{
+	background-color:#555555be;
+	border-radius:.3rem;
+	height:10;
+	padding-left:5px;
+	padding-right:5px;
+	font-weight:bold;
+	color:white;
+}
+details.fold p{
+	padding-left:10px;
+	padding-right:10px;
+}
+details.fold p.lastline{
+	padding-bottom: 6px;
+}
+/*强调块*/
+div.block{
+	background-color: #f2f2f2f0;
+	border-radius: .3rem;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+div.block p{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+}
+div.block p.headline{
+	font-weight: bold;
+	background-color: #808080be;
+	color: white;
+	border-top-left-radius: .3rem;
+	border-top-right-radius: .3rem;
+	margin-bottom: 0px;
+	text-shadow: 2px 2px 1px #4a464691;
+}
+div.block p.lastline{
+	padding-bottom: 6px;
+}
+/*代码折叠块*/
+details.code{
+	background-color:#e1dfddaf;
+	border-radius:.3rem;
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+	box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.726);
+}
+details.code summary{
+	color: #494646;
+	font-weight: bold;
+	height: auto;
+	padding: 3px;
+}
+img.myfont{
+	background-color: rgba(255, 255, 255, 0.726);
+	border-radius: .3rem;
+	padding: 3px;
+	width: 600px;
+	border-width: 2px !important;
+	border: #f4f0e1;
+}
+/*页尾歌词*/div.tail-lyrics p.lyrics {
+	font-family: 楷体;
+	text-align: center;
+}
+a.labelfont{
+	color:white;
+	background-color:#272727;
+	border-radius:.3rem;
+	display:inline-block;
+	font-weight:700;
+	height:5;
+	text-decoration:none;
+	font-family:楷体;
+	padding: 0.01px 5px;
+	margin: 1mm 1mm 1mm 1mm;
+}
+a.labelfont#oj{
+	background-color:#272727 !important;
+	font-family:courier !important;
+}
+a.labelfont#dp{
+	background-color:#3C3C3C !important;
+}
+a.labelfont#graph{
+	background-color:#4F4F4F !important;
+}
+a.labelfont#string{
+	background-color:#5B5B5B !important;
+}
+a.labelfont#search{
+	background-color:#6C6C6C !important;
+}
+a.labelfont#math{
+	background-color:#7B7B7B !important;
+}
+a.labelfont#data-structure{
+	background-color:#8E8E8E !important;
+}
+a.labelfont#speed{
+	background-color:#9D9D9D !important;
+}
+a.labelfont#greedy{
+	background-color:#ADADAD !important;
+}
+a.labelfont#other{
+	background-color:#BEBEBE !important;
+}
+</style>
+<link rel="alternate" href="/atom.xml" title="Lucky_Glass's Blog" type="application/atom+xml">
+</head>
+</html>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"4rds5h.coding-pages.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"right","width":270,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="要不是考到了，我还没发现这玩意我不是很会……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「NOTE」常系数齐次线性递推">
+<meta property="og:url" content="https://4rds5h.coding-pages.com/2021/21May23rdArt3/">
+<meta property="og:site_name" content="Lucky_Glass&#39;s Blog">
+<meta property="og:description" content="要不是考到了，我还没发现这玩意我不是很会……">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-23T15:46:04.000Z">
+<meta property="article:modified_time" content="2021-05-23T15:57:18.803Z">
+<meta property="article:author" content="Lucky_Glass">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://4rds5h.coding-pages.com/2021/21May23rdArt3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>「NOTE」常系数齐次线性递推 | Lucky_Glass's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky_Glass's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">以心为名，名为爱惜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-newtags">
+
+    <a href="/newtags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-fw fa-group"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos/" rel="section"><i class="fa fa-fw fa-image"></i>照片墙</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://4rds5h.coding-pages.com/2021/21May23rdArt3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lucky_Glass">
+      <meta itemprop="description" content="玻璃易碎，但打碎玻璃的人也将被玻璃划伤">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky_Glass's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「NOTE」常系数齐次线性递推
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-23 23:46:04 / 修改时间：23:57:18" itemprop="dateCreated datePublished" datetime="2021-05-23T23:46:04+08:00">2021-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-fire"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/21May23rdArt3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/21May23rdArt3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>要不是考到了，我还没发现这玩意我不是很会……</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="前置"><a href="#前置" class="headerlink" title="# 前置"></a># 前置</h2><ul>
+<li>多项式取模；</li>
+<li>矩阵快速幂。</li>
+</ul>
+<hr>
+<h2 id="常系数齐次线性递推"><a href="#常系数齐次线性递推" class="headerlink" title="# 常系数齐次线性递推"></a># 常系数齐次线性递推</h2><p>描述的是这么一个问题，给定数列 $c_1,c_2,\dots,c_k$ 以及数列 $f$ 的前 $k$ 项 $f_0,f_1,\dots,f_{k-1}$，已知 $f$ 有如下递推公式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+(n\ge m)&&f_{n}=\sum_{i=1}^kc_if_{n-i}
+\end{aligned}</script><p>求 $f_n \bmod 998244353$，其中 $n$ 可以很大，$k$ 是 $10^5$ 左右的数。</p>
+<ul>
+<li>常系数：递推式的系数 $c_i$ 均为常数；</li>
+<li>齐次：这意味着递推式<strong>没有常数项</strong>（如果有常数项就别想了）；</li>
+<li>线性：$f_i$ 的指数都为 $1$。</li>
+</ul>
+<hr>
+<h2 id="算法原理"><a href="#算法原理" class="headerlink" title="# 算法原理"></a># 算法原理</h2><p>对于这种系数为常数的问题，我们有一个通用的解法 —— 矩阵快速幂：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}f_{n}\\f_{n + 1}\\\vdots\\f_{n + k - 1}\end{bmatrix}=\begin{bmatrix}0&1&0&\cdots&0\\0&0&1&\cdots&0\\0&0&0&\cdots&0\\\vdots&\vdots&\vdots&\ddots&\vdots\\c_k&c_{k - 1}&c_{k - 2}&\cdots&c_1\end{bmatrix}\times\begin{bmatrix}f_{n - 1}\\f_{n}\\\vdots\\f_{n + k - 2}\end{bmatrix}</script><p>记最后那个 $k\times k$ 的转移方阵为 $A$，初始列向量为 $St$。常规的计算方法即计算</p>
+<script type="math/tex; mode=display">
+A^n\times St</script><p>复杂度 $\mathcal O(k^3\log n)$，主要的瓶颈在于矩阵乘法。</p>
+<p>下面要介绍的算法给出了这样一种构造，其中 $\{c_i\}$ 是针对 $A^n$（注意不仅与 $A$ 有关，还与指数 $n$ 有关）构造的<strong>数列</strong> ——</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&A^n=\sum_{i=0}^{k-1}c_iA^i\\
+&A^n\times St=\sum_{i=0}^{k-1}c_iA^i\times St
+\end{aligned}</script><p>目前看来好像没有什么茄子用，仍然需要计算矩乘。但是我们真的需要 $A^n\times St$ 这整个向量吗？实际上我们只需要 $f_n$，即 $A^n\times St$ 的第一项。</p>
+<p>再看看这个式子就可以发现它的用处了：</p>
+<script type="math/tex; mode=display">
+(A^n\times St)_1=\sum_{i=0}^{k-1}(c_iA^i\times St)_1=\sum_{i=0}^{k-1}c_i(A^i\times St)_1</script><p>$A^i\times St$ 的实际意义是将 $St$ 转移 $i$ 次。所以 $(A^i\times St)_1=f_i$，也即</p>
+<script type="math/tex; mode=display">
+f_n=\sum_{i=0}^{k-1}c_if_i</script><p>这样就免去了矩乘。</p>
+<p><del>这就是这个算法的全部内容了？</del>还剩下一个问题，$\{c_i\}$ 怎么构造？</p>
+<p>定义函数 $C(x)$ 如下，则要求 $C(A)=A^n$。</p>
+<script type="math/tex; mode=display">
+C(x)=\sum_{i=0}^{k - 1}c_ix^i</script><p>接下来是一些魔法……如果我们有函数 $F(x)$ 满足</p>
+<script type="math/tex; mode=display">
+F(A)=\sum_{i=0}^{k}f_iA^i=0</script><p>且有 $G(x)$ 满足：</p>
+<script type="math/tex; mode=display">
+x^n=G(x)F(x)+C(x)\to C(x)=x^n\bmod F(x)</script><p>易得</p>
+<script type="math/tex; mode=display">
+A^n=G(A)F(A)+C(A)=C(A)</script><p>利用多项式取模对快速幂稍加改造就可以计算 $C(x)$。</p>
+<details class="fold">
+    <summary>「稍 加 改 造」</summary>
+    <p class="lastline">
+        说起来倒也简单，把多项式 $x$ 拿来做快速幂，对 $F(x)$ 取模。
+    </p>
+</details>
+
+<p>然后我们发现又需要构造 $F(x)$……如果要对一个一般的方阵求 $F(A)=0$ 那确实很难，但常系数齐次线性递推的转移矩阵 $A$ 因为它的结构特殊，有一个简洁的构造：</p>
+<ul>
+<li>$f_k=1$；</li>
+<li>$f_{i}=c_{k-i}$（$0\le i\lt k$）。</li>
+</ul>
+<p>至于为什么这样构造，就涉及到矩阵的特征向量的内容，和这个算法本身没有太紧的关联。有兴趣的读者可以参考 <a href="https://www.luogu.com.cn/blog/ShadowassIIXVIIIIV/solution-p4723" target="_blank" rel="noopener">shadowice1984 的洛谷博客</a>。</p>
+<hr>
+<h2 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h2><h4 id="Thanks-for-reading"><a href="#Thanks-for-reading" class="headerlink" title="Thanks for reading!"></a>Thanks for reading!</h4><div class="tail-lyrics">
+    <p class="lyrics">
+        我也曾 隐约想过 从这世界逃离<br>
+        因为有无数次 和最优解失之交臂<br>
+        那时耀眼的自己 定不会轻易容许<br>
+        骄傲变得同墙角霉菌 不差毫厘<br>
+    </p>
+    <p>
+        ——《我也曾想过一了百了(中文填词)》 By 洛天依
+    </p>
+    <p>
+        > Link <a href="https://www.bilibili.com/video/BV1dy4y1s7rA" target="_blank" rel="noopener">我也曾想过一了百了</a> - Bilibili
+    </p>
+</div>
+
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Lucky_Glass
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://4rds5h.coding-pages.com/2021/21May23rdArt3/" title="「NOTE」常系数齐次线性递推">https://4rds5h.coding-pages.com/2021/21May23rdArt3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/21May23rdArt2/" rel="prev" title="「SOL」NOI2016 Day1 解题报告">
+      <i class="fa fa-chevron-left"></i> 「SOL」NOI2016 Day1 解题报告
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/21May23rdArt4/" rel="next" title="「SOL」Hamiltonian Cycle (AtCoder)">
+      「SOL」Hamiltonian Cycle (AtCoder) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前置"><span class="nav-text"># 前置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常系数齐次线性递推"><span class="nav-text"># 常系数齐次线性递推</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法原理"><span class="nav-text"># 算法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#THE-END"><span class="nav-text">THE END</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thanks-for-reading"><span class="nav-text">Thanks for reading!</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lucky_Glass"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lucky_Glass</p>
+  <div class="site-description" itemprop="description">玻璃易碎，但打碎玻璃的人也将被玻璃划伤</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">287</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">158</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyglass" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyglass" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lucky_glass@foxmail.com" title="E-Mail → mailto:lucky_glass@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://codeforces.com/profile/Lucky_Glass" title="Codeforces → http:&#x2F;&#x2F;codeforces.com&#x2F;profile&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>Codeforces</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://atcoder.jp/users/Lucky_Glass" title="AtCoder → https:&#x2F;&#x2F;atcoder.jp&#x2F;users&#x2F;Lucky_Glass" rel="noopener" target="_blank"><i class="fa fa-fw fa-coffee"></i>AtCoder</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lucky_Glass</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共472.1k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BdJ010NYfhlJueXnVdYRkBzs-gzGzoHsz',
+      appKey     : 'YGVhqteiijBaFlriCCs2nn2B',
+      placeholder: "Please leave me your email address, so that I can contact with you as soon as I notice your comment.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
