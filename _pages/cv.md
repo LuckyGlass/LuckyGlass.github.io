@@ -11,5 +11,5 @@ redirect_from:
 
 Education
 ======
-* Undergraduate in computer science, Peking University, 2022 - Present
+* Undergraduate in School of Electronics Engineering and Computer Sciencecomputer science, Peking University, 2022 - Present
 
