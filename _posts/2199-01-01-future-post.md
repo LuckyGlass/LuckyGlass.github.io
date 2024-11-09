@@ -1,5 +1,5 @@
 ---
-title: 'Blogs on-going'
+title: 'Blogs up-coming'
 date: 2024-11-09
 permalink: /posts/2024/11/top-blog/
 tags:
