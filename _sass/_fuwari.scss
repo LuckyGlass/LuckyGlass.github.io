@@ -1,0 +1,119 @@
+/*******************************************************************************
+ * Fuwari-inspired blog styles: banner + rounded post cards with tag pills.
+ * Built on al-folio's CSS variables so light/dark themes keep working.
+ ******************************************************************************/
+
+/* Banner ------------------------------------------------------------------ */
+
+.fuwari-banner {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  padding: 3.5rem 2.5rem;
+  margin: 1rem 0 2rem 0;
+  background:
+    linear-gradient(rgba(18, 22, 48, 0.32), rgba(18, 22, 48, 0.32)),
+    url("/assets/img/blog-banner.png") center / cover no-repeat;
+  color: #ffffff;
+}
+
+.fuwari-banner-content {
+  position: relative;
+  z-index: 1;
+}
+
+.fuwari-banner h1 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.fuwari-banner p {
+  margin: 0.5rem 0 0;
+  font-size: 1.05rem;
+  opacity: 0.92;
+}
+
+/* Post cards --------------------------------------------------------------- */
+
+.fuwari-post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.fuwari-post-card {
+  background: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.fuwari-post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="dark"] .fuwari-post-card:hover {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.fuwari-post-title {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.fuwari-post-desc {
+  margin: 0 0 0.75rem 0;
+  color: var(--global-text-color-light);
+}
+
+/* Meta pills --------------------------------------------------------------- */
+
+.fuwari-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fuwari-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.18rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--global-text-color-light);
+  background: color-mix(in srgb, var(--global-text-color) 6%, transparent);
+}
+
+a.fuwari-pill-tag {
+  color: var(--global-theme-color);
+  background: color-mix(in srgb, var(--global-theme-color) 12%, transparent);
+  text-decoration: none;
+}
+
+a.fuwari-pill-tag:hover {
+  background: var(--global-theme-color);
+  color: var(--global-hover-text-color);
+}
+
+/* Responsive ---------------------------------------------------------------- */
+
+@media (max-width: 576px) {
+  .fuwari-banner {
+    padding: 2.25rem 1.5rem;
+    border-radius: 1rem;
+  }
+
+  .fuwari-post-card {
+    padding: 1rem 1.1rem;
+  }
+}

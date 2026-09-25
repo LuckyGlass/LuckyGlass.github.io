@@ -1,15 +1,11 @@
 ---
-layout: archive
-title: "CV"
+layout: cv
 permalink: /cv/
-author_profile: true
-redirect_from:
-  - /resume
+title: CV
+nav: true
+nav_order: 3
+# cv_pdf: # add a path here to show a PDF download button
+description: Curriculum Vitae of Yansheng Mao.
+toc:
+  sidebar: left
 ---
-
-{% include base_path %}
-
-Education
-======
-* Undergraduate in School of Electronics Engineering and Computer Sciencecomputer science, Peking University, 2022 - Present
-

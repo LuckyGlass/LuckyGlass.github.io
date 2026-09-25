@@ -1,0 +1,23 @@
+/*******************************************************************************
+ * Site-wide custom styles.
+ ******************************************************************************/
+
+/* Navbar brand logo, theme-adapted (indigo in light mode, silver in dark) */
+.navbar-logo {
+  height: 2.1rem;
+  width: auto;
+  margin-right: 0.5rem;
+  vertical-align: -0.55rem;
+}
+
+.navbar-logo-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .navbar-logo-light {
+  display: none;
+}
+
+html[data-theme="dark"] .navbar-logo-dark {
+  display: inline;
+}

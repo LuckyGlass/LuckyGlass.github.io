@@ -1,0 +1,33 @@
+- title: General Information
+  type: map
+  contents:
+    - name: Full Name
+      value: Yansheng Mao
+    - name: Email
+      value: ysmao_lumen@outlook.com
+    - name: GitHub
+      value: LuckyGlass (https://github.com/LuckyGlass)
+
+- title: Education
+  type: time_table
+  contents:
+    - title: Ph.D. Student, School of Intelligence Science and Technology
+      institution: Peking University
+      year: 2026 - Present
+      description:
+        - Advised by Prof. Muhan Zhang in Μμ Lab (https://mulabpku.com/).
+    - title: Undergraduate, School of Electronics Engineering and Computer Science
+      institution: Peking University
+      year: 2022 - 2026
+      description:
+        - Member of the Zhi Class, a special class for excellent students majoring in artificial intelligence.
+        - Recipient of the Zhi Class scholarship in 2024 and 2025.
+
+- title: Experience
+  type: time_table
+  contents:
+    - title: Training Infrastructure Intern (Founding Team Member)
+      institution: Norizon (无涯智远)
+      year: 2026 - Present
+      description:
+        - Core member of the training infrastructure team, responsible for building and maintaining the company's large-model training infrastructure.
