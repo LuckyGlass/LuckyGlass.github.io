@@ -30,4 +30,6 @@
       institution: Norizon (无涯智远)
       year: 2026 - Present
       description:
-        - Core member of the training infrastructure team, responsible for building and maintaining the company's large-model training infrastructure.
+        - Core member of the training infrastructure team, responsible for building and maintaining the company's large-model training infrastructure; primary author of all of the company's training frameworks.
+        - Designed and built three generations of internal training frameworks — a PyTorch/FSDP2 stack, a Megatron-Core rewrite scaling to dense and MoE models up to ~35B parameters, and a from-scratch PyTorch-native framework; the latter two were built solo.
+        - Implemented FSDP2/HSDP, tensor, sequence (Ulysses and context), and MoE expert parallelism, plus custom Triton/DeepGEMM grouped kernels and packed varlen training with ~66% peak-memory reduction.

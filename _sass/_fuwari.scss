@@ -12,6 +12,14 @@
   padding: 3.5rem 2.5rem;
   margin: 1rem 0 2rem 0;
   background:
+    linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)),
+    url("/assets/img/blog-banner.png") center / cover no-repeat;
+  color: var(--global-text-color);
+}
+
+/* The banner image is dark, so keep white text behind a dark tint in dark mode. */
+html[data-theme="dark"] .fuwari-banner {
+  background:
     linear-gradient(rgba(18, 22, 48, 0.32), rgba(18, 22, 48, 0.32)),
     url("/assets/img/blog-banner.png") center / cover no-repeat;
   color: #ffffff;
@@ -115,5 +123,33 @@ a.fuwari-pill-tag:hover {
 
   .fuwari-post-card {
     padding: 1rem 1.1rem;
+  }
+}
+
+/* Collapsible framework entries (about page) ------------------------------- */
+
+details.framework-item {
+  margin-bottom: 0.8rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0.75rem;
+  background: var(--global-card-bg-color);
+
+  summary {
+    cursor: pointer;
+  }
+
+  summary::marker {
+    color: var(--global-theme-color);
+  }
+
+  &[open] summary {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px dashed var(--global-divider-color);
+  }
+
+  ul {
+    margin-bottom: 0.2rem;
   }
 }
