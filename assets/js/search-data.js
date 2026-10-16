@@ -41,7 +41,10 @@ ninja.data = [{
             window.location.href = "/blog/2024/blogs-up-coming/";
           
         },
-      },{
+      },{id: "news-shipped-the-third-generation-training-framework-with-context-parallelism-and-packed-varlen-training-built-solo",
+          title: 'Shipped the third-generation training framework with context parallelism and packed varlen training, built...',
+          description: "",
+          section: "News",},{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
