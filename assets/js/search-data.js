@@ -44,6 +44,9 @@ ninja.data = [{
       },{id: "news-shipped-the-third-generation-training-framework-with-context-parallelism-and-packed-varlen-training-built-solo",
           title: 'Shipped the third-generation training framework with context parallelism and packed varlen training, built...',
           description: "",
+          section: "News",},{id: "news-implemented-native-tensor-parallelism-for-custom-multi-axis-transformers-composed-with-fsdp-packed-attention-mlp-projections-with-checkpoint-conversion-and-adapter-support-and-grouped-gemm-layouts-for-unaligned-adapter-dimensions-see-training-frameworks",
+          title: 'Implemented native tensor parallelism for custom multi-axis Transformers composed with FSDP, packed attention/MLP...',
+          description: "",
           section: "News",},{
         id: 'social-email',
         title: 'email',
