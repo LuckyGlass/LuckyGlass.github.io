@@ -73,8 +73,9 @@ stack, a Megatron-Core rewrite, and a from-scratch PyTorch-native framework, the
 
 <details markdown="1" class="framework-item">
   <summary>
-    <strong>Gen 1 · PyTorch/FSDP2 trainer</strong> (2026.05 – 2026.10) — Ulysses sequence parallelism ·
-    Muon/AdamW optimization.
+    <span class="framework-meta"><span>Generation 01</span><span>May – Oct 2026</span></span>
+    <strong class="framework-title">PyTorch/FSDP2 trainer</strong>
+    <span class="framework-overview">Ulysses sequence parallelism · Muon/AdamW optimization</span>
   </summary>
 
   My role: top contributor; designed and owned the tensor-parallel and sequence-parallel integration.
@@ -90,8 +91,9 @@ stack, a Megatron-Core rewrite, and a from-scratch PyTorch-native framework, the
 
 <details markdown="1" class="framework-item">
   <summary>
-    <strong>Gen 2 · Megatron-Core rewrite</strong> (2026.08 – 2026.09) — dense & MoE up to ~35B · TP/SP/DP/EP ·
-    Triton/DeepGEMM grouped kernels · built solo.
+    <span class="framework-meta"><span>Generation 02</span><span>Aug – Sep 2026</span></span>
+    <strong class="framework-title">Megatron-Core rewrite</strong>
+    <span class="framework-overview">Dense & MoE up to ~35B · TP/SP/DP/EP · Triton/DeepGEMM grouped kernels · built solo</span>
   </summary>
 
   - Rewrote the training stack natively on Megatron-Core + Transformer Engine; imports HuggingFace checkpoints (dense and MoE) via Megatron-Bridge.
@@ -103,17 +105,19 @@ stack, a Megatron-Core rewrite, and a from-scratch PyTorch-native framework, the
   - Multi-node training of dense models up to ~27B and MoE models up to ~35B parameters.
 </details>
 
-<details markdown="1" class="framework-item">
+<details markdown="1" class="framework-item framework-current" id="pytorch-native-framework">
   <summary>
-    <strong>Gen 3 · From-scratch PyTorch-native framework</strong> (2026.09 – present) — context parallelism ·
-    packed varlen training (~66% peak-memory cut) · Triton grouped GEMM · CPU-offloaded activation
-    checkpointing · built solo in four weeks.
+    <span class="framework-meta"><span>Generation 03 <span class="framework-status">Current</span></span><span>Sep 2026 – present</span></span>
+    <strong class="framework-title">From-scratch PyTorch-native framework</strong>
+    <span class="framework-overview">Native DTensor TP + FSDP2/HSDP · hybrid-attention CP · packed varlen training · custom grouped GEMM · built solo</span>
   </summary>
 
-  - Clean-room rewrite (~9k lines of framework code plus ~18k lines of tests), developed with an agent-assisted, PR-based workflow.
-  - Context parallelism over hybrid full-attention + linear-attention kernels (ring-flash-attention), with CP-aware reductions composed with FSDP gradient reduction; validated by whole-model numerical grids of hundreds of randomized trials per configuration.
+  - Built from scratch in native PyTorch, with the initial framework completed solo in four weeks using an agent-assisted, PR-based workflow.
+  - Context parallelism across hybrid full-attention and linear-attention layers, with sequence-boundary handling and CP-aware loss and gradient reductions composed with FSDP.
+  - Native DTensor tensor parallelism for custom multi-axis Transformer modules, composed with whole-layer FSDP; axis-specific parameter and activation layouts, gradient communication, and sharded weight loading.
   - Packed/varlen training with sequence metadata routed through every length-sensitive operator — ~66% peak-memory reduction at high-padding workloads at batched step time, backed by custom Triton grouped-GEMM kernels.
+  - Combined attention and gate/up MLP projections with pretrained checkpoint conversion and adapter routing; column-major grouped-GEMM factor layouts support unaligned adapter dimensions without padding.
   - FSDP2/HSDP engineering: meta-device construction, rank-local streaming weight materialization from safetensors, and tied-weight ownership rules.
   - Activation checkpointing with CPU offloading (BF16) and backward prefetch; per-layer `torch.compile`.
-  - Spec-driven kernel hot-swap (eager ↔ FlashAttention ↔ Liger) via operation-UID slots; single-step profiler with Chrome traces and FLOPs meta-accounting.
+  - Spec-based composition of model components, parallel implementations, and interchangeable eager/FlashAttention/Liger kernels, keeping core model code independent of distributed execution.
 </details>

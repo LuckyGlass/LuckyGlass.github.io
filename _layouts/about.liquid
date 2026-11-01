@@ -1,9 +1,9 @@
 ---
 layout: default
 ---
-<div class="post">
+<div class="post about-page">
   <header class="post-header">
-    <h1 class="post-title about-title">{{ page.title | capitalize }}</h1>
+    <h1 class="post-title about-title">{{ site.first_name }} {% if site.middle_name %}{{ site.middle_name }} {% endif %}{{ site.last_name }}</h1>
     <p class="desc">{{ page.subtitle }}</p>
   </header>
 
@@ -13,25 +13,19 @@ layout: default
         {% if page.profile.image %}
           {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
           {% if page.profile.image_circular %}
-            {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
+            {% assign profile_image_class = 'img-fluid rounded-circle' %}
           {% else %}
-            {% assign profile_image_class = 'img-fluid z-depth-1
+            {% assign profile_image_class = 'img-fluid
       rounded' %}
           {% endif %}
           {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
       30vw, 95vw"{% endcapture %}
+          {% assign profile_image_alt = site.first_name | append: ' ' | append: site.last_name %}
           {%
-            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
+            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=profile_image_alt
             cache_bust=true
           %}
         {% endif %}
-        <div class="profile-name">
-          {% if site.title == 'blank' %}
-            {{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}
-          {% else %}
-            {{ site.title }}
-          {% endif %}
-        </div>
         {% if page.profile.more_info %}
           <div class="more-info">{{ page.profile.more_info }}</div>
         {% endif %}

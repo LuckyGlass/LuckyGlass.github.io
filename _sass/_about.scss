@@ -1,94 +1,177 @@
 /*******************************************************************************
- * About page refinements: research-interest cards that match the rounded
- * card language of the blog page. Built on al-folio's CSS variables.
+ * Restrained typography and responsive layout for the personal homepage.
+ * Keep these rules local to About; colors follow the site's theme.
  ******************************************************************************/
 
-/* Wider gutter between the profile photo and the wrapping body text */
-.profile.float-right {
-  margin-left: 2.5rem;
-}
+.about-page {
+  --about-muted: color-mix(in srgb, var(--global-text-color) 72%, var(--global-bg-color));
+  line-height: 1.7;
 
-.profile.float-left {
-  margin-right: 2.5rem;
-}
+  .post-header { margin-bottom: 1.75rem; }
+  .about-title {
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+  }
+  .desc { color: var(--about-muted); line-height: 1.6; }
+  article > .clearfix > p { margin-bottom: 1.15rem; }
 
-.profile {
-  margin-bottom: 1.25rem;
-}
+  article > .clearfix > h2,
+  .about-section-heading {
+    clear: both;
+    margin: 2.75rem 0 1.15rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--global-divider-color);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    scroll-margin-top: 5rem;
+  }
 
-/* Regular-weight name heading (default is bold) */
-.about-title {
-  font-weight: 400;
-}
-
-/* Name shown under the profile photo */
-.profile .profile-name {
-  margin-top: 0.6rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  text-align: left;
-  color: var(--global-text-color);
-}
-
-/* Contact lines under the profile photo: <icon> | <address> */
-.profile .more-info .profile-social {
-  display: block;
-  margin: 0.2rem 0;
-  font-size: 0.85rem;
-
-  a {
-    color: var(--global-text-color-light);
-
-    &:hover {
-      color: var(--global-theme-color);
-      text-decoration: none;
+  .profile {
+    width: 240px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    &.float-right { margin-left: 2.5rem; }
+    &.float-left { margin-right: 2.5rem; }
+    figure { margin-bottom: 1rem; }
+    img { max-width: 210px; }
+    .more-info {
+      font-family: inherit;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--about-muted);
+      p { display: block; }
+      .profile-social {
+        margin-top: 0.35rem;
+        font-size: 0.85rem;
+        overflow-wrap: anywhere;
+        a { color: var(--about-muted); }
+        a:hover { color: var(--global-theme-color); }
+        .ps-icon { margin-right: 0.35rem; }
+        .ps-sep { display: none; }
+      }
     }
   }
 
-  a.ps-icon {
-    font-size: 1rem;
-    margin-right: 0.4rem;
+  .about-interests {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
   }
-
-  .ps-sep {
-    margin-right: 0.45rem;
-    color: var(--global-text-color-light);
-    opacity: 0.55;
-  }
-}
-
-/* Section heading gap matching the content's own heading spacing (1rem) */
-.about-section-heading {
-  margin-top: 1rem;
-}
-
-.about-interests {
-  display: grid;
-  gap: 1rem;
-  margin-top: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-.about-interest-card {
-  background: var(--global-card-bg-color);
-  border: 1px solid var(--global-divider-color);
-  border-left: 4px solid var(--global-theme-color);
-  border-radius: 1rem;
-  padding: 1.1rem 1.4rem;
-}
-
-.about-interest-card h3 {
-  margin: 0 0 0.45rem 0;
-  font-size: 1.05rem;
-  font-weight: 600;
-}
-
-.about-interest-card p {
-  margin: 0;
-}
-
-@media (max-width: 576px) {
   .about-interest-card {
-    padding: 0.9rem 1rem;
+    padding: 0.25rem 0 0.25rem 1rem;
+    border-left: 2px solid var(--global-divider-color);
+    h3 {
+      margin: 0 0 0.65rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    p { margin: 0; }
+  }
+
+  details.framework-item {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid var(--global-divider-color);
+    border-radius: 0;
+    background: transparent;
+    scroll-margin-top: 5rem;
+    summary {
+      position: relative;
+      padding: 1.35rem 2.25rem 1.35rem 0;
+      list-style: none;
+      cursor: pointer;
+      &::-webkit-details-marker { display: none; }
+      &::after {
+        content: "+";
+        position: absolute;
+        right: 0.5rem;
+        top: 2.65rem;
+        font-size: 1.35rem;
+        font-weight: 400;
+        color: var(--about-muted);
+      }
+      &:hover .framework-title { color: var(--global-theme-color); }
+      &:focus-visible {
+        outline: 2px solid var(--global-theme-color);
+        outline-offset: 4px;
+        border-radius: 2px;
+      }
+    }
+    .framework-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 1rem;
+      align-items: center;
+      margin-bottom: 0.35rem;
+      color: var(--about-muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.025em;
+    }
+    .framework-status {
+      margin-left: 0.5rem;
+      font-weight: 600;
+      color: var(--global-theme-color);
+    }
+    .framework-title {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 1.15rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .framework-overview {
+      display: block;
+      color: var(--about-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    &[open] summary {
+      margin-bottom: 0.75rem;
+      padding-bottom: 1rem;
+      border-bottom: 0;
+      &::after { content: "−"; }
+    }
+    ul { padding-left: 1.2rem; margin-bottom: 1.5rem; }
+    li { padding-left: 0.25rem; margin-bottom: 0.65rem; }
+  }
+
+  .news {
+    th, td { padding: 0.6rem 0; }
+    th {
+      padding-right: 1rem;
+      color: var(--about-muted);
+      font-size: 0.85rem;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+    tr + tr { border-top: 1px solid var(--global-divider-color); }
+  }
+
+  @media (max-width: 767px) {
+    .profile {
+      width: 200px;
+      &.float-right { margin-left: 1.5rem; }
+      &.float-left { margin-right: 1.5rem; }
+      img { max-width: 180px; }
+    }
+    .about-interests { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+  @media (max-width: 575px) {
+    .about-title { font-size: 2rem; }
+    .post-header { margin-bottom: 1.5rem; }
+    .profile {
+      &.float-left, &.float-right {
+        float: none !important;
+        width: 100%;
+        margin: 0 0 2rem;
+      }
+    }
+    .news th { white-space: normal; }
   }
 }
