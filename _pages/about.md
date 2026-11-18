@@ -116,7 +116,6 @@ stack, a Megatron-Core rewrite, and a from-scratch PyTorch-native framework, the
   - Context parallelism across hybrid full-attention and linear-attention layers, with sequence-boundary handling and CP-aware loss and gradient reductions composed with FSDP.
   - Native DTensor tensor parallelism for custom multi-axis Transformer modules, composed with whole-layer FSDP; axis-specific parameter and activation layouts, gradient communication, and sharded weight loading.
   - Packed/varlen training with sequence metadata routed through every length-sensitive operator — ~66% peak-memory reduction at high-padding workloads at batched step time, backed by custom Triton grouped-GEMM kernels.
-  - Combined attention and gate/up MLP projections with pretrained checkpoint conversion and adapter routing; column-major grouped-GEMM factor layouts support unaligned adapter dimensions without padding.
   - FSDP2/HSDP engineering: meta-device construction, rank-local streaming weight materialization from safetensors, and tied-weight ownership rules.
   - Activation checkpointing with CPU offloading (BF16) and backward prefetch; per-layer `torch.compile`.
   - Spec-based composition of model components, parallel implementations, and interchangeable eager/FlashAttention/Liger kernels, keeping core model code independent of distributed execution.
